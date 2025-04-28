@@ -5,6 +5,10 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver", "FERNGSolver\FERNGSolver.csproj", "{B00399B7-EE09-4C66-B373-1A2A1E3ACC0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.RNG.Common", "FERNGSolver.RNG.Common\FERNGSolver.RNG.Common.csproj", "{7E85F74E-5D74-4CC8-8C0C-16416F323CA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.FalconKnightTool", "FERNGSolver.FalconKnightTool\FERNGSolver.FalconKnightTool.csproj", "{011151F3-37F5-4F05-AB98-5C2B71B903C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B00399B7-EE09-4C66-B373-1A2A1E3ACC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B00399B7-EE09-4C66-B373-1A2A1E3ACC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B00399B7-EE09-4C66-B373-1A2A1E3ACC0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E85F74E-5D74-4CC8-8C0C-16416F323CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E85F74E-5D74-4CC8-8C0C-16416F323CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E85F74E-5D74-4CC8-8C0C-16416F323CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E85F74E-5D74-4CC8-8C0C-16416F323CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{011151F3-37F5-4F05-AB98-5C2B71B903C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011151F3-37F5-4F05-AB98-5C2B71B903C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011151F3-37F5-4F05-AB98-5C2B71B903C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011151F3-37F5-4F05-AB98-5C2B71B903C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
