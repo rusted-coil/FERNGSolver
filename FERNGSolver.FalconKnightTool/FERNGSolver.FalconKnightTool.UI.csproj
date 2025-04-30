@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ExternalProjects\ShinyMultiSeed\FormRx\FormRx.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Presentation\FERNGSolver.FalconKnightTool.Presentation.csproj" />
   </ItemGroup>
 

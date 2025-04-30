@@ -7,7 +7,7 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter
     {
         public static IFalconKnightToolPresenter Create(IFalconKnightToolView view)
         {
-            return new FalconKnightToolPresenter();
+            return new FalconKnightToolPresenter(view);
         }
     }
 }

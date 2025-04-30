@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.FalconKnightToo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.FalconKnightTool.Presentation", "FERNGSolver.FalconKnightTool.Presentation\FERNGSolver.FalconKnightTool.Presentation.csproj", "{F142B0C4-0F43-4667-84E4-BC7B341EF9E5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormRx", "..\..\ExternalProjects\ShinyMultiSeed\FormRx\FormRx.csproj", "{33EC0EEC-4799-4281-8E68-B56612A13BF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Common", "FERNGSolver.Common\FERNGSolver.Common.csproj", "{2F41102F-297E-4BE7-A1AD-6850853E3FA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{F142B0C4-0F43-4667-84E4-BC7B341EF9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F142B0C4-0F43-4667-84E4-BC7B341EF9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F142B0C4-0F43-4667-84E4-BC7B341EF9E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33EC0EEC-4799-4281-8E68-B56612A13BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33EC0EEC-4799-4281-8E68-B56612A13BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33EC0EEC-4799-4281-8E68-B56612A13BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33EC0EEC-4799-4281-8E68-B56612A13BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F41102F-297E-4BE7-A1AD-6850853E3FA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F41102F-297E-4BE7-A1AD-6850853E3FA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F41102F-297E-4BE7-A1AD-6850853E3FA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F41102F-297E-4BE7-A1AD-6850853E3FA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

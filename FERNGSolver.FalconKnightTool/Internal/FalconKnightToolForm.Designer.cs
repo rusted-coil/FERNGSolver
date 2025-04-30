@@ -1,4 +1,4 @@
-﻿namespace FERNGSolver.FalconKnightTool
+namespace FERNGSolver.FalconKnightTool
 {
     partial class FalconKnightToolForm
     {
@@ -28,18 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            m_AddButton = new Button();
             SuspendLayout();
             // 
-            // Form1
+            // m_AddButton
+            // 
+            m_AddButton.Location = new Point(357, 48);
+            m_AddButton.Name = "m_AddButton";
+            m_AddButton.Size = new Size(125, 73);
+            m_AddButton.TabIndex = 0;
+            m_AddButton.Text = "button1";
+            m_AddButton.UseVisualStyleBackColor = true;
+            // 
+            // FalconKnightToolForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Name = "Form1";
+            Controls.Add(m_AddButton);
+            Name = "FalconKnightToolForm";
             Text = "FalconKnightTool";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Button m_AddButton;
     }
 }
