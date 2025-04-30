@@ -1,0 +1,3 @@
+[submodule "FormRx"]
+	path = FormRx
+	url = https://github.com/rusted-coil/FormRx.git
