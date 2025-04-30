@@ -15,7 +15,7 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
 
         void OnAddButtonClicked()
         {
-            Console.WriteLine("Addボタンが押されました。");
+            System.Diagnostics.Debug.WriteLine("Addボタンが押されました。");
         }
     }
 }
