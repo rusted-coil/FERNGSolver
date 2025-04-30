@@ -1,6 +1,6 @@
 ﻿namespace FERNGSolver.FalconKnightTool
 {
-    partial class Form1
+    partial class FalconKnightToolForm
     {
         /// <summary>
         ///  Required designer variable.
