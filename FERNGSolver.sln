@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.UI", "FERNGSolver\FERNGSolver.UI.csproj", "{B00399B7-EE09-4C66-B373-1A2A1E3ACC0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.UI", "FERNGSolver.UI\FERNGSolver.UI.csproj", "{B00399B7-EE09-4C66-B373-1A2A1E3ACC0F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{127ABF97-A3AA-4C9F-B9B5-31626F992D6E} = {127ABF97-A3AA-4C9F-B9B5-31626F992D6E}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.RNG.Common", "FERNGSolver.RNG.Common\FERNGSolver.RNG.Common.csproj", "{7E85F74E-5D74-4CC8-8C0C-16416F323CA9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.FalconKnightTool.UI", "FERNGSolver.FalconKnightTool\FERNGSolver.FalconKnightTool.UI.csproj", "{011151F3-37F5-4F05-AB98-5C2B71B903C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.FalconKnightTool.UI", "FERNGSolver.FalconKnightTool.UI\FERNGSolver.FalconKnightTool.UI.csproj", "{011151F3-37F5-4F05-AB98-5C2B71B903C0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F142B0C4-0F43-4667-84E4-BC7B341EF9E5} = {F142B0C4-0F43-4667-84E4-BC7B341EF9E5}
 	EndProjectSection
@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.FalconKnightToo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.FalconKnightTool.Presentation", "FERNGSolver.FalconKnightTool.Presentation\FERNGSolver.FalconKnightTool.Presentation.csproj", "{F142B0C4-0F43-4667-84E4-BC7B341EF9E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormRx", "..\..\ExternalProjects\ShinyMultiSeed\FormRx\FormRx.csproj", "{33EC0EEC-4799-4281-8E68-B56612A13BF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormRx", "FormRx\FormRx.csproj", "{33EC0EEC-4799-4281-8E68-B56612A13BF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Common", "FERNGSolver.Common\FERNGSolver.Common.csproj", "{2F41102F-297E-4BE7-A1AD-6850853E3FA4}"
 EndProject
