@@ -23,7 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.FalconKnightToo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormRx", "FormRx\FormRx.csproj", "{33EC0EEC-4799-4281-8E68-B56612A13BF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Common", "FERNGSolver.Common\FERNGSolver.Common.csproj", "{2F41102F-297E-4BE7-A1AD-6850853E3FA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Common", "FERNGSolver.Common\FERNGSolver.Common.csproj", "{2F41102F-297E-4BE7-A1AD-6850853E3FA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FERNGSolver.FalconKnightTool", "FERNGSolver.FalconKnightTool", "{C5634BAB-88E4-40A8-965B-80D04D42A54B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.FalconKnightTool.Application.Tests", "FERNGSolver.FalconKnightTool.Application.Tests\FERNGSolver.FalconKnightTool.Application.Tests.csproj", "{9F76C913-4391-41C2-8E0F-7342DCD0EDFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,9 +67,20 @@ Global
 		{2F41102F-297E-4BE7-A1AD-6850853E3FA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F41102F-297E-4BE7-A1AD-6850853E3FA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F41102F-297E-4BE7-A1AD-6850853E3FA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F76C913-4391-41C2-8E0F-7342DCD0EDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F76C913-4391-41C2-8E0F-7342DCD0EDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F76C913-4391-41C2-8E0F-7342DCD0EDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F76C913-4391-41C2-8E0F-7342DCD0EDFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{011151F3-37F5-4F05-AB98-5C2B71B903C0} = {C5634BAB-88E4-40A8-965B-80D04D42A54B}
+		{127ABF97-A3AA-4C9F-B9B5-31626F992D6E} = {C5634BAB-88E4-40A8-965B-80D04D42A54B}
+		{EBA11390-F8D2-4908-9D9F-2BA6B20A97C0} = {C5634BAB-88E4-40A8-965B-80D04D42A54B}
+		{F142B0C4-0F43-4667-84E4-BC7B341EF9E5} = {C5634BAB-88E4-40A8-965B-80D04D42A54B}
+		{9F76C913-4391-41C2-8E0F-7342DCD0EDFC} = {C5634BAB-88E4-40A8-965B-80D04D42A54B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C1D57B-9A5F-435F-8A5C-5CE76D13C833}

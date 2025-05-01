@@ -1,3 +1,4 @@
+using FERNGSolver.Common.Types;
 using System.Reactive;
 
 namespace FERNGSolver.FalconKnightTool.Presentation.ViewContracts
@@ -8,5 +9,10 @@ namespace FERNGSolver.FalconKnightTool.Presentation.ViewContracts
         /// 「追加」ボタンがクリックされたことを通知するストリームです。
         /// </summary>
         IObservable<Unit> AddButtonClicked { get; }
+
+        /// <summary>
+        /// パスの入力が完了したことを通知するストリームです。
+        /// </summary>
+        IObservable<IReadOnlyList<GridPosition>> PathDetermined { get; }
     }
 }

@@ -1,7 +1,7 @@
+using FERNGSolver.Common.Types;
 using FERNGSolver.FalconKnightTool.Presentation.ViewContracts;
 using FormRx.Button;
 using FormRx.Extensions;
-using System.Diagnostics;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
@@ -12,6 +12,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
     {
         Subject<Unit> m_AddButtonClicked = new Subject<Unit>();
         public IObservable<Unit> AddButtonClicked => m_AddButtonClicked;
+        public IObservable<IReadOnlyList<GridPosition>> PathDetermined => m_GridCanvas.PathDetermined;
 
         CompositeDisposable m_Disposables = new CompositeDisposable();
 
@@ -21,13 +22,6 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
 
             var button = ButtonFactory.CreateButton(m_AddButton);
             button.Clicked.Subscribe(m_AddButtonClicked).AddTo(m_Disposables);
-
-            m_GridCanvas.PathDetermined.Subscribe(list => {
-                foreach (var position in list)
-                {
-                    Debug.WriteLine($"{position.X}, {position.Y}");
-                }
-            }).AddTo(m_Disposables);
         }
     }
 }
