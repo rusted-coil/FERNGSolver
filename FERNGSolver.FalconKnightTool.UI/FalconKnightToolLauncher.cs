@@ -6,7 +6,7 @@ namespace FERNGSolver.FalconKnightTool.UI
     {
         public static Form CreateToolForm()
         {
-            var form = new FalconKnightToolForm();
+            var form = new Internal.FalconKnightToolForm();
             var presenter = PresenterFactory.Create(form);
             return form;
         }

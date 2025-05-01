@@ -1,4 +1,4 @@
-namespace FERNGSolver.FalconKnightTool
+namespace FERNGSolver.FalconKnightTool.UI.Internal
 {
     partial class FalconKnightToolForm
     {
@@ -29,6 +29,7 @@ namespace FERNGSolver.FalconKnightTool
         private void InitializeComponent()
         {
             m_AddButton = new Button();
+            m_GridCanvas = new Path.GridCanvas();
             SuspendLayout();
             // 
             // m_AddButton
@@ -40,11 +41,21 @@ namespace FERNGSolver.FalconKnightTool
             m_AddButton.Text = "button1";
             m_AddButton.UseVisualStyleBackColor = true;
             // 
+            // m_GridCanvas
+            // 
+            m_GridCanvas.BackColor = Color.White;
+            m_GridCanvas.GridCount = 5;
+            m_GridCanvas.Location = new Point(12, 12);
+            m_GridCanvas.Name = "m_GridCanvas";
+            m_GridCanvas.Size = new Size(267, 273);
+            m_GridCanvas.TabIndex = 1;
+            // 
             // FalconKnightToolForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(m_GridCanvas);
             Controls.Add(m_AddButton);
             Name = "FalconKnightToolForm";
             Text = "FalconKnightTool";
@@ -54,5 +65,6 @@ namespace FERNGSolver.FalconKnightTool
         #endregion
 
         private Button m_AddButton;
+        private Path.GridCanvas m_GridCanvas;
     }
 }
