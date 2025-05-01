@@ -23,5 +23,20 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
             var button = ButtonFactory.CreateButton(m_AddButton);
             button.Clicked.Subscribe(m_AddButtonClicked).AddTo(m_Disposables);
         }
+
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_Disposables.Dispose();
+        }
+
+        public void SetCurrentPathText(string text)
+        {
+            m_CurrentPathText.Text = text;
+        }
+
+        public void AddCxStringText(string text)
+        {
+            m_TotalCxStringTextBox.Text += text;
+        }
     }
 }
