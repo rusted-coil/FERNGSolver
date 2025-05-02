@@ -29,23 +29,53 @@ namespace FERNGSolver.Gba.UI.FalconKnight.Internal
         private void InitializeComponent()
         {
             label1 = new Label();
+            OffsetMinTextBox = new TextBox();
+            OffsetMaxTextBox = new TextBox();
+            label2 = new Label();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(31, 33);
+            label1.Location = new Point(16, 23);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(55, 15);
             label1.TabIndex = 0;
-            label1.Text = "label1";
+            label1.Text = "消費数：";
             // 
-            // UserControl1
+            // OffsetMinTextBox
+            // 
+            OffsetMinTextBox.Location = new Point(77, 20);
+            OffsetMinTextBox.Name = "OffsetMinTextBox";
+            OffsetMinTextBox.Size = new Size(37, 23);
+            OffsetMinTextBox.TabIndex = 1;
+            // 
+            // OffsetMaxTextBox
+            // 
+            OffsetMaxTextBox.Location = new Point(146, 20);
+            OffsetMaxTextBox.Name = "OffsetMaxTextBox";
+            OffsetMaxTextBox.Size = new Size(37, 23);
+            OffsetMaxTextBox.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(121, 23);
+            label2.Name = "label2";
+            label2.Size = new Size(19, 15);
+            label2.TabIndex = 3;
+            label2.Text = "～";
+            // 
+            // SearchConditionUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label2);
+            Controls.Add(OffsetMaxTextBox);
+            Controls.Add(OffsetMinTextBox);
             Controls.Add(label1);
-            Name = "UserControl1";
+            Name = "SearchConditionUserControl";
+            Size = new Size(205, 150);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -53,5 +83,8 @@ namespace FERNGSolver.Gba.UI.FalconKnight.Internal
         #endregion
 
         private Label label1;
+        private TextBox OffsetMinTextBox;
+        private TextBox OffsetMaxTextBox;
+        private Label label2;
     }
 }

@@ -19,7 +19,7 @@ namespace FERNGSolver.Gba.Presentation.FalconKnight.Internal
         public void ExecuteSearch(string cxString)
         {
             IRng rng = RngFactory.CreateDefault();
-            var result = PatternSearcher.Search(rng, 0, 10000, CxStringConverter.CxStringToBools(cxString));
+            var result = PatternSearcher.Search(rng, m_View.OffsetMin, m_View.OffsetMax, CxStringConverter.CxStringToBools(cxString));
             Debug.WriteLine($"検索結果: {result.Count}個 先頭: {result.First()}");
         }
     }
