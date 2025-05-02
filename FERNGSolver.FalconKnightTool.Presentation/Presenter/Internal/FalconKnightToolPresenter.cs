@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Extensions;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.FalconKnightTool.Presentation.ViewContracts;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 
 namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
@@ -18,11 +19,21 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
                 view.AddCxStringText(m_CurrentCxString);
             }).AddTo(m_Disposables);
 
+            view.SearchButtonClicked.Subscribe(_ =>
+            {
+                Debug.WriteLine("検索ボタンがクリックされました。");
+            }).AddTo(m_Disposables);
+
             view.PathDetermined.Subscribe(list =>
             {
                 m_CurrentCxString = PathConverter.PathToCxString(list);
                 view.SetCurrentPathText($"現在の入力: {m_CurrentCxString}");
             }).AddTo(m_Disposables);
+        }
+
+        public void Dispose()
+        {
+            m_Disposables.Dispose();
         }
     }
 }

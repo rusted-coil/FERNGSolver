@@ -28,68 +28,105 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         /// </summary>
         private void InitializeComponent()
         {
-            m_AddButton = new Button();
-            m_GridCanvas = new Path.GridCanvas();
+            AddButton = new Button();
+            GridCanvas = new Path.GridCanvas();
             m_CurrentPathText = new Label();
-            m_TotalCxStringTextBox = new TextBox();
+            TotalCxStringTextBox = new TextBox();
+            m_TestGroupBox = new GroupBox();
+            m_TestPanel = new Panel();
+            SearchButton = new Button();
+            m_TestGroupBox.SuspendLayout();
             SuspendLayout();
             // 
-            // m_AddButton
+            // AddButton
             // 
-            m_AddButton.Location = new Point(403, 104);
-            m_AddButton.Name = "m_AddButton";
-            m_AddButton.Size = new Size(81, 41);
-            m_AddButton.TabIndex = 0;
-            m_AddButton.Text = "Add";
-            m_AddButton.UseVisualStyleBackColor = true;
+            AddButton.Location = new Point(12, 326);
+            AddButton.Name = "AddButton";
+            AddButton.Size = new Size(63, 28);
+            AddButton.TabIndex = 0;
+            AddButton.Text = "Add";
+            AddButton.UseVisualStyleBackColor = true;
             // 
-            // m_GridCanvas
+            // GridCanvas
             // 
-            m_GridCanvas.BackColor = Color.White;
-            m_GridCanvas.GridCount = 5;
-            m_GridCanvas.Location = new Point(12, 12);
-            m_GridCanvas.Name = "m_GridCanvas";
-            m_GridCanvas.Size = new Size(267, 273);
-            m_GridCanvas.TabIndex = 1;
+            GridCanvas.BackColor = Color.White;
+            GridCanvas.GridCount = 5;
+            GridCanvas.Location = new Point(12, 12);
+            GridCanvas.Name = "GridCanvas";
+            GridCanvas.Size = new Size(267, 273);
+            GridCanvas.TabIndex = 1;
             // 
             // m_CurrentPathText
             // 
             m_CurrentPathText.AutoSize = true;
-            m_CurrentPathText.Location = new Point(326, 38);
+            m_CurrentPathText.Location = new Point(12, 298);
             m_CurrentPathText.Name = "m_CurrentPathText";
             m_CurrentPathText.Size = new Size(106, 15);
             m_CurrentPathText.TabIndex = 2;
             m_CurrentPathText.Text = "m_CurrentPathText";
             // 
-            // m_TotalCxStringTextBox
+            // TotalCxStringTextBox
             // 
-            m_TotalCxStringTextBox.Location = new Point(335, 208);
-            m_TotalCxStringTextBox.Multiline = true;
-            m_TotalCxStringTextBox.Name = "m_TotalCxStringTextBox";
-            m_TotalCxStringTextBox.Size = new Size(299, 118);
-            m_TotalCxStringTextBox.TabIndex = 3;
+            TotalCxStringTextBox.Location = new Point(327, 12);
+            TotalCxStringTextBox.Multiline = true;
+            TotalCxStringTextBox.Name = "TotalCxStringTextBox";
+            TotalCxStringTextBox.Size = new Size(418, 34);
+            TotalCxStringTextBox.TabIndex = 3;
+            // 
+            // m_TestGroupBox
+            // 
+            m_TestGroupBox.Controls.Add(m_TestPanel);
+            m_TestGroupBox.Location = new Point(321, 73);
+            m_TestGroupBox.Name = "m_TestGroupBox";
+            m_TestGroupBox.Size = new Size(403, 233);
+            m_TestGroupBox.TabIndex = 4;
+            m_TestGroupBox.TabStop = false;
+            m_TestGroupBox.Text = "groupBox1";
+            // 
+            // m_TestPanel
+            // 
+            m_TestPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            m_TestPanel.Location = new Point(20, 22);
+            m_TestPanel.Name = "m_TestPanel";
+            m_TestPanel.Size = new Size(355, 180);
+            m_TestPanel.TabIndex = 0;
+            // 
+            // SearchButton
+            // 
+            SearchButton.Location = new Point(380, 326);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(63, 28);
+            SearchButton.TabIndex = 5;
+            SearchButton.Text = "Search";
+            SearchButton.UseVisualStyleBackColor = true;
             // 
             // FalconKnightToolForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(m_TotalCxStringTextBox);
+            Controls.Add(SearchButton);
+            Controls.Add(m_TestGroupBox);
+            Controls.Add(TotalCxStringTextBox);
             Controls.Add(m_CurrentPathText);
-            Controls.Add(m_GridCanvas);
-            Controls.Add(m_AddButton);
+            Controls.Add(GridCanvas);
+            Controls.Add(AddButton);
             Name = "FalconKnightToolForm";
             Text = "FalconKnightTool";
             FormClosed += OnFormClosed;
+            m_TestGroupBox.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button m_AddButton;
-        private Path.GridCanvas m_GridCanvas;
+        private Button AddButton;
+        private Path.GridCanvas GridCanvas;
         private Label m_CurrentPathText;
-        private TextBox m_TotalCxStringTextBox;
+        private TextBox TotalCxStringTextBox;
+        private GroupBox m_TestGroupBox;
+        private Panel m_TestPanel;
+        private Button SearchButton;
     }
 }

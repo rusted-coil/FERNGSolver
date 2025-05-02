@@ -1,27 +1,36 @@
+using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.Types;
 using FERNGSolver.FalconKnightTool.Presentation.ViewContracts;
 using FormRx.Button;
-using FormRx.Extensions;
 using System.Reactive;
 using System.Reactive.Disposables;
-using System.Reactive.Subjects;
 
 namespace FERNGSolver.FalconKnightTool.UI.Internal
 {
     internal partial class FalconKnightToolForm : Form, IFalconKnightToolView
     {
-        Subject<Unit> m_AddButtonClicked = new Subject<Unit>();
-        public IObservable<Unit> AddButtonClicked => m_AddButtonClicked;
-        public IObservable<IReadOnlyList<GridPosition>> PathDetermined => m_GridCanvas.PathDetermined;
+        public IObservable<Unit> AddButtonClicked => m_AddButton.Clicked;
+        public IObservable<Unit> SearchButtonClicked => m_SearchButton.Clicked;
+        public IObservable<IReadOnlyList<GridPosition>> PathDetermined => GridCanvas.PathDetermined;
+
+        IButton m_AddButton, m_SearchButton;
 
         CompositeDisposable m_Disposables = new CompositeDisposable();
 
-        public FalconKnightToolForm()
+        public FalconKnightToolForm(IUserControlFactory searchConditionUserControlFactory)
         {
             InitializeComponent();
 
-            var button = ButtonFactory.CreateButton(m_AddButton);
-            button.Clicked.Subscribe(m_AddButtonClicked).AddTo(m_Disposables);
+            // 検索条件のUserControlを展開
+            {
+                var subControl = searchConditionUserControlFactory.Create();
+                m_TestPanel.Controls.Clear();
+                subControl.Dock = DockStyle.Fill;
+                m_TestPanel.Controls.Add(subControl);
+            }
+
+            m_AddButton = ButtonFactory.CreateButton(AddButton);
+            m_SearchButton = ButtonFactory.CreateButton(SearchButton);
         }
 
         private void OnFormClosed(object sender, FormClosedEventArgs e)
@@ -36,7 +45,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
 
         public void AddCxStringText(string text)
         {
-            m_TotalCxStringTextBox.Text += text;
+            TotalCxStringTextBox.Text += text;
         }
     }
 }

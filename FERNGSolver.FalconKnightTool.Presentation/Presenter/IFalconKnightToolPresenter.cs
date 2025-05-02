@@ -1,6 +1,6 @@
 namespace FERNGSolver.FalconKnightTool.Presentation.Presenter
 {
-    public interface IFalconKnightToolPresenter
+    public interface IFalconKnightToolPresenter : IDisposable
     {
     }
 }

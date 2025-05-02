@@ -9,7 +9,7 @@ namespace FERNGSolver
         {
             InitializeComponent();
 
-            var form = FalconKnightToolLauncher.CreateToolForm();
+            var form = FalconKnightToolLauncher.CreateToolForm(Gba.UI.Search.SearchUserControlFactoryProvider.CreateFalconKnightToolSearchConditionUserControlFactory());
             form.Show();
         }
     }

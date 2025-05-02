@@ -11,6 +11,11 @@ namespace FERNGSolver.FalconKnightTool.Presentation.ViewContracts
         IObservable<Unit> AddButtonClicked { get; }
 
         /// <summary>
+        /// 「検索」ボタンがクリックされたことを通知するストリームです。
+        /// </summary>
+        IObservable<Unit> SearchButtonClicked { get; }
+
+        /// <summary>
         /// パスの入力が完了したことを通知するストリームです。
         /// </summary>
         IObservable<IReadOnlyList<GridPosition>> PathDetermined { get; }

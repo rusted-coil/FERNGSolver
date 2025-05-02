@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Windows.Common\FERNGSolver.Windows.Common.csproj" />
     <ProjectReference Include="..\FormRx\FormRx.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Presentation\FERNGSolver.FalconKnightTool.Presentation.csproj" />
   </ItemGroup>
