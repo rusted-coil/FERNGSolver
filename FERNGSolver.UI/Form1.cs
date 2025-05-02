@@ -1,5 +1,4 @@
 using FERNGSolver.FalconKnightTool.UI;
-using System.Diagnostics;
 
 namespace FERNGSolver
 {
@@ -9,7 +8,8 @@ namespace FERNGSolver
         {
             InitializeComponent();
 
-            var form = FalconKnightToolLauncher.CreateToolForm(Gba.UI.Search.SearchUserControlFactoryProvider.CreateFalconKnightToolSearchConditionUserControlFactory());
+            var bindings = Gba.UI.FalconKnight.FalconKnightToolIntegration.Create();
+            var form = FalconKnightToolLauncher.CreateToolForm(bindings.SearchConditionControl, bindings.SearchStrategy);
             form.Show();
         }
     }

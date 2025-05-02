@@ -1,6 +1,6 @@
-﻿namespace FERNGSolver.Gba.UI
+namespace FERNGSolver.Gba.UI.FalconKnight.Internal
 {
-    partial class FalconKnightToolSearchConditionUserControl
+    partial class SearchConditionUserControl
     {
         /// <summary> 
         /// 必要なデザイナー変数です。

@@ -1,7 +1,7 @@
-using FERNGSolver.Gba.Domain.FalconKnight;
+using FERNGSolver.Gba.Application.FalconKnight;
 using FERNGSolver.Gba.Domain.RNG;
 
-namespace FERNGSolver.Gba.Domain.Tests.FalconKnight
+namespace FERNGSolver.Gba.Application.Tests.FalconKnight
 {
     [TestClass]
     public class PatternSearcherTests

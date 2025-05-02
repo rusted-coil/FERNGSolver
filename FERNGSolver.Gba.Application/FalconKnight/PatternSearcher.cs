@@ -1,6 +1,6 @@
 using FERNGSolver.Gba.Domain.RNG;
 
-namespace FERNGSolver.Gba.Domain.FalconKnight
+namespace FERNGSolver.Gba.Application.FalconKnight
 {
     public static class PatternSearcher
     {

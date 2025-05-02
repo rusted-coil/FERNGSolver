@@ -7,13 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reactive" Version="6.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FERNGSolver.Common\FERNGSolver.Common.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Common\FERNGSolver.FalconKnightTool.Common.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Gba.Application\FERNGSolver.Gba.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Gba.Domain\FERNGSolver.Gba.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,3 @@
-using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.Types;
 using FERNGSolver.FalconKnightTool.Presentation.ViewContracts;
 using FormRx.Button;
@@ -17,16 +16,15 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
 
         CompositeDisposable m_Disposables = new CompositeDisposable();
 
-        public FalconKnightToolForm(IUserControlFactory searchConditionUserControlFactory)
+        public FalconKnightToolForm(UserControl searchConditionUserControl)
         {
             InitializeComponent();
 
             // 検索条件のUserControlを展開
             {
-                var subControl = searchConditionUserControlFactory.Create();
                 m_TestPanel.Controls.Clear();
-                subControl.Dock = DockStyle.Fill;
-                m_TestPanel.Controls.Add(subControl);
+                searchConditionUserControl.Dock = DockStyle.Fill;
+                m_TestPanel.Controls.Add(searchConditionUserControl);
             }
 
             m_AddButton = ButtonFactory.CreateButton(AddButton);
@@ -46,6 +44,11 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         public void AddCxStringText(string text)
         {
             TotalCxStringTextBox.Text += text;
+        }
+
+        public string GetCxStringText()
+        {
+            return TotalCxStringTextBox.Text;
         }
     }
 }

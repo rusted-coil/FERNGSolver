@@ -29,5 +29,10 @@ namespace FERNGSolver.FalconKnightTool.Presentation.ViewContracts
         /// 特定の文字列をcx列文字列として追加します。
         /// </summary>
         void AddCxStringText(string text);
+
+        /// <summary>
+        /// 現在入力されているcx列文字列を取得します。
+        /// </summary>
+        string GetCxStringText();
     }
 }

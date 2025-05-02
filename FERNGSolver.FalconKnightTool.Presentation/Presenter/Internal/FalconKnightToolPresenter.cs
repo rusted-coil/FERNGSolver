@@ -1,7 +1,7 @@
 using FERNGSolver.Common.Extensions;
 using FERNGSolver.FalconKnightTool.Application.Path;
+using FERNGSolver.FalconKnightTool.Common.Interfaces;
 using FERNGSolver.FalconKnightTool.Presentation.ViewContracts;
-using System.Diagnostics;
 using System.Reactive.Disposables;
 
 namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
@@ -12,7 +12,7 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
 
         CompositeDisposable m_Disposables = new CompositeDisposable();
 
-        public FalconKnightToolPresenter(IFalconKnightToolView view)
+        public FalconKnightToolPresenter(IFalconKnightToolView view, IFalconKnightToolSearchStrategy searchStrategy)
         {
             view.AddButtonClicked.Subscribe(_ =>
             {
@@ -21,7 +21,7 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
 
             view.SearchButtonClicked.Subscribe(_ =>
             {
-                Debug.WriteLine("検索ボタンがクリックされました。");
+                searchStrategy.ExecuteSearch(view.GetCxStringText());
             }).AddTo(m_Disposables);
 
             view.PathDetermined.Subscribe(list =>
