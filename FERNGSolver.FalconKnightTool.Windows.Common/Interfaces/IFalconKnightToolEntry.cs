@@ -11,5 +11,10 @@ namespace FERNGSolver.FalconKnightTool.Windows.Common.Interfaces
         /// 検索条件を設定するパネルのユーザーコントロールを取得します。
         /// </summary>
         UserControl SearchConditionControl { get; }
+
+        /// <summary>
+        /// 結果の行を右クリックした時にコンテキストメニューを生成するプロバイダーを取得します。
+        /// </summary>
+        IFalconKnightToolResultViewContextMenuProvider ResultViewContextMenuProvider { get; }
     }
 }

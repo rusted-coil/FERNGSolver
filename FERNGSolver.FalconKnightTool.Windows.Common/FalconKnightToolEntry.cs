@@ -8,12 +8,18 @@ namespace FERNGSolver.FalconKnightTool.Windows.Common
         public string Title { get; }
         public UserControl SearchConditionControl { get; }
         public IFalconKnightToolSearchStrategy SearchStrategy { get; }
+        public IFalconKnightToolResultViewContextMenuProvider ResultViewContextMenuProvider { get; }
 
-        public FalconKnightToolEntry(string title, UserControl searchConditionControl, IFalconKnightToolSearchStrategy searchStrategy)
+        public FalconKnightToolEntry(
+            string title,
+            UserControl searchConditionControl,
+            IFalconKnightToolSearchStrategy searchStrategy,
+            IFalconKnightToolResultViewContextMenuProvider resultViewContextMenuProvider)
         {
             Title = title;
             SearchConditionControl = searchConditionControl;
             SearchStrategy = searchStrategy;
+            ResultViewContextMenuProvider = resultViewContextMenuProvider;
         }
     }
 }

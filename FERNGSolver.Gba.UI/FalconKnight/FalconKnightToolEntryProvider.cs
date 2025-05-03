@@ -11,7 +11,11 @@ namespace FERNGSolver.Gba.UI.FalconKnight
             var searchConditionControl = new Internal.SearchConditionUserControl();
             searchConditionControl.InitializeDefaults();
 
-            return new FalconKnightToolEntry("GBA", searchConditionControl, SearchStrategyFactory.Create(searchConditionControl));
+            return new FalconKnightToolEntry(
+                "GBA",
+                searchConditionControl,
+                SearchStrategyFactory.Create(searchConditionControl),
+                new Internal.ResultViewContextMenuProvider());
         }
     }
 }

@@ -11,13 +11,14 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
 {
     internal partial class FalconKnightToolForm : Form, IFalconKnightToolView
     {
-        public string CurrentTitle => m_Titles[SearchConditionTabControl.SelectedIndex];
+        public string CurrentTitle => CurrentEntry.Title;
         public IObservable<Unit> AddButtonClicked => m_AddButton.Clicked;
         public IObservable<Unit> SearchButtonClicked => m_SearchButton.Clicked;
         public IObservable<IReadOnlyList<GridPosition>> PathDetermined => GridCanvas.PathDetermined;
 
-        IButton m_AddButton, m_SearchButton;
-        string[] m_Titles;
+        private IButton m_AddButton, m_SearchButton;
+        private IFalconKnightToolEntry[] m_Entries;
+        private IFalconKnightToolEntry CurrentEntry => m_Entries[SearchConditionTabControl.SelectedIndex];
 
         CompositeDisposable m_Disposables = new CompositeDisposable();
 
@@ -25,7 +26,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         {
             InitializeComponent();
 
-            m_Titles = entries.Select(entry => entry.Title).ToArray();
+            m_Entries = entries;
 
             // 検索条件のUserControlを展開
             SearchConditionTabControl.TabPages.Clear();
@@ -42,6 +43,8 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
 
             m_AddButton = ButtonFactory.CreateButton(AddButton);
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
+
+            SearchResultDataGridView.MouseDown += OnSearchResultDataGridViewClicked;
         }
 
         private void OnFormClosed(object sender, FormClosedEventArgs e)
@@ -69,6 +72,24 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
             var listType = typeof(BindingList<>).MakeGenericType(viewModelType);
             var list = Activator.CreateInstance(listType, viewModels) as IList;
             SearchResultDataGridView.DataSource = list;
+        }
+
+        private void OnSearchResultDataGridViewClicked(object? sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hitTestInfo = SearchResultDataGridView.HitTest(e.X, e.Y);
+                if (hitTestInfo.RowIndex >= 0)
+                {
+                    // クリックされた行を選択状態にする
+                    SearchResultDataGridView.ClearSelection(); // 他の選択をクリア
+                    SearchResultDataGridView.Rows[hitTestInfo.RowIndex].Selected = true;
+
+                    // コンテキストメニューを表示
+                    var menu = CurrentEntry.ResultViewContextMenuProvider.CreateContextMenu(hitTestInfo.RowIndex);
+                    menu.Show(SearchResultDataGridView, e.Location);
+                }
+            }
         }
     }
 }
