@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Common\FERNGSolver.FalconKnightTool.Common.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Thracia.Application\FERNGSolver.Thracia.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Thracia.Domain\FERNGSolver.Thracia.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -8,8 +8,9 @@ namespace FERNGSolver
         {
             InitializeComponent();
 
-            var bindings = Gba.UI.FalconKnight.FalconKnightToolEntryProvider.Create();
-            var form = FalconKnightToolLauncher.CreateToolForm(bindings);
+            var form = FalconKnightToolLauncher.CreateToolForm(
+                Thracia.UI.FalconKnight.FalconKnightToolEntryProvider.Create(),
+                Gba.UI.FalconKnight.FalconKnightToolEntryProvider.Create());
             form.Show();
         }
     }

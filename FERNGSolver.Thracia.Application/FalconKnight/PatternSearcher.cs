@@ -1,6 +1,6 @@
-using FERNGSolver.Gba.Domain.RNG;
+using FERNGSolver.Thracia.Domain.RNG;
 
-namespace FERNGSolver.Gba.Application.FalconKnight
+namespace FERNGSolver.Thracia.Application.FalconKnight
 {
     public static class PatternSearcher
     {
@@ -8,9 +8,9 @@ namespace FERNGSolver.Gba.Application.FalconKnight
         /// ファルコンナイト法のパターンに一致する消費数を全て検索します。
         /// <para> * 受け取ったRNGは進めません。</para>
         /// </summary>
-        public static IReadOnlyList<(int, ushort[])> Search(IRng currentRng, int offsetMin, int offsetMax, IReadOnlyList<bool> falconKnightPattern)
+        public static IReadOnlyList<int> Search(IRng currentRng, int offsetMin, int offsetMax, IReadOnlyList<bool> falconKnightPattern)
         {
-            var result = new List<(int, ushort[])>();
+            var result = new List<int>();
 
             var startRng = RngFactory.CreateFromRng(currentRng);
             for (int i = 0; i < offsetMin; ++i)
@@ -34,12 +34,11 @@ namespace FERNGSolver.Gba.Application.FalconKnight
 
                 if (isOk)
                 {
-                    result.Add((offsetMin + i, [startRng.States[0], startRng.States[1], startRng.States[2]]));
+                    result.Add(offsetMin + i);
                 }
 
                 startRng.Next();
             }
-
             return result;
         }
     }
