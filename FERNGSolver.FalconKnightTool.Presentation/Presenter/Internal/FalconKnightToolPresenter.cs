@@ -9,11 +9,14 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
     internal sealed class FalconKnightToolPresenter : IFalconKnightToolPresenter
     {
         private string m_CurrentCxString = string.Empty;
+        private Dictionary<string, IFalconKnightToolSearchStrategy> m_Strategies;
 
         CompositeDisposable m_Disposables = new CompositeDisposable();
 
-        public FalconKnightToolPresenter(IFalconKnightToolView view, IFalconKnightToolSearchStrategy searchStrategy)
+        public FalconKnightToolPresenter(IFalconKnightToolView view, params IFalconKnightToolEntryCore[] entries)
         {
+            m_Strategies = entries.ToDictionary(entry => entry.Title, entry => entry.SearchStrategy);
+
             view.AddButtonClicked.Subscribe(_ =>
             {
                 view.AddCxStringText(m_CurrentCxString);
@@ -21,7 +24,7 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
 
             view.SearchButtonClicked.Subscribe(_ =>
             {
-                searchStrategy.ExecuteSearch(view.GetCxStringText());
+                m_Strategies[view.CurrentTitle].ExecuteSearch(view.GetCxStringText(), view);
             }).AddTo(m_Disposables);
 
             view.PathDetermined.Subscribe(list =>

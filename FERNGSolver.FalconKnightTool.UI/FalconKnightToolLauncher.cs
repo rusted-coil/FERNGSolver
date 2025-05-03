@@ -1,15 +1,14 @@
-using FERNGSolver.Common.Interfaces;
-using FERNGSolver.FalconKnightTool.Common.Interfaces;
 using FERNGSolver.FalconKnightTool.Presentation.Presenter;
+using FERNGSolver.FalconKnightTool.Windows.Common.Interfaces;
 
 namespace FERNGSolver.FalconKnightTool.UI
 {
     public static class FalconKnightToolLauncher
     {
-        public static Form CreateToolForm(UserControl searchConditionControl, IFalconKnightToolSearchStrategy searchStrategy)
+        public static Form CreateToolForm(params IFalconKnightToolEntry[] entries)
         {
-            var form = new Internal.FalconKnightToolForm(searchConditionControl);
-            var presenter = PresenterFactory.Create(form, searchStrategy);
+            var form = new Internal.FalconKnightToolForm(entries);
+            var presenter = PresenterFactory.Create(form, entries);
 
             // フォームを閉じた時にpresenterをdispose
             form.FormClosed += (object? sender, FormClosedEventArgs e) => {

@@ -6,9 +6,9 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter
 {
     public static class PresenterFactory
     {
-        public static IFalconKnightToolPresenter Create(IFalconKnightToolView view, IFalconKnightToolSearchStrategy searchStrategy)
+        public static IFalconKnightToolPresenter Create(IFalconKnightToolView view, params IFalconKnightToolEntryCore[] entries)
         {
-            return new FalconKnightToolPresenter(view, searchStrategy);
+            return new FalconKnightToolPresenter(view, entries);
         }
     }
 }

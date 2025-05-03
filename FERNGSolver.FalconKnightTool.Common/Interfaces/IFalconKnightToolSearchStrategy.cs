@@ -9,6 +9,6 @@ namespace FERNGSolver.FalconKnightTool.Common.Interfaces
         /// 検索処理を行います。
         /// <para> * ファルコンナイト法ツールの共通部分で入力する情報を引数として渡し、作品固有の設定などは内部で処理します。</para>
         /// </summary>
-        void ExecuteSearch(string cxString);
+        void ExecuteSearch(string cxString, IFalconKnightToolResultView resultView);
     }
 }

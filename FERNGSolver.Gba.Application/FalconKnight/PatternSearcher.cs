@@ -8,22 +8,24 @@ namespace FERNGSolver.Gba.Application.FalconKnight
         /// ファルコンナイト法のパターンに一致する消費数を全て検索します。
         /// <para> * 受け取ったRNGは進めません。</para>
         /// </summary>
-        public static IReadOnlyList<int> Search(IRng currentRng, int offsetMin, int offsetMax, IReadOnlyList<bool> falconKnightPattern)
+        public static IReadOnlyList<(int, ushort[])> Search(IRng currentRng, int offsetMin, int offsetMax, IReadOnlyList<bool> falconKnightPattern)
         {
-            var result = new List<int>();
+            var result = new List<(int, ushort[])>();
 
-            for (int offset = offsetMin; offset <= offsetMax; ++offset)
+            var startRng = RngFactory.CreateFromRng(currentRng);
+            for (int i = 0; i < offsetMin; ++i)
             {
-                var cloneRng = RngFactory.CreateFromRng(currentRng);
-                for (int a = 0; a < offset; ++a)
-                {
-                    cloneRng.Next();
-                }
+                startRng.Next();
+            }
+
+            for (int i = 0; i <= offsetMax - offsetMin; ++i)
+            {
+                var tempRng = RngFactory.CreateFromRng(startRng);
 
                 bool isOk = true;
-                foreach(var pattern in falconKnightPattern)
+                foreach (var pattern in falconKnightPattern)
                 {
-                    if (pattern != (cloneRng.Next() <= 49))
+                    if (pattern != (tempRng.Next() <= 49))
                     {
                         isOk = false;
                         break;
@@ -32,8 +34,10 @@ namespace FERNGSolver.Gba.Application.FalconKnight
 
                 if (isOk)
                 {
-                    result.Add(offset);
+                    result.Add((offsetMin + i, [startRng.States[0], startRng.States[1], startRng.States[2]]));
                 }
+
+                startRng.Next();
             }
 
             return result;

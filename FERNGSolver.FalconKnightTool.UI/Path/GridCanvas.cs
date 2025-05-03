@@ -5,7 +5,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
 {
     public class GridCanvas : Panel
     {
-        public int GridCount { get; set; } = 5;
+        public int GridCount { get; set; } = 15;
         public IObservable<IReadOnlyList<GridPosition>> PathDetermined => m_PathDetermined;
 
         private GridPosition StartPosition => new(GridCount / 2, GridCount / 2);

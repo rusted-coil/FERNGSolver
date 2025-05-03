@@ -8,7 +8,8 @@ namespace FERNGSolver.Gba.Domain.RNG
         public static IRng CreateDefault()
         {
             // 初期seedはゲームの固定値を使う
-            return new Internal.Rng(0x3671, 0x90ea, 0x1496);
+            var seeds = Const.DefaultSeeds;
+            return new Internal.Rng(seeds[0], seeds[1], seeds[2]);
         }
 
         /// <summary>

@@ -1,10 +1,16 @@
 using FERNGSolver.Common.Types;
+using FERNGSolver.FalconKnightTool.Common.Interfaces;
 using System.Reactive;
 
 namespace FERNGSolver.FalconKnightTool.Presentation.ViewContracts
 {
-    public interface IFalconKnightToolView
+    public interface IFalconKnightToolView : IFalconKnightToolResultView
     {
+        /// <summary>
+        /// 現在アクティブな作品のタイトルを取得します。
+        /// </summary>
+        string CurrentTitle { get; }
+
         /// <summary>
         /// 「追加」ボタンがクリックされたことを通知するストリームです。
         /// </summary>
