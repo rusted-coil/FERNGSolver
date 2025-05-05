@@ -12,6 +12,7 @@
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.UI\FERNGSolver.FalconKnightTool.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Gba.UI\FERNGSolver.Gba.UI.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Presentation\FERNGSolver.Presentation.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.UI\FERNGSolver.Thracia.UI.csproj" />
   </ItemGroup>
 

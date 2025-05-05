@@ -1,6 +1,7 @@
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.FalconKnightTool.Common.Interfaces;
-using FERNGSolver.Gba.Application.FalconKnight;
+using FERNGSolver.Gba.Application.Search;
+using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.ViewContracts;
 
@@ -20,7 +21,8 @@ namespace FERNGSolver.Gba.Presentation.FalconKnight.Internal
             var cxPattern = CxStringConverter.CxStringToBools(cxString);
 
             IRng rng = RngFactory.CreateDefault();
-            var result = PatternSearcher.Search(rng, m_View.OffsetMin, m_View.OffsetMax, cxPattern);
+            var strategy = StrategyFactory.CreateFalconKnightPatternStrategy(cxPattern);
+            var result = Searcher.Search(rng, m_View.OffsetMin, m_View.OffsetMax, strategy);
 
             var viewModels = new SearchResultItemViewModel[result.Count];
             for (int i = 0; i < viewModels.Length && i < 100; ++i)
