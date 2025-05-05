@@ -44,7 +44,7 @@ namespace FERNGSolver
             SearchConditionTabControl.Location = new Point(12, 12);
             SearchConditionTabControl.Name = "SearchConditionTabControl";
             SearchConditionTabControl.SelectedIndex = 0;
-            SearchConditionTabControl.Size = new Size(559, 607);
+            SearchConditionTabControl.Size = new Size(654, 619);
             SearchConditionTabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -52,7 +52,7 @@ namespace FERNGSolver
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(551, 579);
+            tabPage1.Size = new Size(646, 591);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -69,7 +69,7 @@ namespace FERNGSolver
             // 
             // SearchButton
             // 
-            SearchButton.Location = new Point(210, 637);
+            SearchButton.Location = new Point(257, 637);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(143, 32);
             SearchButton.TabIndex = 0;

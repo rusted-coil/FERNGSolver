@@ -19,7 +19,7 @@ namespace FERNGSolver
 
             // 作品個別コントロールを初期化
             form.SetEntries(
-                Gba.UI.Search.MainFormEntryProvider.Create(form));
+                Gba.UI.Search.MainFormEntryProvider.Create(form, new UI.Internal.ErrorNotifier()));
 
             Application.Run(form);
         }

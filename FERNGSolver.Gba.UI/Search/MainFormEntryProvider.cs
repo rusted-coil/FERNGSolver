@@ -7,12 +7,12 @@ namespace FERNGSolver.Gba.UI.Search
 {
     public static class MainFormEntryProvider
     {
-        public static IMainFormEntry Create(IMainFormView mainFormView)
+        public static IMainFormEntry Create(IMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
             var userControl = new MainFormUserControl(mainFormView);
             userControl.InitializeDefaults();
 
-            var presenter = PresenterFactory.Create(userControl);
+            var presenter = PresenterFactory.Create(userControl, errorNotifier);
 
             // UserControlの破棄時にPresenterも破棄
             userControl.Disposed += (sender, args) => presenter.Dispose();

@@ -1,7 +1,6 @@
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.ViewContracts;
-using System.ComponentModel;
 using System.Reactive;
 
 namespace FERNGSolver.Gba.UI.Search
@@ -11,6 +10,8 @@ namespace FERNGSolver.Gba.UI.Search
         public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
         public void ShowSearchResults(Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(viewModelType, viewModels);
 
+        public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
+        public string CxString => CxStringTextBox.Text;
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
         public bool ContainsGrowth => ContainsGrowthCheckBox.Checked;
 
@@ -68,6 +69,16 @@ namespace FERNGSolver.Gba.UI.Search
         private void DefaultSeedButton_Click(object sender, EventArgs e)
         {
             SetDefaultSeeds();
+        }
+
+        private void UsesFalconKnightMethodCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // ファルコンナイト法検索にチェックを入れてる時は戦闘とレベルアップ検索を無効に
+            bool isChecked = UsesFalconKnightMethodCheckBox.Checked;
+            ContainsCombatCheckBox.Enabled = !isChecked;
+            CombatGroupBox.Enabled = !isChecked;
+            ContainsGrowthCheckBox.Enabled = !isChecked;
+            GrowthGroupBox.Enabled = !isChecked;
         }
     }
 }

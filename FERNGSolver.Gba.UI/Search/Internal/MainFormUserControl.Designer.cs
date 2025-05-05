@@ -41,79 +41,85 @@ namespace FERNGSolver.Gba.UI.Search
             label1 = new Label();
             ContainsCombatCheckBox = new CheckBox();
             CombatGroupBox = new GroupBox();
-            GrowthGroupBox = new GroupBox();
-            ContainsGrowthCheckBox = new CheckBox();
-            label6 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            label7 = new Label();
+            checkBox2 = new CheckBox();
+            checkBox1 = new CheckBox();
             textBox3 = new TextBox();
             label8 = new Label();
             textBox4 = new TextBox();
             label9 = new Label();
-            checkBox1 = new CheckBox();
-            checkBox2 = new CheckBox();
-            comboBox1 = new ComboBox();
-            label10 = new Label();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
-            label11 = new Label();
-            textBox7 = new TextBox();
-            label12 = new Label();
+            textBox2 = new TextBox();
+            label7 = new Label();
+            textBox1 = new TextBox();
+            label6 = new Label();
+            GrowthGroupBox = new GroupBox();
+            checkBox9 = new CheckBox();
+            checkBox8 = new CheckBox();
+            checkBox7 = new CheckBox();
+            checkBox6 = new CheckBox();
+            checkBox5 = new CheckBox();
+            checkBox4 = new CheckBox();
+            checkBox3 = new CheckBox();
+            textBox11 = new TextBox();
+            label16 = new Label();
             textBox8 = new TextBox();
             label13 = new Label();
             textBox9 = new TextBox();
             label14 = new Label();
             textBox10 = new TextBox();
             label15 = new Label();
-            textBox11 = new TextBox();
-            label16 = new Label();
-            checkBox3 = new CheckBox();
-            checkBox4 = new CheckBox();
-            checkBox5 = new CheckBox();
-            checkBox6 = new CheckBox();
-            checkBox7 = new CheckBox();
-            checkBox8 = new CheckBox();
-            checkBox9 = new CheckBox();
+            textBox7 = new TextBox();
+            label12 = new Label();
+            textBox6 = new TextBox();
+            label11 = new Label();
+            textBox5 = new TextBox();
+            label10 = new Label();
+            comboBox1 = new ComboBox();
+            ContainsGrowthCheckBox = new CheckBox();
+            FalconKnightMethodGroupBox = new GroupBox();
+            AddsCxOffset = new CheckBox();
+            label17 = new Label();
+            CxStringTextBox = new TextBox();
+            UsesFalconKnightMethodCheckBox = new CheckBox();
             CombatGroupBox.SuspendLayout();
             GrowthGroupBox.SuspendLayout();
+            FalconKnightMethodGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // DefaultSeedButton
             // 
-            DefaultSeedButton.Location = new Point(25, 412);
+            DefaultSeedButton.Location = new Point(25, 556);
             DefaultSeedButton.Name = "DefaultSeedButton";
             DefaultSeedButton.Size = new Size(75, 23);
-            DefaultSeedButton.TabIndex = 21;
+            DefaultSeedButton.TabIndex = 104;
             DefaultSeedButton.Text = "Default";
             DefaultSeedButton.UseVisualStyleBackColor = true;
             DefaultSeedButton.Click += DefaultSeedButton_Click;
             // 
             // Seed2TextBox
             // 
-            Seed2TextBox.Location = new Point(72, 381);
+            Seed2TextBox.Location = new Point(72, 525);
             Seed2TextBox.Name = "Seed2TextBox";
             Seed2TextBox.Size = new Size(42, 23);
-            Seed2TextBox.TabIndex = 20;
+            Seed2TextBox.TabIndex = 103;
             // 
             // Seed1TextBox
             // 
-            Seed1TextBox.Location = new Point(72, 353);
+            Seed1TextBox.Location = new Point(72, 497);
             Seed1TextBox.Name = "Seed1TextBox";
             Seed1TextBox.Size = new Size(42, 23);
-            Seed1TextBox.TabIndex = 19;
+            Seed1TextBox.TabIndex = 102;
             // 
             // Seed0TextBox
             // 
-            Seed0TextBox.Location = new Point(72, 325);
+            Seed0TextBox.Location = new Point(72, 469);
             Seed0TextBox.Name = "Seed0TextBox";
             Seed0TextBox.Size = new Size(42, 23);
-            Seed0TextBox.TabIndex = 18;
+            Seed0TextBox.TabIndex = 101;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(11, 384);
+            label5.Location = new Point(11, 528);
             label5.Name = "label5";
             label5.Size = new Size(61, 15);
             label5.TabIndex = 17;
@@ -122,7 +128,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(11, 356);
+            label4.Location = new Point(11, 500);
             label4.Name = "label4";
             label4.Size = new Size(61, 15);
             label4.TabIndex = 16;
@@ -131,7 +137,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(11, 328);
+            label3.Location = new Point(11, 472);
             label3.Name = "label3";
             label3.Size = new Size(61, 15);
             label3.TabIndex = 15;
@@ -140,7 +146,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(243, 328);
+            label2.Location = new Point(243, 472);
             label2.Name = "label2";
             label2.Size = new Size(19, 15);
             label2.TabIndex = 14;
@@ -148,22 +154,22 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // OffsetMaxTextBox
             // 
-            OffsetMaxTextBox.Location = new Point(268, 325);
+            OffsetMaxTextBox.Location = new Point(268, 469);
             OffsetMaxTextBox.Name = "OffsetMaxTextBox";
             OffsetMaxTextBox.Size = new Size(37, 23);
-            OffsetMaxTextBox.TabIndex = 13;
+            OffsetMaxTextBox.TabIndex = 106;
             // 
             // OffsetMinTextBox
             // 
-            OffsetMinTextBox.Location = new Point(199, 325);
+            OffsetMinTextBox.Location = new Point(199, 469);
             OffsetMinTextBox.Name = "OffsetMinTextBox";
             OffsetMinTextBox.Size = new Size(37, 23);
-            OffsetMinTextBox.TabIndex = 12;
+            OffsetMinTextBox.TabIndex = 105;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(138, 328);
+            label1.Location = new Point(138, 472);
             label1.Name = "label1";
             label1.Size = new Size(55, 15);
             label1.TabIndex = 11;
@@ -192,84 +198,31 @@ namespace FERNGSolver.Gba.UI.Search
             CombatGroupBox.Controls.Add(textBox1);
             CombatGroupBox.Controls.Add(label6);
             CombatGroupBox.Controls.Add(ContainsCombatCheckBox);
-            CombatGroupBox.Location = new Point(11, 5);
+            CombatGroupBox.Location = new Point(11, 77);
             CombatGroupBox.Name = "CombatGroupBox";
-            CombatGroupBox.Size = new Size(401, 114);
-            CombatGroupBox.TabIndex = 23;
+            CombatGroupBox.Size = new Size(620, 114);
+            CombatGroupBox.TabIndex = 20;
             CombatGroupBox.TabStop = false;
             // 
-            // GrowthGroupBox
+            // checkBox2
             // 
-            GrowthGroupBox.Controls.Add(checkBox9);
-            GrowthGroupBox.Controls.Add(checkBox8);
-            GrowthGroupBox.Controls.Add(checkBox7);
-            GrowthGroupBox.Controls.Add(checkBox6);
-            GrowthGroupBox.Controls.Add(checkBox5);
-            GrowthGroupBox.Controls.Add(checkBox4);
-            GrowthGroupBox.Controls.Add(checkBox3);
-            GrowthGroupBox.Controls.Add(textBox11);
-            GrowthGroupBox.Controls.Add(label16);
-            GrowthGroupBox.Controls.Add(textBox8);
-            GrowthGroupBox.Controls.Add(label13);
-            GrowthGroupBox.Controls.Add(textBox9);
-            GrowthGroupBox.Controls.Add(label14);
-            GrowthGroupBox.Controls.Add(textBox10);
-            GrowthGroupBox.Controls.Add(label15);
-            GrowthGroupBox.Controls.Add(textBox7);
-            GrowthGroupBox.Controls.Add(label12);
-            GrowthGroupBox.Controls.Add(textBox6);
-            GrowthGroupBox.Controls.Add(label11);
-            GrowthGroupBox.Controls.Add(textBox5);
-            GrowthGroupBox.Controls.Add(label10);
-            GrowthGroupBox.Controls.Add(comboBox1);
-            GrowthGroupBox.Controls.Add(ContainsGrowthCheckBox);
-            GrowthGroupBox.Location = new Point(11, 125);
-            GrowthGroupBox.Name = "GrowthGroupBox";
-            GrowthGroupBox.Size = new Size(401, 181);
-            GrowthGroupBox.TabIndex = 24;
-            GrowthGroupBox.TabStop = false;
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(116, 81);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(50, 19);
+            checkBox2.TabIndex = 32;
+            checkBox2.Text = "反撃";
+            checkBox2.UseVisualStyleBackColor = true;
             // 
-            // ContainsGrowthCheckBox
+            // checkBox1
             // 
-            ContainsGrowthCheckBox.AutoSize = true;
-            ContainsGrowthCheckBox.Location = new Point(6, 0);
-            ContainsGrowthCheckBox.Name = "ContainsGrowthCheckBox";
-            ContainsGrowthCheckBox.Size = new Size(81, 19);
-            ContainsGrowthCheckBox.TabIndex = 22;
-            ContainsGrowthCheckBox.Text = "レベルアップ";
-            ContainsGrowthCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(14, 25);
-            label6.Name = "label6";
-            label6.Size = new Size(31, 15);
-            label6.TabIndex = 23;
-            label6.Text = "命中";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(47, 22);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(42, 23);
-            textBox1.TabIndex = 24;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(47, 50);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(42, 23);
-            textBox2.TabIndex = 26;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(14, 53);
-            label7.Name = "label7";
-            label7.Size = new Size(31, 15);
-            label7.TabIndex = 25;
-            label7.Text = "必殺";
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(19, 81);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(50, 19);
+            checkBox1.TabIndex = 31;
+            checkBox1.Text = "追撃";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // textBox3
             // 
@@ -303,81 +256,147 @@ namespace FERNGSolver.Gba.UI.Search
             label9.TabIndex = 27;
             label9.Text = "命中";
             // 
-            // checkBox1
+            // textBox2
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(19, 81);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(50, 19);
-            checkBox1.TabIndex = 31;
-            checkBox1.Text = "追撃";
-            checkBox1.UseVisualStyleBackColor = true;
+            textBox2.Location = new Point(47, 50);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(42, 23);
+            textBox2.TabIndex = 26;
             // 
-            // checkBox2
+            // label7
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(116, 81);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(50, 19);
-            checkBox2.TabIndex = 32;
-            checkBox2.Text = "反撃";
-            checkBox2.UseVisualStyleBackColor = true;
+            label7.AutoSize = true;
+            label7.Location = new Point(14, 53);
+            label7.Name = "label7";
+            label7.Size = new Size(31, 15);
+            label7.TabIndex = 25;
+            label7.Text = "必殺";
             // 
-            // comboBox1
+            // textBox1
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(16, 25);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(134, 23);
-            comboBox1.TabIndex = 23;
+            textBox1.Location = new Point(47, 22);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(42, 23);
+            textBox1.TabIndex = 24;
             // 
-            // label10
+            // label6
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(16, 61);
-            label10.Name = "label10";
-            label10.Size = new Size(23, 15);
-            label10.TabIndex = 33;
-            label10.Text = "HP";
+            label6.AutoSize = true;
+            label6.Location = new Point(14, 25);
+            label6.Name = "label6";
+            label6.Size = new Size(31, 15);
+            label6.TabIndex = 23;
+            label6.Text = "命中";
             // 
-            // textBox5
+            // GrowthGroupBox
             // 
-            textBox5.Location = new Point(45, 58);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(42, 23);
-            textBox5.TabIndex = 33;
+            GrowthGroupBox.Controls.Add(checkBox9);
+            GrowthGroupBox.Controls.Add(checkBox8);
+            GrowthGroupBox.Controls.Add(checkBox7);
+            GrowthGroupBox.Controls.Add(checkBox6);
+            GrowthGroupBox.Controls.Add(checkBox5);
+            GrowthGroupBox.Controls.Add(checkBox4);
+            GrowthGroupBox.Controls.Add(checkBox3);
+            GrowthGroupBox.Controls.Add(textBox11);
+            GrowthGroupBox.Controls.Add(label16);
+            GrowthGroupBox.Controls.Add(textBox8);
+            GrowthGroupBox.Controls.Add(label13);
+            GrowthGroupBox.Controls.Add(textBox9);
+            GrowthGroupBox.Controls.Add(label14);
+            GrowthGroupBox.Controls.Add(textBox10);
+            GrowthGroupBox.Controls.Add(label15);
+            GrowthGroupBox.Controls.Add(textBox7);
+            GrowthGroupBox.Controls.Add(label12);
+            GrowthGroupBox.Controls.Add(textBox6);
+            GrowthGroupBox.Controls.Add(label11);
+            GrowthGroupBox.Controls.Add(textBox5);
+            GrowthGroupBox.Controls.Add(label10);
+            GrowthGroupBox.Controls.Add(comboBox1);
+            GrowthGroupBox.Controls.Add(ContainsGrowthCheckBox);
+            GrowthGroupBox.Location = new Point(11, 277);
+            GrowthGroupBox.Name = "GrowthGroupBox";
+            GrowthGroupBox.Size = new Size(620, 181);
+            GrowthGroupBox.TabIndex = 30;
+            GrowthGroupBox.TabStop = false;
             // 
-            // textBox6
+            // checkBox9
             // 
-            textBox6.Location = new Point(45, 86);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(42, 23);
-            textBox6.TabIndex = 34;
+            checkBox9.AutoSize = true;
+            checkBox9.Location = new Point(210, 118);
+            checkBox9.Name = "checkBox9";
+            checkBox9.Size = new Size(15, 14);
+            checkBox9.TabIndex = 52;
+            checkBox9.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // checkBox8
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(16, 89);
-            label11.Name = "label11";
-            label11.Size = new Size(19, 15);
-            label11.TabIndex = 35;
-            label11.Text = "力";
+            checkBox8.AutoSize = true;
+            checkBox8.Location = new Point(210, 90);
+            checkBox8.Name = "checkBox8";
+            checkBox8.Size = new Size(15, 14);
+            checkBox8.TabIndex = 51;
+            checkBox8.UseVisualStyleBackColor = true;
             // 
-            // textBox7
+            // checkBox7
             // 
-            textBox7.Location = new Point(45, 114);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(42, 23);
-            textBox7.TabIndex = 36;
+            checkBox7.AutoSize = true;
+            checkBox7.Location = new Point(210, 62);
+            checkBox7.Name = "checkBox7";
+            checkBox7.Size = new Size(15, 14);
+            checkBox7.TabIndex = 50;
+            checkBox7.UseVisualStyleBackColor = true;
             // 
-            // label12
+            // checkBox6
             // 
-            label12.AutoSize = true;
-            label12.Location = new Point(16, 117);
-            label12.Name = "label12";
-            label12.Size = new Size(19, 15);
-            label12.TabIndex = 37;
-            label12.Text = "技";
+            checkBox6.AutoSize = true;
+            checkBox6.Location = new Point(93, 146);
+            checkBox6.Name = "checkBox6";
+            checkBox6.Size = new Size(15, 14);
+            checkBox6.TabIndex = 49;
+            checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            checkBox5.AutoSize = true;
+            checkBox5.Location = new Point(93, 118);
+            checkBox5.Name = "checkBox5";
+            checkBox5.Size = new Size(15, 14);
+            checkBox5.TabIndex = 48;
+            checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            checkBox4.AutoSize = true;
+            checkBox4.Location = new Point(93, 90);
+            checkBox4.Name = "checkBox4";
+            checkBox4.Size = new Size(15, 14);
+            checkBox4.TabIndex = 47;
+            checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Location = new Point(93, 62);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(15, 14);
+            checkBox3.TabIndex = 46;
+            checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // textBox11
+            // 
+            textBox11.Location = new Point(45, 142);
+            textBox11.Name = "textBox11";
+            textBox11.Size = new Size(42, 23);
+            textBox11.TabIndex = 44;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(16, 145);
+            label16.Name = "label16";
+            label16.Size = new Size(27, 15);
+            label16.TabIndex = 45;
+            label16.Text = "速さ";
             // 
             // textBox8
             // 
@@ -427,89 +446,126 @@ namespace FERNGSolver.Gba.UI.Search
             label15.TabIndex = 39;
             label15.Text = "幸運";
             // 
-            // textBox11
+            // textBox7
             // 
-            textBox11.Location = new Point(45, 142);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(42, 23);
-            textBox11.TabIndex = 44;
+            textBox7.Location = new Point(45, 114);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(42, 23);
+            textBox7.TabIndex = 36;
             // 
-            // label16
+            // label12
             // 
-            label16.AutoSize = true;
-            label16.Location = new Point(16, 145);
-            label16.Name = "label16";
-            label16.Size = new Size(27, 15);
-            label16.TabIndex = 45;
-            label16.Text = "速さ";
+            label12.AutoSize = true;
+            label12.Location = new Point(16, 117);
+            label12.Name = "label12";
+            label12.Size = new Size(19, 15);
+            label12.TabIndex = 37;
+            label12.Text = "技";
             // 
-            // checkBox3
+            // textBox6
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(93, 62);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(15, 14);
-            checkBox3.TabIndex = 46;
-            checkBox3.UseVisualStyleBackColor = true;
+            textBox6.Location = new Point(45, 86);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(42, 23);
+            textBox6.TabIndex = 34;
             // 
-            // checkBox4
+            // label11
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(93, 90);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(15, 14);
-            checkBox4.TabIndex = 47;
-            checkBox4.UseVisualStyleBackColor = true;
+            label11.AutoSize = true;
+            label11.Location = new Point(16, 89);
+            label11.Name = "label11";
+            label11.Size = new Size(19, 15);
+            label11.TabIndex = 35;
+            label11.Text = "力";
             // 
-            // checkBox5
+            // textBox5
             // 
-            checkBox5.AutoSize = true;
-            checkBox5.Location = new Point(93, 118);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(15, 14);
-            checkBox5.TabIndex = 48;
-            checkBox5.UseVisualStyleBackColor = true;
+            textBox5.Location = new Point(45, 58);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(42, 23);
+            textBox5.TabIndex = 33;
             // 
-            // checkBox6
+            // label10
             // 
-            checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(93, 146);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(15, 14);
-            checkBox6.TabIndex = 49;
-            checkBox6.UseVisualStyleBackColor = true;
+            label10.AutoSize = true;
+            label10.Location = new Point(16, 61);
+            label10.Name = "label10";
+            label10.Size = new Size(23, 15);
+            label10.TabIndex = 33;
+            label10.Text = "HP";
             // 
-            // checkBox7
+            // comboBox1
             // 
-            checkBox7.AutoSize = true;
-            checkBox7.Location = new Point(210, 62);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Size = new Size(15, 14);
-            checkBox7.TabIndex = 50;
-            checkBox7.UseVisualStyleBackColor = true;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(16, 25);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(134, 23);
+            comboBox1.TabIndex = 23;
             // 
-            // checkBox8
+            // ContainsGrowthCheckBox
             // 
-            checkBox8.AutoSize = true;
-            checkBox8.Location = new Point(210, 90);
-            checkBox8.Name = "checkBox8";
-            checkBox8.Size = new Size(15, 14);
-            checkBox8.TabIndex = 51;
-            checkBox8.UseVisualStyleBackColor = true;
+            ContainsGrowthCheckBox.AutoSize = true;
+            ContainsGrowthCheckBox.Location = new Point(6, 0);
+            ContainsGrowthCheckBox.Name = "ContainsGrowthCheckBox";
+            ContainsGrowthCheckBox.Size = new Size(81, 19);
+            ContainsGrowthCheckBox.TabIndex = 22;
+            ContainsGrowthCheckBox.Text = "レベルアップ";
+            ContainsGrowthCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox9
+            // FalconKnightMethodGroupBox
             // 
-            checkBox9.AutoSize = true;
-            checkBox9.Location = new Point(210, 118);
-            checkBox9.Name = "checkBox9";
-            checkBox9.Size = new Size(15, 14);
-            checkBox9.TabIndex = 52;
-            checkBox9.UseVisualStyleBackColor = true;
+            FalconKnightMethodGroupBox.Controls.Add(AddsCxOffset);
+            FalconKnightMethodGroupBox.Controls.Add(label17);
+            FalconKnightMethodGroupBox.Controls.Add(CxStringTextBox);
+            FalconKnightMethodGroupBox.Controls.Add(UsesFalconKnightMethodCheckBox);
+            FalconKnightMethodGroupBox.Location = new Point(11, 12);
+            FalconKnightMethodGroupBox.Name = "FalconKnightMethodGroupBox";
+            FalconKnightMethodGroupBox.Size = new Size(620, 59);
+            FalconKnightMethodGroupBox.TabIndex = 11;
+            FalconKnightMethodGroupBox.TabStop = false;
+            // 
+            // AddsCxOffset
+            // 
+            AddsCxOffset.AutoSize = true;
+            AddsCxOffset.Location = new Point(344, 24);
+            AddsCxOffset.Name = "AddsCxOffset";
+            AddsCxOffset.Size = new Size(140, 19);
+            AddsCxOffset.TabIndex = 2;
+            AddsCxOffset.Text = "入力分を消費数に加算";
+            AddsCxOffset.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(14, 25);
+            label17.Name = "label17";
+            label17.Size = new Size(37, 15);
+            label17.TabIndex = 24;
+            label17.Text = "cx列: ";
+            // 
+            // CxStringTextBox
+            // 
+            CxStringTextBox.Location = new Point(52, 22);
+            CxStringTextBox.Name = "CxStringTextBox";
+            CxStringTextBox.Size = new Size(269, 23);
+            CxStringTextBox.TabIndex = 1;
+            // 
+            // UsesFalconKnightMethodCheckBox
+            // 
+            UsesFalconKnightMethodCheckBox.AutoSize = true;
+            UsesFalconKnightMethodCheckBox.Location = new Point(6, 0);
+            UsesFalconKnightMethodCheckBox.Name = "UsesFalconKnightMethodCheckBox";
+            UsesFalconKnightMethodCheckBox.Size = new Size(130, 19);
+            UsesFalconKnightMethodCheckBox.TabIndex = 0;
+            UsesFalconKnightMethodCheckBox.Text = "ファルコンナイト法検索";
+            UsesFalconKnightMethodCheckBox.UseVisualStyleBackColor = true;
+            UsesFalconKnightMethodCheckBox.CheckedChanged += UsesFalconKnightMethodCheckBox_CheckedChanged;
             // 
             // MainFormUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(FalconKnightMethodGroupBox);
             Controls.Add(GrowthGroupBox);
             Controls.Add(CombatGroupBox);
             Controls.Add(DefaultSeedButton);
@@ -524,11 +580,13 @@ namespace FERNGSolver.Gba.UI.Search
             Controls.Add(OffsetMinTextBox);
             Controls.Add(label1);
             Name = "MainFormUserControl";
-            Size = new Size(645, 609);
+            Size = new Size(640, 590);
             CombatGroupBox.ResumeLayout(false);
             CombatGroupBox.PerformLayout();
             GrowthGroupBox.ResumeLayout(false);
             GrowthGroupBox.PerformLayout();
+            FalconKnightMethodGroupBox.ResumeLayout(false);
+            FalconKnightMethodGroupBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -582,5 +640,18 @@ namespace FERNGSolver.Gba.UI.Search
         private Label label11;
         private TextBox textBox5;
         private Label label10;
+        private GroupBox FalconKnightMethodGroupBox;
+        private CheckBox checkBox10;
+        private CheckBox checkBox11;
+        private TextBox textBox13;
+        private Label label18;
+        private TextBox textBox14;
+        private Label label19;
+        private TextBox textBox15;
+        private Label label20;
+        private CheckBox UsesFalconKnightMethodCheckBox;
+        private Label label17;
+        private TextBox CxStringTextBox;
+        private CheckBox AddsCxOffset;
     }
 }
