@@ -13,9 +13,9 @@ namespace FERNGSolver.Gba.Application.Search.Strategy
         /// <summary>
         /// 戦闘とレベルアップを判定するストラテジを作成します。
         /// </summary>
-        public static ISearchStrategy CreateCombatAndGrowthStrategy()
+        public static ISearchStrategy CreateCombatAndGrowthStrategy(CombatAndGrowthStrategyArgs args)
         {
-            return new Internal.CombatAndGrowthStrategy();
+            return new Internal.CombatAndGrowthStrategy(args);
         }
     }
 }

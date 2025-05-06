@@ -70,7 +70,10 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
             }
             else
             {
-                strategy = StrategyFactory.CreateCombatAndGrowthStrategy();
+                strategy = StrategyFactory.CreateCombatAndGrowthStrategy(new CombatAndGrowthStrategyArgs {
+                    ContainsCombat = m_MainFormView.ContainsCombat,
+                    ContainsGrowth = m_MainFormView.ContainsGrowth,
+                });
             }
             return Searcher.Search(rng, m_MainFormView.OffsetMin, m_MainFormView.OffsetMax, strategy);
         }
