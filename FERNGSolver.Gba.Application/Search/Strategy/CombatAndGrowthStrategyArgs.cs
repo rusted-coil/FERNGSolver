@@ -15,4 +15,12 @@ namespace FERNGSolver.Gba.Application.Search.Strategy
         /// </summary>
         public bool ContainsGrowth { get; set; }
     }
+
+    public sealed class GrowthStrategyArgs
+    {
+    }
+
+    public sealed class CombatStrategyArgs
+    {
+    }
 }

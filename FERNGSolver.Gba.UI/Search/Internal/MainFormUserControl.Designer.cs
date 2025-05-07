@@ -50,6 +50,7 @@ namespace FERNGSolver.Gba.UI.Search
             textBox1 = new TextBox();
             label6 = new Label();
             GrowthGroupBox = new GroupBox();
+            IsGrowthBoostedCheckBox = new CheckBox();
             checkBox9 = new CheckBox();
             checkBox8 = new CheckBox();
             checkBox7 = new CheckBox();
@@ -57,21 +58,21 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox5 = new CheckBox();
             checkBox4 = new CheckBox();
             checkBox3 = new CheckBox();
-            textBox11 = new TextBox();
+            GrowthSpdRateTextBox = new TextBox();
             label16 = new Label();
-            textBox8 = new TextBox();
+            GrowthMdfRateTextBox = new TextBox();
             label13 = new Label();
-            textBox9 = new TextBox();
+            GrowthDefRateTextBox = new TextBox();
             label14 = new Label();
-            textBox10 = new TextBox();
+            GrowthLucRateTextBox = new TextBox();
             label15 = new Label();
-            textBox7 = new TextBox();
+            GrowthTecRateTextBox = new TextBox();
             label12 = new Label();
-            textBox6 = new TextBox();
+            GrowthAtkRateTextBox = new TextBox();
             label11 = new Label();
-            textBox5 = new TextBox();
+            GrowthHpRateTextBox = new TextBox();
             label10 = new Label();
-            comboBox1 = new ComboBox();
+            GrowthCharacterNameComboBox = new ComboBox();
             ContainsGrowthCheckBox = new CheckBox();
             FalconKnightMethodGroupBox = new GroupBox();
             FalconKnightToolOpenButton = new Button();
@@ -271,6 +272,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // GrowthGroupBox
             // 
+            GrowthGroupBox.Controls.Add(IsGrowthBoostedCheckBox);
             GrowthGroupBox.Controls.Add(checkBox9);
             GrowthGroupBox.Controls.Add(checkBox8);
             GrowthGroupBox.Controls.Add(checkBox7);
@@ -278,27 +280,37 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthGroupBox.Controls.Add(checkBox5);
             GrowthGroupBox.Controls.Add(checkBox4);
             GrowthGroupBox.Controls.Add(checkBox3);
-            GrowthGroupBox.Controls.Add(textBox11);
+            GrowthGroupBox.Controls.Add(GrowthSpdRateTextBox);
             GrowthGroupBox.Controls.Add(label16);
-            GrowthGroupBox.Controls.Add(textBox8);
+            GrowthGroupBox.Controls.Add(GrowthMdfRateTextBox);
             GrowthGroupBox.Controls.Add(label13);
-            GrowthGroupBox.Controls.Add(textBox9);
+            GrowthGroupBox.Controls.Add(GrowthDefRateTextBox);
             GrowthGroupBox.Controls.Add(label14);
-            GrowthGroupBox.Controls.Add(textBox10);
+            GrowthGroupBox.Controls.Add(GrowthLucRateTextBox);
             GrowthGroupBox.Controls.Add(label15);
-            GrowthGroupBox.Controls.Add(textBox7);
+            GrowthGroupBox.Controls.Add(GrowthTecRateTextBox);
             GrowthGroupBox.Controls.Add(label12);
-            GrowthGroupBox.Controls.Add(textBox6);
+            GrowthGroupBox.Controls.Add(GrowthAtkRateTextBox);
             GrowthGroupBox.Controls.Add(label11);
-            GrowthGroupBox.Controls.Add(textBox5);
+            GrowthGroupBox.Controls.Add(GrowthHpRateTextBox);
             GrowthGroupBox.Controls.Add(label10);
-            GrowthGroupBox.Controls.Add(comboBox1);
+            GrowthGroupBox.Controls.Add(GrowthCharacterNameComboBox);
             GrowthGroupBox.Controls.Add(ContainsGrowthCheckBox);
             GrowthGroupBox.Location = new Point(11, 365);
             GrowthGroupBox.Name = "GrowthGroupBox";
             GrowthGroupBox.Size = new Size(620, 181);
             GrowthGroupBox.TabIndex = 30;
             GrowthGroupBox.TabStop = false;
+            // 
+            // IsGrowthBoostedCheckBox
+            // 
+            IsGrowthBoostedCheckBox.AutoSize = true;
+            IsGrowthBoostedCheckBox.Location = new Point(156, 27);
+            IsGrowthBoostedCheckBox.Name = "IsGrowthBoostedCheckBox";
+            IsGrowthBoostedCheckBox.Size = new Size(90, 19);
+            IsGrowthBoostedCheckBox.TabIndex = 33;
+            IsGrowthBoostedCheckBox.Text = "アフア/メティス";
+            IsGrowthBoostedCheckBox.UseVisualStyleBackColor = true;
             // 
             // checkBox9
             // 
@@ -363,12 +375,12 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox3.TabIndex = 46;
             checkBox3.UseVisualStyleBackColor = true;
             // 
-            // textBox11
+            // GrowthSpdRateTextBox
             // 
-            textBox11.Location = new Point(45, 142);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(42, 23);
-            textBox11.TabIndex = 44;
+            GrowthSpdRateTextBox.Location = new Point(45, 142);
+            GrowthSpdRateTextBox.Name = "GrowthSpdRateTextBox";
+            GrowthSpdRateTextBox.Size = new Size(42, 23);
+            GrowthSpdRateTextBox.TabIndex = 44;
             // 
             // label16
             // 
@@ -379,12 +391,12 @@ namespace FERNGSolver.Gba.UI.Search
             label16.TabIndex = 45;
             label16.Text = "速さ";
             // 
-            // textBox8
+            // GrowthMdfRateTextBox
             // 
-            textBox8.Location = new Point(161, 114);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(42, 23);
-            textBox8.TabIndex = 42;
+            GrowthMdfRateTextBox.Location = new Point(161, 114);
+            GrowthMdfRateTextBox.Name = "GrowthMdfRateTextBox";
+            GrowthMdfRateTextBox.Size = new Size(42, 23);
+            GrowthMdfRateTextBox.TabIndex = 42;
             // 
             // label13
             // 
@@ -395,12 +407,12 @@ namespace FERNGSolver.Gba.UI.Search
             label13.TabIndex = 43;
             label13.Text = "魔防";
             // 
-            // textBox9
+            // GrowthDefRateTextBox
             // 
-            textBox9.Location = new Point(161, 86);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(42, 23);
-            textBox9.TabIndex = 40;
+            GrowthDefRateTextBox.Location = new Point(161, 86);
+            GrowthDefRateTextBox.Name = "GrowthDefRateTextBox";
+            GrowthDefRateTextBox.Size = new Size(42, 23);
+            GrowthDefRateTextBox.TabIndex = 40;
             // 
             // label14
             // 
@@ -411,12 +423,12 @@ namespace FERNGSolver.Gba.UI.Search
             label14.TabIndex = 41;
             label14.Text = "守備";
             // 
-            // textBox10
+            // GrowthLucRateTextBox
             // 
-            textBox10.Location = new Point(161, 58);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(42, 23);
-            textBox10.TabIndex = 38;
+            GrowthLucRateTextBox.Location = new Point(161, 58);
+            GrowthLucRateTextBox.Name = "GrowthLucRateTextBox";
+            GrowthLucRateTextBox.Size = new Size(42, 23);
+            GrowthLucRateTextBox.TabIndex = 38;
             // 
             // label15
             // 
@@ -427,12 +439,12 @@ namespace FERNGSolver.Gba.UI.Search
             label15.TabIndex = 39;
             label15.Text = "幸運";
             // 
-            // textBox7
+            // GrowthTecRateTextBox
             // 
-            textBox7.Location = new Point(45, 114);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(42, 23);
-            textBox7.TabIndex = 36;
+            GrowthTecRateTextBox.Location = new Point(45, 114);
+            GrowthTecRateTextBox.Name = "GrowthTecRateTextBox";
+            GrowthTecRateTextBox.Size = new Size(42, 23);
+            GrowthTecRateTextBox.TabIndex = 36;
             // 
             // label12
             // 
@@ -443,12 +455,12 @@ namespace FERNGSolver.Gba.UI.Search
             label12.TabIndex = 37;
             label12.Text = "技";
             // 
-            // textBox6
+            // GrowthAtkRateTextBox
             // 
-            textBox6.Location = new Point(45, 86);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(42, 23);
-            textBox6.TabIndex = 34;
+            GrowthAtkRateTextBox.Location = new Point(45, 86);
+            GrowthAtkRateTextBox.Name = "GrowthAtkRateTextBox";
+            GrowthAtkRateTextBox.Size = new Size(42, 23);
+            GrowthAtkRateTextBox.TabIndex = 34;
             // 
             // label11
             // 
@@ -459,12 +471,12 @@ namespace FERNGSolver.Gba.UI.Search
             label11.TabIndex = 35;
             label11.Text = "力";
             // 
-            // textBox5
+            // GrowthHpRateTextBox
             // 
-            textBox5.Location = new Point(45, 58);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(42, 23);
-            textBox5.TabIndex = 33;
+            GrowthHpRateTextBox.Location = new Point(45, 58);
+            GrowthHpRateTextBox.Name = "GrowthHpRateTextBox";
+            GrowthHpRateTextBox.Size = new Size(42, 23);
+            GrowthHpRateTextBox.TabIndex = 33;
             // 
             // label10
             // 
@@ -475,13 +487,13 @@ namespace FERNGSolver.Gba.UI.Search
             label10.TabIndex = 33;
             label10.Text = "HP";
             // 
-            // comboBox1
+            // GrowthCharacterNameComboBox
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(16, 25);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(134, 23);
-            comboBox1.TabIndex = 23;
+            GrowthCharacterNameComboBox.FormattingEnabled = true;
+            GrowthCharacterNameComboBox.Location = new Point(16, 25);
+            GrowthCharacterNameComboBox.Name = "GrowthCharacterNameComboBox";
+            GrowthCharacterNameComboBox.Size = new Size(134, 23);
+            GrowthCharacterNameComboBox.TabIndex = 23;
             // 
             // ContainsGrowthCheckBox
             // 
@@ -605,7 +617,7 @@ namespace FERNGSolver.Gba.UI.Search
         private Label label7;
         private TextBox textBox1;
         private Label label6;
-        private ComboBox comboBox1;
+        private ComboBox GrowthCharacterNameComboBox;
         private CheckBox checkBox9;
         private CheckBox checkBox8;
         private CheckBox checkBox7;
@@ -613,19 +625,19 @@ namespace FERNGSolver.Gba.UI.Search
         private CheckBox checkBox5;
         private CheckBox checkBox4;
         private CheckBox checkBox3;
-        private TextBox textBox11;
+        private TextBox GrowthSpdRateTextBox;
         private Label label16;
-        private TextBox textBox8;
+        private TextBox GrowthMdfRateTextBox;
         private Label label13;
-        private TextBox textBox9;
+        private TextBox GrowthDefRateTextBox;
         private Label label14;
-        private TextBox textBox10;
+        private TextBox GrowthLucRateTextBox;
         private Label label15;
-        private TextBox textBox7;
+        private TextBox GrowthTecRateTextBox;
         private Label label12;
-        private TextBox textBox6;
+        private TextBox GrowthAtkRateTextBox;
         private Label label11;
-        private TextBox textBox5;
+        private TextBox GrowthHpRateTextBox;
         private Label label10;
         private GroupBox FalconKnightMethodGroupBox;
         private CheckBox checkBox10;
@@ -641,5 +653,6 @@ namespace FERNGSolver.Gba.UI.Search
         private TextBox CxStringTextBox;
         private CheckBox AddsCxOffset;
         private Button FalconKnightToolOpenButton;
+        private CheckBox IsGrowthBoostedCheckBox;
     }
 }
