@@ -33,8 +33,6 @@ namespace FERNGSolver.Gba.UI.Search
             Seed1TextBox = new TextBox();
             Seed0TextBox = new TextBox();
             label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
             label2 = new Label();
             OffsetMaxTextBox = new TextBox();
             OffsetMinTextBox = new TextBox();
@@ -76,6 +74,7 @@ namespace FERNGSolver.Gba.UI.Search
             comboBox1 = new ComboBox();
             ContainsGrowthCheckBox = new CheckBox();
             FalconKnightMethodGroupBox = new GroupBox();
+            FalconKnightToolOpenButton = new Button();
             AddsCxOffset = new CheckBox();
             label17 = new Label();
             CxStringTextBox = new TextBox();
@@ -87,7 +86,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // DefaultSeedButton
             // 
-            DefaultSeedButton.Location = new Point(25, 556);
+            DefaultSeedButton.Location = new Point(202, 557);
             DefaultSeedButton.Name = "DefaultSeedButton";
             DefaultSeedButton.Size = new Size(75, 23);
             DefaultSeedButton.TabIndex = 104;
@@ -97,21 +96,21 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // Seed2TextBox
             // 
-            Seed2TextBox.Location = new Point(72, 525);
+            Seed2TextBox.Location = new Point(154, 558);
             Seed2TextBox.Name = "Seed2TextBox";
             Seed2TextBox.Size = new Size(42, 23);
             Seed2TextBox.TabIndex = 103;
             // 
             // Seed1TextBox
             // 
-            Seed1TextBox.Location = new Point(72, 497);
+            Seed1TextBox.Location = new Point(106, 558);
             Seed1TextBox.Name = "Seed1TextBox";
             Seed1TextBox.Size = new Size(42, 23);
             Seed1TextBox.TabIndex = 102;
             // 
             // Seed0TextBox
             // 
-            Seed0TextBox.Location = new Point(72, 469);
+            Seed0TextBox.Location = new Point(58, 558);
             Seed0TextBox.Name = "Seed0TextBox";
             Seed0TextBox.Size = new Size(42, 23);
             Seed0TextBox.TabIndex = 101;
@@ -119,34 +118,16 @@ namespace FERNGSolver.Gba.UI.Search
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(11, 528);
+            label5.Location = new Point(11, 561);
             label5.Name = "label5";
-            label5.Size = new Size(61, 15);
+            label5.Size = new Size(47, 15);
             label5.TabIndex = 17;
-            label5.Text = "Seed[2]:0x";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(11, 500);
-            label4.Name = "label4";
-            label4.Size = new Size(61, 15);
-            label4.TabIndex = 16;
-            label4.Text = "Seed[1]:0x";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(11, 472);
-            label3.Name = "label3";
-            label3.Size = new Size(61, 15);
-            label3.TabIndex = 15;
-            label3.Text = "Seed[0]:0x";
+            label5.Text = "Seed:0x";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(243, 472);
+            label2.Location = new Point(406, 561);
             label2.Name = "label2";
             label2.Size = new Size(19, 15);
             label2.TabIndex = 14;
@@ -154,14 +135,14 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // OffsetMaxTextBox
             // 
-            OffsetMaxTextBox.Location = new Point(268, 469);
+            OffsetMaxTextBox.Location = new Point(431, 558);
             OffsetMaxTextBox.Name = "OffsetMaxTextBox";
             OffsetMaxTextBox.Size = new Size(37, 23);
             OffsetMaxTextBox.TabIndex = 106;
             // 
             // OffsetMinTextBox
             // 
-            OffsetMinTextBox.Location = new Point(199, 469);
+            OffsetMinTextBox.Location = new Point(362, 558);
             OffsetMinTextBox.Name = "OffsetMinTextBox";
             OffsetMinTextBox.Size = new Size(37, 23);
             OffsetMinTextBox.TabIndex = 105;
@@ -169,11 +150,11 @@ namespace FERNGSolver.Gba.UI.Search
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(138, 472);
+            label1.Location = new Point(314, 561);
             label1.Name = "label1";
-            label1.Size = new Size(55, 15);
+            label1.Size = new Size(49, 15);
             label1.TabIndex = 11;
-            label1.Text = "消費数：";
+            label1.Text = "消費数: ";
             // 
             // ContainsCombatCheckBox
             // 
@@ -200,7 +181,7 @@ namespace FERNGSolver.Gba.UI.Search
             CombatGroupBox.Controls.Add(ContainsCombatCheckBox);
             CombatGroupBox.Location = new Point(11, 77);
             CombatGroupBox.Name = "CombatGroupBox";
-            CombatGroupBox.Size = new Size(620, 114);
+            CombatGroupBox.Size = new Size(620, 282);
             CombatGroupBox.TabIndex = 20;
             CombatGroupBox.TabStop = false;
             // 
@@ -313,7 +294,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthGroupBox.Controls.Add(label10);
             GrowthGroupBox.Controls.Add(comboBox1);
             GrowthGroupBox.Controls.Add(ContainsGrowthCheckBox);
-            GrowthGroupBox.Location = new Point(11, 277);
+            GrowthGroupBox.Location = new Point(11, 365);
             GrowthGroupBox.Name = "GrowthGroupBox";
             GrowthGroupBox.Size = new Size(620, 181);
             GrowthGroupBox.TabIndex = 30;
@@ -514,6 +495,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // FalconKnightMethodGroupBox
             // 
+            FalconKnightMethodGroupBox.Controls.Add(FalconKnightToolOpenButton);
             FalconKnightMethodGroupBox.Controls.Add(AddsCxOffset);
             FalconKnightMethodGroupBox.Controls.Add(label17);
             FalconKnightMethodGroupBox.Controls.Add(CxStringTextBox);
@@ -523,6 +505,15 @@ namespace FERNGSolver.Gba.UI.Search
             FalconKnightMethodGroupBox.Size = new Size(620, 59);
             FalconKnightMethodGroupBox.TabIndex = 11;
             FalconKnightMethodGroupBox.TabStop = false;
+            // 
+            // FalconKnightToolOpenButton
+            // 
+            FalconKnightToolOpenButton.Location = new Point(505, 20);
+            FalconKnightToolOpenButton.Name = "FalconKnightToolOpenButton";
+            FalconKnightToolOpenButton.Size = new Size(75, 25);
+            FalconKnightToolOpenButton.TabIndex = 3;
+            FalconKnightToolOpenButton.Text = "補助ツール";
+            FalconKnightToolOpenButton.UseVisualStyleBackColor = true;
             // 
             // AddsCxOffset
             // 
@@ -573,8 +564,6 @@ namespace FERNGSolver.Gba.UI.Search
             Controls.Add(Seed1TextBox);
             Controls.Add(Seed0TextBox);
             Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(OffsetMaxTextBox);
             Controls.Add(OffsetMinTextBox);
@@ -598,8 +587,6 @@ namespace FERNGSolver.Gba.UI.Search
         private TextBox Seed1TextBox;
         private TextBox Seed0TextBox;
         private Label label5;
-        private Label label4;
-        private Label label3;
         private Label label2;
         private TextBox OffsetMaxTextBox;
         private TextBox OffsetMinTextBox;
@@ -653,5 +640,6 @@ namespace FERNGSolver.Gba.UI.Search
         private Label label17;
         private TextBox CxStringTextBox;
         private CheckBox AddsCxOffset;
+        private Button FalconKnightToolOpenButton;
     }
 }
