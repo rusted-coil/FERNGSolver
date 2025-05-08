@@ -385,6 +385,8 @@ namespace FERNGSolver.Gba.UI.Search
             // checkBox9
             // 
             checkBox9.AutoSize = true;
+            checkBox9.Checked = true;
+            checkBox9.CheckState = CheckState.Checked;
             checkBox9.Location = new Point(210, 118);
             checkBox9.Name = "checkBox9";
             checkBox9.Size = new Size(15, 14);
@@ -394,6 +396,8 @@ namespace FERNGSolver.Gba.UI.Search
             // checkBox8
             // 
             checkBox8.AutoSize = true;
+            checkBox8.Checked = true;
+            checkBox8.CheckState = CheckState.Checked;
             checkBox8.Location = new Point(210, 90);
             checkBox8.Name = "checkBox8";
             checkBox8.Size = new Size(15, 14);
@@ -403,6 +407,8 @@ namespace FERNGSolver.Gba.UI.Search
             // checkBox7
             // 
             checkBox7.AutoSize = true;
+            checkBox7.Checked = true;
+            checkBox7.CheckState = CheckState.Checked;
             checkBox7.Location = new Point(210, 62);
             checkBox7.Name = "checkBox7";
             checkBox7.Size = new Size(15, 14);
@@ -412,6 +418,8 @@ namespace FERNGSolver.Gba.UI.Search
             // checkBox6
             // 
             checkBox6.AutoSize = true;
+            checkBox6.Checked = true;
+            checkBox6.CheckState = CheckState.Checked;
             checkBox6.Location = new Point(93, 146);
             checkBox6.Name = "checkBox6";
             checkBox6.Size = new Size(15, 14);
@@ -421,6 +429,8 @@ namespace FERNGSolver.Gba.UI.Search
             // checkBox5
             // 
             checkBox5.AutoSize = true;
+            checkBox5.Checked = true;
+            checkBox5.CheckState = CheckState.Checked;
             checkBox5.Location = new Point(93, 118);
             checkBox5.Name = "checkBox5";
             checkBox5.Size = new Size(15, 14);
@@ -430,6 +440,8 @@ namespace FERNGSolver.Gba.UI.Search
             // checkBox4
             // 
             checkBox4.AutoSize = true;
+            checkBox4.Checked = true;
+            checkBox4.CheckState = CheckState.Checked;
             checkBox4.Location = new Point(93, 90);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(15, 14);
@@ -439,6 +451,8 @@ namespace FERNGSolver.Gba.UI.Search
             // checkBox3
             // 
             checkBox3.AutoSize = true;
+            checkBox3.Checked = true;
+            checkBox3.CheckState = CheckState.Checked;
             checkBox3.Location = new Point(93, 62);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(15, 14);
@@ -566,6 +580,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // GrowthCharacterNameComboBox
             // 
+            GrowthCharacterNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             GrowthCharacterNameComboBox.FormattingEnabled = true;
             GrowthCharacterNameComboBox.Location = new Point(16, 25);
             GrowthCharacterNameComboBox.Name = "GrowthCharacterNameComboBox";

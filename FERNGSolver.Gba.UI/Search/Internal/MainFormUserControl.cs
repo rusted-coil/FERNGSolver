@@ -84,6 +84,14 @@ namespace FERNGSolver.Gba.UI.Search
             m_Characters = characterRepository.AllCharacters;
             GrowthCharacterNameComboBox.Items.Clear();
             GrowthCharacterNameComboBox.Items.AddRange(m_Characters.Select(x => x.Name).ToArray());
+            for (int i = 0; i < m_Characters.Count; ++i)
+            {
+                if (!m_Characters[i].IsPartitionData())
+                {
+                    GrowthCharacterNameComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
         }
 
         public void InitializeDefaults()
