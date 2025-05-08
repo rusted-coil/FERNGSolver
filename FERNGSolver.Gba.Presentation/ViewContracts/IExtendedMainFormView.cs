@@ -2,7 +2,7 @@ using FERNGSolver.Common.ViewContracts;
 
 namespace FERNGSolver.Gba.Presentation.ViewContracts
 {
-    public interface IExtendedMainFormView : IMainFormView
+    public interface IExtendedMainFormView : IMainFormView, IGrowthSettingsView, ICombatSettingsView
     {
         /// <summary>
         /// ファルコンナイト法による検索を行うかどうかを取得します。
@@ -15,16 +15,6 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// <para> * 文字列のValidationは行われていません。</para>
         /// </summary>
         string CxString { get; }
-
-        /// <summary>
-        /// 戦闘を行うかどうかを取得します。
-        /// </summary>
-        bool ContainsCombat { get; }
-
-        /// <summary>
-        /// レベルアップを行うかどうかを取得します。
-        /// </summary>
-        bool ContainsGrowth { get; }
 
         /// <summary>
         /// 検索条件のSeedを取得します。

@@ -12,8 +12,19 @@ namespace FERNGSolver.Gba.UI.Search
 
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
         public string CxString => CxStringTextBox.Text;
+
+        // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
+
+        // レベルアップ
         public bool ContainsGrowth => ContainsGrowthCheckBox.Checked;
+        public int HpGrowthRate => (int)GrowthHpRateNumericUpDown.Value;
+        public int AtkGrowthRate => (int)GrowthAtkRateNumericUpDown.Value;
+        public int TecGrowthRate => (int)GrowthTecRateNumericUpDown.Value;
+        public int SpdGrowthRate => (int)GrowthSpdRateNumericUpDown.Value;
+        public int DefGrowthRate => (int)GrowthDefRateNumericUpDown.Value;
+        public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
+        public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
 
         public IReadOnlyList<ushort> Seeds {
             get {

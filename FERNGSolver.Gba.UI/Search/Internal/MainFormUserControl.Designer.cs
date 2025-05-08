@@ -315,7 +315,7 @@ namespace FERNGSolver.Gba.UI.Search
             IsGrowthBoostedCheckBox.Location = new Point(156, 27);
             IsGrowthBoostedCheckBox.Name = "IsGrowthBoostedCheckBox";
             IsGrowthBoostedCheckBox.Size = new Size(90, 19);
-            IsGrowthBoostedCheckBox.TabIndex = 33;
+            IsGrowthBoostedCheckBox.TabIndex = 2;
             IsGrowthBoostedCheckBox.Text = "アフア/メティス";
             IsGrowthBoostedCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -325,7 +325,7 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox9.Location = new Point(210, 118);
             checkBox9.Name = "checkBox9";
             checkBox9.Size = new Size(15, 14);
-            checkBox9.TabIndex = 52;
+            checkBox9.TabIndex = 26;
             checkBox9.UseVisualStyleBackColor = true;
             // 
             // checkBox8
@@ -334,7 +334,7 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox8.Location = new Point(210, 90);
             checkBox8.Name = "checkBox8";
             checkBox8.Size = new Size(15, 14);
-            checkBox8.TabIndex = 51;
+            checkBox8.TabIndex = 25;
             checkBox8.UseVisualStyleBackColor = true;
             // 
             // checkBox7
@@ -343,7 +343,7 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox7.Location = new Point(210, 62);
             checkBox7.Name = "checkBox7";
             checkBox7.Size = new Size(15, 14);
-            checkBox7.TabIndex = 50;
+            checkBox7.TabIndex = 24;
             checkBox7.UseVisualStyleBackColor = true;
             // 
             // checkBox6
@@ -352,7 +352,7 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox6.Location = new Point(93, 146);
             checkBox6.Name = "checkBox6";
             checkBox6.Size = new Size(15, 14);
-            checkBox6.TabIndex = 49;
+            checkBox6.TabIndex = 23;
             checkBox6.UseVisualStyleBackColor = true;
             // 
             // checkBox5
@@ -361,7 +361,7 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox5.Location = new Point(93, 118);
             checkBox5.Name = "checkBox5";
             checkBox5.Size = new Size(15, 14);
-            checkBox5.TabIndex = 48;
+            checkBox5.TabIndex = 22;
             checkBox5.UseVisualStyleBackColor = true;
             // 
             // checkBox4
@@ -370,7 +370,7 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox4.Location = new Point(93, 90);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(15, 14);
-            checkBox4.TabIndex = 47;
+            checkBox4.TabIndex = 21;
             checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBox3
@@ -379,7 +379,7 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox3.Location = new Point(93, 62);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(15, 14);
-            checkBox3.TabIndex = 46;
+            checkBox3.TabIndex = 20;
             checkBox3.UseVisualStyleBackColor = true;
             // 
             // GrowthSpdRateNumericUpDown
@@ -388,7 +388,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthSpdRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthSpdRateNumericUpDown.Name = "GrowthSpdRateNumericUpDown";
             GrowthSpdRateNumericUpDown.Size = new Size(42, 23);
-            GrowthSpdRateNumericUpDown.TabIndex = 44;
+            GrowthSpdRateNumericUpDown.TabIndex = 13;
             // 
             // label16
             // 
@@ -405,7 +405,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthMdfRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthMdfRateNumericUpDown.Name = "GrowthMdfRateNumericUpDown";
             GrowthMdfRateNumericUpDown.Size = new Size(42, 23);
-            GrowthMdfRateNumericUpDown.TabIndex = 42;
+            GrowthMdfRateNumericUpDown.TabIndex = 16;
             // 
             // label13
             // 
@@ -422,7 +422,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthDefRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthDefRateNumericUpDown.Name = "GrowthDefRateNumericUpDown";
             GrowthDefRateNumericUpDown.Size = new Size(42, 23);
-            GrowthDefRateNumericUpDown.TabIndex = 40;
+            GrowthDefRateNumericUpDown.TabIndex = 15;
             // 
             // label14
             // 
@@ -439,7 +439,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthLucRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthLucRateNumericUpDown.Name = "GrowthLucRateNumericUpDown";
             GrowthLucRateNumericUpDown.Size = new Size(42, 23);
-            GrowthLucRateNumericUpDown.TabIndex = 38;
+            GrowthLucRateNumericUpDown.TabIndex = 14;
             // 
             // label15
             // 
@@ -456,7 +456,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthTecRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthTecRateNumericUpDown.Name = "GrowthTecRateNumericUpDown";
             GrowthTecRateNumericUpDown.Size = new Size(42, 23);
-            GrowthTecRateNumericUpDown.TabIndex = 36;
+            GrowthTecRateNumericUpDown.TabIndex = 12;
             // 
             // label12
             // 
@@ -473,7 +473,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthAtkRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthAtkRateNumericUpDown.Name = "GrowthAtkRateNumericUpDown";
             GrowthAtkRateNumericUpDown.Size = new Size(42, 23);
-            GrowthAtkRateNumericUpDown.TabIndex = 34;
+            GrowthAtkRateNumericUpDown.TabIndex = 11;
             // 
             // label11
             // 
@@ -490,7 +490,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthHpRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthHpRateNumericUpDown.Name = "GrowthHpRateNumericUpDown";
             GrowthHpRateNumericUpDown.Size = new Size(42, 23);
-            GrowthHpRateNumericUpDown.TabIndex = 33;
+            GrowthHpRateNumericUpDown.TabIndex = 10;
             // 
             // label10
             // 
@@ -507,7 +507,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthCharacterNameComboBox.Location = new Point(16, 25);
             GrowthCharacterNameComboBox.Name = "GrowthCharacterNameComboBox";
             GrowthCharacterNameComboBox.Size = new Size(134, 23);
-            GrowthCharacterNameComboBox.TabIndex = 23;
+            GrowthCharacterNameComboBox.TabIndex = 1;
             // 
             // ContainsGrowthCheckBox
             // 
@@ -515,7 +515,7 @@ namespace FERNGSolver.Gba.UI.Search
             ContainsGrowthCheckBox.Location = new Point(6, 0);
             ContainsGrowthCheckBox.Name = "ContainsGrowthCheckBox";
             ContainsGrowthCheckBox.Size = new Size(81, 19);
-            ContainsGrowthCheckBox.TabIndex = 22;
+            ContainsGrowthCheckBox.TabIndex = 0;
             ContainsGrowthCheckBox.Text = "レベルアップ";
             ContainsGrowthCheckBox.UseVisualStyleBackColor = true;
             // 

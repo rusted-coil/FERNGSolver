@@ -80,13 +80,13 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
                 {
                     strategies.Add(StrategyFactory.CreateGrowthStrategy(new GrowthStrategyArgs
                     {
-                        HpGrowthRate = 70,
-                        AtkGrowthRate = 40,
-                        TecGrowthRate = 60,
-                        SpdGrowthRate = 60,
-                        DefGrowthRate = 30,
-                        MdfGrowthRate = 30,
-                        LucGrowthRate = 60,
+                        HpGrowthRate = m_MainFormView.HpGrowthRate,
+                        AtkGrowthRate = m_MainFormView.AtkGrowthRate,
+                        TecGrowthRate = m_MainFormView.TecGrowthRate,
+                        SpdGrowthRate = m_MainFormView.SpdGrowthRate,
+                        DefGrowthRate = m_MainFormView.DefGrowthRate,
+                        MdfGrowthRate = m_MainFormView.MdfGrowthRate,
+                        LucGrowthRate = m_MainFormView.LucGrowthRate,
                     }));
                 }
 
