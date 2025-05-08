@@ -18,10 +18,14 @@ namespace FERNGSolver.Gba.UI.Search
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
+        public int AttackerHp => (int)AttackerHpNumericUpDown.Value;
+        public int AttackerPower => (int)AttackerPowerNumericUpDown.Value;
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
         public int AttackerCriticalRate => (int)AttackerCriticalRateNumericUpDown.Value;
         public int AttackerPhaseCount => DoesAttackerFollowUpAttackCheckBox.Checked ? 2 : 1;
         public bool IsAttackerDoubleAttack => IsAttackerDoubleAttackCheckBox.Checked;
+        public int DefenderHp => (int)DefenderHpNumericUpDown.Value;
+        public int DefenderPower => (int)DefenderPowerNumericUpDown.Value;
         public int DefenderHitRate => (int)DefenderHitRateNumericUpDown.Value;
         public int DefenderCriticalRate => (int)DefenderCriticalRateNumericUpDown.Value;
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
@@ -37,20 +41,16 @@ namespace FERNGSolver.Gba.UI.Search
         public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
         public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
 
-        public IReadOnlyList<ushort> Seeds
-        {
-            get
-            {
+        public IReadOnlyList<ushort> Seeds {
+            get {
                 var values = new ushort[3];
                 //                if()
                 return values;
             }
         }
 
-        public int OffsetMin
-        {
-            get
-            {
+        public int OffsetMin {
+            get {
                 if (int.TryParse(OffsetMinTextBox.Text, out var value))
                 {
                     return value;
@@ -59,10 +59,8 @@ namespace FERNGSolver.Gba.UI.Search
             }
         }
 
-        public int OffsetMax
-        {
-            get
-            {
+        public int OffsetMax {
+            get {
                 if (int.TryParse(OffsetMaxTextBox.Text, out var value))
                 {
                     return value;
@@ -96,20 +94,9 @@ namespace FERNGSolver.Gba.UI.Search
 
         public void InitializeDefaults()
         {
-            SetDefaultSeeds();
             OffsetMinTextBox.Text = "0";
             OffsetMaxTextBox.Text = "1000";
         }
-
-        private void SetDefaultSeeds()
-        {
-            var seeds = Const.DefaultSeeds;
-            Seed0TextBox.Text = seeds[0].ToString("X4");
-            Seed1TextBox.Text = seeds[1].ToString("X4");
-            Seed2TextBox.Text = seeds[2].ToString("X4");
-        }
-
-        private void DefaultSeedButton_Click(object sender, EventArgs e) => SetDefaultSeeds();
 
         private void UsesFalconKnightMethodCheckBox_CheckedChanged(object sender, EventArgs e)
         {

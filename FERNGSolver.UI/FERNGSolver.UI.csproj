@@ -14,6 +14,7 @@
     <ProjectReference Include="..\FERNGSolver.Gba.UI\FERNGSolver.Gba.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Presentation\FERNGSolver.Presentation.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.UI\FERNGSolver.Thracia.UI.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Windows.Common\FERNGSolver.Windows.Common.csproj" />
   </ItemGroup>
 
 </Project>

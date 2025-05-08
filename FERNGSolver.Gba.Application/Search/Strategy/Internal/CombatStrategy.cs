@@ -16,25 +16,47 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
             var rng = allowsAdvance ? currentRng : RngFactory.CreateFromRng(currentRng);
 
             // 攻撃側→防御側の順でPhaseCountがなくなるまで交互に攻撃を行う
+            // どちらかが死んだら終わり
             int a = 0, d = 0;
+            int attackerHp = m_Args.Attacker.Hp, defenderHp = m_Args.Defender.Hp;
             while (a < m_Args.Attacker.PhaseCount || d < m_Args.Defender.PhaseCount)
             {
                 if (a < m_Args.Attacker.PhaseCount)
                 {
-                    ExecutePhase(rng, m_Args.Attacker);
+                    defenderHp = ExecutePhase(rng, m_Args.Attacker, defenderHp);
+                    if (defenderHp <= 0)
+                    {
+                        defenderHp = 0;
+                        break;
+                    }
                     if (m_Args.Attacker.IsDoubleAttack)
                     {
-                        ExecutePhase(rng, m_Args.Attacker);
+                        defenderHp = ExecutePhase(rng, m_Args.Attacker, defenderHp);
+                        if (defenderHp <= 0)
+                        {
+                            defenderHp = 0;
+                            break;
+                        }
                     }
                     ++a;
                 }
 
                 if (d < m_Args.Defender.PhaseCount)
                 {
-                    ExecutePhase(rng, m_Args.Defender);
+                    attackerHp = ExecutePhase(rng, m_Args.Defender, attackerHp);
+                    if (attackerHp <= 0)
+                    {
+                        attackerHp = 0;
+                        break;
+                    }
                     if (m_Args.Defender.IsDoubleAttack)
                     {
-                        ExecutePhase(rng, m_Args.Defender);
+                        attackerHp = ExecutePhase(rng, m_Args.Defender, attackerHp);
+                        if (attackerHp <= 0)
+                        {
+                            attackerHp = 0;
+                            break;
+                        }
                     }
                     ++d;
                 }
@@ -43,7 +65,7 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
             return true;
         }
 
-        private void ExecutePhase(IRng rng, CombatUnitInfo attackerInfo)
+        private int ExecutePhase(IRng rng, CombatUnitInfo attackerInfo, int currentDefenderHp)
         {
             // 命中判定
             if ((rng.Next() + rng.Next()) / 2 < attackerInfo.HitRate)
@@ -53,8 +75,15 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
                 {
                     // 必殺が出たら瞬殺判定（封印以外）
                     rng.Next();
+
+                    return currentDefenderHp - attackerInfo.Power * 3;
+                }
+                else
+                {
+                    return currentDefenderHp - attackerInfo.Power;
                 }
             }
+            return currentDefenderHp;
         }
     }
 }

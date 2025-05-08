@@ -7,6 +7,10 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// </summary>
         bool ContainsCombat { get; }
 
+        int AttackerHp { get; }
+
+        int AttackerPower { get; }
+
         /// <summary>
         /// 攻撃側の命中率を取得します。
         /// </summary>
@@ -26,6 +30,10 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// 攻撃側が2回攻撃（勇者武器）を行うかどうかを取得します。
         /// </summary>
         bool IsAttackerDoubleAttack { get; }
+
+        int DefenderHp { get; }
+
+        int DefenderPower { get; }
 
         /// <summary>
         /// 反撃側の命中率を取得します。

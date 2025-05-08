@@ -1,5 +1,4 @@
 using FERNGSolver.Common.ViewContracts;
-using FERNGSolver.FalconKnightTool.UI;
 using FERNGSolver.Windows.Common.Interfaces;
 using FormRx.Button;
 using System.Collections;
@@ -17,12 +16,6 @@ namespace FERNGSolver
         public MainForm()
         {
             InitializeComponent();
-
-            // とりあえずファルコンナイトツールを開く
-            var form = FalconKnightToolLauncher.CreateToolForm(
-                Thracia.UI.FalconKnight.FalconKnightToolEntryProvider.Create(),
-                Gba.UI.FalconKnight.FalconKnightToolEntryProvider.Create());
-            form.Show();
 
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
 
