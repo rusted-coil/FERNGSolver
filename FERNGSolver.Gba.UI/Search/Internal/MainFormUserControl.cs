@@ -15,6 +15,14 @@ namespace FERNGSolver.Gba.UI.Search
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
+        public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
+        public int AttackerCriticalRate => (int)AttackerCriticalRateNumericUpDown.Value;
+        public int AttackerPhaseCount => DoesAttackerFollowUpAttackCheckBox.Checked ? 2 : 1;
+        public bool IsAttackerDoubleAttack => IsAttackerDoubleAttackCheckBox.Checked;
+        public int DefenderHitRate => (int)DefenderHitRateNumericUpDown.Value;
+        public int DefenderCriticalRate => (int)DefenderCriticalRateNumericUpDown.Value;
+        public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
+        public bool IsDefenderDoubleAttack => IsDefenderDoubleAttackCheckBox.Checked;
 
         // レベルアップ
         public bool ContainsGrowth => ContainsGrowthCheckBox.Checked;

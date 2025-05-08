@@ -74,6 +74,18 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
                 if (m_MainFormView.ContainsCombat)
                 {
                     strategies.Add(StrategyFactory.CreateCombatStrategy(new CombatStrategyArgs {
+                        Attacker = new CombatUnitInfo {
+                            PhaseCount = m_MainFormView.AttackerPhaseCount,
+                            HitRate = m_MainFormView.AttackerHitRate,
+                            CriticalRate = m_MainFormView.AttackerCriticalRate,
+                            IsDoubleAttack = m_MainFormView.IsAttackerDoubleAttack,
+                        },
+                        Defender = new CombatUnitInfo {
+                            PhaseCount = m_MainFormView.DefenderPhaseCount,
+                            HitRate = m_MainFormView.DefenderHitRate,
+                            CriticalRate = m_MainFormView.DefenderCriticalRate,
+                            IsDoubleAttack = m_MainFormView.IsDefenderDoubleAttack,
+                        },
                     }));
                 }
                 if (m_MainFormView.ContainsGrowth)

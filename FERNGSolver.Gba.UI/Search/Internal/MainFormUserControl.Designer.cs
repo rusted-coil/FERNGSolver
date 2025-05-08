@@ -39,15 +39,20 @@ namespace FERNGSolver.Gba.UI.Search
             label1 = new Label();
             ContainsCombatCheckBox = new CheckBox();
             CombatGroupBox = new GroupBox();
-            checkBox2 = new CheckBox();
-            checkBox1 = new CheckBox();
-            textBox3 = new TextBox();
+            IsDefenderDoubleAttackCheckBox = new CheckBox();
+            IsAttackerDoubleAttackCheckBox = new CheckBox();
+            DoesAttackerFollowUpAttackCheckBox = new CheckBox();
+            label4 = new Label();
+            label3 = new Label();
+            DoesDefenderAttackCheckBox = new CheckBox();
+            DoesDefenderFollowUpAttackCheckBox = new CheckBox();
+            DefenderCriticalRateNumericUpDown = new NumericUpDown();
             label8 = new Label();
-            textBox4 = new TextBox();
+            DefenderHitRateNumericUpDown = new NumericUpDown();
             label9 = new Label();
-            textBox2 = new TextBox();
+            AttackerCriticalRateNumericUpDown = new NumericUpDown();
             label7 = new Label();
-            textBox1 = new TextBox();
+            AttackerHitRateNumericUpDown = new NumericUpDown();
             label6 = new Label();
             GrowthGroupBox = new GroupBox();
             IsGrowthBoostedCheckBox = new CheckBox();
@@ -81,6 +86,10 @@ namespace FERNGSolver.Gba.UI.Search
             CxStringTextBox = new TextBox();
             UsesFalconKnightMethodCheckBox = new CheckBox();
             CombatGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DefenderCriticalRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DefenderHitRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AttackerCriticalRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AttackerHitRateNumericUpDown).BeginInit();
             GrowthGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GrowthSpdRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GrowthMdfRateNumericUpDown).BeginInit();
@@ -170,21 +179,26 @@ namespace FERNGSolver.Gba.UI.Search
             ContainsCombatCheckBox.Location = new Point(6, 0);
             ContainsCombatCheckBox.Name = "ContainsCombatCheckBox";
             ContainsCombatCheckBox.Size = new Size(79, 19);
-            ContainsCombatCheckBox.TabIndex = 22;
+            ContainsCombatCheckBox.TabIndex = 0;
             ContainsCombatCheckBox.Text = "戦闘を行う";
             ContainsCombatCheckBox.UseVisualStyleBackColor = true;
             // 
             // CombatGroupBox
             // 
-            CombatGroupBox.Controls.Add(checkBox2);
-            CombatGroupBox.Controls.Add(checkBox1);
-            CombatGroupBox.Controls.Add(textBox3);
+            CombatGroupBox.Controls.Add(IsDefenderDoubleAttackCheckBox);
+            CombatGroupBox.Controls.Add(IsAttackerDoubleAttackCheckBox);
+            CombatGroupBox.Controls.Add(DoesAttackerFollowUpAttackCheckBox);
+            CombatGroupBox.Controls.Add(label4);
+            CombatGroupBox.Controls.Add(label3);
+            CombatGroupBox.Controls.Add(DoesDefenderAttackCheckBox);
+            CombatGroupBox.Controls.Add(DoesDefenderFollowUpAttackCheckBox);
+            CombatGroupBox.Controls.Add(DefenderCriticalRateNumericUpDown);
             CombatGroupBox.Controls.Add(label8);
-            CombatGroupBox.Controls.Add(textBox4);
+            CombatGroupBox.Controls.Add(DefenderHitRateNumericUpDown);
             CombatGroupBox.Controls.Add(label9);
-            CombatGroupBox.Controls.Add(textBox2);
+            CombatGroupBox.Controls.Add(AttackerCriticalRateNumericUpDown);
             CombatGroupBox.Controls.Add(label7);
-            CombatGroupBox.Controls.Add(textBox1);
+            CombatGroupBox.Controls.Add(AttackerHitRateNumericUpDown);
             CombatGroupBox.Controls.Add(label6);
             CombatGroupBox.Controls.Add(ContainsCombatCheckBox);
             CombatGroupBox.Location = new Point(11, 77);
@@ -193,85 +207,133 @@ namespace FERNGSolver.Gba.UI.Search
             CombatGroupBox.TabIndex = 20;
             CombatGroupBox.TabStop = false;
             // 
-            // checkBox2
+            // IsDefenderDoubleAttackCheckBox
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(116, 81);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(50, 19);
-            checkBox2.TabIndex = 32;
-            checkBox2.Text = "反撃";
-            checkBox2.UseVisualStyleBackColor = true;
+            IsDefenderDoubleAttackCheckBox.AutoSize = true;
+            IsDefenderDoubleAttackCheckBox.Location = new Point(343, 57);
+            IsDefenderDoubleAttackCheckBox.Name = "IsDefenderDoubleAttackCheckBox";
+            IsDefenderDoubleAttackCheckBox.Size = new Size(50, 19);
+            IsDefenderDoubleAttackCheckBox.TabIndex = 24;
+            IsDefenderDoubleAttackCheckBox.Text = "連撃";
+            IsDefenderDoubleAttackCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // IsAttackerDoubleAttackCheckBox
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(19, 81);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(50, 19);
-            checkBox1.TabIndex = 31;
-            checkBox1.Text = "追撃";
-            checkBox1.UseVisualStyleBackColor = true;
+            IsAttackerDoubleAttackCheckBox.AutoSize = true;
+            IsAttackerDoubleAttackCheckBox.Location = new Point(343, 24);
+            IsAttackerDoubleAttackCheckBox.Name = "IsAttackerDoubleAttackCheckBox";
+            IsAttackerDoubleAttackCheckBox.Size = new Size(50, 19);
+            IsAttackerDoubleAttackCheckBox.TabIndex = 14;
+            IsAttackerDoubleAttackCheckBox.Text = "連撃";
+            IsAttackerDoubleAttackCheckBox.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // DoesAttackerFollowUpAttackCheckBox
             // 
-            textBox3.Location = new Point(144, 50);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(42, 23);
-            textBox3.TabIndex = 30;
+            DoesAttackerFollowUpAttackCheckBox.AutoSize = true;
+            DoesAttackerFollowUpAttackCheckBox.Location = new Point(287, 24);
+            DoesAttackerFollowUpAttackCheckBox.Name = "DoesAttackerFollowUpAttackCheckBox";
+            DoesAttackerFollowUpAttackCheckBox.Size = new Size(50, 19);
+            DoesAttackerFollowUpAttackCheckBox.TabIndex = 13;
+            DoesAttackerFollowUpAttackCheckBox.Text = "追撃";
+            DoesAttackerFollowUpAttackCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(14, 58);
+            label4.Name = "label4";
+            label4.Size = new Size(49, 15);
+            label4.TabIndex = 34;
+            label4.Text = "反撃側: ";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(14, 25);
+            label3.Name = "label3";
+            label3.Size = new Size(49, 15);
+            label3.TabIndex = 33;
+            label3.Text = "攻撃側: ";
+            // 
+            // DoesDefenderAttackCheckBox
+            // 
+            DoesDefenderAttackCheckBox.AutoSize = true;
+            DoesDefenderAttackCheckBox.Location = new Point(231, 57);
+            DoesDefenderAttackCheckBox.Name = "DoesDefenderAttackCheckBox";
+            DoesDefenderAttackCheckBox.Size = new Size(50, 19);
+            DoesDefenderAttackCheckBox.TabIndex = 22;
+            DoesDefenderAttackCheckBox.Text = "反撃";
+            DoesDefenderAttackCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // DoesDefenderFollowUpAttackCheckBox
+            // 
+            DoesDefenderFollowUpAttackCheckBox.AutoSize = true;
+            DoesDefenderFollowUpAttackCheckBox.Location = new Point(287, 57);
+            DoesDefenderFollowUpAttackCheckBox.Name = "DoesDefenderFollowUpAttackCheckBox";
+            DoesDefenderFollowUpAttackCheckBox.Size = new Size(50, 19);
+            DoesDefenderFollowUpAttackCheckBox.TabIndex = 23;
+            DoesDefenderFollowUpAttackCheckBox.Text = "追撃";
+            DoesDefenderFollowUpAttackCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // DefenderCriticalRateNumericUpDown
+            // 
+            DefenderCriticalRateNumericUpDown.Location = new Point(183, 55);
+            DefenderCriticalRateNumericUpDown.Name = "DefenderCriticalRateNumericUpDown";
+            DefenderCriticalRateNumericUpDown.Size = new Size(42, 23);
+            DefenderCriticalRateNumericUpDown.TabIndex = 21;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(111, 53);
+            label8.Location = new Point(150, 58);
             label8.Name = "label8";
             label8.Size = new Size(31, 15);
             label8.TabIndex = 29;
             label8.Text = "必殺";
             // 
-            // textBox4
+            // DefenderHitRateNumericUpDown
             // 
-            textBox4.Location = new Point(144, 22);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(42, 23);
-            textBox4.TabIndex = 28;
+            DefenderHitRateNumericUpDown.Location = new Point(102, 55);
+            DefenderHitRateNumericUpDown.Name = "DefenderHitRateNumericUpDown";
+            DefenderHitRateNumericUpDown.Size = new Size(42, 23);
+            DefenderHitRateNumericUpDown.TabIndex = 20;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(111, 25);
+            label9.Location = new Point(69, 58);
             label9.Name = "label9";
             label9.Size = new Size(31, 15);
             label9.TabIndex = 27;
             label9.Text = "命中";
             // 
-            // textBox2
+            // AttackerCriticalRateNumericUpDown
             // 
-            textBox2.Location = new Point(47, 50);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(42, 23);
-            textBox2.TabIndex = 26;
+            AttackerCriticalRateNumericUpDown.Location = new Point(183, 22);
+            AttackerCriticalRateNumericUpDown.Name = "AttackerCriticalRateNumericUpDown";
+            AttackerCriticalRateNumericUpDown.Size = new Size(42, 23);
+            AttackerCriticalRateNumericUpDown.TabIndex = 11;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(14, 53);
+            label7.Location = new Point(150, 25);
             label7.Name = "label7";
             label7.Size = new Size(31, 15);
             label7.TabIndex = 25;
             label7.Text = "必殺";
             // 
-            // textBox1
+            // AttackerHitRateNumericUpDown
             // 
-            textBox1.Location = new Point(47, 22);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(42, 23);
-            textBox1.TabIndex = 24;
+            AttackerHitRateNumericUpDown.Location = new Point(102, 22);
+            AttackerHitRateNumericUpDown.Name = "AttackerHitRateNumericUpDown";
+            AttackerHitRateNumericUpDown.Size = new Size(42, 23);
+            AttackerHitRateNumericUpDown.TabIndex = 10;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(14, 25);
+            label6.Location = new Point(69, 25);
             label6.Name = "label6";
             label6.Size = new Size(31, 15);
             label6.TabIndex = 23;
@@ -598,6 +660,10 @@ namespace FERNGSolver.Gba.UI.Search
             Size = new Size(640, 590);
             CombatGroupBox.ResumeLayout(false);
             CombatGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DefenderCriticalRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DefenderHitRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AttackerCriticalRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AttackerHitRateNumericUpDown).EndInit();
             GrowthGroupBox.ResumeLayout(false);
             GrowthGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)GrowthSpdRateNumericUpDown).EndInit();
@@ -628,15 +694,15 @@ namespace FERNGSolver.Gba.UI.Search
         private GroupBox CombatGroupBox;
         private GroupBox GrowthGroupBox;
         private CheckBox ContainsGrowthCheckBox;
-        private CheckBox checkBox2;
-        private CheckBox checkBox1;
-        private TextBox textBox3;
+        private CheckBox DoesDefenderAttackCheckBox;
+        private CheckBox DoesDefenderFollowUpAttackCheckBox;
+        private NumericUpDown DefenderCriticalRateNumericUpDown;
         private Label label8;
-        private TextBox textBox4;
+        private NumericUpDown DefenderHitRateNumericUpDown;
         private Label label9;
-        private TextBox textBox2;
+        private NumericUpDown AttackerCriticalRateNumericUpDown;
         private Label label7;
-        private TextBox textBox1;
+        private NumericUpDown AttackerHitRateNumericUpDown;
         private Label label6;
         private ComboBox GrowthCharacterNameComboBox;
         private CheckBox checkBox9;
@@ -675,5 +741,10 @@ namespace FERNGSolver.Gba.UI.Search
         private CheckBox AddsCxOffset;
         private Button FalconKnightToolOpenButton;
         private CheckBox IsGrowthBoostedCheckBox;
+        private CheckBox IsDefenderDoubleAttackCheckBox;
+        private CheckBox IsAttackerDoubleAttackCheckBox;
+        private CheckBox DoesAttackerFollowUpAttackCheckBox;
+        private Label label4;
+        private Label label3;
     }
 }
