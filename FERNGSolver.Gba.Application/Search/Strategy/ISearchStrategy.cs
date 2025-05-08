@@ -6,8 +6,8 @@ namespace FERNGSolver.Gba.Application.Search.Strategy
     {
         /// <summary>
         /// 現在のRNGが条件を満たすか判定します。
-        /// <para> * 受け取ったRNGは進めません。</para>
+        /// <para> * allowsAdvanceがtrueの時、RNGを進めます。</para>
         /// </summary>
-        bool IsOk(IRng currentRng);
+        bool Check(IRng currentRng, bool allowsAdvance);
     }
 }

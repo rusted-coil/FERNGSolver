@@ -70,10 +70,27 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
             }
             else
             {
-                strategy = StrategyFactory.CreateCombatAndGrowthStrategy(new CombatAndGrowthStrategyArgs {
-                    ContainsCombat = m_MainFormView.ContainsCombat,
-                    ContainsGrowth = m_MainFormView.ContainsGrowth,
-                });
+                List<ISearchStrategy> strategies = new List<ISearchStrategy>();
+                if (m_MainFormView.ContainsCombat)
+                {
+                    strategies.Add(StrategyFactory.CreateCombatStrategy(new CombatStrategyArgs {
+                    }));
+                }
+                if (m_MainFormView.ContainsGrowth)
+                {
+                    strategies.Add(StrategyFactory.CreateGrowthStrategy(new GrowthStrategyArgs
+                    {
+                        HpGrowthRate = 70,
+                        AtkGrowthRate = 40,
+                        TecGrowthRate = 60,
+                        SpdGrowthRate = 60,
+                        DefGrowthRate = 30,
+                        MdfGrowthRate = 30,
+                        LucGrowthRate = 60,
+                    }));
+                }
+
+                strategy = StrategyFactory.CreateSequentialStrategy(strategies.ToArray());
             }
             return Searcher.Search(rng, m_MainFormView.OffsetMin, m_MainFormView.OffsetMax, strategy);
         }

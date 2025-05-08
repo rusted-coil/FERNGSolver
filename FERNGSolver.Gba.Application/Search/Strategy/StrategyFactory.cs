@@ -11,11 +11,28 @@ namespace FERNGSolver.Gba.Application.Search.Strategy
         }
 
         /// <summary>
-        /// 戦闘とレベルアップを判定するストラテジを作成します。
+        /// 戦闘を判定するストラテジを作成します。
         /// </summary>
-        public static ISearchStrategy CreateCombatAndGrowthStrategy(CombatAndGrowthStrategyArgs args)
+        public static ISearchStrategy CreateCombatStrategy(CombatStrategyArgs args)
         {
-            return new Internal.CombatAndGrowthStrategy(args);
+            return new Internal.CombatStrategy(args);
+        }
+
+        /// <summary>
+        /// 成長を判定するストラテジを作成します。
+        /// </summary>
+        public static ISearchStrategy CreateGrowthStrategy(GrowthStrategyArgs args)
+        {
+            return new Internal.GrowthStrategy(args);
+        }
+
+        /// <summary>
+        /// 複数のストラテジを順番に実行するストラテジを作成します。
+        /// <para> * 全てが条件を満たす時のみcheckでtrueを返します。</para>
+        /// </summary>
+        public static ISearchStrategy CreateSequentialStrategy(params ISearchStrategy[] strategies)
+        {
+            return new Internal.SequentialStrategy(strategies);
         }
     }
 }

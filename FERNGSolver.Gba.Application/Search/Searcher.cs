@@ -23,7 +23,7 @@ namespace FERNGSolver.Gba.Application.Search
 
             for (int i = 0; i <= offsetMax - offsetMin; ++i)
             {
-                if (strategy.IsOk(startRng))
+                if (strategy.Check(startRng, false))
                 {
                     result.Add((offsetMin + i, [startRng.States[0], startRng.States[1], startRng.States[2]]));
                 }

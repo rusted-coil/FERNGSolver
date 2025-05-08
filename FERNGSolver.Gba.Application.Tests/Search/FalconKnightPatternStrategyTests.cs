@@ -5,7 +5,7 @@ using FERNGSolver.Gba.Domain.RNG;
 namespace FERNGSolver.Gba.Application.Tests.Search
 {
     [TestClass]
-    public class FalconKnightPatternSearcherTests
+    public class FalconKnightPatternStrategyTests
     {
         [TestMethod]
         public void Search_ShouldFindMatchingOffset()

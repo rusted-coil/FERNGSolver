@@ -11,12 +11,13 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
             m_Pattern = pattern;
         }
 
-        public bool IsOk(IRng currentRng)
+        public bool Check(IRng currentRng, bool allowsAdvance)
         {
-            var tempRng = RngFactory.CreateFromRng(currentRng);
+            var rng = allowsAdvance ? currentRng : RngFactory.CreateFromRng(currentRng);
+
             foreach (var pattern in m_Pattern)
             {
-                if (pattern != tempRng.Next().ToCx())
+                if (pattern != rng.Next().ToCx())
                 {
                     return false;
                 }
