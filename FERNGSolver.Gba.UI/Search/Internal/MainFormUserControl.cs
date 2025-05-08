@@ -1,4 +1,7 @@
 using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Gba.Domain.Character;
+using FERNGSolver.Gba.Domain.Character.Extensions;
+using FERNGSolver.Gba.Domain.Repository.Stub;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.ViewContracts;
 using System.Reactive;
@@ -34,16 +37,20 @@ namespace FERNGSolver.Gba.UI.Search
         public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
         public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
 
-        public IReadOnlyList<ushort> Seeds {
-            get {
+        public IReadOnlyList<ushort> Seeds
+        {
+            get
+            {
                 var values = new ushort[3];
                 //                if()
                 return values;
             }
         }
 
-        public int OffsetMin {
-            get {
+        public int OffsetMin
+        {
+            get
+            {
                 if (int.TryParse(OffsetMinTextBox.Text, out var value))
                 {
                     return value;
@@ -52,8 +59,10 @@ namespace FERNGSolver.Gba.UI.Search
             }
         }
 
-        public int OffsetMax {
-            get {
+        public int OffsetMax
+        {
+            get
+            {
                 if (int.TryParse(OffsetMaxTextBox.Text, out var value))
                 {
                     return value;
@@ -62,12 +71,19 @@ namespace FERNGSolver.Gba.UI.Search
             }
         }
 
-        private IMainFormView m_MainFormView;
+        private readonly IMainFormView m_MainFormView;
+        private readonly IReadOnlyList<ICharacter> m_Characters;
 
         public MainFormUserControl(IMainFormView mainFormView)
         {
             m_MainFormView = mainFormView;
             InitializeComponent();
+
+            // TODO とりあえずStubからキャラデータを取得してコンボボックスにセットする
+            var characterRepository = new StubCharacterRepository();
+            m_Characters = characterRepository.AllCharacters;
+            GrowthCharacterNameComboBox.Items.Clear();
+            GrowthCharacterNameComboBox.Items.AddRange(m_Characters.Select(x => x.Name).ToArray());
         }
 
         public void InitializeDefaults()
@@ -85,10 +101,7 @@ namespace FERNGSolver.Gba.UI.Search
             Seed2TextBox.Text = seeds[2].ToString("X4");
         }
 
-        private void DefaultSeedButton_Click(object sender, EventArgs e)
-        {
-            SetDefaultSeeds();
-        }
+        private void DefaultSeedButton_Click(object sender, EventArgs e) => SetDefaultSeeds();
 
         private void UsesFalconKnightMethodCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -98,6 +111,32 @@ namespace FERNGSolver.Gba.UI.Search
             CombatGroupBox.Enabled = !isChecked;
             ContainsGrowthCheckBox.Enabled = !isChecked;
             GrowthGroupBox.Enabled = !isChecked;
+        }
+
+        private void GrowthCharacterNameComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshGrowthRate();
+        private void IsGrowthBoostedCheckBox_CheckedChanged(object sender, EventArgs e) => RefreshGrowthRate();
+
+        void RefreshGrowthRate()
+        {
+            if (GrowthCharacterNameComboBox.SelectedIndex >= 0 && GrowthCharacterNameComboBox.SelectedIndex < m_Characters.Count)
+            {
+                var character = m_Characters[GrowthCharacterNameComboBox.SelectedIndex];
+                if (!character.IsPartitionData())
+                {
+                    if (IsGrowthBoostedCheckBox.Checked)
+                    {
+                        character = character.Boost();
+                    }
+
+                    GrowthHpRateNumericUpDown.Value = character.HpGrowthRate;
+                    GrowthAtkRateNumericUpDown.Value = character.AtkGrowthRate;
+                    GrowthTecRateNumericUpDown.Value = character.TecGrowthRate;
+                    GrowthSpdRateNumericUpDown.Value = character.SpdGrowthRate;
+                    GrowthDefRateNumericUpDown.Value = character.DefGrowthRate;
+                    GrowthMdfRateNumericUpDown.Value = character.MdfGrowthRate;
+                    GrowthLucRateNumericUpDown.Value = character.LucGrowthRate;
+                }
+            }
         }
     }
 }

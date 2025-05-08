@@ -380,6 +380,7 @@ namespace FERNGSolver.Gba.UI.Search
             IsGrowthBoostedCheckBox.TabIndex = 2;
             IsGrowthBoostedCheckBox.Text = "アフア/メティス";
             IsGrowthBoostedCheckBox.UseVisualStyleBackColor = true;
+            IsGrowthBoostedCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
             // 
             // checkBox9
             // 
@@ -570,6 +571,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthCharacterNameComboBox.Name = "GrowthCharacterNameComboBox";
             GrowthCharacterNameComboBox.Size = new Size(134, 23);
             GrowthCharacterNameComboBox.TabIndex = 1;
+            GrowthCharacterNameComboBox.SelectedIndexChanged += GrowthCharacterNameComboBox_SelectedIndexChanged;
             // 
             // ContainsGrowthCheckBox
             // 
