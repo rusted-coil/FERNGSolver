@@ -58,19 +58,19 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox5 = new CheckBox();
             checkBox4 = new CheckBox();
             checkBox3 = new CheckBox();
-            GrowthSpdRateTextBox = new TextBox();
+            GrowthSpdRateNumericUpDown = new NumericUpDown();
             label16 = new Label();
-            GrowthMdfRateTextBox = new TextBox();
+            GrowthMdfRateNumericUpDown = new NumericUpDown();
             label13 = new Label();
-            GrowthDefRateTextBox = new TextBox();
+            GrowthDefRateNumericUpDown = new NumericUpDown();
             label14 = new Label();
-            GrowthLucRateTextBox = new TextBox();
+            GrowthLucRateNumericUpDown = new NumericUpDown();
             label15 = new Label();
-            GrowthTecRateTextBox = new TextBox();
+            GrowthTecRateNumericUpDown = new NumericUpDown();
             label12 = new Label();
-            GrowthAtkRateTextBox = new TextBox();
+            GrowthAtkRateNumericUpDown = new NumericUpDown();
             label11 = new Label();
-            GrowthHpRateTextBox = new TextBox();
+            GrowthHpRateNumericUpDown = new NumericUpDown();
             label10 = new Label();
             GrowthCharacterNameComboBox = new ComboBox();
             ContainsGrowthCheckBox = new CheckBox();
@@ -82,6 +82,13 @@ namespace FERNGSolver.Gba.UI.Search
             UsesFalconKnightMethodCheckBox = new CheckBox();
             CombatGroupBox.SuspendLayout();
             GrowthGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GrowthSpdRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthMdfRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthDefRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthLucRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthTecRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthAtkRateNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthHpRateNumericUpDown).BeginInit();
             FalconKnightMethodGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -280,19 +287,19 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthGroupBox.Controls.Add(checkBox5);
             GrowthGroupBox.Controls.Add(checkBox4);
             GrowthGroupBox.Controls.Add(checkBox3);
-            GrowthGroupBox.Controls.Add(GrowthSpdRateTextBox);
+            GrowthGroupBox.Controls.Add(GrowthSpdRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label16);
-            GrowthGroupBox.Controls.Add(GrowthMdfRateTextBox);
+            GrowthGroupBox.Controls.Add(GrowthMdfRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label13);
-            GrowthGroupBox.Controls.Add(GrowthDefRateTextBox);
+            GrowthGroupBox.Controls.Add(GrowthDefRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label14);
-            GrowthGroupBox.Controls.Add(GrowthLucRateTextBox);
+            GrowthGroupBox.Controls.Add(GrowthLucRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label15);
-            GrowthGroupBox.Controls.Add(GrowthTecRateTextBox);
+            GrowthGroupBox.Controls.Add(GrowthTecRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label12);
-            GrowthGroupBox.Controls.Add(GrowthAtkRateTextBox);
+            GrowthGroupBox.Controls.Add(GrowthAtkRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label11);
-            GrowthGroupBox.Controls.Add(GrowthHpRateTextBox);
+            GrowthGroupBox.Controls.Add(GrowthHpRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label10);
             GrowthGroupBox.Controls.Add(GrowthCharacterNameComboBox);
             GrowthGroupBox.Controls.Add(ContainsGrowthCheckBox);
@@ -375,12 +382,13 @@ namespace FERNGSolver.Gba.UI.Search
             checkBox3.TabIndex = 46;
             checkBox3.UseVisualStyleBackColor = true;
             // 
-            // GrowthSpdRateTextBox
+            // GrowthSpdRateNumericUpDown
             // 
-            GrowthSpdRateTextBox.Location = new Point(45, 142);
-            GrowthSpdRateTextBox.Name = "GrowthSpdRateTextBox";
-            GrowthSpdRateTextBox.Size = new Size(42, 23);
-            GrowthSpdRateTextBox.TabIndex = 44;
+            GrowthSpdRateNumericUpDown.Location = new Point(45, 142);
+            GrowthSpdRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthSpdRateNumericUpDown.Name = "GrowthSpdRateNumericUpDown";
+            GrowthSpdRateNumericUpDown.Size = new Size(42, 23);
+            GrowthSpdRateNumericUpDown.TabIndex = 44;
             // 
             // label16
             // 
@@ -391,12 +399,13 @@ namespace FERNGSolver.Gba.UI.Search
             label16.TabIndex = 45;
             label16.Text = "速さ";
             // 
-            // GrowthMdfRateTextBox
+            // GrowthMdfRateNumericUpDown
             // 
-            GrowthMdfRateTextBox.Location = new Point(161, 114);
-            GrowthMdfRateTextBox.Name = "GrowthMdfRateTextBox";
-            GrowthMdfRateTextBox.Size = new Size(42, 23);
-            GrowthMdfRateTextBox.TabIndex = 42;
+            GrowthMdfRateNumericUpDown.Location = new Point(161, 114);
+            GrowthMdfRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthMdfRateNumericUpDown.Name = "GrowthMdfRateNumericUpDown";
+            GrowthMdfRateNumericUpDown.Size = new Size(42, 23);
+            GrowthMdfRateNumericUpDown.TabIndex = 42;
             // 
             // label13
             // 
@@ -407,12 +416,13 @@ namespace FERNGSolver.Gba.UI.Search
             label13.TabIndex = 43;
             label13.Text = "魔防";
             // 
-            // GrowthDefRateTextBox
+            // GrowthDefRateNumericUpDown
             // 
-            GrowthDefRateTextBox.Location = new Point(161, 86);
-            GrowthDefRateTextBox.Name = "GrowthDefRateTextBox";
-            GrowthDefRateTextBox.Size = new Size(42, 23);
-            GrowthDefRateTextBox.TabIndex = 40;
+            GrowthDefRateNumericUpDown.Location = new Point(161, 86);
+            GrowthDefRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthDefRateNumericUpDown.Name = "GrowthDefRateNumericUpDown";
+            GrowthDefRateNumericUpDown.Size = new Size(42, 23);
+            GrowthDefRateNumericUpDown.TabIndex = 40;
             // 
             // label14
             // 
@@ -423,12 +433,13 @@ namespace FERNGSolver.Gba.UI.Search
             label14.TabIndex = 41;
             label14.Text = "守備";
             // 
-            // GrowthLucRateTextBox
+            // GrowthLucRateNumericUpDown
             // 
-            GrowthLucRateTextBox.Location = new Point(161, 58);
-            GrowthLucRateTextBox.Name = "GrowthLucRateTextBox";
-            GrowthLucRateTextBox.Size = new Size(42, 23);
-            GrowthLucRateTextBox.TabIndex = 38;
+            GrowthLucRateNumericUpDown.Location = new Point(161, 58);
+            GrowthLucRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthLucRateNumericUpDown.Name = "GrowthLucRateNumericUpDown";
+            GrowthLucRateNumericUpDown.Size = new Size(42, 23);
+            GrowthLucRateNumericUpDown.TabIndex = 38;
             // 
             // label15
             // 
@@ -439,12 +450,13 @@ namespace FERNGSolver.Gba.UI.Search
             label15.TabIndex = 39;
             label15.Text = "幸運";
             // 
-            // GrowthTecRateTextBox
+            // GrowthTecRateNumericUpDown
             // 
-            GrowthTecRateTextBox.Location = new Point(45, 114);
-            GrowthTecRateTextBox.Name = "GrowthTecRateTextBox";
-            GrowthTecRateTextBox.Size = new Size(42, 23);
-            GrowthTecRateTextBox.TabIndex = 36;
+            GrowthTecRateNumericUpDown.Location = new Point(45, 114);
+            GrowthTecRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthTecRateNumericUpDown.Name = "GrowthTecRateNumericUpDown";
+            GrowthTecRateNumericUpDown.Size = new Size(42, 23);
+            GrowthTecRateNumericUpDown.TabIndex = 36;
             // 
             // label12
             // 
@@ -455,12 +467,13 @@ namespace FERNGSolver.Gba.UI.Search
             label12.TabIndex = 37;
             label12.Text = "技";
             // 
-            // GrowthAtkRateTextBox
+            // GrowthAtkRateNumericUpDown
             // 
-            GrowthAtkRateTextBox.Location = new Point(45, 86);
-            GrowthAtkRateTextBox.Name = "GrowthAtkRateTextBox";
-            GrowthAtkRateTextBox.Size = new Size(42, 23);
-            GrowthAtkRateTextBox.TabIndex = 34;
+            GrowthAtkRateNumericUpDown.Location = new Point(45, 86);
+            GrowthAtkRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthAtkRateNumericUpDown.Name = "GrowthAtkRateNumericUpDown";
+            GrowthAtkRateNumericUpDown.Size = new Size(42, 23);
+            GrowthAtkRateNumericUpDown.TabIndex = 34;
             // 
             // label11
             // 
@@ -471,12 +484,13 @@ namespace FERNGSolver.Gba.UI.Search
             label11.TabIndex = 35;
             label11.Text = "力";
             // 
-            // GrowthHpRateTextBox
+            // GrowthHpRateNumericUpDown
             // 
-            GrowthHpRateTextBox.Location = new Point(45, 58);
-            GrowthHpRateTextBox.Name = "GrowthHpRateTextBox";
-            GrowthHpRateTextBox.Size = new Size(42, 23);
-            GrowthHpRateTextBox.TabIndex = 33;
+            GrowthHpRateNumericUpDown.Location = new Point(45, 58);
+            GrowthHpRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthHpRateNumericUpDown.Name = "GrowthHpRateNumericUpDown";
+            GrowthHpRateNumericUpDown.Size = new Size(42, 23);
+            GrowthHpRateNumericUpDown.TabIndex = 33;
             // 
             // label10
             // 
@@ -586,6 +600,13 @@ namespace FERNGSolver.Gba.UI.Search
             CombatGroupBox.PerformLayout();
             GrowthGroupBox.ResumeLayout(false);
             GrowthGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)GrowthSpdRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthMdfRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthDefRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthLucRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthTecRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthAtkRateNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GrowthHpRateNumericUpDown).EndInit();
             FalconKnightMethodGroupBox.ResumeLayout(false);
             FalconKnightMethodGroupBox.PerformLayout();
             ResumeLayout(false);
@@ -625,19 +646,19 @@ namespace FERNGSolver.Gba.UI.Search
         private CheckBox checkBox5;
         private CheckBox checkBox4;
         private CheckBox checkBox3;
-        private TextBox GrowthSpdRateTextBox;
+        private NumericUpDown GrowthSpdRateNumericUpDown;
         private Label label16;
-        private TextBox GrowthMdfRateTextBox;
+        private NumericUpDown GrowthMdfRateNumericUpDown;
         private Label label13;
-        private TextBox GrowthDefRateTextBox;
+        private NumericUpDown GrowthDefRateNumericUpDown;
         private Label label14;
-        private TextBox GrowthLucRateTextBox;
+        private NumericUpDown GrowthLucRateNumericUpDown;
         private Label label15;
-        private TextBox GrowthTecRateTextBox;
+        private NumericUpDown GrowthTecRateNumericUpDown;
         private Label label12;
-        private TextBox GrowthAtkRateTextBox;
+        private NumericUpDown GrowthAtkRateNumericUpDown;
         private Label label11;
-        private TextBox GrowthHpRateTextBox;
+        private NumericUpDown GrowthHpRateNumericUpDown;
         private Label label10;
         private GroupBox FalconKnightMethodGroupBox;
         private CheckBox checkBox10;
