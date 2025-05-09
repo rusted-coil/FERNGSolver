@@ -72,13 +72,13 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerCriticalRateNumericUpDown = new NumericUpDownEx();
             GrowthGroupBox = new GroupBox();
             IsGrowthBoostedCheckBox = new CheckBox();
-            checkBox9 = new CheckBox();
-            checkBox8 = new CheckBox();
-            checkBox7 = new CheckBox();
-            checkBox6 = new CheckBox();
-            checkBox5 = new CheckBox();
-            checkBox4 = new CheckBox();
-            checkBox3 = new CheckBox();
+            IsMdfGrowthNeeded = new CheckBox();
+            IsDefGrowthNeeded = new CheckBox();
+            IsLucGrowthNeeded = new CheckBox();
+            IsSpdGrowthNeeded = new CheckBox();
+            IsTecGrowthNeeded = new CheckBox();
+            IsAtkGrowthNeeded = new CheckBox();
+            IsHpGrowthNeeded = new CheckBox();
             GrowthSpdRateNumericUpDown = new NumericUpDownEx();
             label16 = new Label();
             GrowthMdfRateNumericUpDown = new NumericUpDownEx();
@@ -525,13 +525,13 @@ namespace FERNGSolver.Gba.UI.Search
             // GrowthGroupBox
             // 
             GrowthGroupBox.Controls.Add(IsGrowthBoostedCheckBox);
-            GrowthGroupBox.Controls.Add(checkBox9);
-            GrowthGroupBox.Controls.Add(checkBox8);
-            GrowthGroupBox.Controls.Add(checkBox7);
-            GrowthGroupBox.Controls.Add(checkBox6);
-            GrowthGroupBox.Controls.Add(checkBox5);
-            GrowthGroupBox.Controls.Add(checkBox4);
-            GrowthGroupBox.Controls.Add(checkBox3);
+            GrowthGroupBox.Controls.Add(IsMdfGrowthNeeded);
+            GrowthGroupBox.Controls.Add(IsDefGrowthNeeded);
+            GrowthGroupBox.Controls.Add(IsLucGrowthNeeded);
+            GrowthGroupBox.Controls.Add(IsSpdGrowthNeeded);
+            GrowthGroupBox.Controls.Add(IsTecGrowthNeeded);
+            GrowthGroupBox.Controls.Add(IsAtkGrowthNeeded);
+            GrowthGroupBox.Controls.Add(IsHpGrowthNeeded);
             GrowthGroupBox.Controls.Add(GrowthSpdRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label16);
             GrowthGroupBox.Controls.Add(GrowthMdfRateNumericUpDown);
@@ -565,82 +565,82 @@ namespace FERNGSolver.Gba.UI.Search
             IsGrowthBoostedCheckBox.UseVisualStyleBackColor = true;
             IsGrowthBoostedCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
             // 
-            // checkBox9
+            // IsMdfGrowthNeeded
             // 
-            checkBox9.AutoSize = true;
-            checkBox9.Checked = true;
-            checkBox9.CheckState = CheckState.Checked;
-            checkBox9.Location = new Point(210, 118);
-            checkBox9.Name = "checkBox9";
-            checkBox9.Size = new Size(15, 14);
-            checkBox9.TabIndex = 26;
-            checkBox9.UseVisualStyleBackColor = true;
+            IsMdfGrowthNeeded.AutoSize = true;
+            IsMdfGrowthNeeded.Checked = true;
+            IsMdfGrowthNeeded.CheckState = CheckState.Checked;
+            IsMdfGrowthNeeded.Location = new Point(210, 118);
+            IsMdfGrowthNeeded.Name = "IsMdfGrowthNeeded";
+            IsMdfGrowthNeeded.Size = new Size(15, 14);
+            IsMdfGrowthNeeded.TabIndex = 26;
+            IsMdfGrowthNeeded.UseVisualStyleBackColor = true;
             // 
-            // checkBox8
+            // IsDefGrowthNeeded
             // 
-            checkBox8.AutoSize = true;
-            checkBox8.Checked = true;
-            checkBox8.CheckState = CheckState.Checked;
-            checkBox8.Location = new Point(210, 90);
-            checkBox8.Name = "checkBox8";
-            checkBox8.Size = new Size(15, 14);
-            checkBox8.TabIndex = 25;
-            checkBox8.UseVisualStyleBackColor = true;
+            IsDefGrowthNeeded.AutoSize = true;
+            IsDefGrowthNeeded.Checked = true;
+            IsDefGrowthNeeded.CheckState = CheckState.Checked;
+            IsDefGrowthNeeded.Location = new Point(210, 90);
+            IsDefGrowthNeeded.Name = "IsDefGrowthNeeded";
+            IsDefGrowthNeeded.Size = new Size(15, 14);
+            IsDefGrowthNeeded.TabIndex = 25;
+            IsDefGrowthNeeded.UseVisualStyleBackColor = true;
             // 
-            // checkBox7
+            // IsLucGrowthNeeded
             // 
-            checkBox7.AutoSize = true;
-            checkBox7.Checked = true;
-            checkBox7.CheckState = CheckState.Checked;
-            checkBox7.Location = new Point(210, 62);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Size = new Size(15, 14);
-            checkBox7.TabIndex = 24;
-            checkBox7.UseVisualStyleBackColor = true;
+            IsLucGrowthNeeded.AutoSize = true;
+            IsLucGrowthNeeded.Checked = true;
+            IsLucGrowthNeeded.CheckState = CheckState.Checked;
+            IsLucGrowthNeeded.Location = new Point(210, 62);
+            IsLucGrowthNeeded.Name = "IsLucGrowthNeeded";
+            IsLucGrowthNeeded.Size = new Size(15, 14);
+            IsLucGrowthNeeded.TabIndex = 24;
+            IsLucGrowthNeeded.UseVisualStyleBackColor = true;
             // 
-            // checkBox6
+            // IsSpdGrowthNeeded
             // 
-            checkBox6.AutoSize = true;
-            checkBox6.Checked = true;
-            checkBox6.CheckState = CheckState.Checked;
-            checkBox6.Location = new Point(93, 146);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(15, 14);
-            checkBox6.TabIndex = 23;
-            checkBox6.UseVisualStyleBackColor = true;
+            IsSpdGrowthNeeded.AutoSize = true;
+            IsSpdGrowthNeeded.Checked = true;
+            IsSpdGrowthNeeded.CheckState = CheckState.Checked;
+            IsSpdGrowthNeeded.Location = new Point(93, 146);
+            IsSpdGrowthNeeded.Name = "IsSpdGrowthNeeded";
+            IsSpdGrowthNeeded.Size = new Size(15, 14);
+            IsSpdGrowthNeeded.TabIndex = 23;
+            IsSpdGrowthNeeded.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // IsTecGrowthNeeded
             // 
-            checkBox5.AutoSize = true;
-            checkBox5.Checked = true;
-            checkBox5.CheckState = CheckState.Checked;
-            checkBox5.Location = new Point(93, 118);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(15, 14);
-            checkBox5.TabIndex = 22;
-            checkBox5.UseVisualStyleBackColor = true;
+            IsTecGrowthNeeded.AutoSize = true;
+            IsTecGrowthNeeded.Checked = true;
+            IsTecGrowthNeeded.CheckState = CheckState.Checked;
+            IsTecGrowthNeeded.Location = new Point(93, 118);
+            IsTecGrowthNeeded.Name = "IsTecGrowthNeeded";
+            IsTecGrowthNeeded.Size = new Size(15, 14);
+            IsTecGrowthNeeded.TabIndex = 22;
+            IsTecGrowthNeeded.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // IsAtkGrowthNeeded
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Checked = true;
-            checkBox4.CheckState = CheckState.Checked;
-            checkBox4.Location = new Point(93, 90);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(15, 14);
-            checkBox4.TabIndex = 21;
-            checkBox4.UseVisualStyleBackColor = true;
+            IsAtkGrowthNeeded.AutoSize = true;
+            IsAtkGrowthNeeded.Checked = true;
+            IsAtkGrowthNeeded.CheckState = CheckState.Checked;
+            IsAtkGrowthNeeded.Location = new Point(93, 90);
+            IsAtkGrowthNeeded.Name = "IsAtkGrowthNeeded";
+            IsAtkGrowthNeeded.Size = new Size(15, 14);
+            IsAtkGrowthNeeded.TabIndex = 21;
+            IsAtkGrowthNeeded.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // IsHpGrowthNeeded
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Checked = true;
-            checkBox3.CheckState = CheckState.Checked;
-            checkBox3.Location = new Point(93, 62);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(15, 14);
-            checkBox3.TabIndex = 20;
-            checkBox3.UseVisualStyleBackColor = true;
+            IsHpGrowthNeeded.AutoSize = true;
+            IsHpGrowthNeeded.Checked = true;
+            IsHpGrowthNeeded.CheckState = CheckState.Checked;
+            IsHpGrowthNeeded.Location = new Point(93, 62);
+            IsHpGrowthNeeded.Name = "IsHpGrowthNeeded";
+            IsHpGrowthNeeded.Size = new Size(15, 14);
+            IsHpGrowthNeeded.TabIndex = 20;
+            IsHpGrowthNeeded.UseVisualStyleBackColor = true;
             // 
             // GrowthSpdRateNumericUpDown
             // 
@@ -968,13 +968,13 @@ namespace FERNGSolver.Gba.UI.Search
         private NumericUpDownEx AttackerHitRateNumericUpDown;
         private Label label6;
         private ComboBox GrowthCharacterNameComboBox;
-        private CheckBox checkBox9;
-        private CheckBox checkBox8;
-        private CheckBox checkBox7;
-        private CheckBox checkBox6;
-        private CheckBox checkBox5;
-        private CheckBox checkBox4;
-        private CheckBox checkBox3;
+        private CheckBox IsMdfGrowthNeeded;
+        private CheckBox IsDefGrowthNeeded;
+        private CheckBox IsLucGrowthNeeded;
+        private CheckBox IsSpdGrowthNeeded;
+        private CheckBox IsTecGrowthNeeded;
+        private CheckBox IsAtkGrowthNeeded;
+        private CheckBox IsHpGrowthNeeded;
         private NumericUpDownEx GrowthSpdRateNumericUpDown;
         private Label label16;
         private NumericUpDownEx GrowthMdfRateNumericUpDown;

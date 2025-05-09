@@ -33,13 +33,13 @@ namespace FERNGSolver.Gba.UI.Search
 
         // レベルアップ
         public bool ContainsGrowth => ContainsGrowthCheckBox.Checked;
-        public int HpGrowthRate => (int)GrowthHpRateNumericUpDown.Value;
-        public int AtkGrowthRate => (int)GrowthAtkRateNumericUpDown.Value;
-        public int TecGrowthRate => (int)GrowthTecRateNumericUpDown.Value;
-        public int SpdGrowthRate => (int)GrowthSpdRateNumericUpDown.Value;
-        public int DefGrowthRate => (int)GrowthDefRateNumericUpDown.Value;
-        public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
-        public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
+        public int HpGrowthRate => IsHpGrowthNeeded.Checked ? (int)GrowthHpRateNumericUpDown.Value : 100;
+        public int AtkGrowthRate => IsAtkGrowthNeeded.Checked ? (int)GrowthAtkRateNumericUpDown.Value : 100;
+        public int TecGrowthRate => IsTecGrowthNeeded.Checked ? (int)GrowthTecRateNumericUpDown.Value : 100;
+        public int SpdGrowthRate => IsSpdGrowthNeeded.Checked ? (int)GrowthSpdRateNumericUpDown.Value : 100;
+        public int DefGrowthRate => IsDefGrowthNeeded.Checked ? (int)GrowthDefRateNumericUpDown.Value : 100;
+        public int MdfGrowthRate => IsMdfGrowthNeeded.Checked ? (int)GrowthMdfRateNumericUpDown.Value : 100;
+        public int LucGrowthRate => IsLucGrowthNeeded.Checked ? (int)GrowthLucRateNumericUpDown.Value : 100;
 
         // 検索条件
         public int OffsetMin => (int)CurrentRngCountNumericUpDown.Value + (int)OffsetMinNumericUpDown.Value;

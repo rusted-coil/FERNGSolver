@@ -9,5 +9,16 @@ namespace FERNGSolver.Gba.Domain.RNG
         {
             return value <= 49;
         }
+
+        /// <summary>
+        /// offset回分、乱数を進めます。
+        /// </summary>
+        public static void Advance(this IRng rng, int offset)
+        {
+            for (int i = 0; i < offset; ++i)
+            {
+                rng.Next();
+            }
+        }
     }
 }
