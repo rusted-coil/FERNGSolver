@@ -31,6 +31,12 @@ namespace FERNGSolver.Gba.UI.Search
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
         public bool IsDefenderDoubleAttack => IsDefenderDoubleAttackCheckBox.Checked;
 
+        // 戦闘事後条件
+        public int AttackerHpPostconditionMin => FiltersByAttackerHpPostconditionCheckBox.Checked ? (int)AttackerHpPostconditionMinNumericUpDown.Value : 0;
+        public int AttackerHpPostconditionMax => FiltersByAttackerHpPostconditionCheckBox.Checked ? (int)AttackerHpPostconditionMaxNumericUpDown.Value : 999;
+        public int DefenderHpPostconditionMin => FiltersByDefenderHpPostconditionCheckBox.Checked ? (int)DefenderHpPostconditionMinNumericUpDown.Value : 0;
+        public int DefenderHpPostconditionMax => FiltersByDefenderHpPostconditionCheckBox.Checked ? (int)DefenderHpPostconditionMaxNumericUpDown.Value : 999;
+
         // レベルアップ
         public bool ContainsGrowth => ContainsGrowthCheckBox.Checked;
         public int HpGrowthRate => IsHpGrowthNeeded.Checked ? (int)GrowthHpRateNumericUpDown.Value : 100;

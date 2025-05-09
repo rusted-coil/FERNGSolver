@@ -62,6 +62,13 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
                 }
             }
 
+            // HP事後条件チェック
+            if (attackerHp < m_Args.AttackerHpPostconditionMin || attackerHp > m_Args.AttackerHpPostconditionMax
+                || defenderHp < m_Args.DefenderHpPostconditionMin || defenderHp > m_Args.DefenderHpPostconditionMax)
+            {
+                return false;
+            }
+
             return true;
         }
 

@@ -90,6 +90,10 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
                             PhaseCount = m_MainFormView.DefenderPhaseCount,
                             IsDoubleAttack = m_MainFormView.IsDefenderDoubleAttack,
                         },
+                        AttackerHpPostconditionMin = m_MainFormView.AttackerHpPostconditionMin,
+                        AttackerHpPostconditionMax = m_MainFormView.AttackerHpPostconditionMax,
+                        DefenderHpPostconditionMin = m_MainFormView.DefenderHpPostconditionMin,
+                        DefenderHpPostconditionMax = m_MainFormView.DefenderHpPostconditionMax,
                     }));
                 }
                 if (m_MainFormView.ContainsGrowth)
