@@ -17,11 +17,6 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         string CxString { get; }
 
         /// <summary>
-        /// 検索条件のSeedを取得します。
-        /// </summary>
-        IReadOnlyList<ushort> Seeds { get; }
-
-        /// <summary>
         /// 検索条件の最小消費数を取得します。
         /// </summary>
         int OffsetMin { get; }

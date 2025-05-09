@@ -31,8 +31,6 @@ namespace FERNGSolver.Gba.UI.Search
         private void InitializeComponent()
         {
             label2 = new Label();
-            OffsetMaxTextBox = new TextBox();
-            OffsetMinTextBox = new TextBox();
             label1 = new Label();
             ContainsCombatCheckBox = new CheckBox();
             CombatGroupBox = new GroupBox();
@@ -40,7 +38,10 @@ namespace FERNGSolver.Gba.UI.Search
             radioButton1 = new RadioButton();
             label5 = new Label();
             groupBox2 = new GroupBox();
-            checkBox1 = new CheckBox();
+            DefenderHpPostconditionMaxNumericUpDown = new NumericUpDownEx();
+            label26 = new Label();
+            DefenderHpPostconditionMinNumericUpDown = new NumericUpDownEx();
+            FiltersByDefenderHpPostconditionCheckBox = new CheckBox();
             label9 = new Label();
             label3 = new Label();
             DefenderHpNumericUpDown = new NumericUpDownEx();
@@ -54,8 +55,11 @@ namespace FERNGSolver.Gba.UI.Search
             DoesDefenderFollowUpAttackCheckBox = new CheckBox();
             DefenderCriticalRateNumericUpDown = new NumericUpDownEx();
             groupBox1 = new GroupBox();
+            AttackerHpPostconditionMaxNumericUpDown = new NumericUpDownEx();
             label8 = new Label();
-            checkBox10 = new CheckBox();
+            label27 = new Label();
+            FiltersByAttackerHpPostconditionCheckBox = new CheckBox();
+            AttackerHpPostconditionMinNumericUpDown = new NumericUpDownEx();
             label24 = new Label();
             AttackerHpNumericUpDown = new NumericUpDownEx();
             label23 = new Label();
@@ -97,13 +101,24 @@ namespace FERNGSolver.Gba.UI.Search
             label17 = new Label();
             CxStringTextBox = new TextBox();
             UsesFalconKnightMethodCheckBox = new CheckBox();
+            label21 = new Label();
+            CurrentRngCountNumericUpDown = new NumericUpDownEx();
+            OffsetMinNumericUpDown = new NumericUpDownEx();
+            OffsetMaxNumericUpDown = new NumericUpDownEx();
+            label22 = new Label();
+            label25 = new Label();
+            FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMaxNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderPowerNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHitRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderCriticalRateNumericUpDown).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMaxNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerPowerNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHitRateNumericUpDown).BeginInit();
@@ -117,39 +132,29 @@ namespace FERNGSolver.Gba.UI.Search
             ((System.ComponentModel.ISupportInitialize)GrowthAtkRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GrowthHpRateNumericUpDown).BeginInit();
             FalconKnightMethodGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CurrentRngCountNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(116, 641);
+            label2.Location = new Point(253, 641);
             label2.Name = "label2";
             label2.Size = new Size(19, 15);
             label2.TabIndex = 14;
             label2.Text = "～";
             // 
-            // OffsetMaxTextBox
-            // 
-            OffsetMaxTextBox.Location = new Point(141, 638);
-            OffsetMaxTextBox.Name = "OffsetMaxTextBox";
-            OffsetMaxTextBox.Size = new Size(37, 23);
-            OffsetMaxTextBox.TabIndex = 106;
-            // 
-            // OffsetMinTextBox
-            // 
-            OffsetMinTextBox.Location = new Point(72, 638);
-            OffsetMinTextBox.Name = "OffsetMinTextBox";
-            OffsetMinTextBox.Size = new Size(37, 23);
-            OffsetMinTextBox.TabIndex = 105;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(25, 641);
+            label1.Location = new Point(170, 641);
             label1.Name = "label1";
-            label1.Size = new Size(49, 15);
+            label1.Size = new Size(15, 15);
             label1.TabIndex = 11;
-            label1.Text = "消費数: ";
+            label1.Text = "+";
             // 
             // ContainsCombatCheckBox
             // 
@@ -208,7 +213,10 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(checkBox1);
+            groupBox2.Controls.Add(DefenderHpPostconditionMaxNumericUpDown);
+            groupBox2.Controls.Add(label26);
+            groupBox2.Controls.Add(DefenderHpPostconditionMinNumericUpDown);
+            groupBox2.Controls.Add(FiltersByDefenderHpPostconditionCheckBox);
             groupBox2.Controls.Add(label9);
             groupBox2.Controls.Add(label3);
             groupBox2.Controls.Add(DefenderHpNumericUpDown);
@@ -221,22 +229,45 @@ namespace FERNGSolver.Gba.UI.Search
             groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(DoesDefenderFollowUpAttackCheckBox);
             groupBox2.Controls.Add(DefenderCriticalRateNumericUpDown);
-            groupBox2.Location = new Point(14, 186);
+            groupBox2.Location = new Point(14, 203);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(592, 122);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "防御側";
             // 
-            // checkBox1
+            // DefenderHpPostconditionMaxNumericUpDown
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(16, 92);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(115, 19);
-            checkBox1.TabIndex = 43;
-            checkBox1.Text = "戦闘終了後のHP:";
-            checkBox1.UseVisualStyleBackColor = true;
+            DefenderHpPostconditionMaxNumericUpDown.Location = new Point(210, 91);
+            DefenderHpPostconditionMaxNumericUpDown.Name = "DefenderHpPostconditionMaxNumericUpDown";
+            DefenderHpPostconditionMaxNumericUpDown.Size = new Size(42, 23);
+            DefenderHpPostconditionMaxNumericUpDown.TabIndex = 12;
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new Point(185, 93);
+            label26.Name = "label26";
+            label26.Size = new Size(19, 15);
+            label26.TabIndex = 113;
+            label26.Text = "～";
+            // 
+            // DefenderHpPostconditionMinNumericUpDown
+            // 
+            DefenderHpPostconditionMinNumericUpDown.Location = new Point(137, 91);
+            DefenderHpPostconditionMinNumericUpDown.Name = "DefenderHpPostconditionMinNumericUpDown";
+            DefenderHpPostconditionMinNumericUpDown.Size = new Size(42, 23);
+            DefenderHpPostconditionMinNumericUpDown.TabIndex = 11;
+            // 
+            // FiltersByDefenderHpPostconditionCheckBox
+            // 
+            FiltersByDefenderHpPostconditionCheckBox.AutoSize = true;
+            FiltersByDefenderHpPostconditionCheckBox.Location = new Point(16, 92);
+            FiltersByDefenderHpPostconditionCheckBox.Name = "FiltersByDefenderHpPostconditionCheckBox";
+            FiltersByDefenderHpPostconditionCheckBox.Size = new Size(115, 19);
+            FiltersByDefenderHpPostconditionCheckBox.TabIndex = 10;
+            FiltersByDefenderHpPostconditionCheckBox.Text = "戦闘終了後のHP:";
+            FiltersByDefenderHpPostconditionCheckBox.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -343,8 +374,11 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(AttackerHpPostconditionMaxNumericUpDown);
             groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(checkBox10);
+            groupBox1.Controls.Add(label27);
+            groupBox1.Controls.Add(FiltersByAttackerHpPostconditionCheckBox);
+            groupBox1.Controls.Add(AttackerHpPostconditionMinNumericUpDown);
             groupBox1.Controls.Add(label24);
             groupBox1.Controls.Add(AttackerHpNumericUpDown);
             groupBox1.Controls.Add(label23);
@@ -362,6 +396,13 @@ namespace FERNGSolver.Gba.UI.Search
             groupBox1.TabStop = false;
             groupBox1.Text = "攻撃側";
             // 
+            // AttackerHpPostconditionMaxNumericUpDown
+            // 
+            AttackerHpPostconditionMaxNumericUpDown.Location = new Point(210, 91);
+            AttackerHpPostconditionMaxNumericUpDown.Name = "AttackerHpPostconditionMaxNumericUpDown";
+            AttackerHpPostconditionMaxNumericUpDown.Size = new Size(42, 23);
+            AttackerHpPostconditionMaxNumericUpDown.TabIndex = 12;
+            // 
             // label8
             // 
             label8.BackColor = SystemColors.ControlLight;
@@ -371,15 +412,31 @@ namespace FERNGSolver.Gba.UI.Search
             label8.Size = new Size(580, 1);
             label8.TabIndex = 42;
             // 
-            // checkBox10
+            // label27
             // 
-            checkBox10.AutoSize = true;
-            checkBox10.Location = new Point(16, 92);
-            checkBox10.Name = "checkBox10";
-            checkBox10.Size = new Size(115, 19);
-            checkBox10.TabIndex = 41;
-            checkBox10.Text = "戦闘終了後のHP:";
-            checkBox10.UseVisualStyleBackColor = true;
+            label27.AutoSize = true;
+            label27.Location = new Point(185, 93);
+            label27.Name = "label27";
+            label27.Size = new Size(19, 15);
+            label27.TabIndex = 116;
+            label27.Text = "～";
+            // 
+            // FiltersByAttackerHpPostconditionCheckBox
+            // 
+            FiltersByAttackerHpPostconditionCheckBox.AutoSize = true;
+            FiltersByAttackerHpPostconditionCheckBox.Location = new Point(16, 92);
+            FiltersByAttackerHpPostconditionCheckBox.Name = "FiltersByAttackerHpPostconditionCheckBox";
+            FiltersByAttackerHpPostconditionCheckBox.Size = new Size(115, 19);
+            FiltersByAttackerHpPostconditionCheckBox.TabIndex = 10;
+            FiltersByAttackerHpPostconditionCheckBox.Text = "戦闘終了後のHP:";
+            FiltersByAttackerHpPostconditionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AttackerHpPostconditionMinNumericUpDown
+            // 
+            AttackerHpPostconditionMinNumericUpDown.Location = new Point(137, 91);
+            AttackerHpPostconditionMinNumericUpDown.Name = "AttackerHpPostconditionMinNumericUpDown";
+            AttackerHpPostconditionMinNumericUpDown.Size = new Size(42, 23);
+            AttackerHpPostconditionMinNumericUpDown.TabIndex = 11;
             // 
             // label24
             // 
@@ -427,7 +484,7 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerHitRateNumericUpDown.Location = new Point(228, 21);
             AttackerHitRateNumericUpDown.Name = "AttackerHitRateNumericUpDown";
             AttackerHitRateNumericUpDown.Size = new Size(42, 23);
-            AttackerHitRateNumericUpDown.TabIndex = 3;
+            AttackerHitRateNumericUpDown.TabIndex = 2;
             // 
             // IsAttackerDoubleAttackCheckBox
             // 
@@ -463,7 +520,7 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerCriticalRateNumericUpDown.Location = new Point(318, 21);
             AttackerCriticalRateNumericUpDown.Name = "AttackerCriticalRateNumericUpDown";
             AttackerCriticalRateNumericUpDown.Size = new Size(42, 23);
-            AttackerCriticalRateNumericUpDown.TabIndex = 4;
+            AttackerCriticalRateNumericUpDown.TabIndex = 3;
             // 
             // GrowthGroupBox
             // 
@@ -783,16 +840,81 @@ namespace FERNGSolver.Gba.UI.Search
             UsesFalconKnightMethodCheckBox.UseVisualStyleBackColor = true;
             UsesFalconKnightMethodCheckBox.CheckedChanged += UsesFalconKnightMethodCheckBox_CheckedChanged;
             // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(22, 641);
+            label21.Name = "label21";
+            label21.Size = new Size(80, 15);
+            label21.TabIndex = 107;
+            label21.Text = "現在の消費数:";
+            // 
+            // CurrentRngCountNumericUpDown
+            // 
+            CurrentRngCountNumericUpDown.Location = new Point(108, 639);
+            CurrentRngCountNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            CurrentRngCountNumericUpDown.Name = "CurrentRngCountNumericUpDown";
+            CurrentRngCountNumericUpDown.Size = new Size(60, 23);
+            CurrentRngCountNumericUpDown.TabIndex = 40;
+            // 
+            // OffsetMinNumericUpDown
+            // 
+            OffsetMinNumericUpDown.Location = new Point(187, 639);
+            OffsetMinNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            OffsetMinNumericUpDown.Name = "OffsetMinNumericUpDown";
+            OffsetMinNumericUpDown.Size = new Size(60, 23);
+            OffsetMinNumericUpDown.TabIndex = 41;
+            // 
+            // OffsetMaxNumericUpDown
+            // 
+            OffsetMaxNumericUpDown.Location = new Point(278, 639);
+            OffsetMaxNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            OffsetMaxNumericUpDown.Name = "OffsetMaxNumericUpDown";
+            OffsetMaxNumericUpDown.Size = new Size(60, 23);
+            OffsetMaxNumericUpDown.TabIndex = 42;
+            // 
+            // label22
+            // 
+            label22.BackColor = SystemColors.ControlLight;
+            label22.ForeColor = SystemColors.Control;
+            label22.Location = new Point(352, 633);
+            label22.Name = "label22";
+            label22.Size = new Size(1, 30);
+            label22.TabIndex = 44;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new Point(369, 641);
+            label25.Name = "label25";
+            label25.Size = new Size(168, 15);
+            label25.TabIndex = 111;
+            label25.Text = "F法消費回数計算に使う移動力: ";
+            // 
+            // FalconKnightConsumeMoveNumericUpDown
+            // 
+            FalconKnightConsumeMoveNumericUpDown.Location = new Point(543, 639);
+            FalconKnightConsumeMoveNumericUpDown.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
+            FalconKnightConsumeMoveNumericUpDown.Name = "FalconKnightConsumeMoveNumericUpDown";
+            FalconKnightConsumeMoveNumericUpDown.Size = new Size(37, 23);
+            FalconKnightConsumeMoveNumericUpDown.TabIndex = 43;
+            FalconKnightConsumeMoveNumericUpDown.Value = new decimal(new int[] { 8, 0, 0, 0 });
+            // 
             // MainFormUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(FalconKnightConsumeMoveNumericUpDown);
+            Controls.Add(label25);
+            Controls.Add(label22);
+            Controls.Add(OffsetMaxNumericUpDown);
+            Controls.Add(OffsetMinNumericUpDown);
+            Controls.Add(CurrentRngCountNumericUpDown);
+            Controls.Add(label21);
             Controls.Add(FalconKnightMethodGroupBox);
             Controls.Add(GrowthGroupBox);
             Controls.Add(CombatGroupBox);
             Controls.Add(label2);
-            Controls.Add(OffsetMaxTextBox);
-            Controls.Add(OffsetMinTextBox);
             Controls.Add(label1);
             Name = "MainFormUserControl";
             Size = new Size(640, 670);
@@ -800,12 +922,16 @@ namespace FERNGSolver.Gba.UI.Search
             CombatGroupBox.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMaxNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderPowerNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHitRateNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderCriticalRateNumericUpDown).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMaxNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerPowerNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHitRateNumericUpDown).EndInit();
@@ -821,14 +947,16 @@ namespace FERNGSolver.Gba.UI.Search
             ((System.ComponentModel.ISupportInitialize)GrowthHpRateNumericUpDown).EndInit();
             FalconKnightMethodGroupBox.ResumeLayout(false);
             FalconKnightMethodGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CurrentRngCountNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Label label2;
-        private TextBox OffsetMaxTextBox;
-        private TextBox OffsetMinTextBox;
         private Label label1;
         private CheckBox ContainsCombatCheckBox;
         private GroupBox CombatGroupBox;
@@ -862,7 +990,7 @@ namespace FERNGSolver.Gba.UI.Search
         private NumericUpDownEx GrowthHpRateNumericUpDown;
         private Label label10;
         private GroupBox FalconKnightMethodGroupBox;
-        private CheckBox checkBox10;
+        private CheckBox FiltersByAttackerHpPostconditionCheckBox;
         private CheckBox checkBox11;
         private TextBox textBox13;
         private Label label18;
@@ -894,9 +1022,22 @@ namespace FERNGSolver.Gba.UI.Search
         private NumericUpDownEx DefenderCriticalRateNumericUpDown;
         private Label label8;
         private Label label9;
-        private CheckBox checkBox1;
+        private CheckBox FiltersByDefenderHpPostconditionCheckBox;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
         private Label label5;
+        private Label label21;
+        private NumericUpDownEx CurrentRngCountNumericUpDown;
+        private NumericUpDownEx OffsetMinNumericUpDown;
+        private NumericUpDownEx OffsetMaxNumericUpDown;
+        private Label label22;
+        private Label label25;
+        private NumericUpDownEx FalconKnightConsumeMoveNumericUpDown;
+        private NumericUpDownEx DefenderHpPostconditionMaxNumericUpDown;
+        private Label label26;
+        private NumericUpDownEx DefenderHpPostconditionMinNumericUpDown;
+        private NumericUpDownEx AttackerHpPostconditionMaxNumericUpDown;
+        private Label label27;
+        private NumericUpDownEx AttackerHpPostconditionMinNumericUpDown;
     }
 }

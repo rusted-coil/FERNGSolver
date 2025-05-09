@@ -20,6 +20,8 @@ namespace FERNGSolver
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
 
             SearchConditionTabControl.TabPages.Clear();
+
+            this.Text = "FERNGSolver v1.0.0";
         }
 
         public void SetEntries(params IMainFormEntry[] entries)

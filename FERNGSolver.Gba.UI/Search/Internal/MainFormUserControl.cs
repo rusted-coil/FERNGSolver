@@ -2,7 +2,6 @@ using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Gba.Domain.Character;
 using FERNGSolver.Gba.Domain.Character.Extensions;
 using FERNGSolver.Gba.Domain.Repository.Stub;
-using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.ViewContracts;
 using System.Reactive;
 
@@ -13,6 +12,7 @@ namespace FERNGSolver.Gba.UI.Search
         public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
         public void ShowSearchResults(Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(viewModelType, viewModels);
 
+        // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
         public string CxString => CxStringTextBox.Text;
 
@@ -41,33 +41,9 @@ namespace FERNGSolver.Gba.UI.Search
         public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
         public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
 
-        public IReadOnlyList<ushort> Seeds {
-            get {
-                var values = new ushort[3];
-                //                if()
-                return values;
-            }
-        }
-
-        public int OffsetMin {
-            get {
-                if (int.TryParse(OffsetMinTextBox.Text, out var value))
-                {
-                    return value;
-                }
-                return 0;
-            }
-        }
-
-        public int OffsetMax {
-            get {
-                if (int.TryParse(OffsetMaxTextBox.Text, out var value))
-                {
-                    return value;
-                }
-                return 0;
-            }
-        }
+        // 検索条件
+        public int OffsetMin => (int)CurrentRngCountNumericUpDown.Value + (int)OffsetMinNumericUpDown.Value;
+        public int OffsetMax => (int)CurrentRngCountNumericUpDown.Value + (int)OffsetMaxNumericUpDown.Value;
 
         private readonly IMainFormView m_MainFormView;
         private readonly IReadOnlyList<ICharacter> m_Characters;
@@ -94,8 +70,8 @@ namespace FERNGSolver.Gba.UI.Search
 
         public void InitializeDefaults()
         {
-            OffsetMinTextBox.Text = "0";
-            OffsetMaxTextBox.Text = "1000";
+            OffsetMinNumericUpDown.Value = 0;
+            OffsetMaxNumericUpDown.Value = 10000;
         }
 
         private void UsesFalconKnightMethodCheckBox_CheckedChanged(object sender, EventArgs e)

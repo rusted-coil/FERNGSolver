@@ -86,7 +86,7 @@ namespace FERNGSolver
             SearchResultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SearchResultDataGridView.Location = new Point(672, 36);
             SearchResultDataGridView.Name = "SearchResultDataGridView";
-            SearchResultDataGridView.Size = new Size(324, 737);
+            SearchResultDataGridView.Size = new Size(500, 713);
             SearchResultDataGridView.TabIndex = 1;
             // 
             // menuStrip1
@@ -116,7 +116,7 @@ namespace FERNGSolver
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 785);
+            ClientSize = new Size(1184, 785);
             Controls.Add(SearchResultDataGridView);
             Controls.Add(SearchButton);
             Controls.Add(SearchConditionTabControl);
