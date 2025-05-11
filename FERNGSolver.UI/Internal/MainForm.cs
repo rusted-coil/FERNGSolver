@@ -42,5 +42,11 @@ namespace FERNGSolver
             var list = Activator.CreateInstance(listType, viewModels) as IList;
             SearchResultDataGridView.DataSource = list;
         }
+
+        private void OpenThraciaRngListFormMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = FERNGSolver.Thracia.UI.RngList.RngListFormLauncher.CreateForm();
+            form.Show();
+        }
     }
 }

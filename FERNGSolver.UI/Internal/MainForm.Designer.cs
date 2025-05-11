@@ -33,15 +33,19 @@ namespace FERNGSolver
             tabPage2 = new TabPage();
             SearchButton = new Button();
             SearchResultDataGridView = new DataGridView();
+            menuStrip1 = new MenuStrip();
+            ツールToolStripMenuItem = new ToolStripMenuItem();
+            OpenThraciaRngListFormMenuItem = new ToolStripMenuItem();
             SearchConditionTabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // SearchConditionTabControl
             // 
             SearchConditionTabControl.Controls.Add(tabPage1);
             SearchConditionTabControl.Controls.Add(tabPage2);
-            SearchConditionTabControl.Location = new Point(12, 12);
+            SearchConditionTabControl.Location = new Point(12, 36);
             SearchConditionTabControl.Name = "SearchConditionTabControl";
             SearchConditionTabControl.SelectedIndex = 0;
             SearchConditionTabControl.Size = new Size(654, 699);
@@ -62,14 +66,14 @@ namespace FERNGSolver
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(646, 591);
+            tabPage2.Size = new Size(646, 671);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // SearchButton
             // 
-            SearchButton.Location = new Point(257, 717);
+            SearchButton.Location = new Point(257, 741);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(143, 32);
             SearchButton.TabIndex = 0;
@@ -82,22 +86,50 @@ namespace FERNGSolver
             SearchResultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SearchResultDataGridView.Location = new Point(672, 36);
             SearchResultDataGridView.Name = "SearchResultDataGridView";
-            SearchResultDataGridView.Size = new Size(324, 713);
+            SearchResultDataGridView.Size = new Size(324, 737);
             SearchResultDataGridView.TabIndex = 1;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ツールToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1008, 24);
+            menuStrip1.TabIndex = 2;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // ツールToolStripMenuItem
+            // 
+            ツールToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenThraciaRngListFormMenuItem });
+            ツールToolStripMenuItem.Name = "ツールToolStripMenuItem";
+            ツールToolStripMenuItem.Size = new Size(46, 20);
+            ツールToolStripMenuItem.Text = "ツール";
+            // 
+            // OpenThraciaRngListFormMenuItem
+            // 
+            OpenThraciaRngListFormMenuItem.Name = "OpenThraciaRngListFormMenuItem";
+            OpenThraciaRngListFormMenuItem.Size = new Size(186, 22);
+            OpenThraciaRngListFormMenuItem.Text = "トラキア776 乱数ビューア";
+            OpenThraciaRngListFormMenuItem.Click += OpenThraciaRngListFormMenuItem_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 761);
+            ClientSize = new Size(1008, 785);
             Controls.Add(SearchResultDataGridView);
             Controls.Add(SearchButton);
             Controls.Add(SearchConditionTabControl);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Form1";
             SearchConditionTabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -107,5 +139,8 @@ namespace FERNGSolver
         private TabPage tabPage2;
         private Button SearchButton;
         private DataGridView SearchResultDataGridView;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem ツールToolStripMenuItem;
+        private ToolStripMenuItem OpenThraciaRngListFormMenuItem;
     }
 }
