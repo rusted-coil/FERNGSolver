@@ -11,25 +11,30 @@ namespace FERNGSolver.Gba.Application.Search
         /// <summary>
         /// Strategyを使い、条件を満たす消費数を全て検索します。
         /// </summary>
-        public static IReadOnlyList<(int, ushort[])> Search(IRng currentRng, int offsetMin, int offsetMax, ISearchStrategy strategy)
+        /// <param name="initialRng">初期状態のRNG。状態を変更しません。</param>
+        /// <param name="positionMin">検索する最小の消費数</param>
+        /// <param name="positionMax">検索する最大の消費数</param>
+        /// <param name="strategy">条件をチェックするストラテジ</param>
+        /// <returns></returns>
+        public static IReadOnlyList<ISearchResult> Search(IRng initialRng, int positionMin, int positionMax, ISearchStrategy strategy)
         {
-            var result = new List<(int, ushort[])>();
+            var result = new List<ISearchResult>();
 
-            var startRng = RngFactory.CreateFromRng(currentRng);
-            for (int i = 0; i < offsetMin; ++i)
+            var currentRng = RngFactory.CreateFromRng(initialRng);
+            for (int i = 0; i < positionMin; ++i)
             {
-                startRng.Next();
+                currentRng.Next();
             }
 
-            for (int i = 0; i <= offsetMax - offsetMin; ++i)
+            for (int i = 0; i <= positionMax - positionMin; ++i)
             {
-                var tempRng = RngFactory.CreateFromRng(startRng);
+                var tempRng = RngFactory.CreateFromRng(currentRng);
                 if (strategy.CheckAndAdvance(tempRng))
                 {
-                    result.Add((offsetMin + i, [startRng.States[0], startRng.States[1], startRng.States[2]]));
+                    result.Add(new Internal.SearchResult(i));
                 }
 
-                startRng.Next();
+                currentRng.Next();
             }
 
             return result;

@@ -27,7 +27,8 @@ namespace FERNGSolver.Gba.Presentation.FalconKnight.Internal
             var viewModels = new SearchResultItemViewModel[result.Count];
             for (int i = 0; i < viewModels.Length && i < 100; ++i)
             {
-                viewModels[i] = new SearchResultItemViewModel(result[i].Item1, cxPattern.Count, result[i].Item2);
+                // ファルコンナイトツールで検索は行わなくなる予定
+//                viewModels[i] = new SearchResultItemViewModel(result[i].Item1, cxPattern.Count, result[i].Item2);
             }
             resultView.ShowSearchResults(typeof(SearchResultItemViewModel), viewModels);
         }

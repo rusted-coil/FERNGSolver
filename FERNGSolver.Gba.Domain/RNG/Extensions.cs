@@ -7,7 +7,7 @@ namespace FERNGSolver.Gba.Domain.RNG
         /// </summary>
         public static bool ToCx(this int value)
         {
-            return value <= 49;
+            return value <= 49; // GBA版は49以下で◯
         }
 
         /// <summary>

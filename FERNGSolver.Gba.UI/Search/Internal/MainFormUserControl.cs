@@ -48,8 +48,9 @@ namespace FERNGSolver.Gba.UI.Search
         public int LucGrowthRate => IsLucGrowthNeeded.Checked ? (int)GrowthLucRateNumericUpDown.Value : 100;
 
         // 検索条件
-        public int OffsetMin => (int)CurrentRngCountNumericUpDown.Value + (int)OffsetMinNumericUpDown.Value;
-        public int OffsetMax => (int)CurrentRngCountNumericUpDown.Value + (int)OffsetMaxNumericUpDown.Value;
+        public int CurrentPosition => (int)CurrentRngCountNumericUpDown.Value;
+        public int OffsetMin => (int)OffsetMinNumericUpDown.Value;
+        public int OffsetMax => (int)OffsetMaxNumericUpDown.Value;
 
         private readonly IMainFormView m_MainFormView;
         private readonly IReadOnlyList<ICharacter> m_Characters;
