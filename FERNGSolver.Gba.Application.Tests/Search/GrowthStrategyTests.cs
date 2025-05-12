@@ -27,7 +27,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
 
             // Act
             rng.Advance(offset);
-            var result = strategy.Check(rng, true);
+            var result = strategy.CheckAndAdvance(rng);
 
             // Assert
             Assert.AreEqual(expected, result);
@@ -56,7 +56,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
 
             // Act
             rng.Advance(offset);
-            var result = strategy.Check(rng, true);
+            var result = strategy.CheckAndAdvance(rng);
 
             // Assert
             Assert.AreEqual(expected, result);
@@ -83,7 +83,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
 
             // Act
             rng.Advance(offset);
-            var result = strategy.Check(rng, true);
+            var result = strategy.CheckAndAdvance(rng);
 
             // Assert
             Assert.AreEqual(expected, result);

@@ -11,14 +11,12 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
             m_Strategies = strategies;
         }
 
-        public bool Check(IRng currentRng, bool allowsAdvance)
+        public bool CheckAndAdvance(IRng rng)
         {
-            var rng = allowsAdvance ? currentRng : RngFactory.CreateFromRng(currentRng);
-
             // Checkは高頻度で呼び出すことが予想されるため、ヒープを生成しないforを使う
             for (int i = 0; i < m_Strategies.Count; ++i)
             {
-                if (!m_Strategies[i].Check(rng, true))
+                if (!m_Strategies[i].CheckAndAdvance(rng))
                 {
                     return false;
                 }

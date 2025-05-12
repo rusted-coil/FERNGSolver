@@ -17,10 +17,8 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
             m_ActualGrowthRates[6] = args.LucGrowthRate != 100 ? args.LucGrowthRate % 100 : 100;
         }
 
-        public bool Check(IRng currentRng, bool allowsAdvance)
+        public bool CheckAndAdvance(IRng rng)
         {
-            var rng = allowsAdvance ? currentRng : RngFactory.CreateFromRng(currentRng);
-
             for (int i = 0; i < m_ActualGrowthRates.Length; ++i)
             {
                 if (rng.Next() >= m_ActualGrowthRates[i])
