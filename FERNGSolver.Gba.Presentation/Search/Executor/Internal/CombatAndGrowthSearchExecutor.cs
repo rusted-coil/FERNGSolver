@@ -19,11 +19,6 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             ShowResults(mainFormView, result);
         }
 
-        private class ResultViewModel
-        {
-            public required string Position { get; init; }
-        }
-
         private static IReadOnlyList<ISearchResult> ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
             IRng rng = RngFactory.CreateDefault();
