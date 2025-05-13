@@ -1,3 +1,4 @@
+using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Windows.Common.Interfaces;
 using FormRx.Button;
@@ -38,8 +39,21 @@ namespace FERNGSolver
             }
         }
 
-        public void ShowSearchResults(Type viewModelType, IReadOnlyList<object> viewModels)
+        public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
         {
+            SearchResultDataGridView.Columns.Clear();
+            foreach (var column in columns)
+            {
+                var dataGridViewColumn = new DataGridViewTextBoxColumn();
+                dataGridViewColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridViewColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridViewColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridViewColumn.HeaderText = column.HeaderText;
+                dataGridViewColumn.DataPropertyName = column.PropertyName;
+                dataGridViewColumn.Width = column.Width;
+                SearchResultDataGridView.Columns.Add(dataGridViewColumn);
+            }
+
             var listType = typeof(BindingList<>).MakeGenericType(viewModelType);
             var list = Activator.CreateInstance(listType, viewModels) as IList;
             SearchResultDataGridView.DataSource = list;
@@ -47,7 +61,7 @@ namespace FERNGSolver
 
         private void OpenThraciaRngListFormMenuItem_Click(object sender, EventArgs e)
         {
-            var form = FERNGSolver.Thracia.UI.RngList.RngListFormLauncher.CreateForm();
+            var form = Thracia.UI.RngList.RngListFormLauncher.CreateForm();
             form.Show();
         }
     }

@@ -1,3 +1,4 @@
+using FERNGSolver.Common.Interfaces;
 using System.Reactive;
 
 namespace FERNGSolver.Common.ViewContracts
@@ -12,6 +13,6 @@ namespace FERNGSolver.Common.ViewContracts
         /// <summary>
         /// 結果を表示します。
         /// </summary>
-        void ShowSearchResults(Type viewModelType, IReadOnlyList<object> viewModels);
+        void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels);
     }
 }

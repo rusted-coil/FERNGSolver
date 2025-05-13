@@ -1,20 +1,14 @@
-using System.ComponentModel;
 using System.Text;
 
-namespace FERNGSolver.Gba.Presentation.Search.Internal
+namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 {
-    internal class SearchResultItemViewModel
+    internal class CombatAndGrowthSearchResultItemViewModel
     {
-        [DisplayName("消費数")]
         public string Position { get; }
-
-        [DisplayName("Offset")]
         public string Offset { get; }
-
-        [DisplayName("F法消費回数")]
         public string FalconKnightMethodConsume { get; }
 
-        public SearchResultItemViewModel(
+        public CombatAndGrowthSearchResultItemViewModel(
             int position, int offset,
             int falconHorizontalCount, int falconHorizontalRemain,
             int falconVerticalCount, int falconVerticalRemain)
@@ -29,7 +23,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
                 if (falconHorizontalCount > 0 || falconHorizontalRemain > 0)
                 {
                     sb.Append($"横{falconHorizontalCount}回");
-                    if(falconHorizontalRemain > 0)
+                    if (falconHorizontalRemain > 0)
                     {
                         sb.Append($"+c{falconHorizontalRemain}");
                     }
@@ -46,7 +40,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
                     sb.Append($"縦{falconVerticalCount}回");
                     if (falconVerticalRemain > 0)
                     {
-                        sb.Append($"+{falconVerticalRemain}");
+                        sb.Append($"+x{falconVerticalRemain}");
                     }
                 }
 

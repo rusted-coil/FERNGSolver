@@ -1,3 +1,4 @@
+using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Gba.Domain.Character;
 using FERNGSolver.Gba.Domain.Character.Extensions;
@@ -10,7 +11,7 @@ namespace FERNGSolver.Gba.UI.Search
     internal partial class MainFormUserControl : UserControl, IExtendedMainFormView
     {
         public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
-        public void ShowSearchResults(Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(viewModelType, viewModels);
+        public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
 
         // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
