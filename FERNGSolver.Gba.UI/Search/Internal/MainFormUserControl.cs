@@ -53,6 +53,9 @@ namespace FERNGSolver.Gba.UI.Search
         public int OffsetMin => (int)OffsetMinNumericUpDown.Value;
         public int OffsetMax => (int)OffsetMaxNumericUpDown.Value;
 
+        // 結果出力用
+        public int FalconKnightMethodMove => (int)FalconKnightConsumeMoveNumericUpDown.Value;
+
         private readonly IMainFormView m_MainFormView;
         private readonly IReadOnlyList<ICharacter> m_Characters;
 

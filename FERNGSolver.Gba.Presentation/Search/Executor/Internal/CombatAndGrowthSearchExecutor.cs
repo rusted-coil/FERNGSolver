@@ -2,6 +2,8 @@ using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Gba.Application.Search;
 using FERNGSolver.Gba.Application.Search.Strategy;
+using FERNGSolver.Gba.Domain.Combat;
+using FERNGSolver.Gba.Domain.Growth;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.Search.Internal;
 using FERNGSolver.Gba.Presentation.ViewContracts;
@@ -38,46 +40,56 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
                 StrategyFactory.CreateSequentialStrategy(strategies.ToArray()));
         }
 
-        private static ISearchStrategy CreateCombatStrategy(IExtendedMainFormView mainFormView)
+        private static ISearchStrategy CreateCombatStrategy(ICombatSettingsView view)
         {
             return StrategyFactory.CreateCombatStrategy(new CombatStrategyArgs
             {
-                Attacker = new CombatUnit
-                {
-                    Hp = mainFormView.AttackerHp,
-                    Power = mainFormView.AttackerPower,
-                    HitRate = mainFormView.AttackerHitRate,
-                    CriticalRate = mainFormView.AttackerCriticalRate,
-                    PhaseCount = mainFormView.AttackerPhaseCount,
-                    IsDoubleAttack = mainFormView.IsAttackerDoubleAttack,
-                },
-                Defender = new CombatUnit
-                {
-                    Hp = mainFormView.DefenderHp,
-                    Power = mainFormView.DefenderPower,
-                    HitRate = mainFormView.DefenderHitRate,
-                    CriticalRate = mainFormView.DefenderCriticalRate,
-                    PhaseCount = mainFormView.DefenderPhaseCount,
-                    IsDoubleAttack = mainFormView.IsDefenderDoubleAttack,
-                },
-                AttackerHpPostconditionMin = mainFormView.AttackerHpPostconditionMin,
-                AttackerHpPostconditionMax = mainFormView.AttackerHpPostconditionMax,
-                DefenderHpPostconditionMin = mainFormView.DefenderHpPostconditionMin,
-                DefenderHpPostconditionMax = mainFormView.DefenderHpPostconditionMax,
+                Attacker = CreateAttackerUnitFromView(view),
+                Defender = CreateDefenderUnitFromView(view),
+                AttackerHpPostconditionMin = view.AttackerHpPostconditionMin,
+                AttackerHpPostconditionMax = view.AttackerHpPostconditionMax,
+                DefenderHpPostconditionMin = view.DefenderHpPostconditionMin,
+                DefenderHpPostconditionMax = view.DefenderHpPostconditionMax,
             });
         }
 
-        private static ISearchStrategy CreateGrowthStrategy(IExtendedMainFormView mainFormView)
+        private static ICombatUnit CreateAttackerUnitFromView(ICombatSettingsView view)
+        {
+            return new CombatUnit
+            {
+                Hp = view.AttackerHp,
+                Power = view.AttackerPower,
+                HitRate = view.AttackerHitRate,
+                CriticalRate = view.AttackerCriticalRate,
+                PhaseCount = view.AttackerPhaseCount,
+                IsDoubleAttack = view.IsAttackerDoubleAttack,
+            };
+        }
+
+        private static ICombatUnit CreateDefenderUnitFromView(ICombatSettingsView view)
+        {
+            return new CombatUnit
+            {
+                Hp = view.DefenderHp,
+                Power = view.DefenderPower,
+                HitRate = view.DefenderHitRate,
+                CriticalRate = view.DefenderCriticalRate,
+                PhaseCount = view.DefenderPhaseCount,
+                IsDoubleAttack = view.IsDefenderDoubleAttack,
+            };
+        }
+
+        private static ISearchStrategy CreateGrowthStrategy(IGrowthSettingsView view)
         {
             return StrategyFactory.CreateGrowthStrategy(new GrowthStrategyArgs
             {
-                HpGrowthRate = mainFormView.HpGrowthRate,
-                AtkGrowthRate = mainFormView.AtkGrowthRate,
-                TecGrowthRate = mainFormView.TecGrowthRate,
-                SpdGrowthRate = mainFormView.SpdGrowthRate,
-                DefGrowthRate = mainFormView.DefGrowthRate,
-                MdfGrowthRate = mainFormView.MdfGrowthRate,
-                LucGrowthRate = mainFormView.LucGrowthRate,
+                HpGrowthRate = view.HpGrowthRate,
+                AtkGrowthRate = view.AtkGrowthRate,
+                TecGrowthRate = view.TecGrowthRate,
+                SpdGrowthRate = view.SpdGrowthRate,
+                DefGrowthRate = view.DefGrowthRate,
+                MdfGrowthRate = view.MdfGrowthRate,
+                LucGrowthRate = view.LucGrowthRate,
             });
         }
 
@@ -86,22 +98,38 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             var viewModels = new CombatAndGrowthSearchResultItemViewModel[results.Count];
             for (int i = 0; i < viewModels.Length && i < 100; ++i)
             {
-                viewModels[i] = CreateResultItemViewModel(mainFormView.CurrentPosition, results[i].Position - mainFormView.CurrentPosition, 8);
+                viewModels[i] = CreateResultItemViewModel(mainFormView, results[i]);
             }
-            mainFormView.ShowSearchResults(CreateResultColumns(), typeof(CombatAndGrowthSearchResultItemViewModel), viewModels);
+            mainFormView.ShowSearchResults(CreateResultColumns(mainFormView), typeof(CombatAndGrowthSearchResultItemViewModel), viewModels);
         }
 
-        private static IReadOnlyList<ITableColumn> CreateResultColumns()
+        private static IReadOnlyList<ITableColumn> CreateResultColumns(IExtendedMainFormView mainFormView)
         {
-            return [
+            var columns = new List<ITableColumn> {
                 new SearchResultTableColumn("消費数", "Position"){ Width = 50 },
                 new SearchResultTableColumn("Offset", "Offset"){ Width = 50 },
                 new SearchResultTableColumn("F法消費回数", "FalconKnightMethodConsume"){ Width = 160 },
-            ];
+            };
+
+            if (mainFormView.ContainsCombat)
+            {
+                columns.Add(new SearchResultTableColumn("戦闘結果", "CombatResult") { Width = 120 });
+            }
+
+            if (mainFormView.ContainsGrowth)
+            {
+                columns.Add(new SearchResultTableColumn("レベルアップ結果", "GrowthResult") { Width = 310 });
+            }
+
+            return columns;
         }
 
-        private static CombatAndGrowthSearchResultItemViewModel CreateResultItemViewModel(int currentPosition, int offset, int falconMove)
+        private static CombatAndGrowthSearchResultItemViewModel CreateResultItemViewModel(IExtendedMainFormView mainFormView, ISearchResult result)
         {
+            int currentPosition = mainFormView.CurrentPosition;
+            int offset = result.Position - currentPosition;
+            int falconMove = mainFormView.FalconKnightMethodMove;
+
             // 結果表示用RNG処理 重かったら何か考える
             var rng = RngFactory.CreateDefault();
             rng.Advance(currentPosition);
@@ -138,9 +166,23 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
                 }
             }
 
-            return new CombatAndGrowthSearchResultItemViewModel(
+            var viewModel = new CombatAndGrowthSearchResultItemViewModel(
                 currentPosition + offset, offset,
                 hc, h, vc, v);
+
+            if (mainFormView.ContainsCombat)
+            {
+                var combatResult = CombatSimulator.Simulate(rng, CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView));
+                viewModel.SetCombatResult(combatResult);
+            }
+
+            if (mainFormView.ContainsGrowth)
+            {
+                var growthResult = GrowthSimulator.Simulate(rng, mainFormView.HpGrowthRate, mainFormView.AtkGrowthRate, mainFormView.TecGrowthRate, mainFormView.SpdGrowthRate, mainFormView.DefGrowthRate, mainFormView.MdfGrowthRate, mainFormView.LucGrowthRate);
+                viewModel.SetGrowthResult(growthResult);
+            }
+
+            return viewModel;
         }
     }
 }

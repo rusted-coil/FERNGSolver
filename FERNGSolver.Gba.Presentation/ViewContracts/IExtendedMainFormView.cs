@@ -18,5 +18,10 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// 検索条件の最大消費数を取得します。
         /// </summary>
         int OffsetMax { get; }
+
+        /// <summary>
+        /// ファルコンナイト法消費回数計算用の移動力を取得します。
+        /// </summary>
+        int FalconKnightMethodMove { get; }
     }
 }

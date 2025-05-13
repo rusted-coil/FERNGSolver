@@ -1,3 +1,4 @@
+using FERNGSolver.Gba.Domain.Combat;
 using System.Text;
 
 namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
@@ -7,6 +8,8 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
         public string Position { get; }
         public string Offset { get; }
         public string FalconKnightMethodConsume { get; }
+        public string CombatResult { get; private set; } = string.Empty;
+        public string GrowthResult { get; private set; } = string.Empty;
 
         public CombatAndGrowthSearchResultItemViewModel(
             int position, int offset,
@@ -46,6 +49,37 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
                 FalconKnightMethodConsume = sb.ToString();
             }
+        }
+
+        public void SetCombatResult(CombatSimulator.Result result)
+        {
+            CombatResult = $"自:HP{result.AttackerHp}、敵:HP{result.DefenderHp}";
+        }
+
+        public void SetGrowthResult(IReadOnlyList<int> growths)
+        {
+            string[] stats = ["HP", "力", "技", "速さ", "守備", "魔防", "幸運"];
+
+            var sb = new StringBuilder();
+            bool b = false;
+            for (int i = 0; i < growths.Count; ++i)
+            {
+                if (growths[i] > 0)
+                {
+                    if (b)
+                    {
+                        sb.Append("、");
+                    }
+                    sb.Append($"{stats[i]}+{growths[i]}");
+                    b = true;
+                }
+            }
+            if (!b)
+            {
+                sb.Append("-");
+            }
+
+            GrowthResult = sb.ToString();
         }
     }
 }

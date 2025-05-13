@@ -5,7 +5,7 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
 {
     internal sealed class CombatStrategy : ISearchStrategy
     {
-        private CombatStrategyArgs m_Args;
+        private readonly CombatStrategyArgs m_Args;
 
         public CombatStrategy(CombatStrategyArgs args)
         {

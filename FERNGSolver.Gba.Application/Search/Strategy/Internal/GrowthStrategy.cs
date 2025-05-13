@@ -1,27 +1,31 @@
+using FERNGSolver.Gba.Domain.Growth;
 using FERNGSolver.Gba.Domain.RNG;
 
 namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
 {
     internal sealed class GrowthStrategy : ISearchStrategy
     {
-        private readonly int[] m_ActualGrowthRates = new int[7];
+        private readonly GrowthStrategyArgs m_Args;
 
         public GrowthStrategy(GrowthStrategyArgs args)
         {
-            m_ActualGrowthRates[0] = args.HpGrowthRate != 100 ? args.HpGrowthRate % 100 : 100;
-            m_ActualGrowthRates[1] = args.AtkGrowthRate != 100 ? args.AtkGrowthRate % 100 : 100;
-            m_ActualGrowthRates[2] = args.TecGrowthRate != 100 ? args.TecGrowthRate % 100 : 100;
-            m_ActualGrowthRates[3] = args.SpdGrowthRate != 100 ? args.SpdGrowthRate % 100 : 100;
-            m_ActualGrowthRates[4] = args.DefGrowthRate != 100 ? args.DefGrowthRate % 100 : 100;
-            m_ActualGrowthRates[5] = args.MdfGrowthRate != 100 ? args.MdfGrowthRate % 100 : 100;
-            m_ActualGrowthRates[6] = args.LucGrowthRate != 100 ? args.LucGrowthRate % 100 : 100;
+            m_Args = args;
         }
 
         public bool CheckAndAdvance(IRng rng)
         {
-            for (int i = 0; i < m_ActualGrowthRates.Length; ++i)
+            var result = GrowthSimulator.Simulate(rng,
+                m_Args.HpGrowthRate,
+                m_Args.AtkGrowthRate,
+                m_Args.TecGrowthRate,
+                m_Args.SpdGrowthRate,
+                m_Args.DefGrowthRate,
+                m_Args.MdfGrowthRate,
+                m_Args.LucGrowthRate);
+
+            for (int i = 0; i < result.Count; ++i)
             {
-                if (rng.Next() >= m_ActualGrowthRates[i])
+                if (result[i] == 0)
                 {
                     return false;
                 }

@@ -41,6 +41,7 @@ namespace FERNGSolver
 
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
         {
+            SearchResultDataGridView.AutoGenerateColumns = false;
             SearchResultDataGridView.Columns.Clear();
             foreach (var column in columns)
             {
