@@ -5,14 +5,13 @@ using FormRx.Button;
 using System.Collections;
 using System.ComponentModel;
 using System.Reactive;
+using System.Reactive.Linq;
 
 namespace FERNGSolver
 {
     internal partial class MainForm : Form, IMainFormView
     {
-        public IObservable<Unit> SearchButtonClicked => m_SearchButton.Clicked;
-
-        private IButton m_SearchButton;
+        private readonly IButton m_SearchButton;
 
         public MainForm()
         {
@@ -23,6 +22,11 @@ namespace FERNGSolver
             SearchConditionTabControl.TabPages.Clear();
 
             this.Text = "FERNGSolver v1.0.0";
+        }
+
+        public IObservable<Unit> GetSearchButtonClicked(string title)
+        {
+            return m_SearchButton.Clicked.Where(_ => SearchConditionTabControl.SelectedTab != null ? SearchConditionTabControl.SelectedTab.Text == title : false);
         }
 
         public void SetEntries(params IMainFormEntry[] entries)

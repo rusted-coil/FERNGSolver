@@ -10,7 +10,7 @@ namespace FERNGSolver.Gba.UI.Search
 {
     internal partial class MainFormUserControl : UserControl, IExtendedMainFormView
     {
-        public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
+        public IObservable<Unit> GetSearchButtonClicked(string title) => m_MainFormView.GetSearchButtonClicked(title);
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
 
         // ファルコンナイト法

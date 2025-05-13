@@ -1,11 +1,11 @@
 using FERNGSolver.Common.Extensions;
 using FERNGSolver.Common.ViewContracts;
-using FERNGSolver.Gba.Presentation.ViewContracts;
+using FERNGSolver.Thracia.Presentation.ViewContracts;
 using System.Reactive.Disposables;
 
-namespace FERNGSolver.Gba.Presentation.Search.Internal
+namespace FERNGSolver.Thracia.Presentation.Search.Internal
 {
-    internal sealed class SearchPresenter : ISearchPresenter
+    internal class SearchPresenter : ISearchPresenter
     {
         private readonly IExtendedMainFormView m_MainFormView;
         private readonly IErrorNotifier m_ErrorNotifier;
@@ -33,11 +33,11 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
 
             if (m_MainFormView.UsesFalconKnightMethod)
             {
-                Executor.Internal.FalconKnightMethodSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+//                Executor.Internal.FalconKnightMethodSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
             }
             else
             {
-                Executor.Internal.CombatAndGrowthSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                // TODO
             }
         }
 

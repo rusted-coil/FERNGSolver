@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Windows.Common\FERNGSolver.FalconKnightTool.Windows.Common.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.Presentation\FERNGSolver.Thracia.Presentation.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Windows.Common\FERNGSolver.Windows.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,17 +1,17 @@
 using FERNGSolver.Common.ViewContracts;
-using FERNGSolver.Gba.Presentation;
-using FERNGSolver.Gba.Presentation.Search;
+using FERNGSolver.Thracia.Presentation;
+using FERNGSolver.Thracia.Presentation.Search;
 using FERNGSolver.Windows.Common;
 using FERNGSolver.Windows.Common.Interfaces;
 
-namespace FERNGSolver.Gba.UI.Search
+namespace FERNGSolver.Thracia.UI.Search
 {
     public static class MainFormEntryProvider
     {
         public static IMainFormEntry Create(IMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
-            var userControl = new MainFormUserControl(mainFormView);
-            userControl.InitializeDefaults();
+            var userControl = new Internal.MainFormUserControl(mainFormView);
+//            userControl.InitializeDefaults();
 
             var presenter = PresenterFactory.Create(userControl, errorNotifier);
 

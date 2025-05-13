@@ -17,9 +17,12 @@ namespace FERNGSolver
                 presenter.Dispose();
             };
 
+            var errorNotifier = new UI.Internal.ErrorNotifier();
+
             // 作品個別コントロールを初期化
             form.SetEntries(
-                Gba.UI.Search.MainFormEntryProvider.Create(form, new UI.Internal.ErrorNotifier()));
+                Gba.UI.Search.MainFormEntryProvider.Create(form, errorNotifier),
+                Thracia.UI.Search.MainFormEntryProvider.Create(form, errorNotifier));
 
             Application.Run(form);
         }

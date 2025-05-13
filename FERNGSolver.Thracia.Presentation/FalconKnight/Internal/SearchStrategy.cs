@@ -22,7 +22,7 @@ namespace FERNGSolver.Thracia.Presentation.FalconKnight.Internal
             var results = new List<(int, int)>();
             if (m_View.TableIndex == null)
             {
-                for (int i = 0; i < Const.TableCount; ++i)
+                for (int i = 0; i < Domain.RNG.Const.TableCount; ++i)
                 {
                     IRng rng = RngFactory.Create(i);
                     var result = PatternSearcher.Search(rng, m_View.OffsetMin, m_View.OffsetMax, cxPattern);

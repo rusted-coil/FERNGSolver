@@ -17,10 +17,10 @@ namespace FERNGSolver.Gba.Application.Tests.Search
             var strategy = StrategyFactory.CreateFalconKnightPatternStrategy(pattern);
 
             // Act
-            var result = Searcher.Search(rng, offsetMin: 0, offsetMax: 10, strategy: strategy);
+            var result = Searcher.Search(rng, positionMin: 0, positionMax: 10, strategy: strategy);
 
             // Assert
-            CollectionAssert.AreEqual(new List<int> { 5 }, result.Select(pair => pair.Item1).ToList<int>());
+            CollectionAssert.AreEqual(new List<int> { 5 }, result.Select(item => item.Position).ToList<int>());
         }
 
         [TestMethod]

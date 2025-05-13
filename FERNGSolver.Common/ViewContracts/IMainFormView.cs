@@ -6,9 +6,9 @@ namespace FERNGSolver.Common.ViewContracts
     public interface IMainFormView
     {
         /// <summary>
-        /// 「検索」ボタンがクリックされたことを通知するストリームです。
+        /// 特定のタイトルをメインフォームのタブで選択中、「検索」ボタンがクリックされたことを通知するストリームを取得します。。
         /// </summary>
-        IObservable<Unit> SearchButtonClicked { get; }
+        IObservable<Unit> GetSearchButtonClicked(string title);
 
         /// <summary>
         /// 結果を表示します。
