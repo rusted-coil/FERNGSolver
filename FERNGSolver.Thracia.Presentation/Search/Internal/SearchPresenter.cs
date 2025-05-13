@@ -33,7 +33,7 @@ namespace FERNGSolver.Thracia.Presentation.Search.Internal
 
             if (m_MainFormView.UsesFalconKnightMethod)
             {
-//                Executor.Internal.FalconKnightMethodSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                Executor.Internal.FalconKnightMethodSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
             }
             else
             {

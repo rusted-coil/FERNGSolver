@@ -20,6 +20,11 @@ namespace FERNGSolver.Thracia.UI.Search.Internal
         // レベルアップ
         public bool ContainsGrowth => false;
 
+        // 検索条件
+        public int? SearchTableIndex => IsSpecificTableCheckBox.Checked ? (int)TableIndexNumericUpDown.Value : null;
+        public int OffsetMin => (int)OffsetMinNumericUpDown.Value;
+        public int OffsetMax => (int)OffsetMaxNumericUpDown.Value;
+
         private readonly IMainFormView m_MainFormView;
 
         public MainFormUserControl(IMainFormView mainFormView)

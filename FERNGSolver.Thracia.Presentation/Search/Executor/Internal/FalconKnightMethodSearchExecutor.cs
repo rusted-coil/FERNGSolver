@@ -1,7 +1,11 @@
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.FalconKnightTool.Application.Path;
+using FERNGSolver.Gba.Presentation.Search.Internal;
 using FERNGSolver.Thracia.Application.Search;
+using FERNGSolver.Thracia.Application.Search.Strategy;
+using FERNGSolver.Thracia.Domain.RNG;
 using FERNGSolver.Thracia.Presentation.ViewContracts;
+using System.Text;
 
 namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
 {
@@ -18,14 +22,15 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
 
         private class ResultViewModel
         {
+            public required string TableIndex { get; init; }
             public required string Position { get; init; }
+            public string Foresight { get; set; } = string.Empty;
         }
 
         private static IReadOnlyList<ISearchResult> ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
-            /*
-            IRng rng = RngFactory.CreateDefault();
-            */
+            List<ISearchResult> results = new List<ISearchResult>();
+
             IReadOnlyList<bool> cxPattern;
             try
             {
@@ -36,26 +41,44 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
                 errorNotifier.NotifyError($"cx列のパースに失敗しました。\n-----\n{e.ToString()}");
                 return Array.Empty<ISearchResult>();
             }
-            /*
-            return Searcher.Search(
-                rng, mainFormView.OffsetMin, mainFormView.OffsetMax,
-                StrategyFactory.CreateFalconKnightPatternStrategy(cxPattern));
-            */
-            return Array.Empty<ISearchResult>();
+            var strategy = StrategyFactory.CreateFalconKnightPatternStrategy(cxPattern);
+
+            for (int i = 0; i < Domain.RNG.Const.TableCount; ++i)
+            {
+                IRng rng = RngFactory.Create(i);
+                results.AddRange(Searcher.Search(i, rng, mainFormView.OffsetMin, mainFormView.OffsetMax, strategy));
+            }
+            return results;
         }
 
         private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)
         {
-            /*
             var viewModels = new ResultViewModel[results.Count];
             for (int i = 0; i < viewModels.Length && i < 100; ++i)
             {
-                viewModels[i] = new ResultViewModel { Position = results[i].Position.ToString() };
+                var rng = RngFactory.Create(results[i].TableIndex);
+                for (int a = 0; a < results[i].Position; ++a)
+                {
+                    rng.Next();
+                }
+                var sb = new StringBuilder();
+                for (int a = 0; a < 30; ++a)
+                {
+                    sb.Append($"{rng.Next():D2} ");
+                }
+
+                viewModels[i] = new ResultViewModel {
+                    TableIndex = $"#{results[i].TableIndex:D2}",
+                    Position = results[i].Position.ToString(),
+                    Foresight = sb.ToString(),
+                };
             }
-            mainFormView.ShowSearchResults(
-                [ new SearchResultTableColumn("消費数", "Position") { Width = 50 } ],
-                typeof(ResultViewModel), viewModels);
-            */
+            mainFormView.ShowSearchResults([
+                new SearchResultTableColumn("Map", "TableIndex") { Width = 30 },
+                new SearchResultTableColumn("消費数", "Position") { Width = 50 },
+                new SearchResultTableColumn("続き", "Foresight") { Width = 400 },
+            ],
+            typeof(ResultViewModel), viewModels);
         }
     }
 }
