@@ -1,4 +1,5 @@
 using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Thracia.Application.Search;
 using FERNGSolver.Thracia.Presentation.ViewContracts;
 
@@ -24,7 +25,7 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
         {
             /*
             IRng rng = RngFactory.CreateDefault();
-
+            */
             IReadOnlyList<bool> cxPattern;
             try
             {
@@ -35,6 +36,7 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
                 errorNotifier.NotifyError($"cx列のパースに失敗しました。\n-----\n{e.ToString()}");
                 return Array.Empty<ISearchResult>();
             }
+            /*
             return Searcher.Search(
                 rng, mainFormView.OffsetMin, mainFormView.OffsetMax,
                 StrategyFactory.CreateFalconKnightPatternStrategy(cxPattern));
