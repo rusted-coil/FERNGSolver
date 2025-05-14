@@ -16,6 +16,7 @@ namespace FERNGSolver.Gba.UI.Search
         // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
         public string CxString => CxStringTextBox.Text;
+        public bool AddsCxOffset => AddsCxOffsetCheckBox.Checked;
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;

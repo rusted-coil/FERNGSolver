@@ -13,5 +13,10 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// <para> * 文字列のValidationは行われていません。</para>
         /// </summary>
         string CxString { get; }
+
+        /// <summary>
+        /// cx列による消費分を消費数に加算するかどうかを取得します。
+        /// </summary>
+        bool AddsCxOffset { get; }
     }
 }

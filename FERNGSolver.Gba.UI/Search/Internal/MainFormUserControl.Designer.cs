@@ -97,7 +97,7 @@ namespace FERNGSolver.Gba.UI.Search
             ContainsGrowthCheckBox = new CheckBox();
             FalconKnightMethodGroupBox = new GroupBox();
             FalconKnightToolOpenButton = new Button();
-            AddsCxOffset = new CheckBox();
+            AddsCxOffsetCheckBox = new CheckBox();
             label17 = new Label();
             CxStringTextBox = new TextBox();
             UsesFalconKnightMethodCheckBox = new CheckBox();
@@ -784,7 +784,7 @@ namespace FERNGSolver.Gba.UI.Search
             // FalconKnightMethodGroupBox
             // 
             FalconKnightMethodGroupBox.Controls.Add(FalconKnightToolOpenButton);
-            FalconKnightMethodGroupBox.Controls.Add(AddsCxOffset);
+            FalconKnightMethodGroupBox.Controls.Add(AddsCxOffsetCheckBox);
             FalconKnightMethodGroupBox.Controls.Add(label17);
             FalconKnightMethodGroupBox.Controls.Add(CxStringTextBox);
             FalconKnightMethodGroupBox.Controls.Add(UsesFalconKnightMethodCheckBox);
@@ -803,15 +803,15 @@ namespace FERNGSolver.Gba.UI.Search
             FalconKnightToolOpenButton.Text = "補助ツール";
             FalconKnightToolOpenButton.UseVisualStyleBackColor = true;
             // 
-            // AddsCxOffset
+            // AddsCxOffsetCheckBox
             // 
-            AddsCxOffset.AutoSize = true;
-            AddsCxOffset.Location = new Point(344, 24);
-            AddsCxOffset.Name = "AddsCxOffset";
-            AddsCxOffset.Size = new Size(140, 19);
-            AddsCxOffset.TabIndex = 2;
-            AddsCxOffset.Text = "入力分を消費数に加算";
-            AddsCxOffset.UseVisualStyleBackColor = true;
+            AddsCxOffsetCheckBox.AutoSize = true;
+            AddsCxOffsetCheckBox.Location = new Point(344, 24);
+            AddsCxOffsetCheckBox.Name = "AddsCxOffsetCheckBox";
+            AddsCxOffsetCheckBox.Size = new Size(140, 19);
+            AddsCxOffsetCheckBox.TabIndex = 2;
+            AddsCxOffsetCheckBox.Text = "入力分を消費数に加算";
+            AddsCxOffsetCheckBox.UseVisualStyleBackColor = true;
             // 
             // label17
             // 
@@ -1001,7 +1001,7 @@ namespace FERNGSolver.Gba.UI.Search
         private CheckBox UsesFalconKnightMethodCheckBox;
         private Label label17;
         private TextBox CxStringTextBox;
-        private CheckBox AddsCxOffset;
+        private CheckBox AddsCxOffsetCheckBox;
         private Button FalconKnightToolOpenButton;
         private CheckBox IsGrowthBoostedCheckBox;
         private CheckBox IsAttackerDoubleAttackCheckBox;

@@ -31,7 +31,7 @@ namespace FERNGSolver.Gba.Application.Search
                 var tempRng = RngFactory.CreateFromRng(currentRng);
                 if (strategy.CheckAndAdvance(tempRng))
                 {
-                    result.Add(new Internal.SearchResult(i));
+                    result.Add(new Internal.SearchResult(positionMin + i));
                 }
 
                 currentRng.Next();

@@ -48,7 +48,8 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             var viewModels = new ResultViewModel[results.Count];
             for (int i = 0; i < viewModels.Length && i < 100; ++i)
             {
-                viewModels[i] = new ResultViewModel { Position = results[i].Position.ToString() };
+                int offset = mainFormView.AddsCxOffset ? results[i].Position + mainFormView.CxString.Length : results[i].Position;
+                viewModels[i] = new ResultViewModel { Position = offset.ToString() };
             }
             mainFormView.ShowSearchResults(
                 [ new SearchResultTableColumn("消費数", "Position") { Width = 50 } ],
