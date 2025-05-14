@@ -25,13 +25,13 @@ namespace FERNGSolver.Gba.UI.Search
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
         public int AttackerCriticalRate => (int)AttackerCriticalRateNumericUpDown.Value;
         public int AttackerPhaseCount => DoesAttackerFollowUpAttackCheckBox.Checked ? 2 : 1;
-        public bool IsAttackerDoubleAttack => IsAttackerDoubleAttackCheckBox.Checked;
+        public bool IsAttackerDoubleAttack => false;
         public int DefenderHp => (int)DefenderHpNumericUpDown.Value;
         public int DefenderPower => (int)DefenderPowerNumericUpDown.Value;
         public int DefenderHitRate => (int)DefenderHitRateNumericUpDown.Value;
         public int DefenderCriticalRate => (int)DefenderCriticalRateNumericUpDown.Value;
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
-        public bool IsDefenderDoubleAttack => IsDefenderDoubleAttackCheckBox.Checked;
+        public bool IsDefenderDoubleAttack => false;
 
         // 戦闘事後条件
         public int AttackerHpPostconditionMin => FiltersByAttackerHpPostconditionCheckBox.Checked ? (int)AttackerHpPostconditionMinNumericUpDown.Value : 0;

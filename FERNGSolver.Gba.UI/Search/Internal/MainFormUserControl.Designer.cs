@@ -38,6 +38,8 @@ namespace FERNGSolver.Gba.UI.Search
             radioButton1 = new RadioButton();
             label5 = new Label();
             groupBox2 = new GroupBox();
+            DefenderStatusDetailLabel = new Label();
+            DefenderStatusDetailDialogButton = new Button();
             DefenderHpPostconditionMaxNumericUpDown = new NumericUpDownEx();
             label26 = new Label();
             DefenderHpPostconditionMinNumericUpDown = new NumericUpDownEx();
@@ -49,12 +51,13 @@ namespace FERNGSolver.Gba.UI.Search
             DefenderPowerNumericUpDown = new NumericUpDownEx();
             label18 = new Label();
             DefenderHitRateNumericUpDown = new NumericUpDownEx();
-            IsDefenderDoubleAttackCheckBox = new CheckBox();
             DoesDefenderAttackCheckBox = new CheckBox();
             label19 = new Label();
             DoesDefenderFollowUpAttackCheckBox = new CheckBox();
             DefenderCriticalRateNumericUpDown = new NumericUpDownEx();
             groupBox1 = new GroupBox();
+            AttackerStatusDetailLabel = new Label();
+            AttackerStatusDetailDialogButton = new Button();
             AttackerHpPostconditionMaxNumericUpDown = new NumericUpDownEx();
             label8 = new Label();
             label27 = new Label();
@@ -66,7 +69,6 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerPowerNumericUpDown = new NumericUpDownEx();
             label6 = new Label();
             AttackerHitRateNumericUpDown = new NumericUpDownEx();
-            IsAttackerDoubleAttackCheckBox = new CheckBox();
             label7 = new Label();
             DoesAttackerFollowUpAttackCheckBox = new CheckBox();
             AttackerCriticalRateNumericUpDown = new NumericUpDownEx();
@@ -187,7 +189,7 @@ namespace FERNGSolver.Gba.UI.Search
             radioButton2.Location = new Point(133, 26);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(78, 19);
-            radioButton2.TabIndex = 5;
+            radioButton2.TabIndex = 2;
             radioButton2.TabStop = true;
             radioButton2.Text = "烈火/聖魔";
             radioButton2.UseVisualStyleBackColor = true;
@@ -198,7 +200,7 @@ namespace FERNGSolver.Gba.UI.Search
             radioButton1.Location = new Point(78, 26);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(49, 19);
-            radioButton1.TabIndex = 4;
+            radioButton1.TabIndex = 1;
             radioButton1.Text = "封印";
             radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -213,6 +215,8 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(DefenderStatusDetailLabel);
+            groupBox2.Controls.Add(DefenderStatusDetailDialogButton);
             groupBox2.Controls.Add(DefenderHpPostconditionMaxNumericUpDown);
             groupBox2.Controls.Add(label26);
             groupBox2.Controls.Add(DefenderHpPostconditionMinNumericUpDown);
@@ -224,7 +228,6 @@ namespace FERNGSolver.Gba.UI.Search
             groupBox2.Controls.Add(DefenderPowerNumericUpDown);
             groupBox2.Controls.Add(label18);
             groupBox2.Controls.Add(DefenderHitRateNumericUpDown);
-            groupBox2.Controls.Add(IsDefenderDoubleAttackCheckBox);
             groupBox2.Controls.Add(DoesDefenderAttackCheckBox);
             groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(DoesDefenderFollowUpAttackCheckBox);
@@ -232,9 +235,27 @@ namespace FERNGSolver.Gba.UI.Search
             groupBox2.Location = new Point(14, 203);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(592, 122);
-            groupBox2.TabIndex = 2;
+            groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "防御側";
+            // 
+            // DefenderStatusDetailLabel
+            // 
+            DefenderStatusDetailLabel.AutoSize = true;
+            DefenderStatusDetailLabel.Location = new Point(94, 55);
+            DefenderStatusDetailLabel.Name = "DefenderStatusDetailLabel";
+            DefenderStatusDetailLabel.Size = new Size(49, 15);
+            DefenderStatusDetailLabel.TabIndex = 115;
+            DefenderStatusDetailLabel.Text = "設定なし";
+            // 
+            // DefenderStatusDetailDialogButton
+            // 
+            DefenderStatusDetailDialogButton.Location = new Point(13, 51);
+            DefenderStatusDetailDialogButton.Name = "DefenderStatusDetailDialogButton";
+            DefenderStatusDetailDialogButton.Size = new Size(75, 23);
+            DefenderStatusDetailDialogButton.TabIndex = 6;
+            DefenderStatusDetailDialogButton.Text = "詳細設定";
+            DefenderStatusDetailDialogButton.UseVisualStyleBackColor = true;
             // 
             // DefenderHpPostconditionMaxNumericUpDown
             // 
@@ -293,6 +314,7 @@ namespace FERNGSolver.Gba.UI.Search
             DefenderHpNumericUpDown.Name = "DefenderHpNumericUpDown";
             DefenderHpNumericUpDown.Size = new Size(42, 23);
             DefenderHpNumericUpDown.TabIndex = 0;
+            DefenderHpNumericUpDown.Value = new decimal(new int[] { 30, 0, 0, 0 });
             // 
             // label4
             // 
@@ -309,6 +331,7 @@ namespace FERNGSolver.Gba.UI.Search
             DefenderPowerNumericUpDown.Name = "DefenderPowerNumericUpDown";
             DefenderPowerNumericUpDown.Size = new Size(42, 23);
             DefenderPowerNumericUpDown.TabIndex = 1;
+            DefenderPowerNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // label18
             // 
@@ -325,21 +348,12 @@ namespace FERNGSolver.Gba.UI.Search
             DefenderHitRateNumericUpDown.Name = "DefenderHitRateNumericUpDown";
             DefenderHitRateNumericUpDown.Size = new Size(42, 23);
             DefenderHitRateNumericUpDown.TabIndex = 2;
-            // 
-            // IsDefenderDoubleAttackCheckBox
-            // 
-            IsDefenderDoubleAttackCheckBox.AutoSize = true;
-            IsDefenderDoubleAttackCheckBox.Location = new Point(144, 55);
-            IsDefenderDoubleAttackCheckBox.Name = "IsDefenderDoubleAttackCheckBox";
-            IsDefenderDoubleAttackCheckBox.Size = new Size(50, 19);
-            IsDefenderDoubleAttackCheckBox.TabIndex = 6;
-            IsDefenderDoubleAttackCheckBox.Text = "連撃";
-            IsDefenderDoubleAttackCheckBox.UseVisualStyleBackColor = true;
+            DefenderHitRateNumericUpDown.Value = new decimal(new int[] { 80, 0, 0, 0 });
             // 
             // DoesDefenderAttackCheckBox
             // 
             DoesDefenderAttackCheckBox.AutoSize = true;
-            DoesDefenderAttackCheckBox.Location = new Point(16, 55);
+            DoesDefenderAttackCheckBox.Location = new Point(378, 22);
             DoesDefenderAttackCheckBox.Name = "DoesDefenderAttackCheckBox";
             DoesDefenderAttackCheckBox.Size = new Size(50, 19);
             DoesDefenderAttackCheckBox.TabIndex = 4;
@@ -358,7 +372,7 @@ namespace FERNGSolver.Gba.UI.Search
             // DoesDefenderFollowUpAttackCheckBox
             // 
             DoesDefenderFollowUpAttackCheckBox.AutoSize = true;
-            DoesDefenderFollowUpAttackCheckBox.Location = new Point(80, 55);
+            DoesDefenderFollowUpAttackCheckBox.Location = new Point(442, 22);
             DoesDefenderFollowUpAttackCheckBox.Name = "DoesDefenderFollowUpAttackCheckBox";
             DoesDefenderFollowUpAttackCheckBox.Size = new Size(50, 19);
             DoesDefenderFollowUpAttackCheckBox.TabIndex = 5;
@@ -371,9 +385,12 @@ namespace FERNGSolver.Gba.UI.Search
             DefenderCriticalRateNumericUpDown.Name = "DefenderCriticalRateNumericUpDown";
             DefenderCriticalRateNumericUpDown.Size = new Size(42, 23);
             DefenderCriticalRateNumericUpDown.TabIndex = 3;
+            DefenderCriticalRateNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(AttackerStatusDetailLabel);
+            groupBox1.Controls.Add(AttackerStatusDetailDialogButton);
             groupBox1.Controls.Add(AttackerHpPostconditionMaxNumericUpDown);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(label27);
@@ -385,16 +402,33 @@ namespace FERNGSolver.Gba.UI.Search
             groupBox1.Controls.Add(AttackerPowerNumericUpDown);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(AttackerHitRateNumericUpDown);
-            groupBox1.Controls.Add(IsAttackerDoubleAttackCheckBox);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(DoesAttackerFollowUpAttackCheckBox);
             groupBox1.Controls.Add(AttackerCriticalRateNumericUpDown);
             groupBox1.Location = new Point(14, 59);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(592, 122);
-            groupBox1.TabIndex = 1;
+            groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "攻撃側";
+            // 
+            // AttackerStatusDetailLabel
+            // 
+            AttackerStatusDetailLabel.AutoSize = true;
+            AttackerStatusDetailLabel.Location = new Point(94, 55);
+            AttackerStatusDetailLabel.Name = "AttackerStatusDetailLabel";
+            AttackerStatusDetailLabel.Size = new Size(49, 15);
+            AttackerStatusDetailLabel.TabIndex = 118;
+            AttackerStatusDetailLabel.Text = "設定なし";
+            // 
+            // AttackerStatusDetailDialogButton
+            // 
+            AttackerStatusDetailDialogButton.Location = new Point(13, 51);
+            AttackerStatusDetailDialogButton.Name = "AttackerStatusDetailDialogButton";
+            AttackerStatusDetailDialogButton.Size = new Size(75, 23);
+            AttackerStatusDetailDialogButton.TabIndex = 6;
+            AttackerStatusDetailDialogButton.Text = "詳細設定";
+            AttackerStatusDetailDialogButton.UseVisualStyleBackColor = true;
             // 
             // AttackerHpPostconditionMaxNumericUpDown
             // 
@@ -453,6 +487,7 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerHpNumericUpDown.Name = "AttackerHpNumericUpDown";
             AttackerHpNumericUpDown.Size = new Size(42, 23);
             AttackerHpNumericUpDown.TabIndex = 0;
+            AttackerHpNumericUpDown.Value = new decimal(new int[] { 30, 0, 0, 0 });
             // 
             // label23
             // 
@@ -469,6 +504,7 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerPowerNumericUpDown.Name = "AttackerPowerNumericUpDown";
             AttackerPowerNumericUpDown.Size = new Size(42, 23);
             AttackerPowerNumericUpDown.TabIndex = 1;
+            AttackerPowerNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // label6
             // 
@@ -485,16 +521,7 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerHitRateNumericUpDown.Name = "AttackerHitRateNumericUpDown";
             AttackerHitRateNumericUpDown.Size = new Size(42, 23);
             AttackerHitRateNumericUpDown.TabIndex = 2;
-            // 
-            // IsAttackerDoubleAttackCheckBox
-            // 
-            IsAttackerDoubleAttackCheckBox.AutoSize = true;
-            IsAttackerDoubleAttackCheckBox.Location = new Point(144, 55);
-            IsAttackerDoubleAttackCheckBox.Name = "IsAttackerDoubleAttackCheckBox";
-            IsAttackerDoubleAttackCheckBox.Size = new Size(50, 19);
-            IsAttackerDoubleAttackCheckBox.TabIndex = 6;
-            IsAttackerDoubleAttackCheckBox.Text = "連撃";
-            IsAttackerDoubleAttackCheckBox.UseVisualStyleBackColor = true;
+            AttackerHitRateNumericUpDown.Value = new decimal(new int[] { 80, 0, 0, 0 });
             // 
             // label7
             // 
@@ -508,7 +535,7 @@ namespace FERNGSolver.Gba.UI.Search
             // DoesAttackerFollowUpAttackCheckBox
             // 
             DoesAttackerFollowUpAttackCheckBox.AutoSize = true;
-            DoesAttackerFollowUpAttackCheckBox.Location = new Point(80, 55);
+            DoesAttackerFollowUpAttackCheckBox.Location = new Point(378, 22);
             DoesAttackerFollowUpAttackCheckBox.Name = "DoesAttackerFollowUpAttackCheckBox";
             DoesAttackerFollowUpAttackCheckBox.Size = new Size(50, 19);
             DoesAttackerFollowUpAttackCheckBox.TabIndex = 5;
@@ -521,6 +548,7 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerCriticalRateNumericUpDown.Name = "AttackerCriticalRateNumericUpDown";
             AttackerCriticalRateNumericUpDown.Size = new Size(42, 23);
             AttackerCriticalRateNumericUpDown.TabIndex = 3;
+            AttackerCriticalRateNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // GrowthGroupBox
             // 
@@ -997,14 +1025,13 @@ namespace FERNGSolver.Gba.UI.Search
         private TextBox textBox14;
         private Label label19;
         private TextBox textBox15;
-        private Label label20;
+        private Label DefenderStatusDetailLabel;
         private CheckBox UsesFalconKnightMethodCheckBox;
         private Label label17;
         private TextBox CxStringTextBox;
         private CheckBox AddsCxOffsetCheckBox;
         private Button FalconKnightToolOpenButton;
         private CheckBox IsGrowthBoostedCheckBox;
-        private CheckBox IsAttackerDoubleAttackCheckBox;
         private CheckBox DoesAttackerFollowUpAttackCheckBox;
         private GroupBox groupBox1;
         private Label label24;
@@ -1017,7 +1044,6 @@ namespace FERNGSolver.Gba.UI.Search
         private Label label4;
         private NumericUpDownEx DefenderPowerNumericUpDown;
         private NumericUpDownEx DefenderHitRateNumericUpDown;
-        private CheckBox IsDefenderDoubleAttackCheckBox;
         private CheckBox DoesDefenderFollowUpAttackCheckBox;
         private NumericUpDownEx DefenderCriticalRateNumericUpDown;
         private Label label8;
@@ -1039,5 +1065,8 @@ namespace FERNGSolver.Gba.UI.Search
         private NumericUpDownEx AttackerHpPostconditionMaxNumericUpDown;
         private Label label27;
         private NumericUpDownEx AttackerHpPostconditionMinNumericUpDown;
+        private Button DefenderStatusDetailDialogButton;
+        private Label AttackerStatusDetailLabel;
+        private Button AttackerStatusDetailDialogButton;
     }
 }
