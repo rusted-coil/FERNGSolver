@@ -94,9 +94,15 @@ namespace FERNGSolver.Gba.Domain.Combat
             bool isPoisonWeapon = false;
             bool hasGreatShield = false;
             bool hasPierce = false;
+            bool hasSilencer = false;
+            bool isCursedWeapon = false;
+            int luck = 0;
 
             bool isHit = false;
-            bool isCritical = false;
+            bool isGreatShieldActive = false;
+            bool isPierceActive = false;
+            bool isSilencerActive = false;
+            int damage = 0;
 
             // 必的判定
             if (hasSureStrike && rng.Next() < level)
@@ -112,12 +118,12 @@ namespace FERNGSolver.Gba.Domain.Combat
                 // 武器が毒/ストーンの時、大盾判定をスキップ
                 if (!isPoisonWeapon && hasGreatShield && rng.Next() < level)
                 {
-                    // 大盾発動
+                    isGreatShieldActive = true;
                 }
                 // 貫通判定
                 else if(hasPierce && rng.Next() < level)
                 {
-                    // 貫通発動
+                    isPierceActive = true;
                 }
             }
 
@@ -127,15 +133,33 @@ namespace FERNGSolver.Gba.Domain.Combat
                 if (rng.Next() < attackerSide.CombatUnit.CriticalRate)
                 {
                     // 必殺が出たら瞬殺判定（封印以外）
-                    rng.Next();
-                    defenderSide.CurrentHp -= attackerSide.CombatUnit.Power * 3;
+                    // 瞬殺のみスキルを持っていなくても発動する
+                    // TODO ボス系と魔王系には確率が下がる
+                    if (rng.Next() < 50 && hasSilencer)
+                    {
+                        isSilencerActive = true;
+                    }
+                    damage = attackerSide.CombatUnit.Power * 3;
                 }
                 else
                 {
-                    defenderSide.CurrentHp -= attackerSide.CombatUnit.Power;
+                    damage = attackerSide.CombatUnit.Power;
                 }
 
                 // デビルアクス判定
+                if (isCursedWeapon && rng.Next() < (31 - luck))
+                {
+                    attackerSide.CurrentHp -= damage;
+                }
+                // アサシンは斧を持てないので呪いと瞬殺は両立しない
+                else if (isSilencerActive)
+                {
+                    defenderSide.CurrentHp = 0;
+                }
+                else
+                {
+                    defenderSide.CurrentHp -= damage;
+                }
             }
         }
     }
