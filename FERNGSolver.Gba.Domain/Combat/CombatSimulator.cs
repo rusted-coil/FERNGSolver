@@ -88,8 +88,40 @@ namespace FERNGSolver.Gba.Domain.Combat
         // フェーズを実行し、Unitを更新する
         private static void ExecutePhase(IRng rng, Unit attackerSide, Unit defenderSide)
         {
+            // TODO
+            int level = 0;
+            bool hasSureStrike = false;
+            bool isPoisonWeapon = false;
+            bool hasGreatShield = false;
+            bool hasPierce = false;
+
+            bool isHit = false;
+            bool isCritical = false;
+
+            // 必的判定
+            if (hasSureStrike && rng.Next() < level)
+            {
+                isHit = true;
+            }
             // 命中判定
-            if ((rng.Next() + rng.Next()) / 2 < attackerSide.CombatUnit.HitRate)
+            else if ((rng.Next() + rng.Next()) / 2 < attackerSide.CombatUnit.HitRate)
+            {
+                isHit = true;
+
+                // 大盾判定
+                // 武器が毒/ストーンの時、大盾判定をスキップ
+                if (!isPoisonWeapon && hasGreatShield && rng.Next() < level)
+                {
+                    // 大盾発動
+                }
+                // 貫通判定
+                else if(hasPierce && rng.Next() < level)
+                {
+                    // 貫通発動
+                }
+            }
+
+            if (isHit)
             {
                 // 命中していたら必殺判定
                 if (rng.Next() < attackerSide.CombatUnit.CriticalRate)
@@ -102,6 +134,8 @@ namespace FERNGSolver.Gba.Domain.Combat
                 {
                     defenderSide.CurrentHp -= attackerSide.CombatUnit.Power;
                 }
+
+                // デビルアクス判定
             }
         }
     }
