@@ -36,7 +36,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             }
 
             return Searcher.Search(
-                rng, mainFormView.OffsetMin, mainFormView.OffsetMax,
+                rng, mainFormView.CurrentPosition + mainFormView.OffsetMin, mainFormView.CurrentPosition + mainFormView.OffsetMax,
                 StrategyFactory.CreateSequentialStrategy(strategies.ToArray()));
         }
 

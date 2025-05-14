@@ -39,7 +39,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
                 return Array.Empty<ISearchResult>();
             }
             return Searcher.Search(
-                rng, mainFormView.OffsetMin, mainFormView.OffsetMax,
+                rng, mainFormView.CurrentPosition + mainFormView.OffsetMin, mainFormView.CurrentPosition + mainFormView.OffsetMax,
                 StrategyFactory.CreateFalconKnightPatternStrategy(cxPattern));
         }
 
