@@ -62,7 +62,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
                 HitRate = view.AttackerHitRate,
                 CriticalRate = view.AttackerCriticalRate,
                 PhaseCount = view.AttackerPhaseCount,
-                IsDoubleAttack = view.IsAttackerDoubleAttack,
+                StatusDetail = view.AttackerStatusDetail,
             };
         }
 
@@ -75,7 +75,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
                 HitRate = view.DefenderHitRate,
                 CriticalRate = view.DefenderCriticalRate,
                 PhaseCount = view.DefenderPhaseCount,
-                IsDoubleAttack = view.IsDefenderDoubleAttack,
+                StatusDetail = view.DefenderStatusDetail,
             };
         }
 

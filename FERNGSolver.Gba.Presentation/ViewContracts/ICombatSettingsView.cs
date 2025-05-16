@@ -1,3 +1,5 @@
+using FERNGSolver.Gba.Domain.Combat;
+
 namespace FERNGSolver.Gba.Presentation.ViewContracts
 {
     public interface ICombatSettingsView
@@ -33,9 +35,9 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         int AttackerPhaseCount { get; }
 
         /// <summary>
-        /// 攻撃側が2回攻撃（勇者武器）を行うかどうかを取得します。
+        /// 攻撃側の詳細設定を取得します。
         /// </summary>
-        bool IsAttackerDoubleAttack { get; }
+        IUnitStatusDetail AttackerStatusDetail { get; }
 
         /// <summary>
         /// 防御側のHPを取得します。
@@ -63,9 +65,9 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         int DefenderPhaseCount { get; }
 
         /// <summary>
-        /// 防御側が2回攻撃（勇者武器）を行うかどうかを取得します。
+        /// 防御側の詳細設定を取得します。
         /// </summary>
-        bool IsDefenderDoubleAttack { get; }
+        IUnitStatusDetail DefenderStatusDetail { get; }
 
         /// <summary>
         /// 攻撃側のHP事後条件の最低値を取得します。

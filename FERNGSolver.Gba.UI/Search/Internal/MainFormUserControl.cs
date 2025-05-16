@@ -2,8 +2,10 @@ using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Gba.Domain.Character;
 using FERNGSolver.Gba.Domain.Character.Extensions;
+using FERNGSolver.Gba.Domain.Combat;
 using FERNGSolver.Gba.Domain.Repository.Stub;
 using FERNGSolver.Gba.Presentation.ViewContracts;
+using FERNGSolver.Gba.UI.Search.Internal;
 using System.Reactive;
 
 namespace FERNGSolver.Gba.UI.Search
@@ -25,13 +27,16 @@ namespace FERNGSolver.Gba.UI.Search
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
         public int AttackerCriticalRate => (int)AttackerCriticalRateNumericUpDown.Value;
         public int AttackerPhaseCount => DoesAttackerFollowUpAttackCheckBox.Checked ? 2 : 1;
-        public bool IsAttackerDoubleAttack => false;
+        public IUnitStatusDetail AttackerStatusDetail => m_AttackerStatusDetail;
         public int DefenderHp => (int)DefenderHpNumericUpDown.Value;
         public int DefenderPower => (int)DefenderPowerNumericUpDown.Value;
         public int DefenderHitRate => (int)DefenderHitRateNumericUpDown.Value;
         public int DefenderCriticalRate => (int)DefenderCriticalRateNumericUpDown.Value;
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
-        public bool IsDefenderDoubleAttack => false;
+        public IUnitStatusDetail DefenderStatusDetail => m_DefenderStatusDetail;
+
+        private UnitStatusDetail m_AttackerStatusDetail = new UnitStatusDetail();
+        private UnitStatusDetail m_DefenderStatusDetail = new UnitStatusDetail();
 
         // 戦闘事後条件
         public int AttackerHpPostconditionMin => FiltersByAttackerHpPostconditionCheckBox.Checked ? (int)AttackerHpPostconditionMinNumericUpDown.Value : 0;
@@ -78,6 +83,9 @@ namespace FERNGSolver.Gba.UI.Search
                     break;
                 }
             }
+
+            AttackerStatusDetailLabel.Text = m_AttackerStatusDetail.ToString();
+            DefenderStatusDetailLabel.Text = m_DefenderStatusDetail.ToString();
         }
 
         public void InitializeDefaults()
@@ -118,6 +126,23 @@ namespace FERNGSolver.Gba.UI.Search
                     GrowthDefRateNumericUpDown.Value = character.DefGrowthRate;
                     GrowthMdfRateNumericUpDown.Value = character.MdfGrowthRate;
                     GrowthLucRateNumericUpDown.Value = character.LucGrowthRate;
+                }
+            }
+        }
+
+        private void AttackerStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_AttackerStatusDetail, AttackerStatusDetailLabel);
+        private void DefenderStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_DefenderStatusDetail, DefenderStatusDetailLabel);
+
+        private void OpenStatusDetailDialog(UnitStatusDetail targetStatus, Label targetStatusLabel)
+        {
+            using (var form = new UnitStatusDetailDialog(targetStatus))
+            {
+                form.StartPosition = FormStartPosition.CenterParent;
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    form.WriteToUnitStatusDetail(targetStatus);
+                    targetStatusLabel.Text = targetStatus.ToString();
                 }
             }
         }

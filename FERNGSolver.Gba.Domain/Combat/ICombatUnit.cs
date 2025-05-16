@@ -32,8 +32,8 @@ namespace FERNGSolver.Gba.Domain.Combat
         public int PhaseCount { get; }
 
         /// <summary>
-        /// 2回攻撃（勇者武器）かどうかを取得します。
+        /// ステータスの詳細設定を取得します。
         /// </summary>
-        public bool IsDoubleAttack { get; }
+        public IUnitStatusDetail StatusDetail { get; }
     }
 }

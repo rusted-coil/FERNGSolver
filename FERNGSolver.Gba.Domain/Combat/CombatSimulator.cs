@@ -37,7 +37,7 @@ namespace FERNGSolver.Gba.Domain.Combat
                         defenderUnit.CurrentHp = 0;
                         break;
                     }
-                    if (attacker.IsDoubleAttack)
+                    if (attacker.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
                         ExecutePhase(rng, attackerUnit, defenderUnit);
                         if (defenderUnit.CurrentHp <= 0)
@@ -57,7 +57,7 @@ namespace FERNGSolver.Gba.Domain.Combat
                         attackerUnit.CurrentHp = 0;
                         break;
                     }
-                    if (defender.IsDoubleAttack)
+                    if (defender.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
                         ExecutePhase(rng, defenderUnit, attackerUnit);
                         if (attackerUnit.CurrentHp <= 0)
@@ -85,19 +85,17 @@ namespace FERNGSolver.Gba.Domain.Combat
             }
         }
 
+        private static int GetLevel(this Unit unit) => unit.CombatUnit.StatusDetail.Level;
+        private static bool HasSureStrike(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.SureStrike;
+        private static bool HasGreatShield(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.GreatShield;
+        private static bool HasPierce(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.Pierce;
+        private static bool HasSilencer(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.Silencer;
+        private static bool IsPoisonWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Poison;
+        private static bool IsCursedWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Cursed;
+
         // フェーズを実行し、Unitを更新する
         private static void ExecutePhase(IRng rng, Unit attackerSide, Unit defenderSide)
         {
-            // TODO
-            int level = 0;
-            bool hasSureStrike = false;
-            bool isPoisonWeapon = false;
-            bool hasGreatShield = false;
-            bool hasPierce = false;
-            bool hasSilencer = false;
-            bool isCursedWeapon = false;
-            int luck = 0;
-
             bool isHit = false;
             bool isGreatShieldActive = false;
             bool isPierceActive = false;
@@ -105,7 +103,7 @@ namespace FERNGSolver.Gba.Domain.Combat
             int damage = 0;
 
             // 必的判定
-            if (hasSureStrike && rng.Next() < level)
+            if (attackerSide.HasSureStrike() && rng.Next() < attackerSide.GetLevel())
             {
                 isHit = true;
             }
@@ -116,12 +114,12 @@ namespace FERNGSolver.Gba.Domain.Combat
 
                 // 大盾判定
                 // 武器が毒/ストーンの時、大盾判定をスキップ
-                if (!isPoisonWeapon && hasGreatShield && rng.Next() < level)
+                if (!attackerSide.IsPoisonWeapon() && defenderSide.HasGreatShield() && rng.Next() < defenderSide.GetLevel())
                 {
                     isGreatShieldActive = true;
                 }
                 // 貫通判定
-                else if(hasPierce && rng.Next() < level)
+                else if(attackerSide.HasPierce() && rng.Next() < attackerSide.GetLevel())
                 {
                     isPierceActive = true;
                 }
@@ -129,36 +127,46 @@ namespace FERNGSolver.Gba.Domain.Combat
 
             if (isHit)
             {
+                // 貫通ダメージは必殺に乗る
+                int power = (isPierceActive ? attackerSide.CombatUnit.Power + attackerSide.CombatUnit.StatusDetail.OpponentDefense : attackerSide.CombatUnit.Power);
+
                 // 命中していたら必殺判定
                 if (rng.Next() < attackerSide.CombatUnit.CriticalRate)
                 {
-                    // 必殺が出たら瞬殺判定（封印以外）
-                    // 瞬殺のみスキルを持っていなくても発動する
-                    // TODO ボス系と魔王系には確率が下がる
-                    if (rng.Next() < 50 && hasSilencer)
+                    // 必殺が出たら瞬殺判定（TODO 封印以外）
+                    // 瞬殺のみスキルを持っていなくても判定する
+                    // 敵がラスボスなら瞬殺判定をスキップ
+                    if(defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss
+                        && rng.Next() < Util.GetSilencerRate(defenderSide.CombatUnit.StatusDetail.BossType)
+                        && attackerSide.HasSilencer())
                     {
                         isSilencerActive = true;
                     }
-                    damage = attackerSide.CombatUnit.Power * 3;
+                    damage = power * 3;
                 }
                 else
                 {
-                    damage = attackerSide.CombatUnit.Power;
+                    damage = power;
                 }
 
+                // TODO 自分がデビルアクスの呪い発動で相手が大盾発動の場合、受けるダメージは？
+
                 // デビルアクス判定
-                if (isCursedWeapon && rng.Next() < (31 - luck))
+                // アサシンは斧を持てないので呪いと瞬殺は両立しない
+                if (attackerSide.IsCursedWeapon() && rng.Next() < Util.GetCurseRate(attackerSide.CombatUnit.StatusDetail.Luck))
                 {
                     attackerSide.CurrentHp -= damage;
                 }
-                // アサシンは斧を持てないので呪いと瞬殺は両立しない
                 else if (isSilencerActive)
                 {
-                    defenderSide.CurrentHp = 0;
+                    defenderSide.CurrentHp = 0; // 瞬殺は大盾を無視する
                 }
                 else
                 {
-                    defenderSide.CurrentHp -= damage;
+                    if (!isGreatShieldActive)
+                    {
+                        defenderSide.CurrentHp -= damage;
+                    }
                 }
             }
         }
