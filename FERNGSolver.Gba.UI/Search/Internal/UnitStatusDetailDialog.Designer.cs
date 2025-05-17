@@ -29,20 +29,20 @@ namespace FERNGSolver.Gba.UI.Search.Internal
         private void InitializeComponent()
         {
             label1 = new Label();
-            LevelNumericUpDown = new Windows.Common.Controls.NumericUpDownEx();
+            LevelNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             label2 = new Label();
-            MaxHpNumericUpDown = new Windows.Common.Controls.NumericUpDownEx();
+            MaxHpNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             IsWeaponTypeNormalRadioButton = new RadioButton();
             IsWeaponTypeBraveRadioButton = new RadioButton();
             groupBox1 = new GroupBox();
             label3 = new Label();
-            LuckNumericUpDown = new Windows.Common.Controls.NumericUpDownEx();
+            LuckNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             IsWeaponTypeAbsorbRadioButton = new RadioButton();
             IsWeaponTypeCursedRadioButton = new RadioButton();
             IsWeaponTypePoisonRadioButton = new RadioButton();
             groupBox2 = new GroupBox();
             label4 = new Label();
-            OpponentDefNumericUpDown = new Windows.Common.Controls.NumericUpDownEx();
+            OpponentDefNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             IsSkillTypeSilencerRadioButton = new RadioButton();
             IsSkillTypeGreatShieldRadioButton = new RadioButton();
             IsSkillTypePierceRadioButton = new RadioButton();
@@ -172,7 +172,7 @@ namespace FERNGSolver.Gba.UI.Search.Internal
             IsWeaponTypeCursedRadioButton.AutoSize = true;
             IsWeaponTypeCursedRadioButton.Location = new Point(15, 125);
             IsWeaponTypeCursedRadioButton.Name = "IsWeaponTypeCursedRadioButton";
-            IsWeaponTypeCursedRadioButton.Size = new Size(78, 19);
+            IsWeaponTypeCursedRadioButton.Size = new Size(79, 19);
             IsWeaponTypeCursedRadioButton.TabIndex = 126;
             IsWeaponTypeCursedRadioButton.TabStop = true;
             IsWeaponTypeCursedRadioButton.Text = "デビルアクス";
@@ -234,7 +234,7 @@ namespace FERNGSolver.Gba.UI.Search.Internal
             IsSkillTypeSilencerRadioButton.Size = new Size(49, 19);
             IsSkillTypeSilencerRadioButton.TabIndex = 127;
             IsSkillTypeSilencerRadioButton.TabStop = true;
-            IsSkillTypeSilencerRadioButton.Text = "滅殺";
+            IsSkillTypeSilencerRadioButton.Text = "瞬殺";
             IsSkillTypeSilencerRadioButton.UseVisualStyleBackColor = true;
             // 
             // IsSkillTypeGreatShieldRadioButton
@@ -292,7 +292,7 @@ namespace FERNGSolver.Gba.UI.Search.Internal
             groupBox3.Size = new Size(415, 59);
             groupBox3.TabIndex = 128;
             groupBox3.TabStop = false;
-            groupBox3.Text = "ボス属性（相手の滅殺判定にのみ影響）";
+            groupBox3.Text = "ボス属性（相手の瞬殺判定にのみ影響）";
             // 
             // IsBossTypeFinalBossRadioButton
             // 
