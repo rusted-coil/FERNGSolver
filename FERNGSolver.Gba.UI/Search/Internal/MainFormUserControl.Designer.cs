@@ -30,6 +30,7 @@ namespace FERNGSolver.Gba.UI.Search
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label2 = new Label();
             label1 = new Label();
             ContainsCombatCheckBox = new CheckBox();
@@ -110,6 +111,7 @@ namespace FERNGSolver.Gba.UI.Search
             label22 = new Label();
             label25 = new Label();
             FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
+            toolTip1 = new ToolTip(components);
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMaxNumericUpDown).BeginInit();
@@ -212,6 +214,7 @@ namespace FERNGSolver.Gba.UI.Search
             label5.Size = new Size(58, 15);
             label5.TabIndex = 3;
             label5.Text = "計算方式:";
+            toolTip1.SetToolTip(label5, "必殺が出た際の瞬殺判定の有無に影響します。\r\n烈火以降は瞬殺スキルの所持にかかわらず、必殺が出た場合に必ず1消費します。");
             // 
             // groupBox2
             // 
@@ -1070,5 +1073,6 @@ namespace FERNGSolver.Gba.UI.Search
         private Button DefenderStatusDetailDialogButton;
         private Label AttackerStatusDetailLabel;
         private Button AttackerStatusDetailDialogButton;
+        private ToolTip toolTip1;
     }
 }
