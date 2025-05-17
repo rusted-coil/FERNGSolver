@@ -10,6 +10,11 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         bool ContainsCombat { get; }
 
         /// <summary>
+        /// 計算方式が封印の剣かどうかを取得します。
+        /// </summary>
+        bool IsBindingBlade { get; }
+
+        /// <summary>
         /// 攻撃側のHPを取得します。
         /// </summary>
         int AttackerHp { get; }

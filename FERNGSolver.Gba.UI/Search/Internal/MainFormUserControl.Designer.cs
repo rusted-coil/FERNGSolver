@@ -36,7 +36,7 @@ namespace FERNGSolver.Gba.UI.Search
             ContainsCombatCheckBox = new CheckBox();
             CombatGroupBox = new GroupBox();
             radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
+            IsBindingBladeRadioButton = new RadioButton();
             label5 = new Label();
             groupBox2 = new GroupBox();
             DefenderStatusDetailLabel = new Label();
@@ -173,7 +173,7 @@ namespace FERNGSolver.Gba.UI.Search
             // CombatGroupBox
             // 
             CombatGroupBox.Controls.Add(radioButton2);
-            CombatGroupBox.Controls.Add(radioButton1);
+            CombatGroupBox.Controls.Add(IsBindingBladeRadioButton);
             CombatGroupBox.Controls.Add(label5);
             CombatGroupBox.Controls.Add(groupBox2);
             CombatGroupBox.Controls.Add(groupBox1);
@@ -196,15 +196,15 @@ namespace FERNGSolver.Gba.UI.Search
             radioButton2.Text = "烈火/聖魔";
             radioButton2.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // IsBindingBladeRadioButton
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(78, 26);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(49, 19);
-            radioButton1.TabIndex = 1;
-            radioButton1.Text = "封印";
-            radioButton1.UseVisualStyleBackColor = true;
+            IsBindingBladeRadioButton.AutoSize = true;
+            IsBindingBladeRadioButton.Location = new Point(78, 26);
+            IsBindingBladeRadioButton.Name = "IsBindingBladeRadioButton";
+            IsBindingBladeRadioButton.Size = new Size(49, 19);
+            IsBindingBladeRadioButton.TabIndex = 1;
+            IsBindingBladeRadioButton.Text = "封印";
+            IsBindingBladeRadioButton.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -1055,7 +1055,7 @@ namespace FERNGSolver.Gba.UI.Search
         private Label label9;
         private CheckBox FiltersByDefenderHpPostconditionCheckBox;
         private RadioButton radioButton2;
-        private RadioButton radioButton1;
+        private RadioButton IsBindingBladeRadioButton;
         private Label label5;
         private Label label21;
         private NumericUpDownEx CurrentRngCountNumericUpDown;

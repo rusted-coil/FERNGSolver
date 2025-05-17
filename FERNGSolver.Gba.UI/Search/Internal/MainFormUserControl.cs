@@ -23,6 +23,7 @@ namespace FERNGSolver.Gba.UI.Search
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
+        public bool IsBindingBlade => IsBindingBladeRadioButton.Checked;
         public int AttackerHp => (int)AttackerHpNumericUpDown.Value;
         public int AttackerPower => (int)AttackerPowerNumericUpDown.Value;
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;

@@ -14,7 +14,7 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
 
         public bool CheckAndAdvance(IRng rng)
         {
-            var result = CombatSimulator.Simulate(rng, m_Args.Attacker, m_Args.Defender);
+            var result = CombatSimulator.Simulate(rng, m_Args.Attacker, m_Args.Defender, m_Args.IsBindingBlade);
 
             // HP事後条件チェック
             if (result.AttackerHp < m_Args.AttackerHpPostconditionMin || result.AttackerHp > m_Args.AttackerHpPostconditionMax

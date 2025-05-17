@@ -44,6 +44,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
         {
             return StrategyFactory.CreateCombatStrategy(new CombatStrategyArgs
             {
+                IsBindingBlade = view.IsBindingBlade,
                 Attacker = CreateAttackerUnitFromView(view),
                 Defender = CreateDefenderUnitFromView(view),
                 AttackerHpPostconditionMin = view.AttackerHpPostconditionMin,
@@ -179,7 +180,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
             if (mainFormView.ContainsCombat)
             {
-                var combatResult = CombatSimulator.Simulate(rng, CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView));
+                var combatResult = CombatSimulator.Simulate(rng, CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView), mainFormView.IsBindingBlade);
                 viewModel.SetCombatResult(combatResult);
             }
 

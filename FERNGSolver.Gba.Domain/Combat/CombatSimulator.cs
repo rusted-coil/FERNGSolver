@@ -19,7 +19,7 @@ namespace FERNGSolver.Gba.Domain.Combat
         /// <summary>
         /// RNGを進め、戦闘をシミュレートした結果を得ます。
         /// </summary>
-        public static Result Simulate(IRng rng, ICombatUnit attacker, ICombatUnit defender)
+        public static Result Simulate(IRng rng, ICombatUnit attacker, ICombatUnit defender, bool isBindingBlade)
         {
             var attackerUnit = new Unit(attacker);
             var defenderUnit = new Unit(defender);
@@ -31,13 +31,13 @@ namespace FERNGSolver.Gba.Domain.Combat
             {
                 if (a < attacker.PhaseCount)
                 {
-                    if (!ExecutePhase(rng, attackerUnit, defenderUnit))
+                    if (!ExecutePhase(rng, attackerUnit, defenderUnit, isBindingBlade))
                     {
                         break;
                     }
                     if (attacker.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
-                        if (!ExecutePhase(rng, attackerUnit, defenderUnit))
+                        if (!ExecutePhase(rng, attackerUnit, defenderUnit, isBindingBlade))
                         {
                             break;
                         }
@@ -47,13 +47,13 @@ namespace FERNGSolver.Gba.Domain.Combat
 
                 if (d < defender.PhaseCount)
                 {
-                    if (!ExecutePhase(rng, defenderUnit, attackerUnit))
+                    if (!ExecutePhase(rng, defenderUnit, attackerUnit, isBindingBlade))
                     {
                         break;
                     }
                     if (defender.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
-                        if (!ExecutePhase(rng, defenderUnit, attackerUnit))
+                        if (!ExecutePhase(rng, defenderUnit, attackerUnit, isBindingBlade))
                         {
                             break;
                         }
@@ -88,7 +88,7 @@ namespace FERNGSolver.Gba.Domain.Combat
 
         // フェーズを実行し、Unitを更新する
         // どちらかが死んでいたらfalseを返す
-        private static bool ExecutePhase(IRng rng, Unit attackerSide, Unit defenderSide)
+        private static bool ExecutePhase(IRng rng, Unit attackerSide, Unit defenderSide, bool isBindingBlade)
         {
             bool isHit = false;
             bool isGreatShieldActive = false;
@@ -127,10 +127,11 @@ namespace FERNGSolver.Gba.Domain.Combat
                 // 命中していたら必殺判定
                 if (rng.Next() < attackerSide.CombatUnit.CriticalRate)
                 {
-                    // 必殺が出たら瞬殺判定（TODO 封印以外）
+                    // 必殺が出たら瞬殺判定（封印以外）
                     // 瞬殺のみスキルを持っていなくても判定する
                     // 敵がラスボスなら瞬殺判定をスキップ
-                    if(defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss
+                    if(!isBindingBlade
+                        && defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss
                         && rng.Next() < Util.GetSilencerRate(defenderSide.CombatUnit.StatusDetail.BossType)
                         && attackerSide.HasSilencer())
                     {

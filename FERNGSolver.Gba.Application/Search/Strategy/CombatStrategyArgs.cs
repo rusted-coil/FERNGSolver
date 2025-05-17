@@ -8,6 +8,11 @@ namespace FERNGSolver.Gba.Application.Search.Strategy
     public sealed class CombatStrategyArgs
     {
         /// <summary>
+        /// 計算方式が封印の剣かどうかを取得します。
+        /// </summary>
+        public required bool IsBindingBlade { get; init; }
+
+        /// <summary>
         /// 攻撃側の情報を取得します。
         /// </summary>
         public required ICombatUnit Attacker { get; init; }
