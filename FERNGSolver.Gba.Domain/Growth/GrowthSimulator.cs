@@ -11,23 +11,32 @@ namespace FERNGSolver.Gba.Domain.Growth
         public static IReadOnlyList<int> Simulate(IRng rng, params int[] growthRates)
         {
             int[] results = new int[growthRates.Length];
-            int pin = 0;
+            int sum = 0;
+            int retryCount = 0; // 無音救済は2回まで再抽選
 
-            for (int i = 0; i < results.Length; ++i)
+            do
             {
-                int rate = growthRates[i];
-
-                // 成長率100%以上はその数値分確定成長
-                results[i] = rate / 100; 
-                rate -= (results[i] * 100);
-
-                // 成長率0でも乱数は消費する
-
-                if (rng.Next() < rate)
+                for (int i = 0; i < results.Length; ++i)
                 {
-                    results[i]++;
+                    int rate = growthRates[i];
+
+                    // 成長率100%以上はその数値分確定成長
+                    results[i] = rate / 100;
+                    rate -= (results[i] * 100);
+
+                    // 成長率0でも乱数は消費する
+
+                    if (rng.Next() < rate)
+                    {
+                        results[i]++;
+                    }
+                    sum += results[i];
                 }
-            }
+                if ((++retryCount) >= 3)
+                {
+                    break;
+                }
+            } while (sum == 0);
 
             return results;
         }
