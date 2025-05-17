@@ -1,5 +1,6 @@
 using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.Character;
 using FERNGSolver.Gba.Domain.Character.Extensions;
 using FERNGSolver.Gba.Domain.Combat;
@@ -46,13 +47,20 @@ namespace FERNGSolver.Gba.UI.Search
 
         // レベルアップ
         public bool ContainsGrowth => ContainsGrowthCheckBox.Checked;
-        public int HpGrowthRate => IsHpGrowthNeeded.Checked ? (int)GrowthHpRateNumericUpDown.Value : 100;
-        public int AtkGrowthRate => IsAtkGrowthNeeded.Checked ? (int)GrowthAtkRateNumericUpDown.Value : 100;
-        public int TecGrowthRate => IsTecGrowthNeeded.Checked ? (int)GrowthTecRateNumericUpDown.Value : 100;
-        public int SpdGrowthRate => IsSpdGrowthNeeded.Checked ? (int)GrowthSpdRateNumericUpDown.Value : 100;
-        public int DefGrowthRate => IsDefGrowthNeeded.Checked ? (int)GrowthDefRateNumericUpDown.Value : 100;
-        public int MdfGrowthRate => IsMdfGrowthNeeded.Checked ? (int)GrowthMdfRateNumericUpDown.Value : 100;
-        public int LucGrowthRate => IsLucGrowthNeeded.Checked ? (int)GrowthLucRateNumericUpDown.Value : 100;
+        public int HpGrowthRate => (int)GrowthHpRateNumericUpDown.Value;
+        public int AtkGrowthRate => (int)GrowthAtkRateNumericUpDown.Value;
+        public int TecGrowthRate => (int)GrowthTecRateNumericUpDown.Value;
+        public int SpdGrowthRate => (int)GrowthSpdRateNumericUpDown.Value;
+        public int DefGrowthRate => (int)GrowthDefRateNumericUpDown.Value;
+        public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
+        public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
+        public GrowthSearchType HpSearchType => IsHpGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType AtkSearchType => IsAtkGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType TecSearchType => IsTecGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType SpdSearchType => IsSpdGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType DefSearchType => IsDefGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType MdfSearchType => IsMdfGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType LucSearchType => IsLucGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
 
         // 検索条件
         public int CurrentPosition => (int)CurrentRngCountNumericUpDown.Value;

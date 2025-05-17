@@ -23,6 +23,13 @@ namespace FERNGSolver.Gba.Application.Tests.Search
                 DefGrowthRate = 30,
                 MdfGrowthRate = 30,
                 LucGrowthRate = 60,
+                HpSearchType = GrowthSearchType.MustUp,
+                AtkSearchType = GrowthSearchType.MustUp,
+                TecSearchType = GrowthSearchType.MustUp,
+                SpdSearchType = GrowthSearchType.MustUp,
+                DefSearchType = GrowthSearchType.MustUp,
+                MdfSearchType = GrowthSearchType.MustUp,
+                LucSearchType = GrowthSearchType.MustUp,
             });
 
             // Act
@@ -50,8 +57,15 @@ namespace FERNGSolver.Gba.Application.Tests.Search
                 TecGrowthRate = 60,
                 SpdGrowthRate = 60,
                 DefGrowthRate = 30,
-                MdfGrowthRate = 100,
+                MdfGrowthRate = 30,
                 LucGrowthRate = 60,
+                HpSearchType = GrowthSearchType.MustUp,
+                AtkSearchType = GrowthSearchType.MustUp,
+                TecSearchType = GrowthSearchType.MustUp,
+                SpdSearchType = GrowthSearchType.MustUp,
+                DefSearchType = GrowthSearchType.MustUp,
+                MdfSearchType = GrowthSearchType.NotConsidered,
+                LucSearchType = GrowthSearchType.MustUp,
             });
 
             // Act
@@ -79,6 +93,13 @@ namespace FERNGSolver.Gba.Application.Tests.Search
                 DefGrowthRate = 130,
                 MdfGrowthRate = 130,
                 LucGrowthRate = 160,
+                HpSearchType = GrowthSearchType.MustUp,
+                AtkSearchType = GrowthSearchType.MustUp,
+                TecSearchType = GrowthSearchType.MustUp,
+                SpdSearchType = GrowthSearchType.MustUp,
+                DefSearchType = GrowthSearchType.MustUp,
+                MdfSearchType = GrowthSearchType.MustUp,
+                LucSearchType = GrowthSearchType.MustUp,
             });
 
             // Act

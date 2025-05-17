@@ -90,6 +90,13 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
                 DefGrowthRate = view.DefGrowthRate,
                 MdfGrowthRate = view.MdfGrowthRate,
                 LucGrowthRate = view.LucGrowthRate,
+                HpSearchType = view.HpSearchType,
+                AtkSearchType = view.AtkSearchType,
+                TecSearchType = view.TecSearchType,
+                SpdSearchType = view.SpdSearchType,
+                DefSearchType = view.DefSearchType,
+                MdfSearchType = view.MdfSearchType,
+                LucSearchType = view.LucSearchType,
             });
         }
 

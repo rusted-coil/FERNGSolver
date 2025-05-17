@@ -6,10 +6,30 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
     internal sealed class GrowthStrategy : ISearchStrategy
     {
         private readonly GrowthStrategyArgs m_Args;
+        private readonly int[] m_GrowthRates;
+        private readonly GrowthSearchType[] m_SearchTypes;
 
         public GrowthStrategy(GrowthStrategyArgs args)
         {
             m_Args = args;
+            m_GrowthRates = [
+                args.HpGrowthRate,
+                args.AtkGrowthRate,
+                args.TecGrowthRate,
+                args.SpdGrowthRate,
+                args.DefGrowthRate,
+                args.MdfGrowthRate,
+                args.LucGrowthRate
+            ];
+            m_SearchTypes = [
+                args.HpSearchType,
+                args.AtkSearchType,
+                args.TecSearchType,
+                args.SpdSearchType,
+                args.DefSearchType,
+                args.MdfSearchType,
+                args.LucSearchType
+            ];
         }
 
         public bool CheckAndAdvance(IRng rng)
@@ -25,7 +45,11 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
 
             for (int i = 0; i < result.Count; ++i)
             {
-                if (result[i] == 0)
+                if (m_SearchTypes[i] == GrowthSearchType.MustUp && result[i] <= (m_GrowthRates[i] / 100))
+                {
+                    return false;
+                }
+                if (m_SearchTypes[i] == GrowthSearchType.MustNotUp && result[i] > 0)
                 {
                     return false;
                 }
