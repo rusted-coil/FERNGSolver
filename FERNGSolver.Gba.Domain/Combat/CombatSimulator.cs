@@ -31,18 +31,14 @@ namespace FERNGSolver.Gba.Domain.Combat
             {
                 if (a < attacker.PhaseCount)
                 {
-                    ExecutePhase(rng, attackerUnit, defenderUnit);
-                    if (defenderUnit.CurrentHp <= 0)
+                    if (!ExecutePhase(rng, attackerUnit, defenderUnit))
                     {
-                        defenderUnit.CurrentHp = 0;
                         break;
                     }
                     if (attacker.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
-                        ExecutePhase(rng, attackerUnit, defenderUnit);
-                        if (defenderUnit.CurrentHp <= 0)
+                        if (!ExecutePhase(rng, attackerUnit, defenderUnit))
                         {
-                            defenderUnit.CurrentHp = 0;
                             break;
                         }
                     }
@@ -51,18 +47,14 @@ namespace FERNGSolver.Gba.Domain.Combat
 
                 if (d < defender.PhaseCount)
                 {
-                    ExecutePhase(rng, defenderUnit, attackerUnit);
-                    if (attackerUnit.CurrentHp <= 0)
+                    if (!ExecutePhase(rng, defenderUnit, attackerUnit))
                     {
-                        attackerUnit.CurrentHp = 0;
                         break;
                     }
                     if (defender.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
-                        ExecutePhase(rng, defenderUnit, attackerUnit);
-                        if (attackerUnit.CurrentHp <= 0)
+                        if (!ExecutePhase(rng, defenderUnit, attackerUnit))
                         {
-                            attackerUnit.CurrentHp = 0;
                             break;
                         }
                     }
@@ -90,11 +82,13 @@ namespace FERNGSolver.Gba.Domain.Combat
         private static bool HasGreatShield(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.GreatShield;
         private static bool HasPierce(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.Pierce;
         private static bool HasSilencer(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.Silencer;
+        private static bool IsAbsorbWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Absorb;
         private static bool IsPoisonWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Poison;
         private static bool IsCursedWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Cursed;
 
         // フェーズを実行し、Unitを更新する
-        private static void ExecutePhase(IRng rng, Unit attackerSide, Unit defenderSide)
+        // どちらかが死んでいたらfalseを返す
+        private static bool ExecutePhase(IRng rng, Unit attackerSide, Unit defenderSide)
         {
             bool isHit = false;
             bool isGreatShieldActive = false;
@@ -165,10 +159,29 @@ namespace FERNGSolver.Gba.Domain.Combat
                 {
                     if (!isGreatShieldActive)
                     {
+                        if (attackerSide.IsAbsorbWeapon())
+                        {
+                            attackerSide.CurrentHp = Math.Min(
+                                attackerSide.CombatUnit.StatusDetail.MaxHp,
+                                attackerSide.CurrentHp + Math.Min(defenderSide.CurrentHp, damage));
+                        }
                         defenderSide.CurrentHp -= damage;
                     }
                 }
             }
+
+            bool result = true;
+            if (attackerSide.CurrentHp <= 0)
+            {
+                attackerSide.CurrentHp = 0;
+                result = false;
+            }
+            if (defenderSide.CurrentHp <= 0)
+            {
+                defenderSide.CurrentHp = 0;
+                result = false;
+            }
+            return result;
         }
     }
 }
