@@ -1,3 +1,5 @@
+using System.Reactive;
+
 namespace FERNGSolver.Gba.Presentation.ViewContracts
 {
     public interface IFalconKnightMethodSettingsView
@@ -18,5 +20,15 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// cx列による消費分を消費数に加算するかどうかを取得します。
         /// </summary>
         bool AddsCxOffset { get; }
+
+        /// <summary>
+        /// 補助ツールボタンがクリックされた時に通知されるストリームを取得します。
+        /// </summary>
+        IObservable<Unit> FalconKnightToolOpenButtonClicked { get; }
+
+        /// <summary>
+        /// ファルコンナイト法ツールを開きます。
+        /// </summary>
+        void OpenFalconKnightTool();
     }
 }

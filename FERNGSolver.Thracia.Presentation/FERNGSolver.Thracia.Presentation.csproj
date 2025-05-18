@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FERNGSolver.Common\FERNGSolver.Common.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
-    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Common\FERNGSolver.FalconKnightTool.Common.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.Application\FERNGSolver.Thracia.Application.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.Domain\FERNGSolver.Thracia.Domain.csproj" />
   </ItemGroup>

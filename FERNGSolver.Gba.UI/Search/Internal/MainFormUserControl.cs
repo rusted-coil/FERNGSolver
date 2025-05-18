@@ -1,12 +1,15 @@
 using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.FalconKnightTool.UI;
 using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.Character;
 using FERNGSolver.Gba.Domain.Character.Extensions;
 using FERNGSolver.Gba.Domain.Combat;
 using FERNGSolver.Gba.Domain.Repository.Stub;
+using FERNGSolver.Gba.Presentation.FalconKnight;
 using FERNGSolver.Gba.Presentation.ViewContracts;
 using FERNGSolver.Gba.UI.Search.Internal;
+using FormRx.Button;
 using System.Reactive;
 
 namespace FERNGSolver.Gba.UI.Search
@@ -20,6 +23,7 @@ namespace FERNGSolver.Gba.UI.Search
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
         public string CxString => CxStringTextBox.Text;
         public bool AddsCxOffset => AddsCxOffsetCheckBox.Checked;
+        public IObservable<Unit> FalconKnightToolOpenButtonClicked => m_FalconKnightToolOpenButton.Clicked;
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
@@ -71,13 +75,18 @@ namespace FERNGSolver.Gba.UI.Search
         // 結果出力用
         public int FalconKnightMethodMove => (int)FalconKnightConsumeMoveNumericUpDown.Value;
 
+        private Form? m_FalconKnightToolForm = null;
+
         private readonly IMainFormView m_MainFormView;
         private readonly IReadOnlyList<ICharacter> m_Characters;
+        private readonly IButton m_FalconKnightToolOpenButton;
 
         public MainFormUserControl(IMainFormView mainFormView)
         {
             m_MainFormView = mainFormView;
             InitializeComponent();
+
+            m_FalconKnightToolOpenButton = ButtonFactory.CreateButton(FalconKnightToolOpenButton);
 
             // TODO とりあえずStubからキャラデータを取得してコンボボックスにセットする
             var characterRepository = new StubCharacterRepository();
@@ -101,6 +110,19 @@ namespace FERNGSolver.Gba.UI.Search
         {
             OffsetMinNumericUpDown.Value = 0;
             OffsetMaxNumericUpDown.Value = 10000;
+        }
+
+        public void OpenFalconKnightTool()
+        {
+            if (m_FalconKnightToolForm != null)
+            {
+                m_FalconKnightToolForm.Focus();
+            }
+            else
+            {
+                m_FalconKnightToolForm = FalconKnightToolLauncher.CreateToolForm(FalconKnightToolEntryFactory.Create());
+                m_FalconKnightToolForm.Show();
+            }
         }
 
         private void UsesFalconKnightMethodCheckBox_CheckedChanged(object sender, EventArgs e)

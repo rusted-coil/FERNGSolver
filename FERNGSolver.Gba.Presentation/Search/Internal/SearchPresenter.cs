@@ -16,12 +16,19 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
         {
             m_MainFormView = mainFormView;
             m_ErrorNotifier = errorNotifier;
+
+            mainFormView.FalconKnightToolOpenButtonClicked.Subscribe(_ => OpenFalconKnightTool()).AddTo(m_Disposables);
             mainFormView.GetSearchButtonClicked(Const.Title).Subscribe(_ => ExecuteSearch()).AddTo(m_Disposables);
         }
 
         public void Dispose()
         {
             m_Disposables.Dispose();
+        }
+
+        private void OpenFalconKnightTool()
+        {
+            m_MainFormView.OpenFalconKnightTool();
         }
 
         private void ExecuteSearch()
