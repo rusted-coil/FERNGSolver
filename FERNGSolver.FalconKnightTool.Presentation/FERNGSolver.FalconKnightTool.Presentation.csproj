@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FERNGSolver.Common\FERNGSolver.Common.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Domain\FERNGSolver.FalconKnightTool.Domain.csproj" />
   </ItemGroup>
 
 </Project>

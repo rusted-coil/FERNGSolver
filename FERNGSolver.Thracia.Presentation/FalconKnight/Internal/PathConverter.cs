@@ -1,10 +1,11 @@
 using FERNGSolver.Common.Types;
-using System.Text;
+using FERNGSolver.FalconKnightTool.Domain.Path;
 
-namespace FERNGSolver.FalconKnightTool.Application.Path
+namespace FERNGSolver.Thracia.Presentation.FalconKnight.Internal
 {
-    public static class PathConverter
+    internal sealed class PathConverter : IPathConverter
     {
+        // DirectionPriorityが前のものを選んだ場合は◯となる
         private static readonly (int dx, int dy)[] DirectionPriority = new[]
         {
             (-1, 0), // 左
@@ -13,17 +14,14 @@ namespace FERNGSolver.FalconKnightTool.Application.Path
             (0, -1), // 上
         };
 
-        /// <summary>
-        /// 座標のリストから、乱数のcx列に変換します。
-        /// </summary>
-        public static string PathToCxString(IReadOnlyList<GridPosition> path)
+        public IReadOnlyList<bool> PathToCx(IReadOnlyList<GridPosition> path)
         {
             if (path.Count < 2)
             {
-                return string.Empty;
+                return Array.Empty<bool>();
             }
 
-            var sb = new StringBuilder();
+            var result = new List<bool>();
 
             var goal = path[0]; // 終点（ゴール）
 
@@ -59,14 +57,13 @@ namespace FERNGSolver.FalconKnightTool.Application.Path
                     {
                         if (validDirs[rank].dx == actualDx && validDirs[rank].dy == actualDy)
                         {
-                            sb.Append(rank == 0 ? 'c' : 'x');
+                            result.Add(rank == 0);
                             break;
                         }
                     }
                 }
             }
-
-            return sb.ToString();
+            return result;
         }
 
         private static int ManhattanDistance(GridPosition a, GridPosition b)
