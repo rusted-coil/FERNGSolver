@@ -23,7 +23,7 @@ namespace FERNGSolver.FalconKnightTool.Presentation.Presenter.Internal
             view.PathDetermined.Subscribe(ReceivePath).AddTo(m_Disposables);
             view.AddButtonClicked.Subscribe(_ =>
             {
-                // Add処理
+                m_Entry.AddCxString(m_CurrentCxString);
             }).AddTo(m_Disposables);
 
             SetCxNone();

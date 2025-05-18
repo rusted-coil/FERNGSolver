@@ -4,9 +4,9 @@ namespace FERNGSolver.Gba.Presentation.FalconKnight
 {
     public static class FalconKnightToolEntryFactory
     {
-        public static IFalconKnightToolEntry Create()
+        public static IFalconKnightToolEntry Create(Action<string> addCxString)
         {
-            return new Internal.FalconKnightToolEntry();
+            return new Internal.FalconKnightToolEntry(addCxString);
         }
     }
 }

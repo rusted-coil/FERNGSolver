@@ -120,7 +120,10 @@ namespace FERNGSolver.Gba.UI.Search
             }
             else
             {
-                m_FalconKnightToolForm = FalconKnightToolLauncher.CreateToolForm(FalconKnightToolEntryFactory.Create());
+                m_FalconKnightToolForm = FalconKnightToolLauncher.CreateToolForm(FalconKnightToolEntryFactory.Create(AddCxString));
+                m_FalconKnightToolForm.FormClosed += (object? sender, FormClosedEventArgs e) => {
+                    m_FalconKnightToolForm = null;
+                };
                 m_FalconKnightToolForm.Show();
             }
         }
@@ -134,6 +137,8 @@ namespace FERNGSolver.Gba.UI.Search
             ContainsGrowthCheckBox.Enabled = !isChecked;
             GrowthGroupBox.Enabled = !isChecked;
         }
+
+        private void AddCxString(string cxString) => CxStringTextBox.Text += cxString;
 
         private void GrowthCharacterNameComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshGrowthRate();
         private void IsGrowthBoostedCheckBox_CheckedChanged(object sender, EventArgs e) => RefreshGrowthRate();

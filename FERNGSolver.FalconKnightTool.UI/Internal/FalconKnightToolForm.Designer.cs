@@ -39,7 +39,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(63, 28);
             AddButton.TabIndex = 0;
-            AddButton.Text = "←Add";
+            AddButton.Text = "追加";
             AddButton.UseVisualStyleBackColor = true;
             // 
             // GridCanvas

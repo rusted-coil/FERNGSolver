@@ -7,10 +7,14 @@ namespace FERNGSolver.Gba.Presentation.FalconKnight.Internal
     {
         public string Title => Const.Title;
         public IPathConverter PathConverter { get; }
+        public void AddCxString(string cxString) => m_AddCxString(cxString);
 
-        public FalconKnightToolEntry()
+        private readonly Action<string> m_AddCxString;
+
+        public FalconKnightToolEntry(Action<string> addCxString)
         {
             PathConverter = new PathConverter();
+            m_AddCxString = addCxString;
         }
     }
 }
