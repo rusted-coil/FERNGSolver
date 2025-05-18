@@ -32,5 +32,10 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         {
             m_CurrentPathText.Text = text;
         }
+
+        private void GridCanvas_SizeChanged(object sender, EventArgs e)
+        {
+            GridCanvas.Invalidate();
+        }
     }
 }
