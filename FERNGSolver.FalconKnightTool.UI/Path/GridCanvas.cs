@@ -5,13 +5,27 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
 {
     public class GridCanvas : Panel
     {
-        public int GridCount { get; set; } = 15;
+        private int m_GridCount = 15;
+        public int GridCount
+        {
+            get => m_GridCount;
+            set {
+                m_GridCount = value;
+                m_CurrentPath.Clear();
+                m_PathDetermined.OnNext(m_CurrentPath);
+                Invalidate();
+            }
+        } 
+
         public IObservable<IReadOnlyList<GridPosition>> PathDetermined => m_PathDetermined;
 
         private GridPosition StartPosition => new(GridCount / 2, GridCount / 2);
         private List<GridPosition> m_CurrentPath = new List<GridPosition>();
+        private GridPosition? m_CurrentCursorPosition = null;
 
         private Subject<IReadOnlyList<GridPosition>> m_PathDetermined = new Subject<IReadOnlyList<GridPosition>>();
+
+        private Image m_CursorImage;
 
         private void AddPointToPath(GridPosition position)
         {
@@ -47,6 +61,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
         {
             this.DoubleBuffered = true;
             this.BackColor = Color.White;
+            m_CursorImage = Resources.CursorTest;
 
             // デザイン時にはイベントや描画処理を避ける
             if (!DesignMode)
@@ -65,28 +80,39 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
             if (DesignMode) return;
 
             var g = e.Graphics;
+            DrawGrids(g);
+            DrawPlayer(g);
+            DrawPath(g);
+            DrawCursor(g);
+        }
 
-            // コントロールサイズからグリッドのサイズを計算
-            var gridWidth = Width / GridCount;
-            var gridHeight = Height / GridCount;
-
+        private void DrawGrids(Graphics g)
+        {
             using var gridPen = new Pen(Color.Gray);
-
-            // グリッドを描画
-            for (int x = 0; x <= GridCount; x++)
+            for (int i = 0; i < GridCount; i++)
             {
-                g.DrawLine(gridPen, x * gridWidth, 0, x * gridWidth, Height);
+                int x = Width * i / GridCount;
+                g.DrawLine(gridPen, x, 0, x, Height);
             }
-            for (int y = 0; y <= GridCount; y++)
+            g.DrawLine(gridPen, Width - 1, 0, Width - 1, Height);
+            for (int i = 0; i < GridCount; i++)
             {
-                g.DrawLine(gridPen, 0, y * gridHeight, Width, y * gridHeight);
+                int y = Height * i / GridCount;
+                g.DrawLine(gridPen, 0, y, Width, y);
             }
+            g.DrawLine(gridPen, 0, Height - 1, Width, Height - 1);
+        }
 
-            // 操作キャラ（中央）
-            var center = StartPosition;
-            var rect = new Rectangle(center.X * gridWidth + gridWidth / 4, center.Y * gridHeight + gridHeight / 4, gridWidth / 2, gridHeight / 2);
+        private void DrawPlayer(Graphics g)
+        {
+            var center = GridCenterToScreenPoint(StartPosition);
+            int r = Width / GridCount / 4;
+            var rect = new Rectangle(center.X - r, center.Y - r, r * 2, r * 2);
             g.FillEllipse(Brushes.Blue, rect);
+        }
 
+        private void DrawPath(Graphics g)
+        {
             // 経路（矢印の代わりに線で表示）
             using var pathPen = new Pen(Color.Red, 2);
             for (int i = 1; i < m_CurrentPath.Count; i++)
@@ -97,15 +123,20 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
             }
         }
 
+        private void DrawCursor(Graphics g)
+        {
+            if (m_CurrentCursorPosition != null)
+            {
+                g.DrawImage(m_CursorImage, center.X - r * 2 - 3, center.Y - r * 2 - 3, r * 4 + 6, r * 4 + 6);
+            }
+        }
+
         // コントロール上の座標から、該当するグリッドの座標を取得
         // 領域外だった場合はnullを返す（必ず 0～GridCount-1 の間に収まる）
         private GridPosition? ScreenPointToGrid(Point point)
         {
-            var gridWidth = Width / GridCount;
-            var gridHeight = Height / GridCount;
-
-            int x = point.X / gridWidth;
-            int y = point.Y / gridHeight;
+            int x = point.X * GridCount / Width;
+            int y = point.Y * GridCount / Height;
 
             if (x < 0 || x >= GridCount || y < 0 || y >= GridCount)
             {
@@ -118,12 +149,9 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
         // グリッド座標から、その中心のコントロール上の座標を取得
         private Point GridCenterToScreenPoint(GridPosition grid)
         {
-            var gridWidth = Width / GridCount;
-            var gridHeight = Height / GridCount;
-
             return new Point(
-                grid.X * gridWidth + gridWidth / 2,
-                grid.Y * gridHeight + gridHeight / 2
+                Width * (grid.X * 2 + 1) / GridCount / 2,
+                Height * (grid.Y * 2 + 1) / GridCount / 2
             );
         }
 
@@ -170,11 +198,29 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
 
         private void OnMouseMoveImpl(GridPosition? position)
         {
-            if (m_isDragging)
+            if (position != null)
             {
-                if (position != null && !m_CurrentPath.Contains(position.Value))
+                bool invalid = false;
+                if (!position.Equals(m_CurrentCursorPosition))
+                {
+                    m_CurrentCursorPosition = position;
+                    invalid = true;
+                }
+                if (m_isDragging && !m_CurrentPath.Contains(position.Value))
                 {
                     AddPointToPath(position.Value);
+                    invalid = true;
+                }
+                if (invalid)
+                {
+                    Invalidate();
+                }
+            }
+            else
+            {
+                if (m_CurrentCursorPosition != null)
+                {
+                    m_CurrentCursorPosition = null;
                     Invalidate();
                 }
             }

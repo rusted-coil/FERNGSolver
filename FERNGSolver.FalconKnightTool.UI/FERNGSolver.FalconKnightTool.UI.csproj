@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CursorTest.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Reactive" Version="6.0.1" />
   </ItemGroup>
 
@@ -16,6 +20,25 @@
     <ProjectReference Include="..\FERNGSolver.Windows.Common\FERNGSolver.Windows.Common.csproj" />
     <ProjectReference Include="..\FormRx\FormRx.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Presentation\FERNGSolver.FalconKnightTool.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="CursorTest.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

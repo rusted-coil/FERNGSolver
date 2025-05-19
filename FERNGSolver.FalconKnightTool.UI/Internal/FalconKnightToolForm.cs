@@ -19,6 +19,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         {
             InitializeComponent();
             this.Text = $"ファルコンナイト法ツール - {title}";
+            GridCountNumericUpDown.Value = GridCanvas.GridCount;
 
             m_AddButton = ButtonFactory.CreateButton(AddButton);
         }
@@ -36,6 +37,11 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         private void GridCanvas_SizeChanged(object sender, EventArgs e)
         {
             GridCanvas.Invalidate();
+        }
+
+        private void GridCountNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            GridCanvas.GridCount = (int)GridCountNumericUpDown.Value;
         }
     }
 }

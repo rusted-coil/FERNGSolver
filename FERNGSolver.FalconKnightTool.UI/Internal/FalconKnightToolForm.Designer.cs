@@ -29,13 +29,16 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         private void InitializeComponent()
         {
             AddButton = new Button();
-            GridCanvas = new FERNGSolver.FalconKnightTool.UI.Path.GridCanvas();
+            GridCanvas = new Path.GridCanvas();
             m_CurrentPathText = new Label();
+            label1 = new Label();
+            GridCountNumericUpDown = new Windows.Common.Controls.NumericUpDownEx();
+            ((System.ComponentModel.ISupportInitialize)GridCountNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(12, 12);
+            AddButton.Location = new Point(12, 38);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(139, 28);
             AddButton.TabIndex = 0;
@@ -47,7 +50,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
             GridCanvas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             GridCanvas.BackColor = Color.White;
             GridCanvas.GridCount = 15;
-            GridCanvas.Location = new Point(12, 54);
+            GridCanvas.Location = new Point(12, 80);
             GridCanvas.Name = "GridCanvas";
             GridCanvas.Size = new Size(480, 480);
             GridCanvas.TabIndex = 1;
@@ -56,23 +59,43 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
             // m_CurrentPathText
             // 
             m_CurrentPathText.AutoSize = true;
-            m_CurrentPathText.Location = new Point(157, 19);
+            m_CurrentPathText.Location = new Point(12, 13);
             m_CurrentPathText.Name = "m_CurrentPathText";
             m_CurrentPathText.Size = new Size(106, 15);
             m_CurrentPathText.TabIndex = 2;
             m_CurrentPathText.Text = "m_CurrentPathText";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(388, 51);
+            label1.Name = "label1";
+            label1.Size = new Size(55, 15);
+            label1.TabIndex = 3;
+            label1.Text = "グリッド数:";
+            // 
+            // GridCountNumericUpDown
+            // 
+            GridCountNumericUpDown.Location = new Point(449, 49);
+            GridCountNumericUpDown.Name = "GridCountNumericUpDown";
+            GridCountNumericUpDown.Size = new Size(43, 23);
+            GridCountNumericUpDown.TabIndex = 4;
+            GridCountNumericUpDown.ValueChanged += GridCountNumericUpDown_ValueChanged;
+            // 
             // FalconKnightToolForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(502, 543);
+            ClientSize = new Size(502, 571);
+            Controls.Add(GridCountNumericUpDown);
+            Controls.Add(label1);
             Controls.Add(m_CurrentPathText);
             Controls.Add(GridCanvas);
             Controls.Add(AddButton);
             Name = "FalconKnightToolForm";
             Text = "FalconKnightTool";
             FormClosed += OnFormClosed;
+            ((System.ComponentModel.ISupportInitialize)GridCountNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -82,5 +105,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         private Button AddButton;
         private Path.GridCanvas GridCanvas;
         private Label m_CurrentPathText;
+        private Label label1;
+        private Windows.Common.Controls.NumericUpDownEx GridCountNumericUpDown;
     }
 }
