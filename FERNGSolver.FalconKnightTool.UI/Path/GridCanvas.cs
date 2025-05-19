@@ -25,7 +25,9 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
 
         private Subject<IReadOnlyList<GridPosition>> m_PathDetermined = new Subject<IReadOnlyList<GridPosition>>();
 
-        private Image m_CursorImage;
+        private Image m_CursorGrey;
+        private Image m_CursorStart;
+        private Image m_CursorDrag;
 
         private void AddPointToPath(GridPosition position)
         {
@@ -61,7 +63,9 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
         {
             this.DoubleBuffered = true;
             this.BackColor = Color.White;
-            m_CursorImage = Resources.CursorTest;
+            m_CursorStart = Resources.CursorStart;
+            m_CursorDrag = Resources.CursorDrag;
+            m_CursorGrey = Resources.CursorGrey;
 
             // デザイン時にはイベントや描画処理を避ける
             if (!DesignMode)
@@ -127,7 +131,27 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
         {
             if (m_CurrentCursorPosition != null)
             {
-                g.DrawImage(m_CursorImage, center.X - r * 2 - 3, center.Y - r * 2 - 3, r * 4 + 6, r * 4 + 6);
+                if (m_isDragging)
+                {
+                    var center = GridCenterToScreenPoint(m_CurrentCursorPosition.Value);
+                    var width = Width * 110 / GridCount / 100;
+                    var height = Height * 110 / GridCount / 100;
+                    g.DrawImage(m_CursorDrag, center.X - width / 2, center.Y - height / 2, width, height);
+                }
+                else if (StartPosition.Equals(m_CurrentCursorPosition.Value))
+                {
+                    var center = GridCenterToScreenPoint(m_CurrentCursorPosition.Value);
+                    var width = Width * 110 / GridCount / 100;
+                    var height = Height * 110 / GridCount / 100;
+                    g.DrawImage(m_CursorStart, center.X - width / 2, center.Y - height / 2, width, height);
+                }
+                else
+                {
+                    var center = GridCenterToScreenPoint(m_CurrentCursorPosition.Value);
+                    var width = Width / GridCount;
+                    var height = Height / GridCount;
+                    g.DrawImage(m_CursorGrey, center.X - width / 2, center.Y - height / 2, width, height);
+                }
             }
         }
 
@@ -232,6 +256,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Path
             {
                 m_isDragging = false;
                 m_PathDetermined.OnNext(m_CurrentPath.ToArray()); // コピーしてパスを通知
+                Invalidate();
             }
         }
     }

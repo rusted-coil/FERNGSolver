@@ -1,4 +1,5 @@
 using FERNGSolver.Presentation.Presenter;
+using FERNGSolver.Windows.Common.Interfaces;
 
 namespace FERNGSolver
 {
@@ -20,10 +21,13 @@ namespace FERNGSolver
             var errorNotifier = new UI.Internal.ErrorNotifier();
 
             // 作品個別コントロールを初期化
-            form.SetEntries(
+            var entries = new IMainFormEntry[]{
                 Gba.UI.Search.MainFormEntryProvider.Create(form, errorNotifier),
-                Thracia.UI.Search.MainFormEntryProvider.Create(form, errorNotifier));
+//                Thracia.UI.Search.MainFormEntryProvider.Create(form, errorNotifier),
+            };
+            form.SetEntries(entries);
 
+            form.StartPosition = FormStartPosition.CenterScreen;
             Application.Run(form);
         }
     }

@@ -63,9 +63,29 @@ namespace FERNGSolver.FalconKnightTool.UI {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap CursorTest {
+        internal static System.Drawing.Bitmap CursorDrag {
             get {
-                object obj = ResourceManager.GetObject("CursorTest", resourceCulture);
+                object obj = ResourceManager.GetObject("CursorDrag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap CursorStart {
+            get {
+                object obj = ResourceManager.GetObject("CursorStart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap CursorGrey {
+            get {
+                object obj = ResourceManager.GetObject("CursorGrey", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -124,6 +124,7 @@ namespace FERNGSolver.Gba.UI.Search
                 m_FalconKnightToolForm.FormClosed += (object? sender, FormClosedEventArgs e) => {
                     m_FalconKnightToolForm = null;
                 };
+                m_FalconKnightToolForm.StartPosition = FormStartPosition.CenterScreen;
                 m_FalconKnightToolForm.Show();
             }
         }
