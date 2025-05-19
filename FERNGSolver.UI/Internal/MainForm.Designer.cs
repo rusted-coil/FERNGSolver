@@ -73,12 +73,13 @@ namespace FERNGSolver
             // 
             // SearchButton
             // 
+            SearchButton.BackColor = Color.Yellow;
             SearchButton.Location = new Point(257, 741);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(143, 32);
             SearchButton.TabIndex = 0;
             SearchButton.Text = "検索";
-            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.UseVisualStyleBackColor = false;
             // 
             // SearchResultDataGridView
             // 

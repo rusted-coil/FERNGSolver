@@ -218,6 +218,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = Color.FromArgb(255, 204, 204);
             groupBox2.Controls.Add(DefenderStatusDetailLabel);
             groupBox2.Controls.Add(DefenderStatusDetailDialogButton);
             groupBox2.Controls.Add(DefenderHpPostconditionMaxNumericUpDown);
@@ -263,7 +264,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // DefenderHpPostconditionMaxNumericUpDown
             // 
-            DefenderHpPostconditionMaxNumericUpDown.Location = new Point(210, 91);
+            DefenderHpPostconditionMaxNumericUpDown.Location = new Point(259, 91);
             DefenderHpPostconditionMaxNumericUpDown.Name = "DefenderHpPostconditionMaxNumericUpDown";
             DefenderHpPostconditionMaxNumericUpDown.Size = new Size(42, 23);
             DefenderHpPostconditionMaxNumericUpDown.TabIndex = 12;
@@ -271,7 +272,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label26
             // 
             label26.AutoSize = true;
-            label26.Location = new Point(185, 93);
+            label26.Location = new Point(234, 93);
             label26.Name = "label26";
             label26.Size = new Size(19, 15);
             label26.TabIndex = 113;
@@ -279,7 +280,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // DefenderHpPostconditionMinNumericUpDown
             // 
-            DefenderHpPostconditionMinNumericUpDown.Location = new Point(137, 91);
+            DefenderHpPostconditionMinNumericUpDown.Location = new Point(186, 91);
             DefenderHpPostconditionMinNumericUpDown.Name = "DefenderHpPostconditionMinNumericUpDown";
             DefenderHpPostconditionMinNumericUpDown.Size = new Size(42, 23);
             DefenderHpPostconditionMinNumericUpDown.TabIndex = 11;
@@ -289,9 +290,9 @@ namespace FERNGSolver.Gba.UI.Search
             FiltersByDefenderHpPostconditionCheckBox.AutoSize = true;
             FiltersByDefenderHpPostconditionCheckBox.Location = new Point(16, 92);
             FiltersByDefenderHpPostconditionCheckBox.Name = "FiltersByDefenderHpPostconditionCheckBox";
-            FiltersByDefenderHpPostconditionCheckBox.Size = new Size(115, 19);
+            FiltersByDefenderHpPostconditionCheckBox.Size = new Size(168, 19);
             FiltersByDefenderHpPostconditionCheckBox.TabIndex = 10;
-            FiltersByDefenderHpPostconditionCheckBox.Text = "戦闘終了後のHP:";
+            FiltersByDefenderHpPostconditionCheckBox.Text = "戦闘終了後のHPで絞り込み:";
             FiltersByDefenderHpPostconditionCheckBox.UseVisualStyleBackColor = true;
             // 
             // label9
@@ -393,6 +394,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.FromArgb(204, 255, 255);
             groupBox1.Controls.Add(AttackerStatusDetailLabel);
             groupBox1.Controls.Add(AttackerStatusDetailDialogButton);
             groupBox1.Controls.Add(AttackerHpPostconditionMaxNumericUpDown);
@@ -437,7 +439,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // AttackerHpPostconditionMaxNumericUpDown
             // 
-            AttackerHpPostconditionMaxNumericUpDown.Location = new Point(210, 91);
+            AttackerHpPostconditionMaxNumericUpDown.Location = new Point(259, 91);
             AttackerHpPostconditionMaxNumericUpDown.Name = "AttackerHpPostconditionMaxNumericUpDown";
             AttackerHpPostconditionMaxNumericUpDown.Size = new Size(42, 23);
             AttackerHpPostconditionMaxNumericUpDown.TabIndex = 12;
@@ -454,7 +456,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label27
             // 
             label27.AutoSize = true;
-            label27.Location = new Point(185, 93);
+            label27.Location = new Point(234, 93);
             label27.Name = "label27";
             label27.Size = new Size(19, 15);
             label27.TabIndex = 116;
@@ -465,14 +467,14 @@ namespace FERNGSolver.Gba.UI.Search
             FiltersByAttackerHpPostconditionCheckBox.AutoSize = true;
             FiltersByAttackerHpPostconditionCheckBox.Location = new Point(16, 92);
             FiltersByAttackerHpPostconditionCheckBox.Name = "FiltersByAttackerHpPostconditionCheckBox";
-            FiltersByAttackerHpPostconditionCheckBox.Size = new Size(115, 19);
+            FiltersByAttackerHpPostconditionCheckBox.Size = new Size(168, 19);
             FiltersByAttackerHpPostconditionCheckBox.TabIndex = 10;
-            FiltersByAttackerHpPostconditionCheckBox.Text = "戦闘終了後のHP:";
+            FiltersByAttackerHpPostconditionCheckBox.Text = "戦闘終了後のHPで絞り込み:";
             FiltersByAttackerHpPostconditionCheckBox.UseVisualStyleBackColor = true;
             // 
             // AttackerHpPostconditionMinNumericUpDown
             // 
-            AttackerHpPostconditionMinNumericUpDown.Location = new Point(137, 91);
+            AttackerHpPostconditionMinNumericUpDown.Location = new Point(186, 91);
             AttackerHpPostconditionMinNumericUpDown.Name = "AttackerHpPostconditionMinNumericUpDown";
             AttackerHpPostconditionMinNumericUpDown.Size = new Size(42, 23);
             AttackerHpPostconditionMinNumericUpDown.TabIndex = 11;
@@ -829,11 +831,12 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // FalconKnightToolOpenButton
             // 
-            FalconKnightToolOpenButton.Location = new Point(505, 20);
+            FalconKnightToolOpenButton.AutoSize = true;
+            FalconKnightToolOpenButton.Location = new Point(503, 20);
             FalconKnightToolOpenButton.Name = "FalconKnightToolOpenButton";
-            FalconKnightToolOpenButton.Size = new Size(75, 25);
+            FalconKnightToolOpenButton.Size = new Size(98, 25);
             FalconKnightToolOpenButton.TabIndex = 3;
-            FalconKnightToolOpenButton.Text = "補助ツール";
+            FalconKnightToolOpenButton.Text = "補助ツールを開く";
             FalconKnightToolOpenButton.UseVisualStyleBackColor = true;
             // 
             // AddsCxOffsetCheckBox
