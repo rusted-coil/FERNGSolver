@@ -2,9 +2,7 @@ using FERNGSolver.Common.Extensions;
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Gba.Application.Config;
 using FERNGSolver.Gba.Presentation.ViewContracts;
-using System.Diagnostics;
 using System.Reactive.Disposables;
-using System.Text.Json;
 
 namespace FERNGSolver.Gba.Presentation.Search.Internal
 {

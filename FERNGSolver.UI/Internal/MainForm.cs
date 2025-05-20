@@ -1,16 +1,24 @@
+using FERNGSolver.Application.Config;
 using FERNGSolver.Common.Interfaces;
-using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.Windows.Common.Interfaces;
 using FormRx.Button;
 using System.Collections;
 using System.ComponentModel;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 namespace FERNGSolver
 {
-    internal partial class MainForm : Form, IMainFormView
+    internal partial class MainForm : Form, Common.ViewContracts.IMainFormView, Presentation.ViewContracts.IMainFormView
     {
+        public IObservable<Unit> Initialized => m_Initialized;
+        AsyncSubject<Unit> m_Initialized = new AsyncSubject<Unit>();
+
+        public IObservable<Unit> PersistentConfigChanged => m_PersistentConfigChanged;
+        Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
+        private void PersistentConfigControlValueChanged(object sender, EventArgs e) => m_PersistentConfigChanged.OnNext(Unit.Default);
+
         private readonly IButton m_SearchButton;
 
         public MainForm()
@@ -41,9 +49,21 @@ namespace FERNGSolver
 
                 SearchConditionTabControl.TabPages.Add(tabPage);
             }
+
+            // とりあえずエントリーのセット=初期化完了としておく。
+            m_Initialized.OnNext(Unit.Default);
+            m_Initialized.OnCompleted();
         }
 
-        public void SelectTab(string title)
+        public void ReflectConfig(IConfig config)
+        {
+            if (!string.IsNullOrEmpty(config.SelectingTitle))
+            {
+                SelectTab(config.SelectingTitle);
+            }
+        }
+
+        private void SelectTab(string title)
         {
             for (int i = 0; i < SearchConditionTabControl.TabCount; ++i)
             {

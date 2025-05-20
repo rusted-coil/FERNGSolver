@@ -11,20 +11,19 @@ namespace FERNGSolver.UI
         {
             ApplicationConfiguration.Initialize();
 
-            var form = new MainForm();
-            var presenter = PresenterFactory.Create();
-
-            // フォームを閉じた時にpresenterをdispose
-            form.FormClosed += (object? sender, FormClosedEventArgs e) => {
-                presenter.Dispose();
-            };
-
             var serializer = new Serializer();
             var errorNotifier = new ErrorNotifier();
 
             // コンフィグを初期化
             var configService = Application.Config.ConfigServiceFactory.Create(serializer, serializer, errorNotifier);
             var gbaConfigService = Gba.Application.Config.ConfigServiceFactory.Create(serializer, serializer, errorNotifier);
+
+            // メインフォームを初期化
+            var form = new MainForm();
+            var presenter = PresenterFactory.Create(form, configService);
+            form.FormClosed += (object? sender, FormClosedEventArgs e) => {
+                presenter.Dispose();
+            };
 
             // 作品個別コントロールを初期化
             var entries = new IMainFormEntry[]{
