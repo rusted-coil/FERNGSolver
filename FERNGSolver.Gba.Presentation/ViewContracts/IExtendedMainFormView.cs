@@ -1,4 +1,6 @@
 using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Gba.Application.Config;
+using System.Reactive;
 
 namespace FERNGSolver.Gba.Presentation.ViewContracts
 {
@@ -23,5 +25,15 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// ファルコンナイト法消費回数計算用の移動力を取得します。
         /// </summary>
         int FalconKnightMethodMove { get; }
+
+        /// <summary>
+        /// コンフィグをViewに反映します。
+        /// </summary>
+        void ReflectConfig(IConfig config);
+
+        /// <summary>
+        /// 保存が必要なコンフィグが変更されたことを通知するストリームを取得します。
+        /// </summary>
+        IObservable<Unit> PersistentConfigChanged { get; }
     }
 }

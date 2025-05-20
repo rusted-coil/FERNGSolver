@@ -1,4 +1,5 @@
 using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Gba.Application.Config;
 using FERNGSolver.Gba.Presentation;
 using FERNGSolver.Gba.Presentation.Search;
 using FERNGSolver.Windows.Common;
@@ -8,12 +9,11 @@ namespace FERNGSolver.Gba.UI.Search
 {
     public static class MainFormEntryProvider
     {
-        public static IMainFormEntry Create(IMainFormView mainFormView, IErrorNotifier errorNotifier)
+        public static IMainFormEntry Create(IMainFormView mainFormView, IConfigService configService, IErrorNotifier errorNotifier)
         {
             var userControl = new MainFormUserControl(mainFormView);
-            userControl.InitializeDefaults();
 
-            var presenter = PresenterFactory.Create(userControl, errorNotifier);
+            var presenter = PresenterFactory.Create(userControl, configService, errorNotifier);
 
             // UserControlの破棄時にPresenterも破棄
             userControl.Disposed += (sender, args) => presenter.Dispose();

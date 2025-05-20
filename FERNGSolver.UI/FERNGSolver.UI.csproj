@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Application\FERNGSolver.Application.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.UI\FERNGSolver.FalconKnightTool.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Gba.UI\FERNGSolver.Gba.UI.csproj" />

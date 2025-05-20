@@ -43,6 +43,18 @@ namespace FERNGSolver
             }
         }
 
+        public void SelectTab(string title)
+        {
+            for (int i = 0; i < SearchConditionTabControl.TabCount; ++i)
+            {
+                if (SearchConditionTabControl.TabPages[i].Text == title)
+                {
+                    SearchConditionTabControl.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
         {
             SearchResultDataGridView.AutoGenerateColumns = false;

@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Interfaces;
 using FERNGSolver.Common.ViewContracts;
 using FERNGSolver.FalconKnightTool.UI;
+using FERNGSolver.Gba.Application.Config;
 using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.Character;
 using FERNGSolver.Gba.Domain.Character.Extensions;
@@ -11,6 +12,7 @@ using FERNGSolver.Gba.Presentation.ViewContracts;
 using FERNGSolver.Gba.UI.Search.Internal;
 using FormRx.Button;
 using System.Reactive;
+using System.Reactive.Subjects;
 
 namespace FERNGSolver.Gba.UI.Search
 {
@@ -18,6 +20,10 @@ namespace FERNGSolver.Gba.UI.Search
     {
         public IObservable<Unit> GetSearchButtonClicked(string title) => m_MainFormView.GetSearchButtonClicked(title);
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
+
+        public IObservable<Unit> PersistentConfigChanged => m_PersistentConfigChanged;
+        Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
+        private void PersistentConfigControlValueChanged(object sender, EventArgs e) => m_PersistentConfigChanged.OnNext(Unit.Default);
 
         // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
@@ -104,6 +110,11 @@ namespace FERNGSolver.Gba.UI.Search
 
             AttackerStatusDetailLabel.Text = m_AttackerStatusDetail.ToString();
             DefenderStatusDetailLabel.Text = m_DefenderStatusDetail.ToString();
+        }
+
+        public void ReflectConfig(IConfig config)
+        {
+            IsBindingBladeRadioButton.Checked = config.IsBindingBlade;
         }
 
         public void InitializeDefaults()

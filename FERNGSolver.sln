@@ -43,17 +43,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Gba.Application
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FERNGSolver.Thracia", "FERNGSolver.Thracia", "{DDB4EF12-CC4E-5E88-E6FC-71A802F4DE97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Thracia.UI", "FERNGSolver.Thracia.UI\FERNGSolver.Thracia.UI.csproj", "{78462127-724A-4AA9-B4E3-B7399B44B89A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Thracia.UI", "FERNGSolver.Thracia.UI\FERNGSolver.Thracia.UI.csproj", "{78462127-724A-4AA9-B4E3-B7399B44B89A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Thracia.Presentation", "FERNGSolver.Thracia.Presentation\FERNGSolver.Thracia.Presentation.csproj", "{F2C49807-D9A0-4F89-B808-95489AA27F58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Thracia.Presentation", "FERNGSolver.Thracia.Presentation\FERNGSolver.Thracia.Presentation.csproj", "{F2C49807-D9A0-4F89-B808-95489AA27F58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Thracia.Domain", "FERNGSolver.Thracia.Domain\FERNGSolver.Thracia.Domain.csproj", "{A19279BB-DD6A-4F9D-9E1B-5C83C55E5983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Thracia.Domain", "FERNGSolver.Thracia.Domain\FERNGSolver.Thracia.Domain.csproj", "{A19279BB-DD6A-4F9D-9E1B-5C83C55E5983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Thracia.Application", "FERNGSolver.Thracia.Application\FERNGSolver.Thracia.Application.csproj", "{904B0170-FDDD-41FB-A63A-13959764FFDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Thracia.Application", "FERNGSolver.Thracia.Application\FERNGSolver.Thracia.Application.csproj", "{904B0170-FDDD-41FB-A63A-13959764FFDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Thracia.Domain.Tests", "FERNGSolver.Thracia.Domain.Tests\FERNGSolver.Thracia.Domain.Tests.csproj", "{5D4F28CF-FDE9-4EC3-ACCB-FB0DB968CACC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Thracia.Domain.Tests", "FERNGSolver.Thracia.Domain.Tests\FERNGSolver.Thracia.Domain.Tests.csproj", "{5D4F28CF-FDE9-4EC3-ACCB-FB0DB968CACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Presentation", "FERNGSolver.Presentation\FERNGSolver.Presentation.csproj", "{D668E9CA-7B0E-471B-9D33-B9C07352E786}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Presentation", "FERNGSolver.Presentation\FERNGSolver.Presentation.csproj", "{D668E9CA-7B0E-471B-9D33-B9C07352E786}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Application", "FERNGSolver.Application\FERNGSolver.Application.csproj", "{13D2B1D6-FF1C-4876-819D-8F4EFCB10307}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,10 @@ Global
 		{D668E9CA-7B0E-471B-9D33-B9C07352E786}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D668E9CA-7B0E-471B-9D33-B9C07352E786}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D668E9CA-7B0E-471B-9D33-B9C07352E786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13D2B1D6-FF1C-4876-819D-8F4EFCB10307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D2B1D6-FF1C-4876-819D-8F4EFCB10307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D2B1D6-FF1C-4876-819D-8F4EFCB10307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D2B1D6-FF1C-4876-819D-8F4EFCB10307}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

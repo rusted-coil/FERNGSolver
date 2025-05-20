@@ -205,6 +205,7 @@ namespace FERNGSolver.Gba.UI.Search
             IsBindingBladeRadioButton.TabIndex = 1;
             IsBindingBladeRadioButton.Text = "封印";
             IsBindingBladeRadioButton.UseVisualStyleBackColor = true;
+            IsBindingBladeRadioButton.CheckedChanged += PersistentConfigControlValueChanged;
             // 
             // label5
             // 
@@ -908,6 +909,7 @@ namespace FERNGSolver.Gba.UI.Search
             OffsetMaxNumericUpDown.Name = "OffsetMaxNumericUpDown";
             OffsetMaxNumericUpDown.Size = new Size(60, 23);
             OffsetMaxNumericUpDown.TabIndex = 42;
+            OffsetMaxNumericUpDown.Value = new decimal(new int[] { 10000, 0, 0, 0 });
             // 
             // label22
             // 
