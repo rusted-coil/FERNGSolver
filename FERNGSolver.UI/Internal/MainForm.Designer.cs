@@ -102,7 +102,6 @@ namespace FERNGSolver
             // ツールToolStripMenuItem
             // 
             ツールToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenThraciaRngListFormMenuItem });
-            ツールToolStripMenuItem.Enabled = false;
             ツールToolStripMenuItem.Name = "ツールToolStripMenuItem";
             ツールToolStripMenuItem.Size = new Size(46, 20);
             ツールToolStripMenuItem.Text = "ツール";
