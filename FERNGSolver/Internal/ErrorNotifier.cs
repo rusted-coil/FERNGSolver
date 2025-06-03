@@ -1,6 +1,7 @@
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
+using System.Windows.Forms;
 
-namespace FERNGSolver.UI.Internal
+namespace FERNGSolver.Internal
 {
     internal sealed class ErrorNotifier : IErrorNotifier
     {

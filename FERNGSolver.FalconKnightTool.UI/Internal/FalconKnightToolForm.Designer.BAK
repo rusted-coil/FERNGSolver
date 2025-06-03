@@ -34,7 +34,7 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
             GridCanvas = new Path.GridCanvas();
             m_CurrentPathText = new Label();
             label1 = new Label();
-            GridCountNumericUpDown = new NumericUpDownEx();
+            GridCountNumericUpDown = new Windows.Common.Controls.NumericUpDownEx();
             ((System.ComponentModel.ISupportInitialize)GridCountNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -108,6 +108,6 @@ namespace FERNGSolver.FalconKnightTool.UI.Internal
         private Path.GridCanvas GridCanvas;
         private Label m_CurrentPathText;
         private Label label1;
-        private NumericUpDownEx GridCountNumericUpDown;
+        private Windows.Common.Controls.NumericUpDownEx GridCountNumericUpDown;
     }
 }

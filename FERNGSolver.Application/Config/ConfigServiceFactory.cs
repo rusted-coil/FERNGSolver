@@ -1,12 +1,11 @@
-using FERNGSolver.Common.Interfaces;
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
 
 namespace FERNGSolver.Application.Config
 {
     public static class ConfigServiceFactory
     {
         /// <summary>
-        /// GBAの設定関連のサービスを提供するインターフェースを取得します。
+        /// メインフォームの設定関連のサービスを提供するインターフェースを取得します。
         /// </summary>
         public static IConfigService Create(ISerializer serializer, IDeserializer deserializer, IErrorNotifier errorNotifier)
         {

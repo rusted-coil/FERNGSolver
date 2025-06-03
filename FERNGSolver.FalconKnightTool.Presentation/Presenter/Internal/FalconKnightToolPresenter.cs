@@ -1,5 +1,5 @@
-using FERNGSolver.Common.Extensions;
-using FERNGSolver.Common.Types;
+using FERNGSolver.Common.Domain.Types;
+using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.FalconKnightTool.Presentation.ViewContracts;
 using System.Reactive.Disposables;
 using System.Text;

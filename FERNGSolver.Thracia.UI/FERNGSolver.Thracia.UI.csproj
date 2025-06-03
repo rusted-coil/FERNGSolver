@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Common.UI\FERNGSolver.Common.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.Presentation\FERNGSolver.Thracia.Presentation.csproj" />
-    <ProjectReference Include="..\FERNGSolver.Windows.Common\FERNGSolver.Windows.Common.csproj" />
   </ItemGroup>
 
 </Project>

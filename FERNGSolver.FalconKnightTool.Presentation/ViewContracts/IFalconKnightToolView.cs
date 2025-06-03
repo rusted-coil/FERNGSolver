@@ -1,4 +1,4 @@
-using FERNGSolver.Common.Types;
+using FERNGSolver.Common.Domain.Types;
 using System.Reactive;
 
 namespace FERNGSolver.FalconKnightTool.Presentation.ViewContracts

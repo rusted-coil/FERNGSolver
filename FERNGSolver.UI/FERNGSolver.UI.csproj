@@ -1,21 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FERNGSolver.Application\FERNGSolver.Application.csproj" />
-    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
-    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.UI\FERNGSolver.FalconKnightTool.UI.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Common.Presentation\FERNGSolver.Common.Presentation.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Common.UI\FERNGSolver.Common.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Gba.UI\FERNGSolver.Gba.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Presentation\FERNGSolver.Presentation.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.UI\FERNGSolver.Thracia.UI.csproj" />
-    <ProjectReference Include="..\FERNGSolver.Windows.Common\FERNGSolver.Windows.Common.csproj" />
+    <ProjectReference Include="..\FormRx\FormRx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Internal\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 using FERNGSolver.Application.Config;
-using FERNGSolver.Common.Interfaces;
-using FERNGSolver.Windows.Common.Interfaces;
+using FERNGSolver.Common.Presentation.Interfaces;
+using FERNGSolver.Common.UI.Interfaces;
 using FormRx.Button;
 using System.Collections;
 using System.ComponentModel;
@@ -8,9 +8,9 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
-namespace FERNGSolver
+namespace FERNGSolver.UI.Internal
 {
-    internal partial class MainForm : Form, Common.ViewContracts.IMainFormView, Presentation.ViewContracts.IMainFormView
+    internal partial class MainForm : Form, Common.Presentation.ViewContracts.IMainFormView, Presentation.ViewContracts.IMainFormView
     {
         public IObservable<Unit> Initialized => m_Initialized;
         AsyncSubject<Unit> m_Initialized = new AsyncSubject<Unit>();

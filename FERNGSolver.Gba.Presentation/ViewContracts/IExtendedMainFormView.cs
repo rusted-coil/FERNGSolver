@@ -1,4 +1,4 @@
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.Gba.Application.Config;
 using System.Reactive;
 

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FERNGSolver.Common\FERNGSolver.Common.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Common.Domain\FERNGSolver.Common.Domain.csproj" />
   </ItemGroup>
 
 </Project>

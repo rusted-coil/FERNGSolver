@@ -1,5 +1,4 @@
-using FERNGSolver.Common.Interfaces;
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
 
 namespace FERNGSolver.Gba.Application.Config.Internal
 {

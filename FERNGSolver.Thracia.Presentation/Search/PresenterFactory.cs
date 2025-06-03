@@ -1,4 +1,4 @@
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Thracia.Presentation.ViewContracts;
 
 namespace FERNGSolver.Thracia.Presentation.Search

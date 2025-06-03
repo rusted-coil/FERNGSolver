@@ -1,6 +1,6 @@
-using FERNGSolver.Windows.Common.Interfaces;
+using FERNGSolver.Common.UI.Interfaces;
 
-namespace FERNGSolver.Windows.Common
+namespace FERNGSolver.Common.UI
 {
     public class MainFormEntry : IMainFormEntry
     {

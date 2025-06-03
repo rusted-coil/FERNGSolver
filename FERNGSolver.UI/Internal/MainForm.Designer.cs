@@ -1,4 +1,4 @@
-namespace FERNGSolver
+namespace FERNGSolver.UI.Internal
 {
     partial class MainForm
     {

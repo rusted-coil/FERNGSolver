@@ -1,4 +1,4 @@
-namespace FERNGSolver.Common.ViewContracts
+namespace FERNGSolver.Common.Application.Interfaces
 {
     /// <summary>
     /// エラーを通知するためのインターフェースです。

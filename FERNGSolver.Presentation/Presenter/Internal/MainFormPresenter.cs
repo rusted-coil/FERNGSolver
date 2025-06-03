@@ -1,5 +1,5 @@
 using FERNGSolver.Application.Config;
-using FERNGSolver.Common.Extensions;
+using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.Presentation.ViewContracts;
 using System.Reactive.Disposables;
 

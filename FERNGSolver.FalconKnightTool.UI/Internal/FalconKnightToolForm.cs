@@ -1,4 +1,4 @@
-using FERNGSolver.Common.Types;
+using FERNGSolver.Common.Domain.Types;
 using FERNGSolver.FalconKnightTool.Presentation.ViewContracts;
 using FormRx.Button;
 using System.Reactive;

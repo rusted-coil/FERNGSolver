@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Common.UI\FERNGSolver.Common.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.UI\FERNGSolver.FalconKnightTool.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Gba.Domain\FERNGSolver.Gba.Domain.csproj" />
     <ProjectReference Include="..\FERNGSolver.Gba.Presentation\FERNGSolver.Gba.Presentation.csproj" />
-    <ProjectReference Include="..\FERNGSolver.Windows.Common\FERNGSolver.Windows.Common.csproj" />
     <ProjectReference Include="..\FormRx\FormRx.csproj" />
   </ItemGroup>
 

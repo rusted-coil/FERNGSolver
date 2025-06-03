@@ -1,10 +1,10 @@
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Gba.Application.Search;
 using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.RNG;
-using FERNGSolver.Gba.Presentation.ViewContracts;
 using FERNGSolver.Gba.Presentation.Search.Internal;
+using FERNGSolver.Gba.Presentation.ViewContracts;
 
 namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 {

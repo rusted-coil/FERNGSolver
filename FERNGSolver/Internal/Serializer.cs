@@ -1,7 +1,7 @@
-using FERNGSolver.Common.Interfaces;
+using FERNGSolver.Common.Application.Interfaces;
 using System.Text.Json;
 
-namespace FERNGSolver.UI.Internal
+namespace FERNGSolver.Internal
 {
     internal sealed class Serializer : ISerializer, IDeserializer
     {

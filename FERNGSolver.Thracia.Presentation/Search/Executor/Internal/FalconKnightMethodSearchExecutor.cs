@@ -1,4 +1,4 @@
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Gba.Presentation.Search.Internal;
 using FERNGSolver.Thracia.Application.Search;

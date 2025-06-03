@@ -1,4 +1,4 @@
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Gba.Application.Config;
 using FERNGSolver.Gba.Presentation.ViewContracts;
 

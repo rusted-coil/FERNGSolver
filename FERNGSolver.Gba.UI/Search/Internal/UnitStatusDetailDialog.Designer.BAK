@@ -1,5 +1,3 @@
-using FERNGSolver.Common.UI.Controls;
-
 namespace FERNGSolver.Gba.UI.Search.Internal
 {
     partial class UnitStatusDetailDialog
@@ -31,20 +29,20 @@ namespace FERNGSolver.Gba.UI.Search.Internal
         private void InitializeComponent()
         {
             label1 = new Label();
-            LevelNumericUpDown = new NumericUpDownEx();
+            LevelNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             label2 = new Label();
-            MaxHpNumericUpDown = new NumericUpDownEx();
+            MaxHpNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             IsWeaponTypeNormalRadioButton = new RadioButton();
             IsWeaponTypeBraveRadioButton = new RadioButton();
             groupBox1 = new GroupBox();
             label3 = new Label();
-            LuckNumericUpDown = new NumericUpDownEx();
+            LuckNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             IsWeaponTypeAbsorbRadioButton = new RadioButton();
             IsWeaponTypeCursedRadioButton = new RadioButton();
             IsWeaponTypePoisonRadioButton = new RadioButton();
             groupBox2 = new GroupBox();
             label4 = new Label();
-            OpponentDefNumericUpDown = new NumericUpDownEx();
+            OpponentDefNumericUpDown = new FERNGSolver.Windows.Common.Controls.NumericUpDownEx();
             IsSkillTypeSilencerRadioButton = new RadioButton();
             IsSkillTypeGreatShieldRadioButton = new RadioButton();
             IsSkillTypePierceRadioButton = new RadioButton();
@@ -367,9 +365,9 @@ namespace FERNGSolver.Gba.UI.Search.Internal
         #endregion
 
         private Label label1;
-        private NumericUpDownEx LevelNumericUpDown;
+        private Windows.Common.Controls.NumericUpDownEx LevelNumericUpDown;
         private Label label2;
-        private NumericUpDownEx MaxHpNumericUpDown;
+        private Windows.Common.Controls.NumericUpDownEx MaxHpNumericUpDown;
         private RadioButton IsWeaponTypeNormalRadioButton;
         private RadioButton IsWeaponTypeBraveRadioButton;
         private GroupBox groupBox1;
@@ -387,9 +385,9 @@ namespace FERNGSolver.Gba.UI.Search.Internal
         private RadioButton IsBossTypeNoneRadioButton;
         private RadioButton IsBossTypeBossRadioButton;
         private Label label3;
-        private NumericUpDownEx LuckNumericUpDown;
+        private Windows.Common.Controls.NumericUpDownEx LuckNumericUpDown;
         private Label label4;
-        private NumericUpDownEx OpponentDefNumericUpDown;
+        private Windows.Common.Controls.NumericUpDownEx OpponentDefNumericUpDown;
         private Button OkButton;
     }
 }

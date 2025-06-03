@@ -1,5 +1,8 @@
-namespace FERNGSolver.Common.Interfaces
+namespace FERNGSolver.Common.Application.Interfaces
 {
+    /// <summary>
+    /// ファイルの読み込みを行うためのインターフェースです。
+    /// </summary>
     public interface IDeserializer
     {
         /// <summary>

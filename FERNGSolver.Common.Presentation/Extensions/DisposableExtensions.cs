@@ -1,4 +1,4 @@
-namespace FERNGSolver.Common.Extensions
+namespace FERNGSolver.Common.Presentation.Extensions
 {
     public static class DisposableExtensions
     {

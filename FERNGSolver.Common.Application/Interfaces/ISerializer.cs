@@ -1,5 +1,8 @@
-namespace FERNGSolver.Common.Interfaces
+namespace FERNGSolver.Common.Application.Interfaces
 {
+    /// <summary>
+    /// ファイルへの保存を行うためのインターフェースです。
+    /// </summary>
     public interface ISerializer
     {
         /// <summary>

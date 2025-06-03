@@ -1,7 +1,7 @@
-using FERNGSolver.Common.Interfaces;
+using FERNGSolver.Common.Presentation.Interfaces;
 using System.Reactive;
 
-namespace FERNGSolver.Common.ViewContracts
+namespace FERNGSolver.Common.Presentation.ViewContracts
 {
     public interface IMainFormView
     {

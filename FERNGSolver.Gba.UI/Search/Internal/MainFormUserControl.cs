@@ -1,5 +1,5 @@
-using FERNGSolver.Common.Interfaces;
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Presentation.Interfaces;
+using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.FalconKnightTool.UI;
 using FERNGSolver.Gba.Application.Config;
 using FERNGSolver.Gba.Application.Search.Strategy;

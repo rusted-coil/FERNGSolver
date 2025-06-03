@@ -1,4 +1,4 @@
-namespace FERNGSolver.Windows.Common.Interfaces
+namespace FERNGSolver.Common.UI.Interfaces
 {
     /// <summary>
     /// メインフォームに渡す、1タイトルごとの依存物をまとめたエントリーのインターフェースです。

@@ -1,4 +1,4 @@
-using FERNGSolver.Common.Interfaces;
+using FERNGSolver.Common.Presentation.Interfaces;
 
 namespace FERNGSolver.Gba.Presentation.Search.Internal
 {

@@ -1,8 +1,9 @@
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
+using FERNGSolver.Common.Presentation.ViewContracts;
+using FERNGSolver.Common.UI;
+using FERNGSolver.Common.UI.Interfaces;
 using FERNGSolver.Thracia.Presentation;
 using FERNGSolver.Thracia.Presentation.Search;
-using FERNGSolver.Windows.Common;
-using FERNGSolver.Windows.Common.Interfaces;
 
 namespace FERNGSolver.Thracia.UI.Search
 {

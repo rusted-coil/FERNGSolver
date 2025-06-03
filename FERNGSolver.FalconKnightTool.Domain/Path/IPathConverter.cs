@@ -1,4 +1,4 @@
-using FERNGSolver.Common.Types;
+using FERNGSolver.Common.Domain.Types;
 
 namespace FERNGSolver.FalconKnightTool.Domain.Path
 {

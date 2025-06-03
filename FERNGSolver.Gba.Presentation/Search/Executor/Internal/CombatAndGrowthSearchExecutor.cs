@@ -1,5 +1,5 @@
-using FERNGSolver.Common.Interfaces;
-using FERNGSolver.Common.ViewContracts;
+using FERNGSolver.Common.Application.Interfaces;
+using FERNGSolver.Common.Presentation.Interfaces;
 using FERNGSolver.Gba.Application.Search;
 using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.Combat;

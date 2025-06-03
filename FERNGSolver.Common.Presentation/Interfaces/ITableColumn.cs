@@ -1,4 +1,4 @@
-namespace FERNGSolver.Common.Interfaces
+namespace FERNGSolver.Common.Presentation.Interfaces
 {
     /// <summary>
     /// テーブル表示の列情報の共通インターフェースです。

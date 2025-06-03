@@ -1,4 +1,4 @@
-namespace FERNGSolver.Common.Types
+namespace FERNGSolver.Common.Domain.Types
 {
     public struct GridPosition
     {

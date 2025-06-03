@@ -1,4 +1,4 @@
-namespace FERNGSolver.Windows.Common.Controls
+namespace FERNGSolver.Common.UI.Controls
 {
     public class NumericUpDownEx : NumericUpDown
     {

@@ -1,4 +1,4 @@
-using FERNGSolver.Common.UI.Controls;
+using FERNGSolver.Windows.Common.Controls;
 
 namespace FERNGSolver.Gba.UI.Search
 {
