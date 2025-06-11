@@ -19,6 +19,8 @@ namespace FERNGSolver.UI.Internal
         Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
         private void PersistentConfigControlValueChanged(object sender, EventArgs e) => m_PersistentConfigChanged.OnNext(Unit.Default);
 
+        private Form? m_GenealogyRngListForm = null;
+
         private readonly IButton m_SearchButton;
 
         public MainForm()
@@ -100,6 +102,19 @@ namespace FERNGSolver.UI.Internal
         {
             var form = Thracia.UI.RngList.RngListFormLauncher.CreateForm();
             form.Show();
+        }
+
+        private void OpenGenealogyRngListFormMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_GenealogyRngListForm != null)
+            {
+                m_GenealogyRngListForm.Focus();
+            }
+            else
+            {
+                m_GenealogyRngListForm = Genealogy.UI.RngList.RngListFormLauncher.CreateForm();
+                m_GenealogyRngListForm.Show();
+            }
         }
     }
 }

@@ -35,6 +35,7 @@ namespace FERNGSolver.UI.Internal
             SearchResultDataGridView = new DataGridView();
             menuStrip1 = new MenuStrip();
             ツールToolStripMenuItem = new ToolStripMenuItem();
+            OpenGenealogyRngListFormMenuItem = new ToolStripMenuItem();
             OpenThraciaRngListFormMenuItem = new ToolStripMenuItem();
             SearchConditionTabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
@@ -101,15 +102,22 @@ namespace FERNGSolver.UI.Internal
             // 
             // ツールToolStripMenuItem
             // 
-            ツールToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenThraciaRngListFormMenuItem });
+            ツールToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenGenealogyRngListFormMenuItem, OpenThraciaRngListFormMenuItem });
             ツールToolStripMenuItem.Name = "ツールToolStripMenuItem";
             ツールToolStripMenuItem.Size = new Size(46, 20);
             ツールToolStripMenuItem.Text = "ツール";
             // 
+            // OpenGenealogyRngListFormMenuItem
+            // 
+            OpenGenealogyRngListFormMenuItem.Name = "OpenGenealogyRngListFormMenuItem";
+            OpenGenealogyRngListFormMenuItem.Size = new Size(192, 22);
+            OpenGenealogyRngListFormMenuItem.Text = "聖戦の系譜 乱数ビューア";
+            OpenGenealogyRngListFormMenuItem.Click += OpenGenealogyRngListFormMenuItem_Click;
+            // 
             // OpenThraciaRngListFormMenuItem
             // 
             OpenThraciaRngListFormMenuItem.Name = "OpenThraciaRngListFormMenuItem";
-            OpenThraciaRngListFormMenuItem.Size = new Size(186, 22);
+            OpenThraciaRngListFormMenuItem.Size = new Size(192, 22);
             OpenThraciaRngListFormMenuItem.Text = "トラキア776 乱数ビューア";
             OpenThraciaRngListFormMenuItem.Click += OpenThraciaRngListFormMenuItem_Click;
             // 
@@ -143,5 +151,6 @@ namespace FERNGSolver.UI.Internal
         private MenuStrip menuStrip1;
         private ToolStripMenuItem ツールToolStripMenuItem;
         private ToolStripMenuItem OpenThraciaRngListFormMenuItem;
+        private ToolStripMenuItem OpenGenealogyRngListFormMenuItem;
     }
 }
