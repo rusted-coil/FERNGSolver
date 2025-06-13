@@ -29,16 +29,26 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
         private void InitializeComponent()
         {
             label1 = new Label();
+            PositionNumericUpDown = new Common.UI.Controls.NumericUpDownEx();
+            ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(3, 0);
+            label1.Location = new Point(3, 7);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(46, 15);
             label1.TabIndex = 0;
-            label1.Text = "消費数";
+            label1.Text = "消費数:";
+            // 
+            // PositionNumericUpDown
+            // 
+            PositionNumericUpDown.Location = new Point(48, 5);
+            PositionNumericUpDown.Name = "PositionNumericUpDown";
+            PositionNumericUpDown.Size = new Size(70, 23);
+            PositionNumericUpDown.TabIndex = 1;
+            PositionNumericUpDown.ValueChanged += PositionNumericUpDown_ValueChanged;
             // 
             // RngViewUserControl
             // 
@@ -46,9 +56,11 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(PositionNumericUpDown);
             Controls.Add(label1);
             Name = "RngViewUserControl";
             Size = new Size(398, 148);
+            ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -56,5 +68,6 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
         #endregion
 
         private Label label1;
+        private Common.UI.Controls.NumericUpDownEx PositionNumericUpDown;
     }
 }

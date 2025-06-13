@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Common.UI\FERNGSolver.Common.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Genealogy.Presentation\FERNGSolver.Genealogy.Presentation.csproj" />
   </ItemGroup>
 

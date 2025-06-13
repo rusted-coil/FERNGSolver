@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Common.Presentation\FERNGSolver.Common.Presentation.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Genealogy.Domain\FERNGSolver.Genealogy.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
