@@ -4,6 +4,7 @@ using FERNGSolver.Common.Presentation.Interfaces;
 using FERNGSolver.Gba.Application.Search;
 using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.Combat;
+using FERNGSolver.Gba.Domain.Combat.Service;
 using FERNGSolver.Gba.Domain.Growth;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.Search.Internal;
@@ -181,7 +182,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
             if (mainFormView.ContainsCombat)
             {
-                var combatResult = CombatSimulator.Simulate(rng, CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView), mainFormView.IsBindingBlade);
+                var combatResult = CombatSimulator.Simulate(CombatRngServiceFactory.Create(rng), CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView), mainFormView.IsBindingBlade);
                 viewModel.SetCombatResult(combatResult);
             }
 

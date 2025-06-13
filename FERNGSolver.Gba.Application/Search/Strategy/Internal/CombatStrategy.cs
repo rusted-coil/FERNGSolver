@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Application.Search.Strategy;
 using FERNGSolver.Common.Domain.RNG;
 using FERNGSolver.Gba.Domain.Combat;
+using FERNGSolver.Gba.Domain.Combat.Service;
 
 namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
 {
@@ -15,7 +16,7 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
 
         public bool CheckAndAdvance(IRng rng)
         {
-            var result = CombatSimulator.Simulate(rng, m_Args.Attacker, m_Args.Defender, m_Args.IsBindingBlade);
+            var result = CombatSimulator.Simulate(CombatRngServiceFactory.Create(rng), m_Args.Attacker, m_Args.Defender, m_Args.IsBindingBlade);
 
             // HP事後条件チェック
             if (result.AttackerHp < m_Args.AttackerHpPostconditionMin || result.AttackerHp > m_Args.AttackerHpPostconditionMax

@@ -1,4 +1,4 @@
-using FERNGSolver.Common.Domain.RNG;
+using FERNGSolver.Gba.Domain.Combat.Service;
 
 namespace FERNGSolver.Gba.Domain.Combat
 {
@@ -19,7 +19,7 @@ namespace FERNGSolver.Gba.Domain.Combat
         /// <summary>
         /// RNGを進め、戦闘をシミュレートした結果を得ます。
         /// </summary>
-        public static Result Simulate(IRng rng, ICombatUnit attacker, ICombatUnit defender, bool isBindingBlade)
+        public static Result Simulate(ICombatRngService rngService, ICombatUnit attacker, ICombatUnit defender, bool isBindingBlade)
         {
             var attackerUnit = new Unit(attacker);
             var defenderUnit = new Unit(defender);
@@ -31,13 +31,13 @@ namespace FERNGSolver.Gba.Domain.Combat
             {
                 if (a < attacker.PhaseCount)
                 {
-                    if (!ExecutePhase(rng, attackerUnit, defenderUnit, isBindingBlade))
+                    if (!ExecutePhase(rngService, attackerUnit, defenderUnit, isBindingBlade))
                     {
                         break;
                     }
                     if (attacker.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
-                        if (!ExecutePhase(rng, attackerUnit, defenderUnit, isBindingBlade))
+                        if (!ExecutePhase(rngService, attackerUnit, defenderUnit, isBindingBlade))
                         {
                             break;
                         }
@@ -47,13 +47,13 @@ namespace FERNGSolver.Gba.Domain.Combat
 
                 if (d < defender.PhaseCount)
                 {
-                    if (!ExecutePhase(rng, defenderUnit, attackerUnit, isBindingBlade))
+                    if (!ExecutePhase(rngService, defenderUnit, attackerUnit, isBindingBlade))
                     {
                         break;
                     }
                     if (defender.StatusDetail.WeaponType == Const.WeaponType.Brave)
                     {
-                        if (!ExecutePhase(rng, defenderUnit, attackerUnit, isBindingBlade))
+                        if (!ExecutePhase(rngService, defenderUnit, attackerUnit, isBindingBlade))
                         {
                             break;
                         }
@@ -88,7 +88,7 @@ namespace FERNGSolver.Gba.Domain.Combat
 
         // フェーズを実行し、Unitを更新する
         // どちらかが死んでいたらfalseを返す
-        private static bool ExecutePhase(IRng rng, Unit attackerSide, Unit defenderSide, bool isBindingBlade)
+        private static bool ExecutePhase(ICombatRngService rngService, Unit attackerSide, Unit defenderSide, bool isBindingBlade)
         {
             bool isHit = false;
             bool isGreatShieldActive = false;
@@ -97,23 +97,23 @@ namespace FERNGSolver.Gba.Domain.Combat
             int damage = 0;
 
             // 必的判定
-            if (attackerSide.HasSureStrike() && rng.Next() < attackerSide.GetLevel())
+            if (attackerSide.HasSureStrike() && rngService.CheckActivateSureStrike(attackerSide.GetLevel()))
             {
                 isHit = true;
             }
             // 命中判定
-            else if ((rng.Next() + rng.Next()) / 2 < attackerSide.CombatUnit.HitRate)
+            else if (rngService.CheckHit(attackerSide.CombatUnit.HitRate))
             {
                 isHit = true;
 
                 // 大盾判定
                 // 武器が毒/ストーンの時、大盾判定をスキップ
-                if (!attackerSide.IsPoisonWeapon() && defenderSide.HasGreatShield() && rng.Next() < defenderSide.GetLevel())
+                if (!attackerSide.IsPoisonWeapon() && defenderSide.HasGreatShield() && rngService.CheckActivateGreatShield(defenderSide.GetLevel()))
                 {
                     isGreatShieldActive = true;
                 }
                 // 貫通判定
-                else if(attackerSide.HasPierce() && rng.Next() < attackerSide.GetLevel())
+                else if(attackerSide.HasPierce() && rngService.CheckActivatePierce(attackerSide.GetLevel()))
                 {
                     isPierceActive = true;
                 }
@@ -125,14 +125,14 @@ namespace FERNGSolver.Gba.Domain.Combat
                 int power = (isPierceActive ? attackerSide.CombatUnit.Power + attackerSide.CombatUnit.StatusDetail.OpponentDefense : attackerSide.CombatUnit.Power);
 
                 // 命中していたら必殺判定
-                if (rng.Next() < attackerSide.CombatUnit.CriticalRate)
+                if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate))
                 {
                     // 必殺が出たら瞬殺判定（封印以外）
                     // 瞬殺のみスキルを持っていなくても判定する
                     // 敵がラスボスなら瞬殺判定をスキップ
                     if(!isBindingBlade
                         && defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss
-                        && rng.Next() < Util.GetSilencerRate(defenderSide.CombatUnit.StatusDetail.BossType)
+                        && rngService.CheckActivateSilencer(defenderSide.CombatUnit.StatusDetail.BossType)
                         && attackerSide.HasSilencer())
                     {
                         isSilencerActive = true;
@@ -148,7 +148,7 @@ namespace FERNGSolver.Gba.Domain.Combat
 
                 // デビルアクス判定
                 // アサシンは斧を持てないので呪いと瞬殺は両立しない
-                if (attackerSide.IsCursedWeapon() && rng.Next() < Util.GetCurseRate(attackerSide.CombatUnit.StatusDetail.Luck))
+                if (attackerSide.IsCursedWeapon() && rngService.CheckActivateCurse(attackerSide.CombatUnit.StatusDetail.Luck))
                 {
                     attackerSide.CurrentHp -= damage;
                 }
