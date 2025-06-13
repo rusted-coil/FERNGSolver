@@ -1,3 +1,4 @@
+using FERNGSolver.Common.Application.Search.Strategy;
 using FERNGSolver.Common.Domain.RNG;
 using FERNGSolver.Gba.Domain.Combat;
 

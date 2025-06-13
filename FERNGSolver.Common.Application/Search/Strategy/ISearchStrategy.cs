@@ -1,6 +1,6 @@
 using FERNGSolver.Common.Domain.RNG;
 
-namespace FERNGSolver.Gba.Application.Search.Strategy
+namespace FERNGSolver.Common.Application.Search.Strategy
 {
     public interface ISearchStrategy
     {

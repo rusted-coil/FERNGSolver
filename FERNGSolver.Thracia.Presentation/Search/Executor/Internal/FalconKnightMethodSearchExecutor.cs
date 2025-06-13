@@ -1,8 +1,8 @@
 using FERNGSolver.Common.Application.Interfaces;
+using FERNGSolver.Common.Application.Search.Strategy;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Gba.Presentation.Search.Internal;
 using FERNGSolver.Thracia.Application.Search;
-using FERNGSolver.Thracia.Application.Search.Strategy;
 using FERNGSolver.Thracia.Domain.RNG;
 using FERNGSolver.Thracia.Presentation.ViewContracts;
 using System.Text;
@@ -41,11 +41,11 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
                 errorNotifier.NotifyError($"cx列のパースに失敗しました。\n-----\n{e.ToString()}");
                 return Array.Empty<ISearchResult>();
             }
-            var strategy = StrategyFactory.CreateFalconKnightPatternStrategy(cxPattern);
+            var strategy = CommonStrategyFactory.CreateFalconKnightPatternStrategy(cxPattern, Util.IsRngValueOk);
 
             for (int i = 0; i < Domain.RNG.Const.TableCount; ++i)
             {
-                IRng rng = RngFactory.Create(i);
+                var rng = RngFactory.Create(i);
                 results.AddRange(Searcher.Search(i, rng, mainFormView.OffsetMin, mainFormView.OffsetMax, strategy));
             }
             return results;

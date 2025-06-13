@@ -1,6 +1,6 @@
-using FERNGSolver.Thracia.Domain.RNG;
+using FERNGSolver.Common.Domain.RNG;
 
-namespace FERNGSolver.Thracia.Application.Search.Strategy.Internal
+namespace FERNGSolver.Common.Application.Search.Strategy.Internal
 {
     internal sealed class SequentialStrategy : ISearchStrategy
     {

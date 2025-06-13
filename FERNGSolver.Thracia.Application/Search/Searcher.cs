@@ -1,5 +1,5 @@
-using FERNGSolver.Thracia.Application.Search.Strategy;
-using FERNGSolver.Thracia.Domain.RNG;
+using FERNGSolver.Common.Application.Search.Strategy;
+using FERNGSolver.Common.Domain.RNG;
 
 namespace FERNGSolver.Thracia.Application.Search
 {
@@ -16,11 +16,11 @@ namespace FERNGSolver.Thracia.Application.Search
         /// <param name="positionMax">検索する最大の消費数</param>
         /// <param name="strategy">条件をチェックするストラテジ</param>
         /// <returns></returns>
-        public static IReadOnlyList<ISearchResult> Search(int tableIndex, IRng initialRng, int positionMin, int positionMax, ISearchStrategy strategy)
+        public static IReadOnlyList<ISearchResult> Search(int tableIndex, ICloneableRng initialRng, int positionMin, int positionMax, ISearchStrategy strategy)
         {
             var result = new List<ISearchResult>();
 
-            var currentRng = RngFactory.CreateFromRng(initialRng);
+            var currentRng = initialRng.Clone();
             for (int i = 0; i < positionMin; ++i)
             {
                 currentRng.Next();
@@ -28,7 +28,7 @@ namespace FERNGSolver.Thracia.Application.Search
 
             for (int i = 0; i <= positionMax - positionMin; ++i)
             {
-                var tempRng = RngFactory.CreateFromRng(currentRng);
+                var tempRng = currentRng.Clone();
                 if (strategy.CheckAndAdvance(tempRng))
                 {
                     result.Add(new Internal.SearchResult(tableIndex, i));

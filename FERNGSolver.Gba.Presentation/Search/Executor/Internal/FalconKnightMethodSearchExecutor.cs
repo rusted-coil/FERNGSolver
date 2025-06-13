@@ -1,7 +1,7 @@
 using FERNGSolver.Common.Application.Interfaces;
+using FERNGSolver.Common.Application.Search.Strategy;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Gba.Application.Search;
-using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.Search.Internal;
 using FERNGSolver.Gba.Presentation.ViewContracts;
@@ -40,7 +40,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             }
             return Searcher.Search(
                 rng, mainFormView.CurrentPosition + mainFormView.OffsetMin, mainFormView.CurrentPosition + mainFormView.OffsetMax,
-                StrategyFactory.CreateFalconKnightPatternStrategy(cxPattern));
+                CommonStrategyFactory.CreateFalconKnightPatternStrategy(cxPattern, Util.IsRngValueOk));
         }
 
         private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)

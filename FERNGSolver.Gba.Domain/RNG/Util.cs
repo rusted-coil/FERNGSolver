@@ -1,11 +1,11 @@
 namespace FERNGSolver.Gba.Domain.RNG
 {
-    public static class Extensions
+    public static class Util
     {
         /// <summary>
         /// 乱数値が◯✕法で◯にあたるかどうかを返します。
         /// </summary>
-        public static bool ToCx(this int value)
+        public static bool IsRngValueOk(int value)
         {
             return value <= 49; // GBA版は49以下で◯
         }

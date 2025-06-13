@@ -1,7 +1,8 @@
+using FERNGSolver.Common.Domain.RNG;
 
 namespace FERNGSolver.Thracia.Domain.RNG.Internal
 {
-    internal sealed class Rng : IRng
+    internal sealed class Rng : ICloneableRng
     {
         public IReadOnlyList<int> States => m_Table;
         public int CurrentIndex => m_Cursor;
@@ -40,6 +41,11 @@ namespace FERNGSolver.Thracia.Domain.RNG.Internal
                 RefreshTable();
             }
             return m_Table[m_Cursor] - 1; // 乱数表上は1～100なので0～99に直す
+        }
+
+        public ICloneableRng Clone()
+        {
+            return new Rng(m_Table, m_Cursor);
         }
     }
 }

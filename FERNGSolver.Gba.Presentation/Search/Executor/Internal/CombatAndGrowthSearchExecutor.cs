@@ -1,4 +1,5 @@
 using FERNGSolver.Common.Application.Interfaces;
+using FERNGSolver.Common.Application.Search.Strategy;
 using FERNGSolver.Common.Presentation.Interfaces;
 using FERNGSolver.Gba.Application.Search;
 using FERNGSolver.Gba.Application.Search.Strategy;
@@ -37,7 +38,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
             return Searcher.Search(
                 rng, mainFormView.CurrentPosition + mainFormView.OffsetMin, mainFormView.CurrentPosition + mainFormView.OffsetMax,
-                StrategyFactory.CreateSequentialStrategy(strategies.ToArray()));
+                CommonStrategyFactory.CreateSequentialStrategy(strategies.ToArray()));
         }
 
         private static ISearchStrategy CreateCombatStrategy(ICombatSettingsView view)
@@ -148,7 +149,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             int vc = 0, hc = 0;
             for (int i = 0; i < offset; ++i)
             {
-                if (rng.Next().ToCx())
+                if (Domain.RNG.Util.IsRngValueOk(rng.Next()))
                 {
                     ++h;
                     if (h == falconMove - 1)

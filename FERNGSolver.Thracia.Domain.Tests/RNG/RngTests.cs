@@ -47,13 +47,13 @@ namespace FERNGSolver.Thracia.Domain.Tests.RNG
         [TestMethod]
         public void ClonedRng_ShouldProduceSameResults()
         {
-            IRng original = RngFactory.Create(7);
+            var original = RngFactory.Create(7);
 
             // 適当に進める
             for (int i = 0; i < 50; i++) original.Next();
 
             // クローンを作成
-            IRng clone = RngFactory.CreateFromRng(original);
+            var clone = original.Clone();
 
             for (int i = 0; i < 10; i++)
             {

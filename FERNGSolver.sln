@@ -67,9 +67,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Common.UI", "FE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FERNGSolver.Genealogy", "FERNGSolver.Genealogy", "{5775DF68-C0A7-476A-BF64-311607BD8489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Genealogy.UI", "FERNGSolver.Genealogy.UI\FERNGSolver.Genealogy.UI.csproj", "{98391B37-81E5-41EB-A0C1-8B1D18AB2015}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Genealogy.UI", "FERNGSolver.Genealogy.UI\FERNGSolver.Genealogy.UI.csproj", "{98391B37-81E5-41EB-A0C1-8B1D18AB2015}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Genealogy.Presentation", "FERNGSolver.Genealogy.Presentation\FERNGSolver.Genealogy.Presentation.csproj", "{CED201E6-FE8C-4F6A-8FC0-97A23B08CD4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FERNGSolver.Genealogy.Presentation", "FERNGSolver.Genealogy.Presentation\FERNGSolver.Genealogy.Presentation.csproj", "{CED201E6-FE8C-4F6A-8FC0-97A23B08CD4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Genealogy.Domain", "FERNGSolver.Genealogy.Domain\FERNGSolver.Genealogy.Domain.csproj", "{8B440971-44E1-4441-81B0-368500CA1A39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,10 @@ Global
 		{CED201E6-FE8C-4F6A-8FC0-97A23B08CD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CED201E6-FE8C-4F6A-8FC0-97A23B08CD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CED201E6-FE8C-4F6A-8FC0-97A23B08CD4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B440971-44E1-4441-81B0-368500CA1A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B440971-44E1-4441-81B0-368500CA1A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B440971-44E1-4441-81B0-368500CA1A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B440971-44E1-4441-81B0-368500CA1A39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -207,6 +213,7 @@ Global
 		{00CC5098-1A87-4C3D-A8AE-FDAEE1C7787E} = {F8667000-7922-465D-BA01-389C6DB9C2CA}
 		{98391B37-81E5-41EB-A0C1-8B1D18AB2015} = {5775DF68-C0A7-476A-BF64-311607BD8489}
 		{CED201E6-FE8C-4F6A-8FC0-97A23B08CD4F} = {5775DF68-C0A7-476A-BF64-311607BD8489}
+		{8B440971-44E1-4441-81B0-368500CA1A39} = {5775DF68-C0A7-476A-BF64-311607BD8489}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C1D57B-9A5F-435F-8A5C-5CE76D13C833}
