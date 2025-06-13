@@ -1,3 +1,5 @@
+using FERNGSolver.Common.Domain.RNG;
+
 namespace FERNGSolver.Gba.Domain.RNG
 {
     public static class RngFactory
@@ -5,7 +7,7 @@ namespace FERNGSolver.Gba.Domain.RNG
         /// <summary>
         /// GBA作品のRNGを作成します。
         /// </summary>
-        public static IRng CreateDefault()
+        public static ICloneableRng CreateDefault()
         {
             // 初期seedはゲームの固定値を使う
             var seeds = Const.DefaultSeeds;
@@ -15,17 +17,9 @@ namespace FERNGSolver.Gba.Domain.RNG
         /// <summary>
         /// seedを指定してRNGを作成します。
         /// </summary>
-        public static IRng CreateFromSeeds(ushort seed0, ushort seed1, ushort seed2)
+        public static ICloneableRng CreateFromSeeds(ushort seed0, ushort seed1, ushort seed2)
         {
             return new Internal.Rng(seed0, seed1, seed2);
-        }
-
-        /// <summary>
-        /// Rngを複製してRNGを作成します。
-        /// </summary>
-        public static IRng CreateFromRng(IRng origin)
-        {
-            return new Internal.Rng(origin.States[0], origin.States[1], origin.States[2]);
         }
     }
 }

@@ -1,3 +1,4 @@
+using FERNGSolver.Common.Domain.RNG;
 using FERNGSolver.Gba.Domain.RNG;
 
 namespace FERNGSolver.Gba.Application.Search.Strategy.Internal

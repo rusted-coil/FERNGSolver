@@ -1,7 +1,8 @@
+using FERNGSolver.Common.Domain.RNG;
 
 namespace FERNGSolver.Gba.Domain.RNG.Internal
 {
-    internal sealed class Rng : IRng
+    internal sealed class Rng : ICloneableRng
     {
         private ushort[] state = new ushort[3];
         public IReadOnlyList<ushort> States => state;
@@ -26,6 +27,11 @@ namespace FERNGSolver.Gba.Domain.RNG.Internal
             state[0] = result;
 
             return (result * 100) >> 16;
+        }
+
+        public ICloneableRng Clone()
+        {
+            return new Rng(state[0], state[1], state[2]);
         }
     }
 }

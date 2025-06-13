@@ -23,7 +23,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
         private static IReadOnlyList<ISearchResult> ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
-            IRng rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault();
 
             List<ISearchStrategy> strategies = new List<ISearchStrategy>();
             if (mainFormView.ContainsCombat)

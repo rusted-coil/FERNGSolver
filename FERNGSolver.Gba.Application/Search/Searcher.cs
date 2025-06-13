@@ -1,3 +1,4 @@
+using FERNGSolver.Common.Domain.RNG;
 using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.RNG;
 
@@ -16,11 +17,11 @@ namespace FERNGSolver.Gba.Application.Search
         /// <param name="positionMax">検索する最大の消費数</param>
         /// <param name="strategy">条件をチェックするストラテジ</param>
         /// <returns></returns>
-        public static IReadOnlyList<ISearchResult> Search(IRng initialRng, int positionMin, int positionMax, ISearchStrategy strategy)
+        public static IReadOnlyList<ISearchResult> Search(ICloneableRng initialRng, int positionMin, int positionMax, ISearchStrategy strategy)
         {
             var result = new List<ISearchResult>();
 
-            var currentRng = RngFactory.CreateFromRng(initialRng);
+            var currentRng = initialRng.Clone();
             for (int i = 0; i < positionMin; ++i)
             {
                 currentRng.Next();
@@ -28,7 +29,7 @@ namespace FERNGSolver.Gba.Application.Search
 
             for (int i = 0; i <= positionMax - positionMin; ++i)
             {
-                var tempRng = RngFactory.CreateFromRng(currentRng);
+                var tempRng = currentRng.Clone();
                 if (strategy.CheckAndAdvance(tempRng))
                 {
                     result.Add(new Internal.SearchResult(positionMin + i));
