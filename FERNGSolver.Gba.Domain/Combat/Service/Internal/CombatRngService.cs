@@ -2,7 +2,7 @@ using FERNGSolver.Common.Domain.RNG;
 
 namespace FERNGSolver.Gba.Domain.Combat.Service.Internal
 {
-    internal sealed class CombatRngService : ICombatRngService
+    internal sealed class CombatRngService : IModifiableCombatRngService
     {
         private IRng m_Rng;
 
