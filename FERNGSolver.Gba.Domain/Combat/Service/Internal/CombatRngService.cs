@@ -6,6 +6,11 @@ namespace FERNGSolver.Gba.Domain.Combat.Service.Internal
     {
         private IRng m_Rng;
 
+        public CombatRngService(IRng rng)
+        {
+            m_Rng = rng;
+        }
+
         public void SetRng(IRng rng)
         {
             m_Rng = rng;

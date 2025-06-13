@@ -1,11 +1,12 @@
 using FERNGSolver.Common.Domain.RNG;
+using FERNGSolver.Gba.Domain.RNG;
 
 namespace FERNGSolver.Gba.Domain.Combat.Service
 {
     public static class CombatRngServiceFactory
     {
         // Serviceの作成は検索中に頻繁に呼び出すことが想定されるため、一つのオブジェクトを使いまわしてメモリアロケーションを抑える。
-        private static Internal.CombatRngService s_Service = new Internal.CombatRngService();
+        private static Internal.CombatRngService s_Service = new Internal.CombatRngService(RngFactory.CreateDefault());
 
         public static ICombatRngService Create(IRng rng)
         {
