@@ -25,14 +25,13 @@ namespace FERNGSolver.Gba.Domain.Tests.RNG
         [TestMethod]
         public void ClonedRng_ShouldProduceSameResults()
         {
-            IRng original = RngFactory.CreateDefault();
+            var original = RngFactory.CreateDefault();
 
             // 適当に進める
             for (int i = 0; i < 5; i++) original.Next();
 
             // クローンを作成
-            var states = original.States;
-            IRng clone = RngFactory.CreateFromSeeds(states[0], states[1], states[2]);
+            var clone = original.Clone();
 
             for (int i = 0; i < 5; i++)
             {

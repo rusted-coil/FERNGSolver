@@ -12,7 +12,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
         [DataRow(756, true)]
         public void Check_ShouldReturnExpectedResult(int offset, bool expected)
         {
-            IRng rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault();
 
             var strategy = StrategyFactory.CreateGrowthStrategy(new GrowthStrategyArgs
             {
@@ -48,7 +48,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
         [DataRow(756, true)]
         public void Check_WithFilterSkip_ShouldReturnExpectedResult(int offset, bool expected)
         {
-            IRng rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault();
 
             var strategy = StrategyFactory.CreateGrowthStrategy(new GrowthStrategyArgs
             {
@@ -82,7 +82,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
         [DataRow(756, true)]
         public void Check_OverHundred_ShouldReturnExpectedResult(int offset, bool expected)
         {
-            IRng rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault();
 
             var strategy = StrategyFactory.CreateGrowthStrategy(new GrowthStrategyArgs
             {

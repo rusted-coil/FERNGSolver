@@ -36,7 +36,7 @@ namespace FERNGSolver.Thracia.Domain.Tests.RNG
         public void ToCx_ShouldReturnExpectedResult(int value, bool expected)
         {
             // Act
-            var result = value.ToCx();
+            var result = Util.IsRngValueOk(value);
 
             // Assert
             Assert.AreEqual(expected, result);
@@ -54,7 +54,7 @@ namespace FERNGSolver.Thracia.Domain.Tests.RNG
             for (int i = 0; i < referenceResults.Length; i++)
             {
                 var value = rng.Next(); // Replace with the actual method to get the next RNG value
-                generatedResults.Add(value.ToCx());
+                generatedResults.Add(Util.IsRngValueOk(value));
             }
 
             // Assert
