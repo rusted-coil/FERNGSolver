@@ -5,9 +5,9 @@ namespace FERNGSolver.Common.Application.Search.Strategy.Internal
     internal sealed class FalconKnightPatternStrategy : ISearchStrategy
     {
         private IReadOnlyList<bool> m_Pattern;
-        private Func<int, bool> m_isRngValueOk;
+        private Func<ushort, bool> m_isRngValueOk;
 
-        public FalconKnightPatternStrategy(IReadOnlyList<bool> pattern, Func<int, bool> isRngValueOk)
+        public FalconKnightPatternStrategy(IReadOnlyList<bool> pattern, Func<ushort, bool> isRngValueOk)
         {
             m_Pattern = pattern;
             m_isRngValueOk = isRngValueOk;

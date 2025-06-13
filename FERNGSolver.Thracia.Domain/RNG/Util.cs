@@ -7,7 +7,7 @@ namespace FERNGSolver.Thracia.Domain.RNG
         /// <summary>
         /// 乱数値が◯✕法で◯にあたるかどうかを返します。
         /// </summary>
-        public static bool IsRngValueOk(this int value)
+        public static bool IsRngValueOk(ushort value)
         {
             return s_CxTable[(value + 1) % 25];
         }

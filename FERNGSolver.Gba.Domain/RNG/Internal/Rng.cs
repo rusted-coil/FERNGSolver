@@ -15,7 +15,7 @@ namespace FERNGSolver.Gba.Domain.RNG.Internal
         }
 
         // 0～99 の値を返す
-        public int Next()
+        public ushort Next()
         {
             ushort result = (ushort)(
                 (((state[0] >> 5) + (state[1] << 11)) ^
@@ -26,7 +26,7 @@ namespace FERNGSolver.Gba.Domain.RNG.Internal
             state[1] = state[0];
             state[0] = result;
 
-            return (result * 100) >> 16;
+            return (ushort)(((uint)result * 100) >> 16);
         }
 
         public ICloneableRng Clone()

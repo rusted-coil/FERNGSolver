@@ -5,7 +5,7 @@ namespace FERNGSolver.Common.Domain.RNG
         /// <summary>
         /// 次の乱数値(0～99)を取得します。
         /// </summary>
-        int Next();
+        ushort Next();
 
         /// <summary>
         /// count分の乱数を進めます。

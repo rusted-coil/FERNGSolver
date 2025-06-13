@@ -11,7 +11,7 @@ namespace FERNGSolver.Common.Application.Search.Strategy
         /// <param name="falconKnightPattern">判定するファルコンナイト法パターンのリスト。○の場合true、×の場合falseをとる</param>
         /// <param name="isRngValueOk">乱数値を入力として受け取り、その乱数値が○か×かを判定する関数</param>
         /// <returns></returns>
-        public static ISearchStrategy CreateFalconKnightPatternStrategy(IReadOnlyList<bool> falconKnightPattern, Func<int, bool> isRngValueOk)
+        public static ISearchStrategy CreateFalconKnightPatternStrategy(IReadOnlyList<bool> falconKnightPattern, Func<ushort, bool> isRngValueOk)
         {
             return new Internal.FalconKnightPatternStrategy(falconKnightPattern, isRngValueOk);
         }

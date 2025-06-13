@@ -5,7 +5,7 @@ namespace FERNGSolver.Gba.Domain.RNG
         /// <summary>
         /// 乱数値が◯✕法で◯にあたるかどうかを返します。
         /// </summary>
-        public static bool IsRngValueOk(int value)
+        public static bool IsRngValueOk(ushort value)
         {
             return value <= 49; // GBA版は49以下で◯
         }

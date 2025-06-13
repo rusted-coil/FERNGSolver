@@ -36,7 +36,7 @@ namespace FERNGSolver.Thracia.Domain.Tests.RNG
         public void ToCx_ShouldReturnExpectedResult(int value, bool expected)
         {
             // Act
-            var result = Util.IsRngValueOk(value);
+            var result = Util.IsRngValueOk((ushort)value);
 
             // Assert
             Assert.AreEqual(expected, result);
