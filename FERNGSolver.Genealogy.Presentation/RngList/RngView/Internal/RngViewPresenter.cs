@@ -3,6 +3,7 @@ using FERNGSolver.Genealogy.Domain.Growth;
 using FERNGSolver.Genealogy.Domain.RNG;
 using FERNGSolver.Genealogy.Presentation.RngList.RngView.ViewContracts;
 using System.Reactive.Disposables;
+using FERNGSolver.Genealogy.Application.RNG;
 
 namespace FERNGSolver.Genealogy.Presentation.RngList.RngView.Internal
 {
@@ -31,9 +32,25 @@ namespace FERNGSolver.Genealogy.Presentation.RngList.RngView.Internal
             var previewRng = rng.Clone();
 
             // 契機をシミュレート
-            GrowthSimulator.Simulate(rng, 100, 100, 100, 100, 100, 100, 100);
+            var growth = GrowthSimulator.Simulate(rng, 100, 100, 100, 100, 100, 100, 100);
 
-            m_View.SetRandomNumbers(Enumerable.Range(0, 20).Select(_ => previewRng.Next()).ToArray());
+            m_View.SetRandomNumbers(Enumerable.Range(0, 20).Select(i => {
+                if (i < growth.Count)
+                {
+                    return new RandomNumberViewModel
+                    {
+                        Value = previewRng.Next(),
+                        Usage = RandomNumberUsage.GrowthStart + i,
+                        IsOk = growth[i] > 0,
+                    };
+                }
+                return new RandomNumberViewModel
+                {
+                    Value = previewRng.Next(),
+                    Usage = RandomNumberUsage.None,
+                    IsOk = false,
+                };
+            }).ToArray());
         }
     }
 }

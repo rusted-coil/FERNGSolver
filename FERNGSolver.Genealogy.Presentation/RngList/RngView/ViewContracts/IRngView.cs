@@ -10,6 +10,6 @@ namespace FERNGSolver.Genealogy.Presentation.RngList.RngView.ViewContracts
         /// <summary>
         /// 表示する乱数列をセットします。
         /// </summary>
-        void SetRandomNumbers(IReadOnlyList<ushort> values);
+        void SetRandomNumbers(IReadOnlyList<IRandomNumberViewModel> viewModels);
     }
 }
