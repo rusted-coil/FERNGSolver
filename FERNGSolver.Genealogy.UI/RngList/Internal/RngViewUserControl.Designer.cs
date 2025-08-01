@@ -29,7 +29,7 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
         private void InitializeComponent()
         {
             label1 = new Label();
-            PositionNumericUpDown = new Common.UI.Controls.NumericUpDownEx();
+            PositionNumericUpDown = new FERNGSolver.Common.UI.Controls.NumericUpDownEx();
             ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -58,6 +58,7 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(PositionNumericUpDown);
             Controls.Add(label1);
+            DoubleBuffered = true;
             Name = "RngViewUserControl";
             Size = new Size(398, 148);
             ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).EndInit();

@@ -36,9 +36,9 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
             RngViewPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             RngViewPanel.AutoScroll = true;
             RngViewPanel.BackColor = Color.DimGray;
-            RngViewPanel.Location = new Point(208, 29);
+            RngViewPanel.Location = new Point(496, 29);
             RngViewPanel.Name = "RngViewPanel";
-            RngViewPanel.Size = new Size(566, 737);
+            RngViewPanel.Size = new Size(475, 737);
             RngViewPanel.TabIndex = 1;
             // 
             // RngListForm

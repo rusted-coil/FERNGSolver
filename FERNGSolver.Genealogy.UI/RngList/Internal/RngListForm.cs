@@ -22,6 +22,9 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
             userControl.Top = controlCount * userControl.Height;
             userControl.Left = 0;
 
+            // Dockを設定して横幅いっぱいに広げる
+            userControl.Dock = DockStyle.Top;
+
             // UserControlをPanelに追加
             RngViewPanel.Controls.Add(userControl);
         }
