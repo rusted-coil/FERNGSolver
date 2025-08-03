@@ -1,6 +1,8 @@
 using FERNGSolver.Common.Application.Interfaces;
+using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.Common.UI.Interfaces;
 using FERNGSolver.Presentation.Presenter;
+using System.Reactive.Disposables;
 
 namespace FERNGSolver.UI
 {
@@ -17,9 +19,10 @@ namespace FERNGSolver.UI
 
             // メインフォームを初期化
             var form = new Internal.MainForm();
-            var presenter = PresenterFactory.Create(form, configService);
+            var disposables = new CompositeDisposable();
+            PresenterFactory.Create(form, configService).AddTo(disposables);
             form.FormClosed += (object? sender, FormClosedEventArgs e) => {
-                presenter.Dispose();
+                disposables.Dispose();
             };
 
             // 作品個別コントロールを初期化
@@ -28,6 +31,9 @@ namespace FERNGSolver.UI
                 Thracia.UI.Search.MainFormEntryProvider.Create(form, errorNotifier),
             };
             form.SetEntries(entries);
+
+            // 作品個別乱数ビューを初期化
+//            Gba.UI.RngList.
 
             form.StartPosition = FormStartPosition.CenterScreen;
 

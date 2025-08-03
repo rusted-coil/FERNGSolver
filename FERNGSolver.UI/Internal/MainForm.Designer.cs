@@ -37,9 +37,17 @@ namespace FERNGSolver.UI.Internal
             ツールToolStripMenuItem = new ToolStripMenuItem();
             OpenGenealogyRngListFormMenuItem = new ToolStripMenuItem();
             OpenThraciaRngListFormMenuItem = new ToolStripMenuItem();
+            tabControl1 = new TabControl();
+            tabPage3 = new TabPage();
+            tabPage4 = new TabPage();
+            RngViewPanel = new Panel();
+            RngViewInitializeButton = new Button();
             SearchConditionTabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
             menuStrip1.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
             SuspendLayout();
             // 
             // SearchConditionTabControl
@@ -86,9 +94,9 @@ namespace FERNGSolver.UI.Internal
             // 
             SearchResultDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             SearchResultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SearchResultDataGridView.Location = new Point(672, 36);
+            SearchResultDataGridView.Location = new Point(6, 6);
             SearchResultDataGridView.Name = "SearchResultDataGridView";
-            SearchResultDataGridView.Size = new Size(500, 713);
+            SearchResultDataGridView.Size = new Size(880, 697);
             SearchResultDataGridView.TabIndex = 1;
             // 
             // menuStrip1
@@ -96,7 +104,7 @@ namespace FERNGSolver.UI.Internal
             menuStrip1.Items.AddRange(new ToolStripItem[] { ツールToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1184, 24);
+            menuStrip1.Size = new Size(1584, 24);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -121,12 +129,65 @@ namespace FERNGSolver.UI.Internal
             OpenThraciaRngListFormMenuItem.Text = "トラキア776 乱数ビューア";
             OpenThraciaRngListFormMenuItem.Click += OpenThraciaRngListFormMenuItem_Click;
             // 
+            // tabControl1
+            // 
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Location = new Point(672, 36);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(900, 737);
+            tabControl1.TabIndex = 3;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(SearchResultDataGridView);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(892, 709);
+            tabPage3.TabIndex = 0;
+            tabPage3.Text = "検索結果";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(RngViewInitializeButton);
+            tabPage4.Controls.Add(RngViewPanel);
+            tabPage4.Location = new Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(892, 709);
+            tabPage4.TabIndex = 1;
+            tabPage4.Text = "乱数ビューア";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // RngViewPanel
+            // 
+            RngViewPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            RngViewPanel.AutoScroll = true;
+            RngViewPanel.BackColor = Color.DimGray;
+            RngViewPanel.Location = new Point(6, 36);
+            RngViewPanel.Name = "RngViewPanel";
+            RngViewPanel.Size = new Size(880, 670);
+            RngViewPanel.TabIndex = 2;
+            // 
+            // RngViewInitializeButton
+            // 
+            RngViewInitializeButton.Location = new Point(6, 6);
+            RngViewInitializeButton.Name = "RngViewInitializeButton";
+            RngViewInitializeButton.Size = new Size(75, 24);
+            RngViewInitializeButton.TabIndex = 0;
+            RngViewInitializeButton.Text = "初期化";
+            RngViewInitializeButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 785);
-            Controls.Add(SearchResultDataGridView);
+            ClientSize = new Size(1584, 785);
+            Controls.Add(tabControl1);
             Controls.Add(SearchButton);
             Controls.Add(SearchConditionTabControl);
             Controls.Add(menuStrip1);
@@ -137,6 +198,9 @@ namespace FERNGSolver.UI.Internal
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            tabControl1.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -152,5 +216,10 @@ namespace FERNGSolver.UI.Internal
         private ToolStripMenuItem ツールToolStripMenuItem;
         private ToolStripMenuItem OpenThraciaRngListFormMenuItem;
         private ToolStripMenuItem OpenGenealogyRngListFormMenuItem;
+        private TabControl tabControl1;
+        private TabPage tabPage3;
+        private TabPage tabPage4;
+        private Panel RngViewPanel;
+        private Button RngViewInitializeButton;
     }
 }

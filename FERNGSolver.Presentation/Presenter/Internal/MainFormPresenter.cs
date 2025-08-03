@@ -12,6 +12,7 @@ namespace FERNGSolver.Presentation.Presenter.Internal
         public MainFormPresenter(IMainFormView mainFormView, IConfigService configService)
         {
             mainFormView.Initialized.Subscribe(_ => mainFormView.ReflectConfig(configService.Config)).AddTo(m_Disposable);
+            mainFormView.RngViewInitializeButtonClicked
         }
 
         public void Dispose()
