@@ -1,3 +1,5 @@
+using FERNGSolver.Genealogy.Domain.Combat.Service;
+
 namespace FERNGSolver.Genealogy.Application.RNG
 {
     /// <summary>
@@ -18,5 +20,51 @@ namespace FERNGSolver.Genealogy.Application.RNG
 
         GrowthStart = HpGrowth,
         GrowthEnd = MdfGrowth,
+
+        PlayerHit, // 命中
+        PlayerCritical, // 必殺
+        PlayerAstra, // 流星剣判定
+        PlayerLuna, // 月光剣判定
+        PlayerSol, // 太陽剣判定
+        PlayerContinuation, // 連続判定
+        PlayerGreatShield, // 大盾判定
+
+        PlayerStart = PlayerHit,
+        PlayerEnd = PlayerGreatShield,
+
+        EnemyHit, // 命中
+        EnemyCritical, // 必殺
+        EnemyAstra, // 流星剣判定
+        EnemyLuna, // 月光剣判定
+        EnemySol, // 太陽剣判定
+        EnemyContinuation, // 連続判定
+        EnemyGreatShield, // 大盾判定
+
+        EnemyStart = EnemyHit,
+        EnemyEnd = EnemyGreatShield,
+    }
+
+    public static class RandomNumberUsageExtensions
+    {
+        /// <summary>
+        /// 乱数値が成長に使用されたかどうかを判定します。
+        /// </summary>
+        public static bool IsGrowth(this RandomNumberUsage usage) => usage >= RandomNumberUsage.GrowthStart && usage <= RandomNumberUsage.GrowthEnd;
+
+        /// <summary>
+        /// 乱数値の使用された陣営を取得します。
+        /// </summary>
+        public static UnitSide GetUnitSide(this RandomNumberUsage usage)
+        {
+            if (usage >= RandomNumberUsage.PlayerStart && usage <= RandomNumberUsage.PlayerEnd)
+            {
+                return UnitSide.Player;
+            }
+            if (usage >= RandomNumberUsage.EnemyStart && usage <= RandomNumberUsage.EnemyEnd)
+            {
+                return UnitSide.Enemy;
+            }
+            return UnitSide.None;
+        }
     }
 }

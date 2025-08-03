@@ -1,3 +1,5 @@
+using FERNGSolver.Genealogy.Application.RNG;
+using FERNGSolver.Genealogy.Domain.Combat.Service;
 using FERNGSolver.Genealogy.Presentation.RngList.RngView;
 using FERNGSolver.Genealogy.Presentation.RngList.RngView.ViewContracts;
 using System.Drawing.Drawing2D;
@@ -11,17 +13,24 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
         private const int RngNumberStartX = 5; // 乱数値の表示開始X座標
         private const int RngNumberStartY = 32; // 乱数値の表示開始Y座標
         private const int RngNumberIntervalX = 22; // 乱数値の表示位置X座標間隔
-        private const int RngNumberUsageOffset = 24;
+        private const int RngNumberUsageOffset = 20;
+
+        // ブラシとペンのキャッシュ
+        private static readonly (Brush Brush, Pen Pen) DefaultDrawer = (Brushes.Black, Pens.Black);
+        private static readonly (Brush Brush, Pen Pen) GrowthUsageDrawer = (Brushes.DarkGreen, Pens.DarkGreen);
+        private static readonly (Brush Brush, Pen Pen) PlayerUsageDrawer = (Brushes.Blue, Pens.Blue);
+        private static readonly (Brush Brush, Pen Pen) EnemyUsageDrawer = (Brushes.Red, Pens.Red);
 
         public IObservable<int> PositionChanged => m_PositionChanged;
 
-        private Subject<int> m_PositionChanged = new Subject<int>();
+        private BehaviorSubject<int> m_PositionChanged;
 
         private IRandomNumberViewModel[] m_RandomNumberViewModels = Array.Empty<IRandomNumberViewModel>();
 
         public RngViewUserControl()
         {
             InitializeComponent();
+            m_PositionChanged = new BehaviorSubject<int>((int)PositionNumericUpDown.Value);
         }
 
         public void SetRandomNumbers(IReadOnlyList<IRandomNumberViewModel> viewModels)
@@ -39,21 +48,41 @@ namespace FERNGSolver.Genealogy.UI.RngList.Internal
 
             for (int i = 0; i < m_RandomNumberViewModels.Length; i++)
             {
-                var x = RngNumberStartX + i * RngNumberIntervalX; // 行ごとに20個
+                var x = RngNumberStartX + i * RngNumberIntervalX;
                 var y = RngNumberStartY;
 
                 g.DrawString(m_RandomNumberViewModels[i].Value.ToString("D2"), this.Font, Brushes.Black, x, y);
-                g.DrawString(m_RandomNumberViewModels[i].Usage.ToDisplayString(), this.Font, Brushes.LightGreen, x, y + RngNumberUsageOffset);
-                if (m_RandomNumberViewModels[i].IsOk)
-                {
-                    g.DrawLine(Pens.Red, x, y + 20, x + 20, y + 20);
-                }
+                DrawUsage(g, m_RandomNumberViewModels[i], x, y + RngNumberUsageOffset);
             }
         }
 
-        private void PositionNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void DrawUsage(Graphics g, IRandomNumberViewModel viewModel, int x, int y)
         {
-            m_PositionChanged.OnNext((int)PositionNumericUpDown.Value);
+            var drawer = GetUsageDrawer(viewModel.Usage);
+
+            g.DrawString(viewModel.Usage.ToDisplayString(), this.Font, drawer.Brush, x, y);
+            var size = g.MeasureString(viewModel.Usage.ToDisplayString(), this.Font);
+            if (viewModel.IsOk)
+            {
+                g.DrawLine(drawer.Pen, x, y + 16, x + 16, y + 16);
+            }
         }
+
+        private (Brush Brush, Pen Pen) GetUsageDrawer(RandomNumberUsage usage)
+        {
+            if (usage.IsGrowth())
+            {
+                return GrowthUsageDrawer;
+            }
+            var unitSide = usage.GetUnitSide();
+            return unitSide switch
+            {
+                UnitSide.Player => PlayerUsageDrawer,
+                UnitSide.Enemy => EnemyUsageDrawer,
+                _ => DefaultDrawer,
+            };
+        }
+
+        private void PositionNumericUpDown_ValueChanged(object sender, EventArgs e) => m_PositionChanged.OnNext((int)PositionNumericUpDown.Value);
     }
 }
