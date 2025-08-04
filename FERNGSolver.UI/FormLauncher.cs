@@ -27,13 +27,10 @@ namespace FERNGSolver.UI
 
             // 作品個別コントロールを初期化
             var entries = new IMainFormEntry[]{
-                Gba.UI.Search.MainFormEntryProvider.Create(form, gbaConfigService, errorNotifier),
+                Gba.UI.MainFormEntryProvider.Create(form, Gba.UI.RngView.RngViewListViewFactory.Create(form.RngViewPanel), gbaConfigService, errorNotifier),
                 Thracia.UI.Search.MainFormEntryProvider.Create(form, errorNotifier),
             };
             form.SetEntries(entries);
-
-            // 作品個別乱数ビューを初期化
-//            Gba.UI.RngList.
 
             form.StartPosition = FormStartPosition.CenterScreen;
 

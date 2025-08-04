@@ -15,4 +15,10 @@
     <ProjectReference Include="..\FormRx\FormRx.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="RngView\Internal\RngViewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

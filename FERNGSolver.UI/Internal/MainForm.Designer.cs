@@ -40,8 +40,8 @@ namespace FERNGSolver.UI.Internal
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
             tabPage4 = new TabPage();
-            RngViewPanel = new Panel();
             RngViewInitializeButton = new Button();
+            RngViewPanel = new Panel();
             SearchConditionTabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
             menuStrip1.SuspendLayout();
@@ -163,6 +163,15 @@ namespace FERNGSolver.UI.Internal
             tabPage4.Text = "乱数ビューア";
             tabPage4.UseVisualStyleBackColor = true;
             // 
+            // RngViewInitializeButton
+            // 
+            RngViewInitializeButton.Location = new Point(6, 6);
+            RngViewInitializeButton.Name = "RngViewInitializeButton";
+            RngViewInitializeButton.Size = new Size(75, 24);
+            RngViewInitializeButton.TabIndex = 0;
+            RngViewInitializeButton.Text = "初期化";
+            RngViewInitializeButton.UseVisualStyleBackColor = true;
+            // 
             // RngViewPanel
             // 
             RngViewPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -172,15 +181,6 @@ namespace FERNGSolver.UI.Internal
             RngViewPanel.Name = "RngViewPanel";
             RngViewPanel.Size = new Size(880, 670);
             RngViewPanel.TabIndex = 2;
-            // 
-            // RngViewInitializeButton
-            // 
-            RngViewInitializeButton.Location = new Point(6, 6);
-            RngViewInitializeButton.Name = "RngViewInitializeButton";
-            RngViewInitializeButton.Size = new Size(75, 24);
-            RngViewInitializeButton.TabIndex = 0;
-            RngViewInitializeButton.Text = "初期化";
-            RngViewInitializeButton.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -219,7 +219,7 @@ namespace FERNGSolver.UI.Internal
         private TabControl tabControl1;
         private TabPage tabPage3;
         private TabPage tabPage4;
-        private Panel RngViewPanel;
         private Button RngViewInitializeButton;
+        public Panel RngViewPanel;
     }
 }
