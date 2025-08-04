@@ -19,58 +19,51 @@ namespace FERNGSolver.Genealogy.Presentation.Combat.Internal
 
         public void SetRng(IRng rng) => m_Underlying.SetRng(rng);
 
-        public bool CheckHit(int hitRate, UnitSide unitSide = UnitSide.None)
+        public bool CheckHit(int hitRate, UnitSide unitSide)
         {
-            Debug.Assert(unitSide != UnitSide.None);
-            bool isOk = m_Underlying.CheckHit(hitRate);
+            bool isOk = m_Underlying.CheckHit(hitRate, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerHit : RandomNumberUsage.EnemyHit, isOk));
             return isOk;
         }
 
-        public bool CheckCritical(int criticalRate, UnitSide unitSide = UnitSide.None)
+        public bool CheckCritical(int criticalRate, UnitSide unitSide)
         {
-            Debug.Assert(unitSide != UnitSide.None);
-            bool isOk = m_Underlying.CheckCritical(criticalRate);
+            bool isOk = m_Underlying.CheckCritical(criticalRate, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerCritical : RandomNumberUsage.EnemyCritical, isOk));
             return isOk;
         }
 
-        public bool CheckActivateAstra(int tec, UnitSide unitSide = UnitSide.None)
+        public bool CheckActivateAstra(int tec, UnitSide unitSide)
         {
-            Debug.Assert(unitSide != UnitSide.None);
-            bool isOk = m_Underlying.CheckActivateAstra(tec);
+            bool isOk = m_Underlying.CheckActivateAstra(tec, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerAstra : RandomNumberUsage.EnemyAstra, isOk));
             return isOk;
         }
 
-        public bool CheckActivateLuna(int tec, UnitSide unitSide = UnitSide.None)
+        public bool CheckActivateLuna(int tec, UnitSide unitSide)
         {
-            Debug.Assert(unitSide != UnitSide.None);
-            bool isOk = m_Underlying.CheckActivateLuna(tec);
+            bool isOk = m_Underlying.CheckActivateLuna(tec, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerLuna : RandomNumberUsage.EnemyLuna, isOk));
             return isOk;
         }
 
-        public bool CheckActivateSol(int tec, UnitSide unitSide = UnitSide.None)
+        public bool CheckActivateSol(int tec, UnitSide unitSide)
         {
-            Debug.Assert(unitSide != UnitSide.None);
-            bool isOk = m_Underlying.CheckActivateSol(tec);
+            bool isOk = m_Underlying.CheckActivateSol(tec, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerSol : RandomNumberUsage.EnemySol, isOk));
             return isOk;
         }
 
-        public bool CheckActivateContinuation(int attackSpeed, UnitSide unitSide = UnitSide.None)
+        public bool CheckActivateContinuation(int attackSpeed, UnitSide unitSide)
         {
-            Debug.Assert(unitSide != UnitSide.None);
-            bool isOk = m_Underlying.CheckActivateContinuation(attackSpeed);
+            bool isOk = m_Underlying.CheckActivateContinuation(attackSpeed, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerContinuation : RandomNumberUsage.EnemyContinuation, isOk));
             return isOk;
         }
 
-        public bool CheckActivateGreatShield(int level, UnitSide unitSide = UnitSide.None)
+        public bool CheckActivateGreatShield(int level, UnitSide unitSide)
         {
-            Debug.Assert(unitSide != UnitSide.None);
-            bool isOk = m_Underlying.CheckActivateGreatShield(level);
+            bool isOk = m_Underlying.CheckActivateGreatShield(level, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerGreatShield : RandomNumberUsage.EnemyGreatShield, isOk));
             return isOk;
         }

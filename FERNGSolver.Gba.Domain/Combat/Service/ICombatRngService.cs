@@ -1,5 +1,11 @@
 namespace FERNGSolver.Gba.Domain.Combat.Service
 {
+    public enum UnitSide
+    {
+        Player, // プレイヤー側(青軍)
+        Enemy, // 敵側(赤軍)
+    }
+
     public interface ICombatRngService
     {
         /// <summary>

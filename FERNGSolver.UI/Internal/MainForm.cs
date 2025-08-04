@@ -22,12 +22,14 @@ namespace FERNGSolver.UI.Internal
         private Form? m_GenealogyRngListForm = null;
 
         private readonly IButton m_SearchButton;
+        private readonly IButton m_RngViewInitializeButton;
 
         public MainForm()
         {
             InitializeComponent();
 
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
+            m_RngViewInitializeButton = ButtonFactory.CreateButton(RngViewInitializeButton);
 
             SearchConditionTabControl.TabPages.Clear();
 
@@ -37,6 +39,11 @@ namespace FERNGSolver.UI.Internal
         public IObservable<Unit> GetSearchButtonClicked(string title)
         {
             return m_SearchButton.Clicked.Where(_ => SearchConditionTabControl.SelectedTab != null ? SearchConditionTabControl.SelectedTab.Text == title : false);
+        }
+
+        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title)
+        {
+            return m_RngViewInitializeButton.Clicked.Where(_ => SearchConditionTabControl.SelectedTab != null ? SearchConditionTabControl.SelectedTab.Text == title : false);
         }
 
         public void SetEntries(params IMainFormEntry[] entries)

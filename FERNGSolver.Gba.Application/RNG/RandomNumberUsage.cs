@@ -1,6 +1,6 @@
-using FERNGSolver.Genealogy.Domain.Combat.Service;
+using FERNGSolver.Gba.Domain.Combat.Service;
 
-namespace FERNGSolver.Genealogy.Application.RNG
+namespace FERNGSolver.Gba.Application.RNG
 {
     /// <summary>
     /// 乱数値が何に使われたかを示す列挙型です。
@@ -64,7 +64,7 @@ namespace FERNGSolver.Genealogy.Application.RNG
             {
                 return UnitSide.Enemy;
             }
-            throw new ArgumentOutOfRangeException(nameof(usage), usage, "Invalid RandomNumberUsage value for determining unit side.");
+            throw new ArgumentOutOfRangeException(nameof(usage), usage, "Invalid RandomNumberUsage value for unit side determination.");
         }
     }
 }

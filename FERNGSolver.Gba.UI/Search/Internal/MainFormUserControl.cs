@@ -20,6 +20,7 @@ namespace FERNGSolver.Gba.UI.Search
     {
         public IObservable<Unit> GetSearchButtonClicked(string title) => m_MainFormView.GetSearchButtonClicked(title);
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
+        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title) => m_MainFormView.GetRngViewInitializeButtonClicked(title);
 
         public IObservable<Unit> PersistentConfigChanged => m_PersistentConfigChanged;
         Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
