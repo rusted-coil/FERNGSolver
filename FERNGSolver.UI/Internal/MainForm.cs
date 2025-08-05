@@ -19,6 +19,8 @@ namespace FERNGSolver
         Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
         private void PersistentConfigControlValueChanged(object sender, EventArgs e) => m_PersistentConfigChanged.OnNext(Unit.Default);
 
+        int m_MaxSearchConditionControlContentSize = 0;
+
         private readonly IButton m_SearchButton;
 
         public MainForm()
@@ -43,6 +45,9 @@ namespace FERNGSolver
             {
                 var tabPage = new TabPage(entry.Title);
                 tabPage.BackColor = SystemColors.Window;
+
+                // Dock = FillでAddする前にサイズを取得しておかないと意図しない値になってしまっている
+                m_MaxSearchConditionControlContentSize = Math.Max(m_MaxSearchConditionControlContentSize, entry.MainFormControl.Size.Height);
 
                 entry.MainFormControl.Dock = DockStyle.Fill;
                 tabPage.Controls.Add(entry.MainFormControl);
@@ -100,6 +105,20 @@ namespace FERNGSolver
         {
             var form = Thracia.UI.RngList.RngListFormLauncher.CreateForm();
             form.Show();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            // ウィンドウサイズの動的調整
+            // 例えばGBAのUserControlの高さが635の時、メインフォームの高さは765にするのがちょうどいい
+            // つまり全UserControlの高さの最大値+130が理想のフォームの高さ
+            // ただし、表示ディスプレイのWorkingAreaがこれより狭い場合には全体を表示することを諦めて高さを縮めなければならない
+            const int MainFormMarginHeight = 130;
+
+            var idealHeight = m_MaxSearchConditionControlContentSize + MainFormMarginHeight;
+            var workingArea = Screen.GetWorkingArea(this);
+
+            this.Size = new Size(Math.Min(this.Size.Width, workingArea.Width), Math.Min(idealHeight, workingArea.Height));
         }
     }
 }
