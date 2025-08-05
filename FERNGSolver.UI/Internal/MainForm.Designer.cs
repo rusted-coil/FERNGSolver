@@ -33,10 +33,6 @@ namespace FERNGSolver.UI.Internal
             tabPage2 = new TabPage();
             SearchButton = new Button();
             SearchResultDataGridView = new DataGridView();
-            menuStrip1 = new MenuStrip();
-            ツールToolStripMenuItem = new ToolStripMenuItem();
-            OpenGenealogyRngListFormMenuItem = new ToolStripMenuItem();
-            OpenThraciaRngListFormMenuItem = new ToolStripMenuItem();
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
             tabPage4 = new TabPage();
@@ -44,7 +40,6 @@ namespace FERNGSolver.UI.Internal
             RngViewPanel = new Panel();
             SearchConditionTabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
-            menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
@@ -55,10 +50,10 @@ namespace FERNGSolver.UI.Internal
             SearchConditionTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             SearchConditionTabControl.Controls.Add(tabPage1);
             SearchConditionTabControl.Controls.Add(tabPage2);
-            SearchConditionTabControl.Location = new Point(12, 36);
+            SearchConditionTabControl.Location = new Point(12, 12);
             SearchConditionTabControl.Name = "SearchConditionTabControl";
             SearchConditionTabControl.SelectedIndex = 0;
-            SearchConditionTabControl.Size = new Size(654, 699);
+            SearchConditionTabControl.Size = new Size(654, 664);
             SearchConditionTabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -66,7 +61,7 @@ namespace FERNGSolver.UI.Internal
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(646, 671);
+            tabPage1.Size = new Size(646, 636);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -76,16 +71,16 @@ namespace FERNGSolver.UI.Internal
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(646, 671);
+            tabPage2.Size = new Size(646, 636);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // SearchButton
             // 
-            SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            SearchButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             SearchButton.BackColor = Color.Yellow;
-            SearchButton.Location = new Point(257, 741);
+            SearchButton.Location = new Point(257, 682);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(143, 32);
             SearchButton.TabIndex = 0;
@@ -100,36 +95,6 @@ namespace FERNGSolver.UI.Internal
             SearchResultDataGridView.Name = "SearchResultDataGridView";
             SearchResultDataGridView.Size = new Size(880, 697);
             SearchResultDataGridView.TabIndex = 1;
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { ツールToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1584, 24);
-            menuStrip1.TabIndex = 2;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // ツールToolStripMenuItem
-            // 
-            ツールToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenGenealogyRngListFormMenuItem, OpenThraciaRngListFormMenuItem });
-            ツールToolStripMenuItem.Name = "ツールToolStripMenuItem";
-            ツールToolStripMenuItem.Size = new Size(46, 20);
-            ツールToolStripMenuItem.Text = "ツール";
-            // 
-            // OpenGenealogyRngListFormMenuItem
-            // 
-            OpenGenealogyRngListFormMenuItem.Name = "OpenGenealogyRngListFormMenuItem";
-            OpenGenealogyRngListFormMenuItem.Size = new Size(191, 22);
-            OpenGenealogyRngListFormMenuItem.Text = "聖戦の系譜 乱数ビューア";
-            OpenGenealogyRngListFormMenuItem.Click += OpenGenealogyRngListFormMenuItem_Click;
-            // 
-            // OpenThraciaRngListFormMenuItem
-            // 
-            OpenThraciaRngListFormMenuItem.Name = "OpenThraciaRngListFormMenuItem";
-            OpenThraciaRngListFormMenuItem.Size = new Size(191, 22);
-            OpenThraciaRngListFormMenuItem.Text = "トラキア776 乱数ビューア";
-            OpenThraciaRngListFormMenuItem.Click += OpenThraciaRngListFormMenuItem_Click;
             // 
             // tabControl1
             // 
@@ -188,24 +153,19 @@ namespace FERNGSolver.UI.Internal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1584, 785);
+            ClientSize = new Size(1184, 726);
             Controls.Add(tabControl1);
             Controls.Add(SearchButton);
             Controls.Add(SearchConditionTabControl);
-            Controls.Add(menuStrip1);
-            MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Form1";
             Shown += MainForm_Shown;
             SearchConditionTabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).EndInit();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -215,9 +175,6 @@ namespace FERNGSolver.UI.Internal
         private TabPage tabPage2;
         private Button SearchButton;
         private DataGridView SearchResultDataGridView;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem ツールToolStripMenuItem;
-        private ToolStripMenuItem OpenThraciaRngListFormMenuItem;
         private ToolStripMenuItem OpenGenealogyRngListFormMenuItem;
         private TabControl tabControl1;
         private TabPage tabPage3;
