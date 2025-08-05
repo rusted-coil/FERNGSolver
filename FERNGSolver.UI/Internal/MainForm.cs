@@ -123,5 +123,11 @@ namespace FERNGSolver.UI.Internal
                 m_GenealogyRngListForm.Show();
             }
         }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            var workingArea = Screen.GetWorkingArea(this);
+            MessageBox.Show($"Width: {workingArea.Width}, Height: {workingArea.Height}");
+        }
     }
 }

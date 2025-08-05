@@ -7,13 +7,14 @@ using System.Reactive.Subjects;
 
 namespace FERNGSolver.Gba.UI.RngView.Internal
 {
-    public partial class RngViewUserControl : UserControl
+    public partial class RngViewUserControl : UserControl, IRngView
     {
         // Viewに使用する定数
         private const int RngNumberStartX = 5; // 乱数値の表示開始X座標
         private const int RngNumberStartY = 32; // 乱数値の表示開始Y座標
         private const int RngNumberIntervalX = 22; // 乱数値の表示位置X座標間隔
-        private const int RngNumberUsageOffset = 20;
+        private const int RngNumberCxOffset = 20; // ◯×表示のY座標オフセット
+        private const int RngNumberUsageOffset = 40; // 乱数値の使用状況表示のY座標オフセット
 
         // ブラシとペンのキャッシュ
         private static readonly (Brush Brush, Pen Pen) DefaultDrawer = (Brushes.Black, Pens.Black);
@@ -52,12 +53,18 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
                 var y = RngNumberStartY;
 
                 g.DrawString(m_RandomNumberViewModels[i].Value.ToString("D2"), this.Font, Brushes.Black, x, y);
+                g.DrawString(Domain.RNG.Util.IsRngValueOk(m_RandomNumberViewModels[i].Value) ? "◯" : "✕", this.Font, Brushes.Black, x + 2, y + RngNumberCxOffset);
                 DrawUsage(g, m_RandomNumberViewModels[i], x, y + RngNumberUsageOffset);
             }
         }
 
         private void DrawUsage(Graphics g, IRandomNumberViewModel viewModel, int x, int y)
         {
+            if (viewModel.Usage == RandomNumberUsage.None)
+            {
+                return;
+            }
+
             var drawer = GetUsageDrawer(viewModel.Usage);
 
 //            g.DrawString(viewModel.Usage.ToDisplayString(), this.Font, drawer.Brush, x, y);

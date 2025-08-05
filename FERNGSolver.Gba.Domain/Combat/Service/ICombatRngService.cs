@@ -11,36 +11,36 @@ namespace FERNGSolver.Gba.Domain.Combat.Service
         /// <summary>
         /// 乱数を消費して命中判定を行います。
         /// </summary>
-        bool CheckHit(int hitRate);
+        bool CheckHit(int hitRate, UnitSide unitSide);
 
         /// <summary>
         /// 乱数を消費して必殺判定を行います。
         /// </summary>
-        bool CheckCritical(int criticalRate);
+        bool CheckCritical(int criticalRate, UnitSide unitSide);
 
         /// <summary>
         /// 乱数を消費して必的の発動判定を行います。
         /// </summary>
-        bool CheckActivateSureStrike(int level);
+        bool CheckActivateSureStrike(int level, UnitSide unitSide);
 
         /// <summary>
         /// 乱数を消費して貫通の発動判定を行います。
         /// </summary>
-        bool CheckActivatePierce(int level);
+        bool CheckActivatePierce(int level, UnitSide unitSide);
 
         /// <summary>
         /// 乱数を消費して大盾の発動判定を行います。
         /// </summary>
-        bool CheckActivateGreatShield(int level);
+        bool CheckActivateGreatShield(int level, UnitSide unitSide);
 
         /// <summary>
         /// 乱数を消費して瞬殺の発動判定を行います。
         /// </summary>
-        bool CheckActivateSilencer(Const.BossType bossType);
+        bool CheckActivateSilencer(Const.BossType bossType, UnitSide unitSide);
 
         /// <summary>
         /// 乱数を消費してデビルアクスの呪いの発動判定を行います。
         /// </summary>
-        bool CheckActivateCurse(int luck);
+        bool CheckActivateCurse(int luck, UnitSide unitSide);
     }
 }

@@ -1,3 +1,4 @@
+using FERNGSolver.Gba.Presentation.RngView;
 using FERNGSolver.Gba.Presentation.RngView.ViewContracts;
 using FERNGSolver.Gba.Presentation.ViewContracts;
 
@@ -14,13 +15,17 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
         public void Clear()
         {
+            m_ListViewPanel.Controls.Clear();
         }
 
         public void AddView(IExtendedMainFormView mainFormView)
         {
             var userControl = new RngViewUserControl();
             AddUserControl(userControl);
+            var presenter = PresenterFactory.CreateViewPresenter(mainFormView, userControl);
 
+            // UserControlの破棄時にPresenterも破棄
+            userControl.Disposed += (sender, args) => presenter.Dispose();
         }
 
         public void AddUserControl(UserControl userControl)

@@ -1,19 +1,24 @@
 using FERNGSolver.Common.Presentation.Extensions;
+using FERNGSolver.Gba.Application.RNG;
 using FERNGSolver.Gba.Domain.Combat;
+using FERNGSolver.Gba.Domain.Combat.Service;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.RngView.ViewContracts;
+using FERNGSolver.Gba.Presentation.ViewContracts;
 using System.Reactive.Disposables;
 
 namespace FERNGSolver.Gba.Presentation.RngView.Internal
 {
     internal sealed class RngViewPresenter : IRngViewPresenter
     {
+        private readonly IExtendedMainFormView m_MainFormView;
         private readonly IRngView m_View;
 
         private readonly CompositeDisposable m_Disposables = new CompositeDisposable();
 
-        public RngViewPresenter(IRngView view)
+        public RngViewPresenter(IExtendedMainFormView mainFormView, IRngView view)
         {
+            m_MainFormView = mainFormView;
             m_View = view;
             m_View.PositionChanged.Subscribe(PositionChanged).AddTo(m_Disposables);
         }
@@ -52,8 +57,33 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
         {
             var rng = RngFactory.CreateDefault();
             rng.Advance(position);
-
             var previewRng = rng.Clone();
+
+            // rngを回して乱数の使用用途を計算し、previewRngで実際の乱数値を取得する
+
+            if (!m_MainFormView.UsesFalconKnightMethod)
+            {
+                // 契機をシミュレート
+                var recordingService = new Combat.Internal.RecordingCombatRngService(CombatRngServiceFactory.Create(rng));
+            }
+
+            int usageCount = 0;
+
+            List<RandomNumberViewModel> viewModels = new List<RandomNumberViewModel>();
+            for (int i = 0; i < 40; ++i) // 乱数の表示個数は外部から変えられるようにしたい
+            {
+                if (i >= usageCount)
+                {
+                    viewModels.Add(new RandomNumberViewModel
+                    {
+                        Value = previewRng.Next(),
+                        Usage = RandomNumberUsage.None,
+                        IsOk = false,
+                    });
+                }
+            }
+
+//            if()
 
             // 契機をシミュレート
             /*
@@ -107,9 +137,9 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
                     },
                 });
 
-            var growth = GrowthSimulator.Simulate(rng, 110, 50, 5, 50, 30, 40, 40, 5);
+            var growth = GrowthSimulator.Simulate(rng, 110, 50, 5, 50, 30, 40, 40, 5);*/
 
-            List<RandomNumberViewModel> viewModels = new List<RandomNumberViewModel>();
+            /*
             foreach (var pair in recordingService.UsedRandomNumbers)
             {
                 viewModels.Add(new RandomNumberViewModel {
@@ -117,9 +147,11 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
                     Usage = pair.Usage,
                     IsOk = pair.IsOk,
                 });
-            }
+            }*/
             for (int i = viewModels.Count, c = 0; i < 30; ++i, ++c)
             {
+
+                    /*
                 if (c < growth.Count)
                 {
                     viewModels.Add(new RandomNumberViewModel {
@@ -136,10 +168,10 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
                         IsOk = false,
                     });
                 }
+                    */
             }
 
             m_View.SetRandomNumbers(viewModels);
-            */
         }
     }
 }

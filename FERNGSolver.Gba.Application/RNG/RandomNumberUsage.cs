@@ -23,25 +23,25 @@ namespace FERNGSolver.Gba.Application.RNG
 
         PlayerHit, // 命中
         PlayerCritical, // 必殺
-        PlayerAstra, // 流星剣判定
-        PlayerLuna, // 月光剣判定
-        PlayerSol, // 太陽剣判定
-        PlayerContinuation, // 連続判定
+        PlayerSureStrike, // 必的判定
+        PlayerPierce, // 貫通判定
         PlayerGreatShield, // 大盾判定
+        PlayerSilencer, // 瞬殺判定
+        PlayerCurse, // 呪い判定
 
         PlayerStart = PlayerHit,
-        PlayerEnd = PlayerGreatShield,
+        PlayerEnd = PlayerCurse,
 
         EnemyHit, // 命中
         EnemyCritical, // 必殺
-        EnemyAstra, // 流星剣判定
-        EnemyLuna, // 月光剣判定
-        EnemySol, // 太陽剣判定
-        EnemyContinuation, // 連続判定
+        EnemySureStrike, // 必的判定
+        EnemyPierce, // 貫通判定
         EnemyGreatShield, // 大盾判定
+        EnemySilencer, // 瞬殺判定
+        EnemyCurse, // 呪い判定
 
         EnemyStart = EnemyHit,
-        EnemyEnd = EnemyGreatShield,
+        EnemyEnd = EnemyCurse,
     }
 
     public static class RandomNumberUsageExtensions

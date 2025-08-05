@@ -16,9 +16,9 @@ namespace FERNGSolver.Gba.Presentation.RngView
         /// <summary>
         /// RngView一つあたりのPresenterを作成します。
         /// </summary>
-        public static IRngViewPresenter CreateViewPresenter(IRngView view)
+        public static IRngViewPresenter CreateViewPresenter(IExtendedMainFormView mainFormView, IRngView view)
         {
-            return new Internal.RngViewPresenter(view);
+            return new Internal.RngViewPresenter(mainFormView, view);
         }
     }
 }

@@ -52,6 +52,7 @@ namespace FERNGSolver.UI.Internal
             // 
             // SearchConditionTabControl
             // 
+            SearchConditionTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             SearchConditionTabControl.Controls.Add(tabPage1);
             SearchConditionTabControl.Controls.Add(tabPage2);
             SearchConditionTabControl.Location = new Point(12, 36);
@@ -82,6 +83,7 @@ namespace FERNGSolver.UI.Internal
             // 
             // SearchButton
             // 
+            SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             SearchButton.BackColor = Color.Yellow;
             SearchButton.Location = new Point(257, 741);
             SearchButton.Name = "SearchButton";
@@ -118,14 +120,14 @@ namespace FERNGSolver.UI.Internal
             // OpenGenealogyRngListFormMenuItem
             // 
             OpenGenealogyRngListFormMenuItem.Name = "OpenGenealogyRngListFormMenuItem";
-            OpenGenealogyRngListFormMenuItem.Size = new Size(192, 22);
+            OpenGenealogyRngListFormMenuItem.Size = new Size(191, 22);
             OpenGenealogyRngListFormMenuItem.Text = "聖戦の系譜 乱数ビューア";
             OpenGenealogyRngListFormMenuItem.Click += OpenGenealogyRngListFormMenuItem_Click;
             // 
             // OpenThraciaRngListFormMenuItem
             // 
             OpenThraciaRngListFormMenuItem.Name = "OpenThraciaRngListFormMenuItem";
-            OpenThraciaRngListFormMenuItem.Size = new Size(192, 22);
+            OpenThraciaRngListFormMenuItem.Size = new Size(191, 22);
             OpenThraciaRngListFormMenuItem.Text = "トラキア776 乱数ビューア";
             OpenThraciaRngListFormMenuItem.Click += OpenThraciaRngListFormMenuItem_Click;
             // 
@@ -194,6 +196,7 @@ namespace FERNGSolver.UI.Internal
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Form1";
+            Shown += MainForm_Shown;
             SearchConditionTabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).EndInit();
             menuStrip1.ResumeLayout(false);

@@ -21,8 +21,8 @@ namespace FERNGSolver.Gba.Domain.Combat
         /// </summary>
         public static Result Simulate(ICombatRngService rngService, ICombatUnit attacker, ICombatUnit defender, bool isBindingBlade)
         {
-            var attackerUnit = new Unit(attacker);
-            var defenderUnit = new Unit(defender);
+            var attackerUnit = new Unit(attacker, UnitSide.Player);
+            var defenderUnit = new Unit(defender, UnitSide.Enemy);
 
             // 攻撃側→防御側の順でPhaseCountがなくなるまで交互に攻撃を行う
             // どちらかが死んだら終わり
@@ -69,11 +69,13 @@ namespace FERNGSolver.Gba.Domain.Combat
         {
             public ICombatUnit CombatUnit { get; }
             public int CurrentHp { get; set; }
+            public UnitSide UnitSide { get; }
 
-            public Unit(ICombatUnit combatUnit)
+            public Unit(ICombatUnit combatUnit, UnitSide unitSide)
             {
                 CombatUnit = combatUnit;
                 CurrentHp = combatUnit.Hp;
+                UnitSide = unitSide;
             }
         }
 
@@ -97,23 +99,23 @@ namespace FERNGSolver.Gba.Domain.Combat
             int damage = 0;
 
             // 必的判定
-            if (attackerSide.HasSureStrike() && rngService.CheckActivateSureStrike(attackerSide.GetLevel()))
+            if (attackerSide.HasSureStrike() && rngService.CheckActivateSureStrike(attackerSide.GetLevel(), attackerSide.UnitSide))
             {
                 isHit = true;
             }
             // 命中判定
-            else if (rngService.CheckHit(attackerSide.CombatUnit.HitRate))
+            else if (rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
             {
                 isHit = true;
 
                 // 大盾判定
                 // 武器が毒/ストーンの時、大盾判定をスキップ
-                if (!attackerSide.IsPoisonWeapon() && defenderSide.HasGreatShield() && rngService.CheckActivateGreatShield(defenderSide.GetLevel()))
+                if (!attackerSide.IsPoisonWeapon() && defenderSide.HasGreatShield() && rngService.CheckActivateGreatShield(defenderSide.GetLevel(), defenderSide.UnitSide))
                 {
                     isGreatShieldActive = true;
                 }
                 // 貫通判定
-                else if(attackerSide.HasPierce() && rngService.CheckActivatePierce(attackerSide.GetLevel()))
+                else if(attackerSide.HasPierce() && rngService.CheckActivatePierce(attackerSide.GetLevel(), attackerSide.UnitSide))
                 {
                     isPierceActive = true;
                 }
@@ -125,14 +127,14 @@ namespace FERNGSolver.Gba.Domain.Combat
                 int power = (isPierceActive ? attackerSide.CombatUnit.Power + attackerSide.CombatUnit.StatusDetail.OpponentDefense : attackerSide.CombatUnit.Power);
 
                 // 命中していたら必殺判定
-                if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate))
+                if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
                 {
                     // 必殺が出たら瞬殺判定（封印以外）
                     // 瞬殺のみスキルを持っていなくても判定する
                     // 敵がラスボスなら瞬殺判定をスキップ
                     if(!isBindingBlade
                         && defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss
-                        && rngService.CheckActivateSilencer(defenderSide.CombatUnit.StatusDetail.BossType)
+                        && rngService.CheckActivateSilencer(defenderSide.CombatUnit.StatusDetail.BossType, attackerSide.UnitSide)
                         && attackerSide.HasSilencer())
                     {
                         isSilencerActive = true;
@@ -148,7 +150,7 @@ namespace FERNGSolver.Gba.Domain.Combat
 
                 // デビルアクス判定
                 // アサシンは斧を持てないので呪いと瞬殺は両立しない
-                if (attackerSide.IsCursedWeapon() && rngService.CheckActivateCurse(attackerSide.CombatUnit.StatusDetail.Luck))
+                if (attackerSide.IsCursedWeapon() && rngService.CheckActivateCurse(attackerSide.CombatUnit.StatusDetail.Luck, attackerSide.UnitSide))
                 {
                     attackerSide.CurrentHp -= damage;
                 }
