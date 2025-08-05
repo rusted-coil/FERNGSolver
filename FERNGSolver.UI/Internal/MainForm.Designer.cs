@@ -93,7 +93,7 @@ namespace FERNGSolver.UI.Internal
             SearchResultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SearchResultDataGridView.Location = new Point(6, 6);
             SearchResultDataGridView.Name = "SearchResultDataGridView";
-            SearchResultDataGridView.Size = new Size(880, 697);
+            SearchResultDataGridView.Size = new Size(680, 662);
             SearchResultDataGridView.TabIndex = 1;
             // 
             // tabControl1
@@ -101,10 +101,10 @@ namespace FERNGSolver.UI.Internal
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
-            tabControl1.Location = new Point(672, 36);
+            tabControl1.Location = new Point(672, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(900, 737);
+            tabControl1.Size = new Size(700, 702);
             tabControl1.TabIndex = 3;
             // 
             // tabPage3
@@ -113,7 +113,7 @@ namespace FERNGSolver.UI.Internal
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(892, 709);
+            tabPage3.Size = new Size(692, 674);
             tabPage3.TabIndex = 0;
             tabPage3.Text = "検索結果";
             tabPage3.UseVisualStyleBackColor = true;
@@ -125,7 +125,7 @@ namespace FERNGSolver.UI.Internal
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(892, 709);
+            tabPage4.Size = new Size(692, 650);
             tabPage4.TabIndex = 1;
             tabPage4.Text = "乱数ビューア";
             tabPage4.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@ namespace FERNGSolver.UI.Internal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 726);
+            ClientSize = new Size(1384, 726);
             Controls.Add(tabControl1);
             Controls.Add(SearchButton);
             Controls.Add(SearchConditionTabControl);
