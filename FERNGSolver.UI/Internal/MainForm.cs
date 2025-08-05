@@ -29,7 +29,7 @@ namespace FERNGSolver
 
             SearchConditionTabControl.TabPages.Clear();
 
-            this.Text = "FERNGSolver v1.0.0";
+            this.Text = "FERNGSolver v1.0.1";
         }
 
         public IObservable<Unit> GetSearchButtonClicked(string title)
