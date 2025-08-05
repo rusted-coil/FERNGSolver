@@ -45,7 +45,7 @@ namespace FERNGSolver
             SearchConditionTabControl.Location = new Point(12, 12);
             SearchConditionTabControl.Name = "SearchConditionTabControl";
             SearchConditionTabControl.SelectedIndex = 0;
-            SearchConditionTabControl.Size = new Size(654, 699);
+            SearchConditionTabControl.Size = new Size(654, 664);
             SearchConditionTabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -53,7 +53,7 @@ namespace FERNGSolver
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(646, 671);
+            tabPage1.Size = new Size(646, 636);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -63,7 +63,7 @@ namespace FERNGSolver
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(646, 671);
+            tabPage2.Size = new Size(646, 636);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@ namespace FERNGSolver
             // 
             SearchButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             SearchButton.BackColor = Color.Yellow;
-            SearchButton.Location = new Point(257, 717);
+            SearchButton.Location = new Point(257, 682);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(143, 32);
             SearchButton.TabIndex = 0;
@@ -85,19 +85,20 @@ namespace FERNGSolver
             SearchResultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SearchResultDataGridView.Location = new Point(672, 12);
             SearchResultDataGridView.Name = "SearchResultDataGridView";
-            SearchResultDataGridView.Size = new Size(500, 737);
+            SearchResultDataGridView.Size = new Size(500, 702);
             SearchResultDataGridView.TabIndex = 1;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 761);
+            ClientSize = new Size(1184, 726);
             Controls.Add(SearchResultDataGridView);
             Controls.Add(SearchButton);
             Controls.Add(SearchConditionTabControl);
             Name = "MainForm";
             Text = "Form1";
+            Shown += MainForm_Shown;
             SearchConditionTabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).EndInit();
             ResumeLayout(false);
