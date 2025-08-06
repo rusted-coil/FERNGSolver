@@ -30,7 +30,10 @@ namespace FERNGSolver.Gba.UI.Internal
             var disposables = new CompositeDisposable();
 
             Presentation.Search.PresenterFactory.Create(userControl, m_ConfigService, m_ErrorNotifier).AddTo(disposables);
-            Presentation.RngView.PresenterFactory.CreateListPresenter(userControl, new RngViewListView(rngViewListViewPanel)).AddTo(disposables);
+
+            var rngViewListView = new RngViewListView(rngViewListViewPanel);
+            Presentation.RngView.PresenterFactory.CreateListPresenter(userControl, rngViewListView).AddTo(disposables);
+            mainFormView.AddRngViewButtonClicked.Subscribe(_ => rngViewListView.AddView(userControl, 0)).AddTo(disposables);
 
             // UserControlの破棄時にPresenterも破棄
             userControl.Disposed += (sender, args) => disposables.Dispose();

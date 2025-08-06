@@ -1,3 +1,5 @@
+using System.Reactive;
+
 namespace FERNGSolver.Gba.Presentation.RngView.ViewContracts
 {
     public interface IRngView

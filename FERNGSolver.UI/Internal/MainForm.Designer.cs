@@ -37,6 +37,7 @@ namespace FERNGSolver.UI.Internal
             ToolBarMenu = new MenuStrip();
             SwitchTitleTreeMenuItem = new ToolStripMenuItem();
             SearchConditionPanel = new Panel();
+            AddRngViewButton = new Button();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
             ResultsTabControl.SuspendLayout();
             RngViewTabPage.SuspendLayout();
@@ -77,6 +78,7 @@ namespace FERNGSolver.UI.Internal
             // 
             // RngViewTabPage
             // 
+            RngViewTabPage.Controls.Add(AddRngViewButton);
             RngViewTabPage.Controls.Add(RngViewPanel);
             RngViewTabPage.Location = new Point(4, 24);
             RngViewTabPage.Name = "RngViewTabPage";
@@ -132,6 +134,15 @@ namespace FERNGSolver.UI.Internal
             SearchConditionPanel.Size = new Size(654, 643);
             SearchConditionPanel.TabIndex = 5;
             // 
+            // AddRngViewButton
+            // 
+            AddRngViewButton.Location = new Point(613, 6);
+            AddRngViewButton.Name = "AddRngViewButton";
+            AddRngViewButton.Size = new Size(58, 23);
+            AddRngViewButton.TabIndex = 0;
+            AddRngViewButton.Text = "追加";
+            AddRngViewButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -165,5 +176,6 @@ namespace FERNGSolver.UI.Internal
         private MenuStrip ToolBarMenu;
         private Panel SearchConditionPanel;
         private ToolStripMenuItem SwitchTitleTreeMenuItem;
+        private Button AddRngViewButton;
     }
 }

@@ -14,5 +14,10 @@ namespace FERNGSolver.Common.Presentation.ViewContracts
         /// 結果を表示します。
         /// </summary>
         void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels);
+
+        /// <summary>
+        /// 乱数ビューの追加ボタンがクリックされたことを通知するストリームを取得します。
+        /// </summary>
+        IObservable<Unit> AddRngViewButtonClicked { get; }
     }
 }

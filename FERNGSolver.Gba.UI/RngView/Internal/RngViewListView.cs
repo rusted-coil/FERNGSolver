@@ -20,9 +20,9 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             m_ListViewPanel.Controls.Clear();
         }
 
-        public void AddView(IExtendedMainFormView mainFormView)
+        public void AddView(IExtendedMainFormView mainFormView, int initialPosition)
         {
-            var userControl = new RngViewUserControl();
+            var userControl = new RngViewUserControl(initialPosition);
             AddUserControl(userControl);
 
             var disposables = new CompositeDisposable();
@@ -31,9 +31,12 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
             // UserControlの破棄時にPresenterも破棄
             userControl.Disposed += (sender, args) => disposables.Dispose();
+
+            // xボタンが押されたら削除
+            userControl.RemoveButtonClicked.Subscribe(_ => RemoveUserControl(userControl)).AddTo(disposables);
         }
 
-        public void AddUserControl(UserControl userControl)
+        private void AddUserControl(UserControl userControl)
         {
             // 現在のコントロール数を取得
             int controlCount = m_ListViewPanel.Controls.Count;
@@ -49,14 +52,12 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             m_ListViewPanel.Controls.Add(userControl);
         }
 
-        public void RemoveLastUserControl()
+        private void RemoveUserControl(UserControl userControl)
         {
-            if (m_ListViewPanel.Controls.Count > 0)
+            if (m_ListViewPanel.Controls.Contains(userControl))
             {
-                // 最後のコントロールを削除
-                var lastControl = m_ListViewPanel.Controls[m_ListViewPanel.Controls.Count - 1];
-                m_ListViewPanel.Controls.Remove(lastControl);
-                lastControl.Dispose();
+                m_ListViewPanel.Controls.Remove(userControl);
+                userControl.Dispose();
             }
         }
     }

@@ -30,6 +30,7 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
         {
             label1 = new Label();
             PositionNumericUpDown = new FERNGSolver.Common.UI.Controls.NumericUpDownEx();
+            RemoveButton = new Button();
             ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -52,17 +53,28 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             PositionNumericUpDown.TextAlign = HorizontalAlignment.Right;
             PositionNumericUpDown.ValueChanged += PositionNumericUpDown_ValueChanged;
             // 
+            // RemoveButton
+            // 
+            RemoveButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            RemoveButton.Location = new Point(370, 3);
+            RemoveButton.Name = "RemoveButton";
+            RemoveButton.Size = new Size(25, 23);
+            RemoveButton.TabIndex = 2;
+            RemoveButton.Text = "x";
+            RemoveButton.UseVisualStyleBackColor = true;
+            // 
             // RngViewUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(RemoveButton);
             Controls.Add(PositionNumericUpDown);
             Controls.Add(label1);
             DoubleBuffered = true;
             Name = "RngViewUserControl";
-            Size = new Size(398, 148);
+            Size = new Size(398, 105);
             ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -72,5 +84,6 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
         private Label label1;
         private Common.UI.Controls.NumericUpDownEx PositionNumericUpDown;
+        private Button RemoveButton;
     }
 }

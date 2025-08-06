@@ -15,6 +15,6 @@ namespace FERNGSolver.Gba.Presentation.RngView.ViewContracts
         /// <summary>
         /// 乱数ビューアを一つ追加します。
         /// </summary>
-        void AddView(IExtendedMainFormView mainFormView);
+        void AddView(IExtendedMainFormView mainFormView, int initialPosition);
     }
 }

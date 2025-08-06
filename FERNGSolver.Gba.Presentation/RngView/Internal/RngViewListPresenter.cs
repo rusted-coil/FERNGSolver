@@ -19,12 +19,17 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
 
             m_ListView.Clear();
             // 初期状態で1つ追加
-            m_ListView.AddView(m_MainFormView);
+            m_ListView.AddView(m_MainFormView, 0);
         }
 
         public void Dispose()
         {
             m_Disposables.Dispose();
+        }
+
+        public void AddRngView(int initialPosition)
+        {
+            m_ListView.AddView(m_MainFormView, initialPosition);
         }
     }
 }

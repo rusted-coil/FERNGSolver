@@ -15,6 +15,7 @@ namespace FERNGSolver.UI.Internal
         public string SelectingTitle { get; private set; } = string.Empty;
 
         public IObservable<Unit> SearchButtonClicked => m_SearchButton.Clicked;
+        public IObservable<Unit> AddRngViewButtonClicked => m_AddRngViewButton.Clicked;
 
         public IObservable<Unit> Initialized => m_Initialized;
         AsyncSubject<Unit> m_Initialized = new AsyncSubject<Unit>();
@@ -28,12 +29,14 @@ namespace FERNGSolver.UI.Internal
         UserControl? m_CurrentSearchConditionUserControl = null;
 
         private readonly IButton m_SearchButton;
+        private readonly IButton m_AddRngViewButton;
 
         public MainForm()
         {
             InitializeComponent();
 
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
+            m_AddRngViewButton = ButtonFactory.CreateButton(AddRngViewButton);
 
             this.Text = "FERNGSolver v1.0.1";
         }

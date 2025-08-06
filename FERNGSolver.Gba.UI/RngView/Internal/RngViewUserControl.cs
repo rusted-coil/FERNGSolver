@@ -2,7 +2,9 @@ using FERNGSolver.Gba.Application.RNG;
 using FERNGSolver.Gba.Domain.Combat.Service;
 using FERNGSolver.Gba.Presentation.RngView;
 using FERNGSolver.Gba.Presentation.RngView.ViewContracts;
+using FormRx.Button;
 using System.Drawing.Drawing2D;
+using System.Reactive;
 using System.Reactive.Subjects;
 
 namespace FERNGSolver.Gba.UI.RngView.Internal
@@ -27,12 +29,18 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
         private BehaviorSubject<int> m_PositionChanged;
 
+        private readonly IButton m_RemoveButton;
+        public IObservable<Unit> RemoveButtonClicked => m_RemoveButton.Clicked;
+
         private IRandomNumberViewModel[] m_RandomNumberViewModels = Array.Empty<IRandomNumberViewModel>();
 
-        public RngViewUserControl()
+        public RngViewUserControl(int initialPosition)
         {
             InitializeComponent();
+            PositionNumericUpDown.Value = initialPosition;
+
             m_PositionChanged = new BehaviorSubject<int>((int)PositionNumericUpDown.Value);
+            m_RemoveButton = ButtonFactory.CreateButton(RemoveButton);
         }
 
         public void SetRandomNumbers(IReadOnlyList<IRandomNumberViewModel> viewModels)
