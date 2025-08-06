@@ -2,6 +2,7 @@ using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.Gba.Application.RNG;
 using FERNGSolver.Gba.Domain.Combat;
 using FERNGSolver.Gba.Domain.Combat.Service;
+using FERNGSolver.Gba.Domain.Growth;
 using FERNGSolver.Gba.Domain.RNG;
 using FERNGSolver.Gba.Presentation.RngView.ViewContracts;
 using FERNGSolver.Gba.Presentation.ViewContracts;
@@ -20,7 +21,9 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
         {
             m_MainFormView = mainFormView;
             m_View = view;
-            m_View.PositionChanged.Subscribe(PositionChanged).AddTo(m_Disposables);
+
+            mainFormView.SearchConditionChanged.Subscribe(_ => PositionChanged(m_View.CurrentPosition)).AddTo(m_Disposables);
+            view.PositionChanged.Subscribe(PositionChanged).AddTo(m_Disposables);
         }
 
         public void Dispose()
@@ -61,114 +64,64 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
 
             // rngを回して乱数の使用用途を計算し、previewRngで実際の乱数値を取得する
 
+            List<RandomNumberViewModel> viewModels = new List<RandomNumberViewModel>();
+
             if (!m_MainFormView.UsesFalconKnightMethod)
             {
                 // 契機をシミュレート
                 var recordingService = new Combat.Internal.RecordingCombatRngService(CombatRngServiceFactory.Create(rng));
-            }
 
-            int usageCount = 0;
-
-            List<RandomNumberViewModel> viewModels = new List<RandomNumberViewModel>();
-            for (int i = 0; i < 40; ++i) // 乱数の表示個数は外部から変えられるようにしたい
-            {
-                if (i >= usageCount)
+                if (m_MainFormView.ContainsCombat)
                 {
-                    viewModels.Add(new RandomNumberViewModel
+                    CombatSimulator.Simulate(recordingService,
+                        Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateAttackerUnitFromView(m_MainFormView),
+                        Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateDefenderUnitFromView(m_MainFormView),
+                        m_MainFormView.IsBindingBlade);
+
+                    // 戦闘に使用した乱数をViewModel化
+                    foreach (var pair in recordingService.UsedRandomNumbers)
                     {
-                        Value = previewRng.Next(),
-                        Usage = RandomNumberUsage.None,
-                        IsOk = false,
-                    });
+                        viewModels.Add(new RandomNumberViewModel
+                        {
+                            Value = previewRng.Next(),
+                            Usage = pair.Usage,
+                            IsOk = pair.IsOk,
+                        });
+                    }
+                }
+
+                if (m_MainFormView.ContainsGrowth)
+                {
+                    var growth = GrowthSimulator.Simulate(rng,
+                        m_MainFormView.HpGrowthRate,
+                        m_MainFormView.AtkGrowthRate,
+                        m_MainFormView.TecGrowthRate,
+                        m_MainFormView.SpdGrowthRate,
+                        m_MainFormView.DefGrowthRate,
+                        m_MainFormView.MdfGrowthRate,
+                        m_MainFormView.LucGrowthRate);
+
+                    for (int i = 0; i < growth.Count; ++i)
+                    {
+                        viewModels.Add(new RandomNumberViewModel
+                        {
+                            Value = previewRng.Next(),
+                            Usage = RandomNumberUsage.GrowthStart + i,
+                            IsOk = growth[i] > 0,
+                        });
+                    }
                 }
             }
 
-//            if()
-
-            // 契機をシミュレート
-            /*
-            var defaultService = CombatRngServiceFactory.Create(rng);
-            var recordingService = new RecordingCombatRngService(defaultService);
-            CombatSimulator.Simulate(recordingService,
-                new CombatUnit {
-                    Hp = 40,
-                    Attack = 15,
-                    Defense = 5,
-                    HitRate = 80,
-                    CriticalRate = 0,
-                    PhaseCount = 2,
-
-                    StatusDetail = new UnitStatusDetail {
-                        WeaponType = Domain.Combat.Const.WeaponType.Normal,
-                        HasVantage = false,
-                        HasAstra = false,
-                        HasLuna = false,
-                        HasSol = false,
-                        HasContinuation = false,
-                        HasAssault = false,
-                        HasGreatShield = false,
-                        Level = 1,
-                        MaxHp = 40,
-                        Tec = 10,
-                        AttackSpeed = 5,
-                    },
-                },
-                new CombatUnit {
-                    Hp = 40,
-                    Attack = 15,
-                    Defense = 5,
-                    HitRate = 80,
-                    CriticalRate = 0,
-                    PhaseCount = 2,
-
-                    StatusDetail = new UnitStatusDetail {
-                        WeaponType = Domain.Combat.Const.WeaponType.Normal,
-                        HasVantage = false,
-                        HasAstra = false,
-                        HasLuna = false,
-                        HasSol = false,
-                        HasContinuation = false,
-                        HasAssault = false,
-                        HasGreatShield = false,
-                        Level = 1,
-                        MaxHp = 40,
-                        Tec = 10,
-                        AttackSpeed = 5,
-                    },
-                });
-
-            var growth = GrowthSimulator.Simulate(rng, 110, 50, 5, 50, 30, 40, 40, 5);*/
-
-            /*
-            foreach (var pair in recordingService.UsedRandomNumbers)
+            const int displayCount = 40; // 乱数の表示個数は外部から変えられるようにしたい
+            for (int i = viewModels.Count; i < displayCount; ++i)
             {
-                viewModels.Add(new RandomNumberViewModel {
+                viewModels.Add(new RandomNumberViewModel
+                {
                     Value = previewRng.Next(),
-                    Usage = pair.Usage,
-                    IsOk = pair.IsOk,
+                    Usage = RandomNumberUsage.None,
+                    IsOk = false,
                 });
-            }*/
-            for (int i = viewModels.Count, c = 0; i < 30; ++i, ++c)
-            {
-
-                    /*
-                if (c < growth.Count)
-                {
-                    viewModels.Add(new RandomNumberViewModel {
-                        Value = previewRng.Next(),
-                        Usage = RandomNumberUsage.GrowthStart + c,
-                        IsOk = growth[c] > 0,
-                    });
-                }
-                else
-                {
-                    viewModels.Add(new RandomNumberViewModel {
-                        Value = previewRng.Next(),
-                        Usage = RandomNumberUsage.None,
-                        IsOk = false,
-                    });
-                }
-                    */
             }
 
             m_View.SetRandomNumbers(viewModels);

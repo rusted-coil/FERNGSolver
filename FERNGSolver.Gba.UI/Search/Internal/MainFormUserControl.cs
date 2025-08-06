@@ -21,11 +21,14 @@ namespace FERNGSolver.Gba.UI.Search
     {
         public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
-//        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title) => m_MainFormView.GetRngViewInitializeButtonClicked(title);
 
         public IObservable<Unit> PersistentConfigChanged => m_PersistentConfigChanged;
         Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
         private void PersistentConfigControlValueChanged(object sender, EventArgs e) => m_PersistentConfigChanged.OnNext(Unit.Default);
+
+        public IObservable<Unit> SearchConditionChanged => m_SearchConditionChanged;
+        Subject<Unit> m_SearchConditionChanged = new Subject<Unit>();
+        private void SearchConditionControlValueChanged(object? sender, EventArgs e) => m_SearchConditionChanged.OnNext(Unit.Default);
 
         // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
@@ -112,6 +115,10 @@ namespace FERNGSolver.Gba.UI.Search
 
             AttackerStatusDetailLabel.Text = m_AttackerStatusDetail.ToString();
             DefenderStatusDetailLabel.Text = m_DefenderStatusDetail.ToString();
+
+            // 検索条件にかかわるコントロールの値が変化した時、外部に通知する用のイベントハンドラを登録
+            ContainsCombatCheckBox.CheckedChanged += SearchConditionControlValueChanged;
+            ContainsGrowthCheckBox.CheckedChanged += SearchConditionControlValueChanged;
         }
 
         public void ReflectConfig(IConfig config)

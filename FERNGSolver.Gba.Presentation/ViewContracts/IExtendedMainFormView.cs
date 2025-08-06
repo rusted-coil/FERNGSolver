@@ -35,5 +35,10 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
         /// 保存が必要なコンフィグが変更されたことを通知するストリームを取得します。
         /// </summary>
         IObservable<Unit> PersistentConfigChanged { get; }
+
+        /// <summary>
+        /// 検索条件が変更されたことを通知するストリームを取得します。
+        /// </summary>
+        IObservable<Unit> SearchConditionChanged { get; }
     }
 }

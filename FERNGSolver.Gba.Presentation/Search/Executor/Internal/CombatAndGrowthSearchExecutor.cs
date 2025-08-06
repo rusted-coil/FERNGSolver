@@ -56,7 +56,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             });
         }
 
-        private static ICombatUnit CreateAttackerUnitFromView(ICombatSettingsView view)
+        internal static ICombatUnit CreateAttackerUnitFromView(ICombatSettingsView view)
         {
             return new CombatUnit
             {
@@ -69,7 +69,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             };
         }
 
-        private static ICombatUnit CreateDefenderUnitFromView(ICombatSettingsView view)
+        internal static ICombatUnit CreateDefenderUnitFromView(ICombatSettingsView view)
         {
             return new CombatUnit
             {

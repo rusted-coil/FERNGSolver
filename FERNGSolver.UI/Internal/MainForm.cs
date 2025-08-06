@@ -89,6 +89,9 @@ namespace FERNGSolver.UI.Internal
             m_CurrentSearchConditionUserControl = userControl;
 
             AdjustMainFormSize(height);
+
+            // タイトル切り替え時は乱数ビュータブを表示
+            ResultsTabControl.SelectedTab = RngViewTabPage;
         }
 
         private void AdjustMainFormSize(int searchConditionControlHeight)
@@ -133,6 +136,7 @@ namespace FERNGSolver.UI.Internal
             var list = Activator.CreateInstance(listType, viewModels) as IList;
             SearchResultDataGridView.DataSource = list;
 
+            // 検索結果タブを表示
             ResultsTabControl.SelectedTab = SearchResultsTabPage;
         }
 

@@ -22,6 +22,7 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
         private static readonly (Brush Brush, Pen Pen) PlayerUsageDrawer = (Brushes.Blue, Pens.Blue);
         private static readonly (Brush Brush, Pen Pen) EnemyUsageDrawer = (Brushes.Red, Pens.Red);
 
+        public int CurrentPosition => (int)PositionNumericUpDown.Value;
         public IObservable<int> PositionChanged => m_PositionChanged;
 
         private BehaviorSubject<int> m_PositionChanged;
@@ -53,7 +54,7 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
                 var y = RngNumberStartY;
 
                 g.DrawString(m_RandomNumberViewModels[i].Value.ToString("D2"), this.Font, Brushes.Black, x, y);
-                g.DrawString(Domain.RNG.Util.IsRngValueOk(m_RandomNumberViewModels[i].Value) ? "◯" : "✕", this.Font, Brushes.Black, x + 2, y + RngNumberCxOffset);
+                g.DrawString(Domain.RNG.Util.IsRngValueOk(m_RandomNumberViewModels[i].Value) ? "◯" : "✕", this.Font, Brushes.Black, x + 1, y + RngNumberCxOffset);
                 DrawUsage(g, m_RandomNumberViewModels[i], x, y + RngNumberUsageOffset);
             }
         }
@@ -67,8 +68,7 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
             var drawer = GetUsageDrawer(viewModel.Usage);
 
-//            g.DrawString(viewModel.Usage.ToDisplayString(), this.Font, drawer.Brush, x, y);
-//            var size = g.MeasureString(viewModel.Usage.ToDisplayString(), this.Font);
+            g.DrawString(viewModel.Usage.ToDisplayString(), this.Font, drawer.Brush, x, y);
             if (viewModel.IsOk)
             {
                 g.DrawLine(drawer.Pen, x, y + 16, x + 16, y + 16);

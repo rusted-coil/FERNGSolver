@@ -1,6 +1,8 @@
+using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.Gba.Presentation.RngView;
 using FERNGSolver.Gba.Presentation.RngView.ViewContracts;
 using FERNGSolver.Gba.Presentation.ViewContracts;
+using System.Reactive.Disposables;
 
 namespace FERNGSolver.Gba.UI.RngView.Internal
 {
@@ -22,10 +24,13 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
         {
             var userControl = new RngViewUserControl();
             AddUserControl(userControl);
-            var presenter = PresenterFactory.CreateViewPresenter(mainFormView, userControl);
+
+            var disposables = new CompositeDisposable();
+
+            PresenterFactory.CreateViewPresenter(mainFormView, userControl).AddTo(disposables);
 
             // UserControlの破棄時にPresenterも破棄
-            userControl.Disposed += (sender, args) => presenter.Dispose();
+            userControl.Disposed += (sender, args) => disposables.Dispose();
         }
 
         public void AddUserControl(UserControl userControl)

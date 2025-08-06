@@ -17,19 +17,14 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
             m_MainFormView = mainFormView;
             m_ListView = listView;
 
-//            m_MainFormView.GetRngViewInitializeButtonClicked(Const.Title).Subscribe(_ => OnInitializeButtonClicked()).AddTo(m_Disposables);
+            m_ListView.Clear();
+            // 初期状態で1つ追加
+            m_ListView.AddView(m_MainFormView);
         }
 
         public void Dispose()
         {
             m_Disposables.Dispose();
-        }
-
-        private void OnInitializeButtonClicked()
-        {
-            m_ListView.Clear();
-            // とりあえず1つ追加
-            m_ListView.AddView(m_MainFormView);
         }
     }
 }

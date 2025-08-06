@@ -36,7 +36,7 @@ namespace FERNGSolver.Gba.Domain.Combat.Service
         /// <summary>
         /// 乱数を消費して瞬殺の発動判定を行います。
         /// </summary>
-        bool CheckActivateSilencer(Const.BossType bossType, UnitSide unitSide);
+        bool CheckActivateSilencer(Const.BossType bossType, bool hasSkill, UnitSide unitSide); // スキルの有無自体にかかわらず判定自体は行われる
 
         /// <summary>
         /// 乱数を消費してデビルアクスの呪いの発動判定を行います。

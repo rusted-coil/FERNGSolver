@@ -134,8 +134,7 @@ namespace FERNGSolver.Gba.Domain.Combat
                     // 敵がラスボスなら瞬殺判定をスキップ
                     if(!isBindingBlade
                         && defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss
-                        && rngService.CheckActivateSilencer(defenderSide.CombatUnit.StatusDetail.BossType, attackerSide.UnitSide)
-                        && attackerSide.HasSilencer())
+                        && rngService.CheckActivateSilencer(defenderSide.CombatUnit.StatusDetail.BossType, attackerSide.HasSilencer(), attackerSide.UnitSide))
                     {
                         isSilencerActive = true;
                     }

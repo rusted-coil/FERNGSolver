@@ -32,7 +32,7 @@ namespace FERNGSolver.Gba.Domain.Combat.Service.Internal
         public bool CheckActivateGreatShield(int level, UnitSide unitSide) => m_Rng.Next() < level;
 
         // 瞬殺: ボスの種類に応じて発動
-        public bool CheckActivateSilencer(Const.BossType bossType, UnitSide unitSide) => m_Rng.Next() < Util.GetSilencerRate(bossType);
+        public bool CheckActivateSilencer(Const.BossType bossType, bool hasSkill, UnitSide unitSide) => m_Rng.Next() < Util.GetSilencerRate(bossType) && hasSkill; // スキルの有無自体にかかわらず判定自体は行われる
 
         // デビルアクス
         public bool CheckActivateCurse(int luck, UnitSide unitSide) => m_Rng.Next() < Util.GetCurseRate(luck);

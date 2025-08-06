@@ -53,9 +53,9 @@ namespace FERNGSolver.Gba.Presentation.Combat.Internal
             return isOk;
         }
 
-        public bool CheckActivateSilencer(Domain.Combat.Const.BossType bossType, UnitSide unitSide)
+        public bool CheckActivateSilencer(Domain.Combat.Const.BossType bossType, bool hasSkill, UnitSide unitSide)
         {
-            bool isOk = m_Underlying.CheckActivateSilencer(bossType, unitSide);
+            bool isOk = m_Underlying.CheckActivateSilencer(bossType, hasSkill, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerSilencer : RandomNumberUsage.EnemySilencer, isOk));
             return isOk;
         }
