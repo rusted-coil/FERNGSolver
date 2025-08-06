@@ -28,21 +28,25 @@ namespace FERNGSolver.UI.Internal
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             SearchButton = new Button();
             SearchResultDataGridView = new DataGridView();
             ResultsTabControl = new TabControl();
             RngViewTabPage = new TabPage();
+            AddRngViewButton = new Button();
             RngViewPanel = new Panel();
             SearchResultsTabPage = new TabPage();
             ToolBarMenu = new MenuStrip();
             SwitchTitleTreeMenuItem = new ToolStripMenuItem();
             SearchConditionPanel = new Panel();
-            AddRngViewButton = new Button();
+            SearchResultContextMenuStrip = new ContextMenuStrip(components);
+            ResultToRngViewMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
             ResultsTabControl.SuspendLayout();
             RngViewTabPage.SuspendLayout();
             SearchResultsTabPage.SuspendLayout();
             ToolBarMenu.SuspendLayout();
+            SearchResultContextMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // SearchButton
@@ -64,6 +68,7 @@ namespace FERNGSolver.UI.Internal
             SearchResultDataGridView.Name = "SearchResultDataGridView";
             SearchResultDataGridView.Size = new Size(665, 649);
             SearchResultDataGridView.TabIndex = 1;
+            SearchResultDataGridView.MouseDown += SearchResultDataGridView_MouseDown;
             // 
             // ResultsTabControl
             // 
@@ -87,6 +92,15 @@ namespace FERNGSolver.UI.Internal
             RngViewTabPage.TabIndex = 1;
             RngViewTabPage.Text = "乱数ビューア";
             RngViewTabPage.UseVisualStyleBackColor = true;
+            // 
+            // AddRngViewButton
+            // 
+            AddRngViewButton.Location = new Point(613, 6);
+            AddRngViewButton.Name = "AddRngViewButton";
+            AddRngViewButton.Size = new Size(58, 23);
+            AddRngViewButton.TabIndex = 0;
+            AddRngViewButton.Text = "追加";
+            AddRngViewButton.UseVisualStyleBackColor = true;
             // 
             // RngViewPanel
             // 
@@ -134,14 +148,18 @@ namespace FERNGSolver.UI.Internal
             SearchConditionPanel.Size = new Size(654, 643);
             SearchConditionPanel.TabIndex = 5;
             // 
-            // AddRngViewButton
+            // SearchResultContextMenuStrip
             // 
-            AddRngViewButton.Location = new Point(613, 6);
-            AddRngViewButton.Name = "AddRngViewButton";
-            AddRngViewButton.Size = new Size(58, 23);
-            AddRngViewButton.TabIndex = 0;
-            AddRngViewButton.Text = "追加";
-            AddRngViewButton.UseVisualStyleBackColor = true;
+            SearchResultContextMenuStrip.Items.AddRange(new ToolStripItem[] { ResultToRngViewMenuItem });
+            SearchResultContextMenuStrip.Name = "SearchResultContextMenuStrip";
+            SearchResultContextMenuStrip.Size = new Size(237, 48);
+            // 
+            // ResultToRngViewMenuItem
+            // 
+            ResultToRngViewMenuItem.Name = "ResultToRngViewMenuItem";
+            ResultToRngViewMenuItem.Size = new Size(236, 22);
+            ResultToRngViewMenuItem.Text = "この消費数から乱数ビューアに追加";
+            ResultToRngViewMenuItem.Click += ResultToRngViewMenuItem_Click;
             // 
             // MainForm
             // 
@@ -161,6 +179,7 @@ namespace FERNGSolver.UI.Internal
             SearchResultsTabPage.ResumeLayout(false);
             ToolBarMenu.ResumeLayout(false);
             ToolBarMenu.PerformLayout();
+            SearchResultContextMenuStrip.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -177,5 +196,7 @@ namespace FERNGSolver.UI.Internal
         private Panel SearchConditionPanel;
         private ToolStripMenuItem SwitchTitleTreeMenuItem;
         private Button AddRngViewButton;
+        private ContextMenuStrip SearchResultContextMenuStrip;
+        private ToolStripMenuItem ResultToRngViewMenuItem;
     }
 }

@@ -142,5 +142,32 @@ namespace FERNGSolver.UI.Internal
             // 検索結果タブを表示
             ResultsTabControl.SelectedTab = SearchResultsTabPage;
         }
+
+        private void SearchResultDataGridView_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hit = SearchResultDataGridView.HitTest(e.X, e.Y);
+                if (hit.RowIndex >= 0)
+                {
+                    SearchResultDataGridView.ClearSelection();
+                    SearchResultDataGridView.Rows[hit.RowIndex].Selected = true;
+                    SearchResultDataGridView.CurrentCell = SearchResultDataGridView.Rows[hit.RowIndex].Cells[0];
+                    SearchResultContextMenuStrip.Show(SearchResultDataGridView, e.Location);
+                }
+            }
+        }
+
+        private void ResultToRngViewMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SearchResultDataGridView.SelectedRows.Count > 0)
+            {
+                var row = SearchResultDataGridView.SelectedRows[0];
+                var data = row.DataBoundItem;
+                // ここでdataを使って処理を行う
+                // 例: MessageBox.Show(data.ToString());
+                MessageBox.Show($"選択されたデータ: {data?.ToString() ?? "null"} ({data?.GetType()})");
+            }
+        }
     }
 }
