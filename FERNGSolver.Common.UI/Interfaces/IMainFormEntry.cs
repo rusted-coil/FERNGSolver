@@ -1,3 +1,5 @@
+using FERNGSolver.Common.Presentation.ViewContracts;
+
 namespace FERNGSolver.Common.UI.Interfaces
 {
     /// <summary>
@@ -12,8 +14,8 @@ namespace FERNGSolver.Common.UI.Interfaces
         string Title { get; }
 
         /// <summary>
-        /// 検索条件を設定するパネルのユーザーコントロールを取得します。
+        /// 検索条件を設定するパネルのユーザーコントロールを生成して返します。
         /// </summary>
-        UserControl MainFormControl { get; }
+        UserControl CreateSearchConditionUserControl(IMainFormView mainFormView, Panel rngViewListViewPanel);
     }
 }

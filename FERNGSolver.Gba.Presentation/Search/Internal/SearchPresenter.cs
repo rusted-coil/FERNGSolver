@@ -23,7 +23,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Internal
             m_MainFormView.ReflectConfig(m_ConfigService.Config);
 
             mainFormView.FalconKnightToolOpenButtonClicked.Subscribe(_ => OpenFalconKnightTool()).AddTo(m_Disposables);
-            mainFormView.GetSearchButtonClicked(Const.Title).Subscribe(_ => ExecuteSearch()).AddTo(m_Disposables);
+            mainFormView.SearchButtonClicked.Subscribe(_ => ExecuteSearch()).AddTo(m_Disposables);
 
             mainFormView.PersistentConfigChanged.Subscribe(_ => OnPersistentConfigChanged()).AddTo(m_Disposables);
         }

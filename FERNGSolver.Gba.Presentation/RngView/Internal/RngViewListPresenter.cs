@@ -17,7 +17,7 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
             m_MainFormView = mainFormView;
             m_ListView = listView;
 
-            m_MainFormView.GetRngViewInitializeButtonClicked(Const.Title).Subscribe(_ => OnInitializeButtonClicked()).AddTo(m_Disposables);
+//            m_MainFormView.GetRngViewInitializeButtonClicked(Const.Title).Subscribe(_ => OnInitializeButtonClicked()).AddTo(m_Disposables);
         }
 
         public void Dispose()

@@ -9,6 +9,7 @@ using FERNGSolver.Gba.Domain.Combat;
 using FERNGSolver.Gba.Domain.Repository.Stub;
 using FERNGSolver.Gba.Presentation.FalconKnight;
 using FERNGSolver.Gba.Presentation.ViewContracts;
+using FERNGSolver.Gba.UI.Internal;
 using FERNGSolver.Gba.UI.Search.Internal;
 using FormRx.Button;
 using System.Reactive;
@@ -18,9 +19,9 @@ namespace FERNGSolver.Gba.UI.Search
 {
     internal partial class MainFormUserControl : UserControl, IExtendedMainFormView
     {
-        public IObservable<Unit> GetSearchButtonClicked(string title) => m_MainFormView.GetSearchButtonClicked(title);
+        public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
-        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title) => m_MainFormView.GetRngViewInitializeButtonClicked(title);
+//        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title) => m_MainFormView.GetRngViewInitializeButtonClicked(title);
 
         public IObservable<Unit> PersistentConfigChanged => m_PersistentConfigChanged;
         Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
@@ -132,7 +133,7 @@ namespace FERNGSolver.Gba.UI.Search
             }
             else
             {
-                m_FalconKnightToolForm = FalconKnightToolLauncher.CreateToolForm(FalconKnightToolEntryFactory.Create(AddCxString));
+                m_FalconKnightToolForm = FalconKnightToolLauncher.CreateToolForm(FalconKnightToolEntryFactory.Create(MainFormEntry.Title, AddCxString));
                 m_FalconKnightToolForm.FormClosed += (object? sender, FormClosedEventArgs e) => {
                     m_FalconKnightToolForm = null;
                 };

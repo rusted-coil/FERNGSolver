@@ -16,7 +16,7 @@ namespace FERNGSolver.Thracia.Presentation.Search.Internal
         {
             m_MainFormView = mainFormView;
             m_ErrorNotifier = errorNotifier;
-            mainFormView.GetSearchButtonClicked(Const.Title).Subscribe(_ => ExecuteSearch()).AddTo(m_Disposables);
+            mainFormView.SearchButtonClicked.Subscribe(_ => ExecuteSearch()).AddTo(m_Disposables);
         }
 
         public void Dispose()

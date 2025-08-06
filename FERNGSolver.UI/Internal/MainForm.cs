@@ -5,13 +5,14 @@ using FormRx.Button;
 using System.Collections;
 using System.ComponentModel;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
 namespace FERNGSolver.UI.Internal
 {
     internal partial class MainForm : Form, Common.Presentation.ViewContracts.IMainFormView, Presentation.ViewContracts.IMainFormView
     {
+        public IObservable<Unit> SearchButtonClicked => m_SearchButton.Clicked;
+
         public IObservable<Unit> Initialized => m_Initialized;
         AsyncSubject<Unit> m_Initialized = new AsyncSubject<Unit>();
 
@@ -19,47 +20,32 @@ namespace FERNGSolver.UI.Internal
         Subject<Unit> m_PersistentConfigChanged = new Subject<Unit>();
         private void PersistentConfigControlValueChanged(object sender, EventArgs e) => m_PersistentConfigChanged.OnNext(Unit.Default);
 
-        int m_MaxSearchConditionControlContentSize = 0;
+        Dictionary<string, IMainFormEntry> m_Entries = new Dictionary<string, IMainFormEntry>();
+        Dictionary<string, ToolStripMenuItem> m_SwitchTitleMenuItems = new Dictionary<string, ToolStripMenuItem>();
+        UserControl? m_CurrentSearchConditionUserControl = null;
 
         private readonly IButton m_SearchButton;
-        private readonly IButton m_RngViewInitializeButton;
 
         public MainForm()
         {
             InitializeComponent();
 
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
-            m_RngViewInitializeButton = ButtonFactory.CreateButton(RngViewInitializeButton);
-
-            SearchConditionTabControl.TabPages.Clear();
 
             this.Text = "FERNGSolver v1.0.1";
-        }
-
-        public IObservable<Unit> GetSearchButtonClicked(string title)
-        {
-            return m_SearchButton.Clicked.Where(_ => SearchConditionTabControl.SelectedTab != null ? SearchConditionTabControl.SelectedTab.Text == title : false);
-        }
-
-        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title)
-        {
-            return m_RngViewInitializeButton.Clicked.Where(_ => SearchConditionTabControl.SelectedTab != null ? SearchConditionTabControl.SelectedTab.Text == title : false);
         }
 
         public void SetEntries(params IMainFormEntry[] entries)
         {
             foreach (var entry in entries)
             {
-                var tabPage = new TabPage(entry.Title);
-                tabPage.BackColor = SystemColors.Window;
+                m_Entries.Add(entry.Title, entry);
 
-                // Dock = FillでAddする前にサイズを取得しておかないと意図しない値になってしまっている
-                m_MaxSearchConditionControlContentSize = Math.Max(m_MaxSearchConditionControlContentSize, entry.MainFormControl.Size.Height);
-
-                entry.MainFormControl.Dock = DockStyle.Fill;
-                tabPage.Controls.Add(entry.MainFormControl);
-
-                SearchConditionTabControl.TabPages.Add(tabPage);
+                // ToolBarMenuにタイトルボタンを追加
+                var menuItem = new ToolStripMenuItem(entry.Title);
+                menuItem.Click += (sender, e) => SwitchTitle(entry.Title);
+                SwitchTitleTreeMenuItem.DropDownItems.Add(menuItem);
+                m_SwitchTitleMenuItems.Add(entry.Title, menuItem);
             }
 
             // とりあえずエントリーのセット=初期化完了としておく。
@@ -67,23 +53,51 @@ namespace FERNGSolver.UI.Internal
             m_Initialized.OnCompleted();
         }
 
+        private void SwitchTitle(string title)
+        {
+            // 現在のUserControlを破棄
+            if (m_CurrentSearchConditionUserControl != null)
+            {
+                SearchConditionPanel.Controls.Remove(m_CurrentSearchConditionUserControl);
+                m_CurrentSearchConditionUserControl.Dispose();
+                m_CurrentSearchConditionUserControl = null;
+            }
+
+            SwitchTitleTreeMenuItem.Text = title;
+            foreach (var menuItem in m_SwitchTitleMenuItems)
+            {
+                menuItem.Value.Checked = (menuItem.Key == title);
+            }
+
+            // 新しいUserControlを生成
+            var userControl = m_Entries[title].CreateSearchConditionUserControl(this, RngViewPanel);
+            int height = userControl.Size.Height; // Dock = FillでAddする前にサイズを取得しておかないと意図しない値になってしまっている
+            userControl.Dock = DockStyle.Fill;
+            SearchConditionPanel.Controls.Add(userControl);
+            m_CurrentSearchConditionUserControl = userControl;
+
+            AdjustMainFormSize(height);
+        }
+
+        private void AdjustMainFormSize(int searchConditionControlHeight)
+        {
+            // ウィンドウサイズの動的調整
+            // 例えばGBAのUserControlの高さが635の時、メインフォームの高さは760にするのがちょうどいい
+            // つまり全UserControlの高さの最大値+125が理想のフォームの高さ
+            // ただし、表示ディスプレイのWorkingAreaがこれより狭い場合には全体を表示することを諦めて高さを縮めなければならない
+            const int MainFormMarginHeight = 125;
+
+            var idealHeight = searchConditionControlHeight + MainFormMarginHeight;
+            var workingArea = Screen.GetWorkingArea(this);
+
+            this.Size = new Size(Math.Min(this.Size.Width, workingArea.Width), Math.Min(Math.Max(this.Size.Height, idealHeight), workingArea.Height));
+        }
+
         public void ReflectConfig(IConfig config)
         {
             if (!string.IsNullOrEmpty(config.SelectingTitle))
             {
-                SelectTab(config.SelectingTitle);
-            }
-        }
-
-        private void SelectTab(string title)
-        {
-            for (int i = 0; i < SearchConditionTabControl.TabCount; ++i)
-            {
-                if (SearchConditionTabControl.TabPages[i].Text == title)
-                {
-                    SearchConditionTabControl.SelectedIndex = i;
-                    break;
-                }
+                SwitchTitle(config.SelectingTitle);
             }
         }
 
@@ -112,20 +126,6 @@ namespace FERNGSolver.UI.Internal
         {
             var form = Thracia.UI.RngList.RngListFormLauncher.CreateForm();
             form.Show();
-        }
-
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
-            // ウィンドウサイズの動的調整
-            // 例えばGBAのUserControlの高さが635の時、メインフォームの高さは765にするのがちょうどいい
-            // つまり全UserControlの高さの最大値+130が理想のフォームの高さ
-            // ただし、表示ディスプレイのWorkingAreaがこれより狭い場合には全体を表示することを諦めて高さを縮めなければならない
-            const int MainFormMarginHeight = 130;
-
-            var idealHeight = m_MaxSearchConditionControlContentSize + MainFormMarginHeight;
-            var workingArea = Screen.GetWorkingArea(this);
-
-            this.Size = new Size(Math.Min(this.Size.Width, workingArea.Width), Math.Min(idealHeight, workingArea.Height));
         }
     }
 }

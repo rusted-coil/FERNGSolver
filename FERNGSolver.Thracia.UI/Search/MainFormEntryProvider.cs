@@ -11,6 +11,7 @@ namespace FERNGSolver.Thracia.UI.Search
     {
         public static IMainFormEntry Create(IMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
+            throw new NotImplementedException("This method is not implemented yet. Please implement it according to your application's requirements.");
             var userControl = new Internal.MainFormUserControl(mainFormView);
 //            userControl.InitializeDefaults();
 
@@ -19,7 +20,8 @@ namespace FERNGSolver.Thracia.UI.Search
             // UserControlの破棄時にPresenterも破棄
             userControl.Disposed += (sender, args) => presenter.Dispose();
 
-            return new MainFormEntry(Const.Title, userControl);
+            return null;
+//            return new Internal.MainFormEntry(Const.Title, userControl);
         }
     }
 }

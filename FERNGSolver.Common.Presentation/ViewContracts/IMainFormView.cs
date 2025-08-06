@@ -6,9 +6,9 @@ namespace FERNGSolver.Common.Presentation.ViewContracts
     public interface IMainFormView
     {
         /// <summary>
-        /// 特定のタイトルをメインフォームのタブで選択中、「検索」ボタンがクリックされたことを通知するストリームを取得します。
+        /// 「検索」ボタンがクリックされたことを通知するストリームを取得します。
         /// </summary>
-        IObservable<Unit> GetSearchButtonClicked(string title);
+        IObservable<Unit> SearchButtonClicked { get; }
 
         /// <summary>
         /// 結果を表示します。
@@ -18,6 +18,6 @@ namespace FERNGSolver.Common.Presentation.ViewContracts
         /// <summary>
         /// 特定のタイトルをメインフォームのタブで選択中、乱数ビューアの初期化ボタンがクリックされたことを通知するストリームを取得します。
         /// </summary>
-        IObservable<Unit> GetRngViewInitializeButtonClicked(string title);
+//        IObservable<Unit> GetRngViewInitializeButtonClicked(string title);
     }
 }

@@ -7,9 +7,9 @@ namespace FERNGSolver.Thracia.UI.Search.Internal
 {
     internal partial class MainFormUserControl : UserControl, IExtendedMainFormView
     {
-        public IObservable<Unit> GetSearchButtonClicked(string title) => m_MainFormView.GetSearchButtonClicked(title);
+        public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
-        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title) => m_MainFormView.GetRngViewInitializeButtonClicked(title);
+//        public IObservable<Unit> GetRngViewInitializeButtonClicked(string title) => m_MainFormView.GetRngViewInitializeButtonClicked(title);
 
         // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
