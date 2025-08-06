@@ -56,11 +56,12 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             // RemoveButton
             // 
             RemoveButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            RemoveButton.Location = new Point(370, 3);
+            RemoveButton.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            RemoveButton.Location = new Point(372, 2);
             RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(25, 23);
+            RemoveButton.Size = new Size(22, 22);
             RemoveButton.TabIndex = 2;
-            RemoveButton.Text = "x";
+            RemoveButton.Text = "✕";
             RemoveButton.UseVisualStyleBackColor = true;
             // 
             // RngViewUserControl
