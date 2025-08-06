@@ -62,7 +62,7 @@ namespace FERNGSolver.UI.Internal
             SearchResultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SearchResultDataGridView.Location = new Point(6, 6);
             SearchResultDataGridView.Name = "SearchResultDataGridView";
-            SearchResultDataGridView.Size = new Size(692, 649);
+            SearchResultDataGridView.Size = new Size(665, 649);
             SearchResultDataGridView.TabIndex = 1;
             // 
             // ResultsTabControl
@@ -73,7 +73,7 @@ namespace FERNGSolver.UI.Internal
             ResultsTabControl.Location = new Point(672, 33);
             ResultsTabControl.Name = "ResultsTabControl";
             ResultsTabControl.SelectedIndex = 0;
-            ResultsTabControl.Size = new Size(712, 689);
+            ResultsTabControl.Size = new Size(687, 689);
             ResultsTabControl.TabIndex = 3;
             // 
             // RngViewTabPage
@@ -83,7 +83,7 @@ namespace FERNGSolver.UI.Internal
             RngViewTabPage.Location = new Point(4, 24);
             RngViewTabPage.Name = "RngViewTabPage";
             RngViewTabPage.Padding = new Padding(3);
-            RngViewTabPage.Size = new Size(704, 661);
+            RngViewTabPage.Size = new Size(679, 661);
             RngViewTabPage.TabIndex = 1;
             RngViewTabPage.Text = "乱数ビューア";
             RngViewTabPage.UseVisualStyleBackColor = true;
@@ -104,7 +104,7 @@ namespace FERNGSolver.UI.Internal
             RngViewPanel.BackColor = Color.DimGray;
             RngViewPanel.Location = new Point(6, 36);
             RngViewPanel.Name = "RngViewPanel";
-            RngViewPanel.Size = new Size(880, 670);
+            RngViewPanel.Size = new Size(665, 619);
             RngViewPanel.TabIndex = 2;
             // 
             // SearchResultsTabPage
@@ -113,7 +113,7 @@ namespace FERNGSolver.UI.Internal
             SearchResultsTabPage.Location = new Point(4, 24);
             SearchResultsTabPage.Name = "SearchResultsTabPage";
             SearchResultsTabPage.Padding = new Padding(3);
-            SearchResultsTabPage.Size = new Size(704, 661);
+            SearchResultsTabPage.Size = new Size(679, 661);
             SearchResultsTabPage.TabIndex = 0;
             SearchResultsTabPage.Text = "検索結果";
             SearchResultsTabPage.UseVisualStyleBackColor = true;
@@ -123,7 +123,7 @@ namespace FERNGSolver.UI.Internal
             ToolBarMenu.Items.AddRange(new ToolStripItem[] { SwitchTitleTreeMenuItem });
             ToolBarMenu.Location = new Point(0, 0);
             ToolBarMenu.Name = "ToolBarMenu";
-            ToolBarMenu.Size = new Size(1384, 24);
+            ToolBarMenu.Size = new Size(1359, 24);
             ToolBarMenu.TabIndex = 4;
             ToolBarMenu.Text = "menuStrip1";
             // 
@@ -147,7 +147,7 @@ namespace FERNGSolver.UI.Internal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1384, 726);
+            ClientSize = new Size(1359, 726);
             Controls.Add(SearchConditionPanel);
             Controls.Add(ResultsTabControl);
             Controls.Add(SearchButton);
