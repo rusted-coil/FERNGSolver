@@ -30,18 +30,18 @@ namespace FERNGSolver.UI.Internal
         {
             SearchButton = new Button();
             SearchResultDataGridView = new DataGridView();
-            tabControl1 = new TabControl();
-            tabPage3 = new TabPage();
-            tabPage4 = new TabPage();
+            ResultsTabControl = new TabControl();
+            RngViewTabPage = new TabPage();
             RngViewInitializeButton = new Button();
             RngViewPanel = new Panel();
+            SearchResultsTabPage = new TabPage();
             ToolBarMenu = new MenuStrip();
             SwitchTitleTreeMenuItem = new ToolStripMenuItem();
             SearchConditionPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
-            tabControl1.SuspendLayout();
-            tabPage3.SuspendLayout();
-            tabPage4.SuspendLayout();
+            ResultsTabControl.SuspendLayout();
+            RngViewTabPage.SuspendLayout();
+            SearchResultsTabPage.SuspendLayout();
             ToolBarMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,39 +65,28 @@ namespace FERNGSolver.UI.Internal
             SearchResultDataGridView.Size = new Size(692, 649);
             SearchResultDataGridView.TabIndex = 1;
             // 
-            // tabControl1
+            // ResultsTabControl
             // 
-            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
-            tabControl1.Location = new Point(672, 33);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(712, 689);
-            tabControl1.TabIndex = 3;
+            ResultsTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ResultsTabControl.Controls.Add(RngViewTabPage);
+            ResultsTabControl.Controls.Add(SearchResultsTabPage);
+            ResultsTabControl.Location = new Point(672, 33);
+            ResultsTabControl.Name = "ResultsTabControl";
+            ResultsTabControl.SelectedIndex = 0;
+            ResultsTabControl.Size = new Size(712, 689);
+            ResultsTabControl.TabIndex = 3;
             // 
-            // tabPage3
+            // RngViewTabPage
             // 
-            tabPage3.Controls.Add(SearchResultDataGridView);
-            tabPage3.Location = new Point(4, 24);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(704, 661);
-            tabPage3.TabIndex = 0;
-            tabPage3.Text = "検索結果";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            tabPage4.Controls.Add(RngViewInitializeButton);
-            tabPage4.Controls.Add(RngViewPanel);
-            tabPage4.Location = new Point(4, 24);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(704, 661);
-            tabPage4.TabIndex = 1;
-            tabPage4.Text = "乱数ビューア";
-            tabPage4.UseVisualStyleBackColor = true;
+            RngViewTabPage.Controls.Add(RngViewInitializeButton);
+            RngViewTabPage.Controls.Add(RngViewPanel);
+            RngViewTabPage.Location = new Point(4, 24);
+            RngViewTabPage.Name = "RngViewTabPage";
+            RngViewTabPage.Padding = new Padding(3);
+            RngViewTabPage.Size = new Size(704, 661);
+            RngViewTabPage.TabIndex = 1;
+            RngViewTabPage.Text = "乱数ビューア";
+            RngViewTabPage.UseVisualStyleBackColor = true;
             // 
             // RngViewInitializeButton
             // 
@@ -117,6 +106,17 @@ namespace FERNGSolver.UI.Internal
             RngViewPanel.Name = "RngViewPanel";
             RngViewPanel.Size = new Size(880, 670);
             RngViewPanel.TabIndex = 2;
+            // 
+            // SearchResultsTabPage
+            // 
+            SearchResultsTabPage.Controls.Add(SearchResultDataGridView);
+            SearchResultsTabPage.Location = new Point(4, 24);
+            SearchResultsTabPage.Name = "SearchResultsTabPage";
+            SearchResultsTabPage.Padding = new Padding(3);
+            SearchResultsTabPage.Size = new Size(704, 661);
+            SearchResultsTabPage.TabIndex = 0;
+            SearchResultsTabPage.Text = "検索結果";
+            SearchResultsTabPage.UseVisualStyleBackColor = true;
             // 
             // ToolBarMenu
             // 
@@ -149,16 +149,16 @@ namespace FERNGSolver.UI.Internal
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1384, 726);
             Controls.Add(SearchConditionPanel);
-            Controls.Add(tabControl1);
+            Controls.Add(ResultsTabControl);
             Controls.Add(SearchButton);
             Controls.Add(ToolBarMenu);
             MainMenuStrip = ToolBarMenu;
             Name = "MainForm";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).EndInit();
-            tabControl1.ResumeLayout(false);
-            tabPage3.ResumeLayout(false);
-            tabPage4.ResumeLayout(false);
+            ResultsTabControl.ResumeLayout(false);
+            RngViewTabPage.ResumeLayout(false);
+            SearchResultsTabPage.ResumeLayout(false);
             ToolBarMenu.ResumeLayout(false);
             ToolBarMenu.PerformLayout();
             ResumeLayout(false);
@@ -169,9 +169,9 @@ namespace FERNGSolver.UI.Internal
         private Button SearchButton;
         private DataGridView SearchResultDataGridView;
         private ToolStripMenuItem OpenGenealogyRngListFormMenuItem;
-        private TabControl tabControl1;
-        private TabPage tabPage3;
-        private TabPage tabPage4;
+        private TabControl ResultsTabControl;
+        private TabPage SearchResultsTabPage;
+        private TabPage RngViewTabPage;
         private Button RngViewInitializeButton;
         public Panel RngViewPanel;
         private MenuStrip ToolBarMenu;

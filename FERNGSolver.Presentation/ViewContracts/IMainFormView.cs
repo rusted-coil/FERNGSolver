@@ -6,6 +6,11 @@ namespace FERNGSolver.Presentation.ViewContracts
     public interface IMainFormView
     {
         /// <summary>
+        /// 現在の選択タイトルIDを取得します。
+        /// </summary>
+        string SelectingTitle { get; }
+
+        /// <summary>
         /// メインフォームの初期化が完了したことを通知するストリームを取得します。
         /// </summary>
         IObservable<Unit> Initialized { get; }

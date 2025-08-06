@@ -4,6 +4,7 @@ using FERNGSolver.Common.UI.Interfaces;
 using FormRx.Button;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reactive;
 using System.Reactive.Subjects;
 
@@ -11,6 +12,8 @@ namespace FERNGSolver.UI.Internal
 {
     internal partial class MainForm : Form, Common.Presentation.ViewContracts.IMainFormView, Presentation.ViewContracts.IMainFormView
     {
+        public string SelectingTitle { get; private set; } = string.Empty;
+
         public IObservable<Unit> SearchButtonClicked => m_SearchButton.Clicked;
 
         public IObservable<Unit> Initialized => m_Initialized;
@@ -59,6 +62,8 @@ namespace FERNGSolver.UI.Internal
 
         private void SwitchTitle(string title)
         {
+            Debug.Assert(m_Entries.ContainsKey(title), $"Title '{title}' is not registered in the entries.");
+
             // 現在のUserControlを破棄
             if (m_CurrentSearchConditionUserControl != null)
             {
@@ -66,12 +71,15 @@ namespace FERNGSolver.UI.Internal
                 m_CurrentSearchConditionUserControl.Dispose();
                 m_CurrentSearchConditionUserControl = null;
             }
+            SearchResultDataGridView.Columns.Clear();
+            RngViewPanel.Controls.Clear();
 
             SwitchTitleTreeMenuItem.Text = title;
             foreach (var menuItem in m_SwitchTitleMenuItems)
             {
                 menuItem.Value.Checked = (menuItem.Key == title);
             }
+            SelectingTitle = title;
 
             // 新しいUserControlを生成
             var userControl = m_Entries[title].CreateSearchConditionUserControl(this, RngViewPanel);
@@ -124,6 +132,8 @@ namespace FERNGSolver.UI.Internal
             var listType = typeof(BindingList<>).MakeGenericType(viewModelType);
             var list = Activator.CreateInstance(listType, viewModels) as IList;
             SearchResultDataGridView.DataSource = list;
+
+            ResultsTabControl.SelectedTab = SearchResultsTabPage;
         }
 
         private void OpenThraciaRngListFormMenuItem_Click(object sender, EventArgs e)
