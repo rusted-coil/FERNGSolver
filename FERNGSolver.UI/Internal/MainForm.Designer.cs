@@ -32,7 +32,6 @@ namespace FERNGSolver.UI.Internal
             SearchResultDataGridView = new DataGridView();
             ResultsTabControl = new TabControl();
             RngViewTabPage = new TabPage();
-            RngViewInitializeButton = new Button();
             RngViewPanel = new Panel();
             SearchResultsTabPage = new TabPage();
             ToolBarMenu = new MenuStrip();
@@ -78,7 +77,6 @@ namespace FERNGSolver.UI.Internal
             // 
             // RngViewTabPage
             // 
-            RngViewTabPage.Controls.Add(RngViewInitializeButton);
             RngViewTabPage.Controls.Add(RngViewPanel);
             RngViewTabPage.Location = new Point(4, 24);
             RngViewTabPage.Name = "RngViewTabPage";
@@ -87,15 +85,6 @@ namespace FERNGSolver.UI.Internal
             RngViewTabPage.TabIndex = 1;
             RngViewTabPage.Text = "乱数ビューア";
             RngViewTabPage.UseVisualStyleBackColor = true;
-            // 
-            // RngViewInitializeButton
-            // 
-            RngViewInitializeButton.Location = new Point(6, 6);
-            RngViewInitializeButton.Name = "RngViewInitializeButton";
-            RngViewInitializeButton.Size = new Size(75, 24);
-            RngViewInitializeButton.TabIndex = 0;
-            RngViewInitializeButton.Text = "初期化";
-            RngViewInitializeButton.UseVisualStyleBackColor = true;
             // 
             // RngViewPanel
             // 
@@ -172,7 +161,6 @@ namespace FERNGSolver.UI.Internal
         private TabControl ResultsTabControl;
         private TabPage SearchResultsTabPage;
         private TabPage RngViewTabPage;
-        private Button RngViewInitializeButton;
         public Panel RngViewPanel;
         private MenuStrip ToolBarMenu;
         private Panel SearchConditionPanel;

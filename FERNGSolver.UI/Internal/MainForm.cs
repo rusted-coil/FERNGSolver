@@ -139,11 +139,5 @@ namespace FERNGSolver.UI.Internal
             // 検索結果タブを表示
             ResultsTabControl.SelectedTab = SearchResultsTabPage;
         }
-
-        private void OpenThraciaRngListFormMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Thracia.UI.RngList.RngListFormLauncher.CreateForm();
-            form.Show();
-        }
     }
 }
