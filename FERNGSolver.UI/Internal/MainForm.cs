@@ -43,7 +43,11 @@ namespace FERNGSolver.UI.Internal
 
                 // ToolBarMenuにタイトルボタンを追加
                 var menuItem = new ToolStripMenuItem(entry.Title);
-                menuItem.Click += (sender, e) => SwitchTitle(entry.Title);
+                menuItem.Click += (sender, e) =>
+                {
+                    SwitchTitle(entry.Title);
+                    m_PersistentConfigChanged.OnNext(Unit.Default);
+                };
                 SwitchTitleTreeMenuItem.DropDownItems.Add(menuItem);
                 m_SwitchTitleMenuItems.Add(entry.Title, menuItem);
             }
