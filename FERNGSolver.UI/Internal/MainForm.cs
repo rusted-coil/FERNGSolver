@@ -55,8 +55,11 @@ namespace FERNGSolver.UI.Internal
                 var menuItem = new ToolStripMenuItem(entry.Title);
                 menuItem.Click += (sender, e) =>
                 {
-                    SwitchTitle(entry.Title);
-                    m_PersistentConfigChanged.OnNext(Unit.Default);
+                    if (!menuItem.Checked)
+                    {
+                        SwitchTitle(entry.Title);
+                        m_PersistentConfigChanged.OnNext(Unit.Default);
+                    }
                 };
                 SwitchTitleTreeMenuItem.DropDownItems.Add(menuItem);
                 m_SwitchTitleMenuItems.Add(entry.Title, menuItem);
