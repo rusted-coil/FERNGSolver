@@ -31,6 +31,22 @@ namespace FERNGSolver.Gba.UI.Search
         public IObservable<Unit> SearchConditionChanged => m_SearchConditionChanged;
         Subject<Unit> m_SearchConditionChanged = new Subject<Unit>();
         private void SearchConditionControlValueChanged(object? sender, EventArgs e) => m_SearchConditionChanged.OnNext(Unit.Default);
+        private void CombatConditionControlValueChanged(object? sender, EventArgs e)
+        {
+            // 「戦闘を行う」にチェックが入っている時のみ条件が変化したものとして通知を行う
+            if (ContainsCombatCheckBox.Checked)
+            {
+                m_SearchConditionChanged.OnNext(Unit.Default);
+            }
+        }
+        private void GrowthConditionControlValueChanged(object? sender, EventArgs e)
+        {
+            // 「レベルアップ」にチェックが入っている時のみ条件が変化したものとして通知を行う
+            if (ContainsGrowthCheckBox.Checked)
+            {
+                m_SearchConditionChanged.OnNext(Unit.Default);
+            }
+        }
 
         // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;
@@ -118,9 +134,36 @@ namespace FERNGSolver.Gba.UI.Search
             AttackerStatusDetailLabel.Text = m_AttackerStatusDetail.ToString();
             DefenderStatusDetailLabel.Text = m_DefenderStatusDetail.ToString();
 
-            // 検索条件にかかわるコントロールの値が変化した時、外部に通知する用のイベントハンドラを登録
+            #region 検索条件にかかわるコントロールの値が変化した時、外部に通知する用のイベントハンドラを登録
+
             ContainsCombatCheckBox.CheckedChanged += SearchConditionControlValueChanged;
+
+            IsBindingBladeRadioButton.CheckedChanged += CombatConditionControlValueChanged;
+
+            AttackerHpNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            AttackerPowerNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            AttackerHitRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            AttackerCriticalRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            DoesAttackerFollowUpAttackCheckBox.CheckedChanged += CombatConditionControlValueChanged;
+
+            DefenderHpNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            DefenderPowerNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            DefenderHitRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            DefenderCriticalRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
+            DoesDefenderAttackCheckBox.CheckedChanged += CombatConditionControlValueChanged;
+            DoesDefenderFollowUpAttackCheckBox.CheckedChanged += CombatConditionControlValueChanged;
+
             ContainsGrowthCheckBox.CheckedChanged += SearchConditionControlValueChanged;
+
+            GrowthHpRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+            GrowthAtkRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+            GrowthTecRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+            GrowthSpdRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+            GrowthLucRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+            GrowthDefRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+            GrowthMdfRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+
+            #endregion
         }
 
         public void ReflectConfig(IConfig config)
@@ -202,6 +245,12 @@ namespace FERNGSolver.Gba.UI.Search
                 {
                     form.WriteToUnitStatusDetail(targetStatus);
                     targetStatusLabel.Text = targetStatus.ToString();
+
+                    // 「戦闘を行う」にチェックが入っている時のみ条件が変化したものとして通知を行う
+                    if (ContainsCombatCheckBox.Checked)
+                    {
+                        m_SearchConditionChanged.OnNext(Unit.Default);
+                    }
                 }
             }
         }
