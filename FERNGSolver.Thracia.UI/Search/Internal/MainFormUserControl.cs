@@ -10,6 +10,7 @@ namespace FERNGSolver.Thracia.UI.Search.Internal
         public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
         public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
         public IObservable<Unit> AddRngViewButtonClicked => m_MainFormView.AddRngViewButtonClicked;
+        public IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults => m_MainFormView.AddRngViewRequestedFromSearchResults;
 
         // ファルコンナイト法
         public bool UsesFalconKnightMethod => UsesFalconKnightMethodCheckBox.Checked;

@@ -19,7 +19,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             ShowResults(mainFormView, result);
         }
 
-        private class ResultViewModel
+        private class ResultViewModel : IRngStateResultViewModel
         {
             public required string Position { get; init; }
         }

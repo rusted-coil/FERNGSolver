@@ -41,6 +41,7 @@ namespace FERNGSolver.UI.Internal
             SearchConditionPanel = new Panel();
             SearchResultContextMenuStrip = new ContextMenuStrip(components);
             ResultToRngViewMenuItem = new ToolStripMenuItem();
+            AllResultToRngViewMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)SearchResultDataGridView).BeginInit();
             ResultsTabControl.SuspendLayout();
             RngViewTabPage.SuspendLayout();
@@ -150,16 +151,23 @@ namespace FERNGSolver.UI.Internal
             // 
             // SearchResultContextMenuStrip
             // 
-            SearchResultContextMenuStrip.Items.AddRange(new ToolStripItem[] { ResultToRngViewMenuItem });
+            SearchResultContextMenuStrip.Items.AddRange(new ToolStripItem[] { ResultToRngViewMenuItem, AllResultToRngViewMenuItem });
             SearchResultContextMenuStrip.Name = "SearchResultContextMenuStrip";
-            SearchResultContextMenuStrip.Size = new Size(237, 48);
+            SearchResultContextMenuStrip.Size = new Size(308, 48);
             // 
             // ResultToRngViewMenuItem
             // 
             ResultToRngViewMenuItem.Name = "ResultToRngViewMenuItem";
-            ResultToRngViewMenuItem.Size = new Size(236, 22);
-            ResultToRngViewMenuItem.Text = "この消費数から乱数ビューアに追加";
+            ResultToRngViewMenuItem.Size = new Size(307, 22);
+            ResultToRngViewMenuItem.Text = "この結果を乱数ビューアに追加";
             ResultToRngViewMenuItem.Click += ResultToRngViewMenuItem_Click;
+            // 
+            // AllResultToRngViewMenuItem
+            // 
+            AllResultToRngViewMenuItem.Name = "AllResultToRngViewMenuItem";
+            AllResultToRngViewMenuItem.Size = new Size(307, 22);
+            AllResultToRngViewMenuItem.Text = "全ての検索結果を乱数ビューアに追加(最大10個)";
+            AllResultToRngViewMenuItem.Click += AllResultToRngViewMenuItem_Click;
             // 
             // MainForm
             // 
@@ -198,5 +206,6 @@ namespace FERNGSolver.UI.Internal
         private Button AddRngViewButton;
         private ContextMenuStrip SearchResultContextMenuStrip;
         private ToolStripMenuItem ResultToRngViewMenuItem;
+        private ToolStripMenuItem AllResultToRngViewMenuItem;
     }
 }

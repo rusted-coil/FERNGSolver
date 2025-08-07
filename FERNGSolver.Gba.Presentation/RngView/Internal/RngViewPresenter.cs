@@ -31,31 +31,6 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
             m_Disposables.Dispose();
         }
 
-        // 仮
-        class UnitStatusDetail : IUnitStatusDetail
-        {
-            public Domain.Combat.Const.WeaponType WeaponType { get; set; }
-            public bool HasVantage { get; set; }
-            public bool HasAstra { get; set; }
-            public bool HasLuna { get; set; }
-            public bool HasSol { get; set; }
-            public bool HasContinuation { get; set; }
-            public bool HasAssault { get; set; }
-            public bool HasGreatShield { get; set; }
-            public int Level { get; set; }
-            public int MaxHp { get; set; }
-            public int Tec { get; set; }
-            public int AttackSpeed { get; set; }
-
-            public Domain.Combat.Const.SkillType SkillType => throw new NotImplementedException();
-
-            public Domain.Combat.Const.BossType BossType => throw new NotImplementedException();
-
-            public int Luck => throw new NotImplementedException();
-
-            public int OpponentDefense => throw new NotImplementedException();
-        }
-
         private void PositionChanged(int position)
         {
             var rng = RngFactory.CreateDefault();

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reactive;
 using System.Reactive.Subjects;
+using System.Linq;
 
 namespace FERNGSolver.UI.Internal
 {
@@ -16,6 +17,9 @@ namespace FERNGSolver.UI.Internal
 
         public IObservable<Unit> SearchButtonClicked => m_SearchButton.Clicked;
         public IObservable<Unit> AddRngViewButtonClicked => m_AddRngViewButton.Clicked;
+
+        Subject<IEnumerable<object>> m_AddRngViewRequestedFromSearchResults = new Subject<IEnumerable<object>>();
+        public IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults => m_AddRngViewRequestedFromSearchResults;
 
         public IObservable<Unit> Initialized => m_Initialized;
         AsyncSubject<Unit> m_Initialized = new AsyncSubject<Unit>();
@@ -75,7 +79,6 @@ namespace FERNGSolver.UI.Internal
                 m_CurrentSearchConditionUserControl = null;
             }
             SearchResultDataGridView.Columns.Clear();
-            RngViewPanel.Controls.Clear();
 
             SwitchTitleTreeMenuItem.Text = title;
             foreach (var menuItem in m_SwitchTitleMenuItems)
@@ -164,9 +167,22 @@ namespace FERNGSolver.UI.Internal
             {
                 var row = SearchResultDataGridView.SelectedRows[0];
                 var data = row.DataBoundItem;
-                // ここでdataを使って処理を行う
-                // 例: MessageBox.Show(data.ToString());
-                MessageBox.Show($"選択されたデータ: {data?.ToString() ?? "null"} ({data?.GetType()})");
+                m_AddRngViewRequestedFromSearchResults.OnNext(new object[] { data });
+
+                // AddRngViewの処理が行われたはずなので、タブを切り替える
+                ResultsTabControl.SelectedTab = RngViewTabPage;
+            }
+        }
+
+        private void AllResultToRngViewMenuItem_Click(object sender, EventArgs e)
+        {
+            // DataSourceから先頭最大10件をIEnumerable<object>として取得し通知（Linqで簡潔に記述）
+            if (SearchResultDataGridView.DataSource is IList list && list.Count > 0)
+            {
+                m_AddRngViewRequestedFromSearchResults.OnNext(list.Cast<object>().Take(10));
+
+                // AddRngViewの処理が行われたはずなので、タブを切り替える
+                ResultsTabControl.SelectedTab = RngViewTabPage;
             }
         }
     }

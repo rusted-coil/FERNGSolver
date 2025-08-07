@@ -19,5 +19,11 @@ namespace FERNGSolver.Common.Presentation.ViewContracts
         /// 乱数ビューの追加ボタンがクリックされたことを通知するストリームを取得します。
         /// </summary>
         IObservable<Unit> AddRngViewButtonClicked { get; }
+
+        /// <summary>
+        /// 検索結果欄から、特定の検索結果を乱数ビューに追加することを要求するイベントが発行されるストリームを取得します。
+        /// <para> * 引数はShowSearchResultsで渡したViewModelの型です。</para>
+        /// </summary>
+        IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults { get; }
     }
 }

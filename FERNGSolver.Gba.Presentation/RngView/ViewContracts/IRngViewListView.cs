@@ -8,11 +8,6 @@ namespace FERNGSolver.Gba.Presentation.RngView.ViewContracts
     public interface IRngViewListView
     {
         /// <summary>
-        /// リストをすべてクリアします。
-        /// </summary>
-        void Clear();
-
-        /// <summary>
         /// 乱数ビューアを一つ追加します。
         /// </summary>
         void AddView(IExtendedMainFormView mainFormView, int initialPosition);

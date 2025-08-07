@@ -6,7 +6,7 @@ using System.Reactive.Disposables;
 
 namespace FERNGSolver.Gba.UI.RngView.Internal
 {
-    internal class RngViewListView : IRngViewListView
+    internal class RngViewListView : IRngViewListView, IDisposable
     {
         private readonly Panel m_ListViewPanel;
 
@@ -15,8 +15,12 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             m_ListViewPanel = listViewPanel;
         }
 
-        public void Clear()
+        public void Dispose()
         {
+            foreach (Control control in m_ListViewPanel.Controls)
+            {
+                control.Dispose();
+            }
             m_ListViewPanel.Controls.Clear();
         }
 
@@ -38,18 +42,25 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
         private void AddUserControl(UserControl userControl)
         {
-            // 現在のコントロール数を取得
-            int controlCount = m_ListViewPanel.Controls.Count;
-
-            // UserControlの位置を計算
-            userControl.Top = controlCount * userControl.Height;
-            userControl.Left = 0;
-
             // Dockを設定して横幅いっぱいに広げる
             userControl.Dock = DockStyle.Top;
 
-            // UserControlをPanelに追加
-            m_ListViewPanel.Controls.Add(userControl);
+            // 末尾に追加ができないため手動で要素を並べ替えて対応している。
+            // 要素数が増えるとパフォーマンスに影響する可能性があるので注意。
+
+            m_ListViewPanel.SuspendLayout();
+            try
+            {
+                var controls = m_ListViewPanel.Controls.Cast<Control>().ToList();
+
+                m_ListViewPanel.Controls.Clear();
+                m_ListViewPanel.Controls.Add(userControl);
+                m_ListViewPanel.Controls.AddRange(controls.ToArray());
+            }
+            finally
+            {
+                m_ListViewPanel.ResumeLayout();
+            }
         }
 
         private void RemoveUserControl(UserControl userControl)

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 {
-    internal class CombatAndGrowthSearchResultItemViewModel
+    internal class CombatAndGrowthSearchResultItemViewModel : IRngStateResultViewModel
     {
         public string Position { get; }
         public string Offset { get; }

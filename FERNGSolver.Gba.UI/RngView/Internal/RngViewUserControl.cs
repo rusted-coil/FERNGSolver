@@ -37,7 +37,11 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
         public RngViewUserControl(int initialPosition)
         {
             InitializeComponent();
+
+            // ValueChangedイベントのハンドラを一時的に解除して初期値をセット
+            PositionNumericUpDown.ValueChanged -= PositionNumericUpDown_ValueChanged;
             PositionNumericUpDown.Value = initialPosition;
+            PositionNumericUpDown.ValueChanged += PositionNumericUpDown_ValueChanged;
 
             m_PositionChanged = new BehaviorSubject<int>((int)PositionNumericUpDown.Value);
             m_RemoveButton = ButtonFactory.CreateButton(RemoveButton);
@@ -98,6 +102,6 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             };
         }
 
-        private void PositionNumericUpDown_ValueChanged(object sender, EventArgs e) => m_PositionChanged.OnNext((int)PositionNumericUpDown.Value);
+        private void PositionNumericUpDown_ValueChanged(object? sender, EventArgs e) => m_PositionChanged.OnNext((int)PositionNumericUpDown.Value);
     }
 }
