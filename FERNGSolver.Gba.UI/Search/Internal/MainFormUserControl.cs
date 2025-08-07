@@ -101,7 +101,7 @@ namespace FERNGSolver.Gba.UI.Search
 
             m_FalconKnightToolOpenButton = ButtonFactory.CreateButton(FalconKnightToolOpenButton);
 
-            // TODO とりあえずStubからキャラデータを取得してコンボボックスにセットする
+            // 固定値で十分なのでStubクラスを使う
             var characterRepository = new StubCharacterRepository();
             m_Characters = characterRepository.AllCharacters;
             GrowthCharacterNameComboBox.Items.Clear();
