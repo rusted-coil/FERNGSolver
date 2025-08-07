@@ -17,20 +17,28 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
                 RandomNumberUsage.LucGrowth => "運",
                 RandomNumberUsage.DefGrowth => "守",
                 RandomNumberUsage.MdfGrowth => "防",
-                RandomNumberUsage.PlayerHit => "命",
                 RandomNumberUsage.PlayerCritical => "必",
                 RandomNumberUsage.PlayerSureStrike => "的",
                 RandomNumberUsage.PlayerPierce => "貫",
                 RandomNumberUsage.PlayerGreatShield => "盾",
                 RandomNumberUsage.PlayerSilencer => "瞬",
                 RandomNumberUsage.PlayerCurse => "呪",
-                RandomNumberUsage.EnemyHit => "命",
                 RandomNumberUsage.EnemyCritical => "必",
                 RandomNumberUsage.EnemySureStrike => "的",
                 RandomNumberUsage.EnemyPierce => "貫",
                 RandomNumberUsage.EnemyGreatShield => "盾",
                 RandomNumberUsage.EnemySilencer => "瞬",
                 RandomNumberUsage.EnemyCurse => "呪",
+                _ => "",
+            };
+        }
+
+        public static string ToSpecialDisplayString(this RandomNumberUsage usage)
+        {
+            return usage switch
+            {
+                RandomNumberUsage.PlayerHit1 => "命中",
+                RandomNumberUsage.EnemyHit1 => "命中",
                 _ => "",
             };
         }

@@ -21,7 +21,8 @@ namespace FERNGSolver.Gba.Application.RNG
         GrowthStart = HpGrowth,
         GrowthEnd = MdfGrowth,
 
-        PlayerHit, // 命中
+        PlayerHit1, // 実効命中率その1
+        PlayerHit2, // 実効命中率その2
         PlayerCritical, // 必殺
         PlayerSureStrike, // 必的判定
         PlayerPierce, // 貫通判定
@@ -29,10 +30,11 @@ namespace FERNGSolver.Gba.Application.RNG
         PlayerSilencer, // 瞬殺判定
         PlayerCurse, // 呪い判定
 
-        PlayerStart = PlayerHit,
+        PlayerStart = PlayerHit1,
         PlayerEnd = PlayerCurse,
 
-        EnemyHit, // 命中
+        EnemyHit1, // 実効命中率その1
+        EnemyHit2, // 実効命中率その2
         EnemyCritical, // 必殺
         EnemySureStrike, // 必的判定
         EnemyPierce, // 貫通判定
@@ -40,7 +42,7 @@ namespace FERNGSolver.Gba.Application.RNG
         EnemySilencer, // 瞬殺判定
         EnemyCurse, // 呪い判定
 
-        EnemyStart = EnemyHit,
+        EnemyStart = EnemyHit1,
         EnemyEnd = EnemyCurse,
     }
 

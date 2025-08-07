@@ -21,7 +21,8 @@ namespace FERNGSolver.Gba.Presentation.Combat.Internal
         public bool CheckHit(int hitRate, UnitSide unitSide)
         {
             bool isOk = m_Underlying.CheckHit(hitRate, unitSide);
-            m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerHit : RandomNumberUsage.EnemyHit, isOk));
+            m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerHit1 : RandomNumberUsage.EnemyHit1, isOk));
+            m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerHit2 : RandomNumberUsage.EnemyHit2, isOk));
             return isOk;
         }
 
