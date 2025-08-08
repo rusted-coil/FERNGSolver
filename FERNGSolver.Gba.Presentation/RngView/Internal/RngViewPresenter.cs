@@ -41,50 +41,49 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
 
             List<RandomNumberViewModel> viewModels = new List<RandomNumberViewModel>();
 
-            if (!m_MainFormView.UsesFalconKnightMethod)
+            // 契機をシミュレート
+            // 乱数ビュー側はファルコンナイト法のチェックにかかわらず常に表示する
+
+            var recordingService = new Combat.Internal.RecordingCombatRngService(CombatRngServiceFactory.Create(rng));
+
+            if (m_MainFormView.ContainsCombat)
             {
-                // 契機をシミュレート
-                var recordingService = new Combat.Internal.RecordingCombatRngService(CombatRngServiceFactory.Create(rng));
+                CombatSimulator.Simulate(recordingService,
+                    Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateAttackerUnitFromView(m_MainFormView),
+                    Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateDefenderUnitFromView(m_MainFormView),
+                    m_MainFormView.IsBindingBlade);
 
-                if (m_MainFormView.ContainsCombat)
+                // 戦闘に使用した乱数をViewModel化
+                foreach (var pair in recordingService.UsedRandomNumbers)
                 {
-                    CombatSimulator.Simulate(recordingService,
-                        Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateAttackerUnitFromView(m_MainFormView),
-                        Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateDefenderUnitFromView(m_MainFormView),
-                        m_MainFormView.IsBindingBlade);
-
-                    // 戦闘に使用した乱数をViewModel化
-                    foreach (var pair in recordingService.UsedRandomNumbers)
+                    viewModels.Add(new RandomNumberViewModel
                     {
-                        viewModels.Add(new RandomNumberViewModel
-                        {
-                            Value = previewRng.Next(),
-                            Usage = pair.Usage,
-                            IsOk = pair.IsOk,
-                        });
-                    }
+                        Value = previewRng.Next(),
+                        Usage = pair.Usage,
+                        IsOk = pair.IsOk,
+                    });
                 }
+            }
 
-                if (m_MainFormView.ContainsGrowth)
+            if (m_MainFormView.ContainsGrowth)
+            {
+                var growth = GrowthSimulator.Simulate(rng,
+                    m_MainFormView.HpGrowthRate,
+                    m_MainFormView.AtkGrowthRate,
+                    m_MainFormView.TecGrowthRate,
+                    m_MainFormView.SpdGrowthRate,
+                    m_MainFormView.DefGrowthRate,
+                    m_MainFormView.MdfGrowthRate,
+                    m_MainFormView.LucGrowthRate);
+
+                for (int i = 0; i < growth.Count; ++i)
                 {
-                    var growth = GrowthSimulator.Simulate(rng,
-                        m_MainFormView.HpGrowthRate,
-                        m_MainFormView.AtkGrowthRate,
-                        m_MainFormView.TecGrowthRate,
-                        m_MainFormView.SpdGrowthRate,
-                        m_MainFormView.DefGrowthRate,
-                        m_MainFormView.MdfGrowthRate,
-                        m_MainFormView.LucGrowthRate);
-
-                    for (int i = 0; i < growth.Count; ++i)
+                    viewModels.Add(new RandomNumberViewModel
                     {
-                        viewModels.Add(new RandomNumberViewModel
-                        {
-                            Value = previewRng.Next(),
-                            Usage = RandomNumberUsage.GrowthStart + i,
-                            IsOk = growth[i] > 0,
-                        });
-                    }
+                        Value = previewRng.Next(),
+                        Usage = RandomNumberUsage.GrowthStart + i,
+                        IsOk = growth[i] > 0,
+                    });
                 }
             }
 
