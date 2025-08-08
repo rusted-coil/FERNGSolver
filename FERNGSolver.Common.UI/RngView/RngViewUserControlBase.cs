@@ -1,5 +1,6 @@
 using FERNGSolver.Common.Presentation.ViewContracts;
 using FormRx.Button;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Reactive;
 
@@ -14,8 +15,8 @@ namespace FERNGSolver.Common.UI.RngView
         private const int CxOffsetX = 1;
         private const int CxOffsetY = 20; // ◯×表示のY座標オフセット
         private const int UsageOffsetY = 20; // 乱数値の使用状況表示のY座標オフセット
-        private const int UsageLineOffsetY = 16;
         private const int UsageLineLength = 16;
+        protected const int UsageLineOffsetY = 16;
 
         // ブラシとペンのキャッシュ
         protected static readonly (Brush Brush, Pen Pen) DefaultDrawer = (Brushes.Black, Pens.Black);
@@ -80,6 +81,11 @@ namespace FERNGSolver.Common.UI.RngView
                     g.DrawString(IsRngValueOk(m_RandomNumberViewModels[i]) ? "◯" : "✕", this.Font, Brushes.Black, x + CxOffsetX, y);
                 }
 
+                if (m_RandomNumberViewModels[i].IsOk == null)
+                {
+                    continue; // 判定が行われていない場合はスキップ
+                }
+
                 if (skipCount == 0)
                 {
                     y += UsageOffsetY;
@@ -105,36 +111,16 @@ namespace FERNGSolver.Common.UI.RngView
         /// </summary>
         protected virtual int GetDrawRangedUsageCount(IReadOnlyList<TViewModel> viewModels, int index) => 0;
 
-        // 複数に跨るUsageを描画する。描画を行った場合はその後スキップする数を返す。
+        // 複数に跨る特殊な描画が必要な場合は処理を行ってください。描画を行った場合はその後スキップする数(1以上)を返します。
         protected virtual int TryDrawRangedUsage(Graphics g, IReadOnlyList<TViewModel> viewModels, int index, int x, int y)
         {
-            if (viewModels[index].IsOk == null)
-            {
-                return 0;
-            }
-
-            int count = GetDrawRangedUsageCount(viewModels, index);
-            if (count > 0)
-            {
-                var drawer = GetUsageDrawer(viewModels[index]); // drawerは最初のUsageを使って判定する
-
-                g.DrawString(GetUsageDisplayString(viewModels[index]), this.Font, drawer.Brush, x, y);
-                if (viewModels[index].IsOk.Value)
-                {
-                    g.DrawLine(drawer.Pen, x, y + UsageLineOffsetY, x + UsageLineLength, y + UsageLineOffsetY);
-                }
-                return count - 1; // スキップする数を返すので、1を引いて返す。
-            }
             return 0;
         }
 
         // 通常のUsageの描画を行う。
         private void DrawUsage(Graphics g, TViewModel viewModel, int x, int y)
         {
-            if (viewModel.IsOk == null)
-            {
-                return;
-            }
+            Debug.Assert(viewModel.IsOk != null, "IsOk should not be null when drawing usage.");
 
             var drawer = GetUsageDrawer(viewModel);
 

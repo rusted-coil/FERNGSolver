@@ -3,6 +3,7 @@ using FERNGSolver.Gba.Application.RNG;
 using FERNGSolver.Gba.Domain.Combat.Service;
 using FERNGSolver.Gba.Presentation.RngView;
 using FERNGSolver.Gba.Presentation.RngView.ViewContracts;
+using System.Diagnostics;
 using System.Reactive.Subjects;
 
 namespace FERNGSolver.Gba.UI.RngView.Internal
@@ -62,13 +63,17 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
         protected override int TryDrawRangedUsage(Graphics g, IReadOnlyList<IRandomNumberViewModel> viewModels, int index, int x, int y)
         {
+            var firstViewModel = viewModels[index];
+            Debug.Assert(firstViewModel.IsOk != null, "IsOk should not be null when drawing usage.");
+
             // 実効命中率
-            if ((viewModels[index].Usage == RandomNumberUsage.PlayerHit1 && index + 1 < viewModels.Count && viewModels[index + 1].Usage == RandomNumberUsage.PlayerHit2)
-                || (viewModels[index].Usage == RandomNumberUsage.EnemyHit1 && index + 1 < viewModels.Count && viewModels[index + 1].Usage == RandomNumberUsage.EnemyHit2))
+            if ((firstViewModel.Usage == RandomNumberUsage.PlayerHit1 && index + 1 < viewModels.Count && viewModels[index + 1].Usage == RandomNumberUsage.PlayerHit2)
+                || (firstViewModel.Usage == RandomNumberUsage.EnemyHit1 && index + 1 < viewModels.Count && viewModels[index + 1].Usage == RandomNumberUsage.EnemyHit2))
             {
-                var drawer = GetUsageDrawer(viewModels[index]);
-                g.DrawString(viewModels[index].Usage.ToSpecialDisplayString(), this.Font, drawer.Brush, x + HitUsageOffsetX, y);
-                if (viewModels[index].IsOk)
+                var drawer = GetUsageDrawer(firstViewModel);
+
+                g.DrawString(firstViewModel.Usage.ToSpecialDisplayString(), this.Font, drawer.Brush, x + HitUsageOffsetX, y);
+                if (firstViewModel.IsOk.Value)
                 {
                     g.DrawLine(drawer.Pen, x + HitUsageOffsetX, y + UsageLineOffsetY, x + HitUsageOffsetX + HitUsageLineLength, y + UsageLineOffsetY);
                 }

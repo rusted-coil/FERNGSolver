@@ -94,7 +94,7 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
                 {
                     Value = previewRng.Next(),
                     Usage = RandomNumberUsage.None,
-                    IsOk = false,
+                    IsOk = null,
                 });
             }
 

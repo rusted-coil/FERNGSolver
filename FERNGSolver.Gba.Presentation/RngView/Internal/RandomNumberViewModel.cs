@@ -6,6 +6,6 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
     {
         public required ushort Value { get; init; }
         public required RandomNumberUsage Usage { get; init; }
-        public required bool IsOk { get; init; }
+        public required bool? IsOk { get; init; }
     }
 }
