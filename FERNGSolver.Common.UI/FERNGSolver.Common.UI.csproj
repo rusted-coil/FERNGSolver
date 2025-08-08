@@ -9,11 +9,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FERNGSolver.Common.Presentation\FERNGSolver.Common.Presentation.csproj" />
+    <ProjectReference Include="..\FormRx\FormRx.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Controls\NumericUpDownEx.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RngView\RngViewUserControlBase.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 

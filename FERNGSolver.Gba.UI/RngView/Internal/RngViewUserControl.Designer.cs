@@ -26,11 +26,10 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
         /// デザイナー サポートに必要なメソッドです。このメソッドの内容を 
         /// コード エディターで変更しないでください。
         /// </summary>
-        private void InitializeComponent()
+        private new void InitializeComponent()
         {
             label1 = new Label();
             PositionNumericUpDown = new FERNGSolver.Common.UI.Controls.NumericUpDownEx();
-            RemoveButton = new Button();
             ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -53,29 +52,17 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             PositionNumericUpDown.TextAlign = HorizontalAlignment.Right;
             PositionNumericUpDown.ValueChanged += PositionNumericUpDown_ValueChanged;
             // 
-            // RemoveButton
-            // 
-            RemoveButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            RemoveButton.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            RemoveButton.Location = new Point(372, 2);
-            RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(22, 22);
-            RemoveButton.TabIndex = 2;
-            RemoveButton.Text = "✕";
-            RemoveButton.UseVisualStyleBackColor = true;
-            // 
             // RngViewUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            BorderStyle = BorderStyle.FixedSingle;
-            Controls.Add(RemoveButton);
             Controls.Add(PositionNumericUpDown);
             Controls.Add(label1);
-            DoubleBuffered = true;
             Name = "RngViewUserControl";
             Size = new Size(398, 105);
+            Controls.SetChildIndex(label1, 0);
+            Controls.SetChildIndex(PositionNumericUpDown, 0);
             ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -85,6 +72,5 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
 
         private Label label1;
         private Common.UI.Controls.NumericUpDownEx PositionNumericUpDown;
-        private Button RemoveButton;
     }
 }
