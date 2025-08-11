@@ -20,16 +20,12 @@ namespace FERNGSolver.Common.UI.RngView
             base.Dispose(disposing);
         }
 
-        #region コンポーネント デザイナーで生成されたコード
-
-        /// <summary> 
-        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を 
-        /// コード エディターで変更しないでください。
-        /// </summary>
+        // ジェネリッククラスのためデザイナーで編集することを諦め、以下の内容を手動で記述する。
         protected void InitializeComponent()
         {
             RemoveButton = new Button();
             SuspendLayout();
+
             // 
             // RemoveButton
             // 
@@ -41,6 +37,7 @@ namespace FERNGSolver.Common.UI.RngView
             RemoveButton.TabIndex = 2;
             RemoveButton.Text = "✕";
             RemoveButton.UseVisualStyleBackColor = true;
+
             // 
             // RngViewUserControlBase
             // 
@@ -51,11 +48,9 @@ namespace FERNGSolver.Common.UI.RngView
             Controls.Add(RemoveButton);
             DoubleBuffered = true;
             Name = "RngViewUserControlBase";
-            Size = new Size(398, 105);
             ResumeLayout(false);
         }
 
-        #endregion
         private Button RemoveButton;
     }
 }

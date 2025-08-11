@@ -6,30 +6,18 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
     internal sealed class UnitStatusDetail : IUnitStatusDetail
     {
         public Const.WeaponType WeaponType { get; set; } = Const.WeaponType.Normal;
-        public Const.SkillType SkillType { get; set; } = Const.SkillType.None;
-        public Const.BossType BossType { get; set; } = Const.BossType.None;
         public int Level { get; set; } = 10;
         public int MaxHp { get; set; } = 30;
-        public int Luck { get; set; } = 10;
-        public int OpponentDefense { get; set; } = 10;
+        public int Tec { get; set; } = 10;
+        public int AttackSpeed { get; set; } = 10;
 
-        public bool HasVantage => throw new NotImplementedException();
-
-        public bool HasAstra => throw new NotImplementedException();
-
-        public bool HasLuna => throw new NotImplementedException();
-
-        public bool HasSol => throw new NotImplementedException();
-
-        public bool HasContinuation => throw new NotImplementedException();
-
-        public bool HasAssault => throw new NotImplementedException();
-
-        public bool HasGreatShield => throw new NotImplementedException();
-
-        public int Tec => throw new NotImplementedException();
-
-        public int AttackSpeed => throw new NotImplementedException();
+        public bool HasVantage { get; set; } = false;
+        public bool HasAstra { get; set; } = false;
+        public bool HasLuna { get; set; } = false;
+        public bool HasSol { get; set; } = false;
+        public bool HasContinuation { get; set; } = false;
+        public bool HasAssault { get; set; } = false;
+        public bool HasGreatShield { get; set; } = false;
 
         public override string ToString()
         {

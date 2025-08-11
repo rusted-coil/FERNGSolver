@@ -20,12 +20,7 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             base.Dispose(disposing);
         }
 
-        #region コンポーネント デザイナーで生成されたコード
-
-        /// <summary> 
-        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を 
-        /// コード エディターで変更しないでください。
-        /// </summary>
+        // ジェネリッククラスのためデザイナーで編集することを諦め、以下の内容を手動で記述する。
         private new void InitializeComponent()
         {
             label1 = new Label();
@@ -41,6 +36,7 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             label1.Size = new Size(46, 15);
             label1.TabIndex = 0;
             label1.Text = "消費数:";
+
             // 
             // PositionNumericUpDown
             // 
@@ -51,6 +47,7 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             PositionNumericUpDown.TabIndex = 1;
             PositionNumericUpDown.TextAlign = HorizontalAlignment.Right;
             PositionNumericUpDown.ValueChanged += PositionNumericUpDown_ValueChanged;
+
             // 
             // RngViewUserControl
             // 
@@ -60,15 +57,12 @@ namespace FERNGSolver.Gba.UI.RngView.Internal
             Controls.Add(PositionNumericUpDown);
             Controls.Add(label1);
             Name = "RngViewUserControl";
-            Size = new Size(398, 105);
             Controls.SetChildIndex(label1, 0);
             Controls.SetChildIndex(PositionNumericUpDown, 0);
             ((System.ComponentModel.ISupportInitialize)PositionNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
-
-        #endregion
 
         private Label label1;
         private Common.UI.Controls.NumericUpDownEx PositionNumericUpDown;

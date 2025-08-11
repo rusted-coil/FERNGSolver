@@ -58,6 +58,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         // 変更可能なUnitStatusDetailにフォーム内容の下記戻しを行います。
         public void WriteToUnitStatusDetail(UnitStatusDetail unitStatusDetail)
         {
+            /*
             unitStatusDetail.WeaponType = (Const.WeaponType)Array.IndexOf(WeaponTypeRadioButtons, WeaponTypeRadioButtons.FirstOrDefault(r => r.Checked));
             unitStatusDetail.SkillType = (Const.SkillType)Array.IndexOf(SkillTypeRadioButtons, SkillTypeRadioButtons.FirstOrDefault(r => r.Checked));
             unitStatusDetail.BossType = (Const.BossType)Array.IndexOf(BossTypeRadioButtons, BossTypeRadioButtons.FirstOrDefault(r => r.Checked));
@@ -65,6 +66,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             unitStatusDetail.MaxHp = (int)MaxHpNumericUpDown.Value;
             unitStatusDetail.Luck = (int)LuckNumericUpDown.Value;
             unitStatusDetail.OpponentDefense = (int)OpponentDefNumericUpDown.Value;
+            */
         }
 
         private void OkButton_Click(object sender, EventArgs e)
