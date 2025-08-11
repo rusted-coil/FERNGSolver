@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.Common.UI.Interfaces;
+using FERNGSolver.Genealogy.UI.Search;
 using System.Reactive.Disposables;
 
 namespace FERNGSolver.Genealogy.UI.Internal
@@ -19,8 +20,7 @@ namespace FERNGSolver.Genealogy.UI.Internal
 
         public UserControl CreateSearchConditionUserControl(IMainFormView mainFormView, Panel rngViewListViewPanel)
         {
-            var userControl = new UserControl();
-//            var userControl = new MainFormUserControl(mainFormView);
+            var userControl = new MainFormUserControl(mainFormView);
 
             var disposables = new CompositeDisposable();
 
