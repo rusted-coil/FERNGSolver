@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.Common.UI.Interfaces;
+using FERNGSolver.Genealogy.UI.RngView.Internal;
 using FERNGSolver.Genealogy.UI.Search;
 using System.Reactive.Disposables;
 
@@ -24,7 +25,11 @@ namespace FERNGSolver.Genealogy.UI.Internal
 
             var disposables = new CompositeDisposable();
 
-//            PresenterFactory.Create(userControl, m_ErrorNotifier).AddTo(disposables);
+            //            PresenterFactory.Create(userControl, m_ErrorNotifier).AddTo(disposables);
+
+            var rngViewListView = new RngViewListView(rngViewListViewPanel);
+
+            Presentation.RngView.PresenterFactory.CreateListPresenter(userControl, rngViewListView);
 
             // UserControlの破棄時にPresenterも破棄
             userControl.Disposed += (sender, args) => disposables.Dispose();

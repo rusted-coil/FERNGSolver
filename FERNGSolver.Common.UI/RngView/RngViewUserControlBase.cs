@@ -106,11 +106,6 @@ namespace FERNGSolver.Common.UI.RngView
         /// </summary>
         protected virtual string GetUsageDisplayString(TViewModel viewModel) => string.Empty;
 
-        /// <summary>
-        /// viewModelのリストの指定したIndexを始点とし、複数に跨った描画をする場合、そのUsageの数を返してください。
-        /// </summary>
-        protected virtual int GetDrawRangedUsageCount(IReadOnlyList<TViewModel> viewModels, int index) => 0;
-
         // 複数に跨る特殊な描画が必要な場合は処理を行ってください。描画を行った場合はその後スキップする数(1以上)を返します。
         protected virtual int TryDrawRangedUsage(Graphics g, IReadOnlyList<TViewModel> viewModels, int index, int x, int y)
         {
