@@ -37,37 +37,36 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsWeaponTypeNormalRadioButton = new RadioButton();
             IsWeaponTypeBraveRadioButton = new RadioButton();
             groupBox1 = new GroupBox();
-            label3 = new Label();
-            LuckNumericUpDown = new NumericUpDownEx();
             IsWeaponTypeAbsorbRadioButton = new RadioButton();
-            IsWeaponTypeCursedRadioButton = new RadioButton();
             IsWeaponTypePoisonRadioButton = new RadioButton();
             groupBox2 = new GroupBox();
+            HasSolCheckBox = new CheckBox();
+            HasLunaCheckBox = new CheckBox();
+            HasAstraCheckBox = new CheckBox();
             label4 = new Label();
-            OpponentDefNumericUpDown = new NumericUpDownEx();
-            IsSkillTypeSilencerRadioButton = new RadioButton();
-            IsSkillTypeGreatShieldRadioButton = new RadioButton();
-            IsSkillTypePierceRadioButton = new RadioButton();
-            IsSkillTypeNoneRadioButton = new RadioButton();
-            IsSkillTypeSureStrikeRadioButton = new RadioButton();
-            groupBox3 = new GroupBox();
-            IsBossTypeFinalBossRadioButton = new RadioButton();
-            IsBossTypeNoneRadioButton = new RadioButton();
-            IsBossTypeBossRadioButton = new RadioButton();
+            TecNumericUpDown = new NumericUpDownEx();
+            HasGreatShieldCheckBox = new CheckBox();
+            label5 = new Label();
+            OpponentAttackSpeedNumericUpDown = new NumericUpDownEx();
+            HasAssaultCheckBox = new CheckBox();
+            label3 = new Label();
+            AttackSpeedNumericUpDown = new NumericUpDownEx();
+            HasContinuationCheckBox = new CheckBox();
+            HasVantageCheckBox = new CheckBox();
             OkButton = new Button();
             ((System.ComponentModel.ISupportInitialize)LevelNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxHpNumericUpDown).BeginInit();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)LuckNumericUpDown).BeginInit();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)OpponentDefNumericUpDown).BeginInit();
-            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TecNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)OpponentAttackSpeedNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AttackSpeedNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(15, 27);
+            label1.Location = new Point(120, 102);
             label1.Name = "label1";
             label1.Size = new Size(22, 15);
             label1.TabIndex = 120;
@@ -75,7 +74,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // LevelNumericUpDown
             // 
-            LevelNumericUpDown.Location = new Point(41, 25);
+            LevelNumericUpDown.Location = new Point(148, 100);
             LevelNumericUpDown.Name = "LevelNumericUpDown";
             LevelNumericUpDown.Size = new Size(42, 23);
             LevelNumericUpDown.TabIndex = 119;
@@ -123,10 +122,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(LuckNumericUpDown);
             groupBox1.Controls.Add(IsWeaponTypeAbsorbRadioButton);
-            groupBox1.Controls.Add(IsWeaponTypeCursedRadioButton);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(MaxHpNumericUpDown);
             groupBox1.Controls.Add(IsWeaponTypePoisonRadioButton);
@@ -134,28 +130,10 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             groupBox1.Controls.Add(IsWeaponTypeBraveRadioButton);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(210, 188);
+            groupBox1.Size = new Size(210, 131);
             groupBox1.TabIndex = 125;
             groupBox1.TabStop = false;
             groupBox1.Text = "武器";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(109, 127);
-            label3.Name = "label3";
-            label3.Size = new Size(34, 15);
-            label3.TabIndex = 129;
-            label3.Text = "幸運:";
-            // 
-            // LuckNumericUpDown
-            // 
-            LuckNumericUpDown.Enabled = false;
-            LuckNumericUpDown.Location = new Point(149, 125);
-            LuckNumericUpDown.Name = "LuckNumericUpDown";
-            LuckNumericUpDown.Size = new Size(42, 23);
-            LuckNumericUpDown.TabIndex = 128;
-            LuckNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // IsWeaponTypeAbsorbRadioButton
             // 
@@ -168,18 +146,6 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsWeaponTypeAbsorbRadioButton.Text = "吸収";
             IsWeaponTypeAbsorbRadioButton.UseVisualStyleBackColor = true;
             IsWeaponTypeAbsorbRadioButton.CheckedChanged += IsWeaponTypeAbsorbRadioButton_CheckedChanged;
-            // 
-            // IsWeaponTypeCursedRadioButton
-            // 
-            IsWeaponTypeCursedRadioButton.AutoSize = true;
-            IsWeaponTypeCursedRadioButton.Location = new Point(15, 125);
-            IsWeaponTypeCursedRadioButton.Name = "IsWeaponTypeCursedRadioButton";
-            IsWeaponTypeCursedRadioButton.Size = new Size(79, 19);
-            IsWeaponTypeCursedRadioButton.TabIndex = 126;
-            IsWeaponTypeCursedRadioButton.TabStop = true;
-            IsWeaponTypeCursedRadioButton.Text = "デビルアクス";
-            IsWeaponTypeCursedRadioButton.UseVisualStyleBackColor = true;
-            IsWeaponTypeCursedRadioButton.CheckedChanged += IsWeaponTypeCursedRadioButton_CheckedChanged;
             // 
             // IsWeaponTypePoisonRadioButton
             // 
@@ -194,140 +160,150 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(HasSolCheckBox);
+            groupBox2.Controls.Add(HasLunaCheckBox);
+            groupBox2.Controls.Add(HasAstraCheckBox);
             groupBox2.Controls.Add(label4);
-            groupBox2.Controls.Add(OpponentDefNumericUpDown);
-            groupBox2.Controls.Add(IsSkillTypeSilencerRadioButton);
-            groupBox2.Controls.Add(IsSkillTypeGreatShieldRadioButton);
-            groupBox2.Controls.Add(IsSkillTypePierceRadioButton);
+            groupBox2.Controls.Add(TecNumericUpDown);
+            groupBox2.Controls.Add(HasGreatShieldCheckBox);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(OpponentAttackSpeedNumericUpDown);
+            groupBox2.Controls.Add(HasAssaultCheckBox);
+            groupBox2.Controls.Add(label3);
+            groupBox2.Controls.Add(AttackSpeedNumericUpDown);
+            groupBox2.Controls.Add(HasContinuationCheckBox);
+            groupBox2.Controls.Add(HasVantageCheckBox);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(LevelNumericUpDown);
-            groupBox2.Controls.Add(IsSkillTypeNoneRadioButton);
-            groupBox2.Controls.Add(IsSkillTypeSureStrikeRadioButton);
             groupBox2.Location = new Point(228, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(199, 188);
+            groupBox2.Size = new Size(199, 204);
             groupBox2.TabIndex = 127;
             groupBox2.TabStop = false;
             groupBox2.Text = "スキル";
             // 
+            // HasSolCheckBox
+            // 
+            HasSolCheckBox.AutoSize = true;
+            HasSolCheckBox.Location = new Point(15, 176);
+            HasSolCheckBox.Name = "HasSolCheckBox";
+            HasSolCheckBox.Size = new Size(62, 19);
+            HasSolCheckBox.TabIndex = 144;
+            HasSolCheckBox.Text = "太陽剣";
+            HasSolCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // HasLunaCheckBox
+            // 
+            HasLunaCheckBox.AutoSize = true;
+            HasLunaCheckBox.Location = new Point(15, 151);
+            HasLunaCheckBox.Name = "HasLunaCheckBox";
+            HasLunaCheckBox.Size = new Size(62, 19);
+            HasLunaCheckBox.TabIndex = 143;
+            HasLunaCheckBox.Text = "月光剣";
+            HasLunaCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // HasAstraCheckBox
+            // 
+            HasAstraCheckBox.AutoSize = true;
+            HasAstraCheckBox.Location = new Point(15, 126);
+            HasAstraCheckBox.Name = "HasAstraCheckBox";
+            HasAstraCheckBox.Size = new Size(62, 19);
+            HasAstraCheckBox.TabIndex = 142;
+            HasAstraCheckBox.Text = "流星剣";
+            HasAstraCheckBox.UseVisualStyleBackColor = true;
+            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(75, 106);
+            label4.Location = new Point(120, 127);
             label4.Name = "label4";
-            label4.Size = new Size(56, 15);
-            label4.TabIndex = 131;
-            label4.Text = "敵の守備:";
+            label4.Size = new Size(22, 15);
+            label4.TabIndex = 141;
+            label4.Text = "技:";
             // 
-            // OpponentDefNumericUpDown
+            // TecNumericUpDown
             // 
-            OpponentDefNumericUpDown.Enabled = false;
-            OpponentDefNumericUpDown.Location = new Point(137, 104);
-            OpponentDefNumericUpDown.Name = "OpponentDefNumericUpDown";
-            OpponentDefNumericUpDown.Size = new Size(42, 23);
-            OpponentDefNumericUpDown.TabIndex = 130;
-            OpponentDefNumericUpDown.Value = new decimal(new int[] { 30, 0, 0, 0 });
+            TecNumericUpDown.Location = new Point(148, 125);
+            TecNumericUpDown.Name = "TecNumericUpDown";
+            TecNumericUpDown.Size = new Size(42, 23);
+            TecNumericUpDown.TabIndex = 140;
+            TecNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
-            // IsSkillTypeSilencerRadioButton
+            // HasGreatShieldCheckBox
             // 
-            IsSkillTypeSilencerRadioButton.AutoSize = true;
-            IsSkillTypeSilencerRadioButton.Location = new Point(15, 154);
-            IsSkillTypeSilencerRadioButton.Name = "IsSkillTypeSilencerRadioButton";
-            IsSkillTypeSilencerRadioButton.Size = new Size(49, 19);
-            IsSkillTypeSilencerRadioButton.TabIndex = 127;
-            IsSkillTypeSilencerRadioButton.TabStop = true;
-            IsSkillTypeSilencerRadioButton.Text = "瞬殺";
-            IsSkillTypeSilencerRadioButton.UseVisualStyleBackColor = true;
+            HasGreatShieldCheckBox.AutoSize = true;
+            HasGreatShieldCheckBox.Location = new Point(15, 101);
+            HasGreatShieldCheckBox.Name = "HasGreatShieldCheckBox";
+            HasGreatShieldCheckBox.Size = new Size(50, 19);
+            HasGreatShieldCheckBox.TabIndex = 139;
+            HasGreatShieldCheckBox.Text = "大盾";
+            HasGreatShieldCheckBox.UseVisualStyleBackColor = true;
             // 
-            // IsSkillTypeGreatShieldRadioButton
+            // label5
             // 
-            IsSkillTypeGreatShieldRadioButton.AutoSize = true;
-            IsSkillTypeGreatShieldRadioButton.Location = new Point(15, 129);
-            IsSkillTypeGreatShieldRadioButton.Name = "IsSkillTypeGreatShieldRadioButton";
-            IsSkillTypeGreatShieldRadioButton.Size = new Size(49, 19);
-            IsSkillTypeGreatShieldRadioButton.TabIndex = 126;
-            IsSkillTypeGreatShieldRadioButton.TabStop = true;
-            IsSkillTypeGreatShieldRadioButton.Text = "大盾";
-            IsSkillTypeGreatShieldRadioButton.UseVisualStyleBackColor = true;
+            label5.AutoSize = true;
+            label5.Location = new Point(86, 77);
+            label5.Name = "label5";
+            label5.Size = new Size(56, 15);
+            label5.TabIndex = 138;
+            label5.Text = "敵の攻速:";
             // 
-            // IsSkillTypePierceRadioButton
+            // OpponentAttackSpeedNumericUpDown
             // 
-            IsSkillTypePierceRadioButton.AutoSize = true;
-            IsSkillTypePierceRadioButton.Location = new Point(15, 104);
-            IsSkillTypePierceRadioButton.Name = "IsSkillTypePierceRadioButton";
-            IsSkillTypePierceRadioButton.Size = new Size(49, 19);
-            IsSkillTypePierceRadioButton.TabIndex = 125;
-            IsSkillTypePierceRadioButton.TabStop = true;
-            IsSkillTypePierceRadioButton.Text = "貫通";
-            IsSkillTypePierceRadioButton.UseVisualStyleBackColor = true;
-            IsSkillTypePierceRadioButton.CheckedChanged += IsSkillTypePierceRadioButton_CheckedChanged;
+            OpponentAttackSpeedNumericUpDown.Location = new Point(148, 75);
+            OpponentAttackSpeedNumericUpDown.Minimum = new decimal(new int[] { 50, 0, 0, int.MinValue });
+            OpponentAttackSpeedNumericUpDown.Name = "OpponentAttackSpeedNumericUpDown";
+            OpponentAttackSpeedNumericUpDown.Size = new Size(42, 23);
+            OpponentAttackSpeedNumericUpDown.TabIndex = 137;
+            OpponentAttackSpeedNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
-            // IsSkillTypeNoneRadioButton
+            // HasAssaultCheckBox
             // 
-            IsSkillTypeNoneRadioButton.AutoSize = true;
-            IsSkillTypeNoneRadioButton.Location = new Point(15, 54);
-            IsSkillTypeNoneRadioButton.Name = "IsSkillTypeNoneRadioButton";
-            IsSkillTypeNoneRadioButton.Size = new Size(43, 19);
-            IsSkillTypeNoneRadioButton.TabIndex = 123;
-            IsSkillTypeNoneRadioButton.TabStop = true;
-            IsSkillTypeNoneRadioButton.Text = "なし";
-            IsSkillTypeNoneRadioButton.UseVisualStyleBackColor = true;
+            HasAssaultCheckBox.AutoSize = true;
+            HasAssaultCheckBox.Location = new Point(15, 76);
+            HasAssaultCheckBox.Name = "HasAssaultCheckBox";
+            HasAssaultCheckBox.Size = new Size(50, 19);
+            HasAssaultCheckBox.TabIndex = 136;
+            HasAssaultCheckBox.Text = "突撃";
+            HasAssaultCheckBox.UseVisualStyleBackColor = true;
             // 
-            // IsSkillTypeSureStrikeRadioButton
+            // label3
             // 
-            IsSkillTypeSureStrikeRadioButton.AutoSize = true;
-            IsSkillTypeSureStrikeRadioButton.Location = new Point(15, 79);
-            IsSkillTypeSureStrikeRadioButton.Name = "IsSkillTypeSureStrikeRadioButton";
-            IsSkillTypeSureStrikeRadioButton.Size = new Size(49, 19);
-            IsSkillTypeSureStrikeRadioButton.TabIndex = 124;
-            IsSkillTypeSureStrikeRadioButton.TabStop = true;
-            IsSkillTypeSureStrikeRadioButton.Text = "必的";
-            IsSkillTypeSureStrikeRadioButton.UseVisualStyleBackColor = true;
+            label3.AutoSize = true;
+            label3.Location = new Point(108, 52);
+            label3.Name = "label3";
+            label3.Size = new Size(34, 15);
+            label3.TabIndex = 135;
+            label3.Text = "攻速:";
             // 
-            // groupBox3
+            // AttackSpeedNumericUpDown
             // 
-            groupBox3.Controls.Add(IsBossTypeFinalBossRadioButton);
-            groupBox3.Controls.Add(IsBossTypeNoneRadioButton);
-            groupBox3.Controls.Add(IsBossTypeBossRadioButton);
-            groupBox3.Location = new Point(12, 206);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(415, 59);
-            groupBox3.TabIndex = 128;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "ボス属性（相手の瞬殺判定にのみ影響）";
+            AttackSpeedNumericUpDown.Location = new Point(148, 50);
+            AttackSpeedNumericUpDown.Minimum = new decimal(new int[] { 50, 0, 0, int.MinValue });
+            AttackSpeedNumericUpDown.Name = "AttackSpeedNumericUpDown";
+            AttackSpeedNumericUpDown.Size = new Size(42, 23);
+            AttackSpeedNumericUpDown.TabIndex = 134;
+            AttackSpeedNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
-            // IsBossTypeFinalBossRadioButton
+            // HasContinuationCheckBox
             // 
-            IsBossTypeFinalBossRadioButton.AutoSize = true;
-            IsBossTypeFinalBossRadioButton.Location = new Point(161, 24);
-            IsBossTypeFinalBossRadioButton.Name = "IsBossTypeFinalBossRadioButton";
-            IsBossTypeFinalBossRadioButton.Size = new Size(49, 19);
-            IsBossTypeFinalBossRadioButton.TabIndex = 125;
-            IsBossTypeFinalBossRadioButton.TabStop = true;
-            IsBossTypeFinalBossRadioButton.Text = "魔王";
-            IsBossTypeFinalBossRadioButton.UseVisualStyleBackColor = true;
+            HasContinuationCheckBox.AutoSize = true;
+            HasContinuationCheckBox.Location = new Point(15, 51);
+            HasContinuationCheckBox.Name = "HasContinuationCheckBox";
+            HasContinuationCheckBox.Size = new Size(50, 19);
+            HasContinuationCheckBox.TabIndex = 133;
+            HasContinuationCheckBox.Text = "連続";
+            HasContinuationCheckBox.UseVisualStyleBackColor = true;
             // 
-            // IsBossTypeNoneRadioButton
+            // HasVantageCheckBox
             // 
-            IsBossTypeNoneRadioButton.AutoSize = true;
-            IsBossTypeNoneRadioButton.Location = new Point(18, 24);
-            IsBossTypeNoneRadioButton.Name = "IsBossTypeNoneRadioButton";
-            IsBossTypeNoneRadioButton.Size = new Size(43, 19);
-            IsBossTypeNoneRadioButton.TabIndex = 123;
-            IsBossTypeNoneRadioButton.TabStop = true;
-            IsBossTypeNoneRadioButton.Text = "なし";
-            IsBossTypeNoneRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // IsBossTypeBossRadioButton
-            // 
-            IsBossTypeBossRadioButton.AutoSize = true;
-            IsBossTypeBossRadioButton.Location = new Point(93, 24);
-            IsBossTypeBossRadioButton.Name = "IsBossTypeBossRadioButton";
-            IsBossTypeBossRadioButton.Size = new Size(44, 19);
-            IsBossTypeBossRadioButton.TabIndex = 124;
-            IsBossTypeBossRadioButton.TabStop = true;
-            IsBossTypeBossRadioButton.Text = "ボス";
-            IsBossTypeBossRadioButton.UseVisualStyleBackColor = true;
+            HasVantageCheckBox.AutoSize = true;
+            HasVantageCheckBox.Location = new Point(15, 26);
+            HasVantageCheckBox.Name = "HasVantageCheckBox";
+            HasVantageCheckBox.Size = new Size(69, 19);
+            HasVantageCheckBox.TabIndex = 132;
+            HasVantageCheckBox.Text = "待ち伏せ";
+            HasVantageCheckBox.UseVisualStyleBackColor = true;
             // 
             // OkButton
             // 
@@ -345,7 +321,6 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(440, 313);
             Controls.Add(OkButton);
-            Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -355,12 +330,11 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             ((System.ComponentModel.ISupportInitialize)MaxHpNumericUpDown).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)LuckNumericUpDown).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)OpponentDefNumericUpDown).EndInit();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)TecNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)OpponentAttackSpeedNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AttackSpeedNumericUpDown).EndInit();
             ResumeLayout(false);
         }
 
@@ -373,23 +347,22 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         private RadioButton IsWeaponTypeNormalRadioButton;
         private RadioButton IsWeaponTypeBraveRadioButton;
         private GroupBox groupBox1;
-        private RadioButton IsWeaponTypeCursedRadioButton;
         private RadioButton IsWeaponTypePoisonRadioButton;
         private GroupBox groupBox2;
-        private RadioButton IsSkillTypeGreatShieldRadioButton;
-        private RadioButton IsSkillTypePierceRadioButton;
-        private RadioButton IsSkillTypeNoneRadioButton;
-        private RadioButton IsSkillTypeSureStrikeRadioButton;
         private RadioButton IsWeaponTypeAbsorbRadioButton;
-        private RadioButton IsSkillTypeSilencerRadioButton;
-        private GroupBox groupBox3;
-        private RadioButton IsBossTypeFinalBossRadioButton;
-        private RadioButton IsBossTypeNoneRadioButton;
-        private RadioButton IsBossTypeBossRadioButton;
-        private Label label3;
-        private NumericUpDownEx LuckNumericUpDown;
-        private Label label4;
-        private NumericUpDownEx OpponentDefNumericUpDown;
         private Button OkButton;
+        private CheckBox HasVantageCheckBox;
+        private Label label5;
+        private NumericUpDownEx OpponentAttackSpeedNumericUpDown;
+        private CheckBox HasAssaultCheckBox;
+        private Label label3;
+        private NumericUpDownEx AttackSpeedNumericUpDown;
+        private CheckBox HasContinuationCheckBox;
+        private CheckBox HasSolCheckBox;
+        private CheckBox HasLunaCheckBox;
+        private CheckBox HasAstraCheckBox;
+        private Label label4;
+        private NumericUpDownEx TecNumericUpDown;
+        private CheckBox HasGreatShieldCheckBox;
     }
 }

@@ -22,6 +22,9 @@ namespace FERNGSolver.Genealogy.Domain.Combat.Service.Internal
         // 必殺判定
         public bool CheckCritical(int criticalRate, UnitSide unitSide) => m_Rng.Next() < criticalRate;
 
+        // 突撃: (自分の攻速-相手の攻速+HP÷2)[%]で発動
+        public bool CheckActivateAssault(int attackSpeed, int opponentAttackSpeed, int attackerHp, UnitSide unitSide) => m_Rng.Next() < (attackSpeed - opponentAttackSpeed + attackerHp / 2);
+
         // 流星剣: 技[%]で発動
         public bool CheckActivateAstra(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
 

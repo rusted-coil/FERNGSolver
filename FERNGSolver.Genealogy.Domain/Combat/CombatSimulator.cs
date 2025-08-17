@@ -26,48 +26,67 @@ namespace FERNGSolver.Genealogy.Domain.Combat
 
             // 攻撃側→防御側の順でPhaseCountがなくなるまで交互に行動を行う
             // どちらかが死んだら終わり
-            int a = 0, d = 0;
-            while (a < attacker.PhaseCount || d < defender.PhaseCount)
+            while(true)
             {
-                if (defender.StatusDetail.HasVantage) // 待ち伏せ
+                int a = 0, d = 0;
+                bool isFinished = false;
+                while (a < attacker.PhaseCount || d < defender.PhaseCount)
                 {
-                    if (d < defender.PhaseCount)
+                    if (defender.StatusDetail.HasVantage) // 待ち伏せ
                     {
-                        if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
+                        if (d < defender.PhaseCount)
                         {
-                            break;
+                            if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
+                            {
+                                isFinished = true;
+                                break;
+                            }
+                            ++d;
                         }
-                        ++d;
-                    }
 
-                    if (a < attacker.PhaseCount)
-                    {
-                        if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
+                        if (a < attacker.PhaseCount)
                         {
-                            break;
+                            if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
+                            {
+                                isFinished = true;
+                                break;
+                            }
+                            ++a;
                         }
-                        ++a;
+                    }
+                    else
+                    {
+                        if (a < attacker.PhaseCount)
+                        {
+                            if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
+                            {
+                                isFinished = true;
+                                break;
+                            }
+                            ++a;
+                        }
+
+                        if (d < defender.PhaseCount)
+                        {
+                            if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
+                            {
+                                isFinished = true;
+                                break;
+                            }
+                            ++d;
+                        }
                     }
                 }
-                else
+                if (isFinished)
                 {
-                    if (a < attacker.PhaseCount)
-                    {
-                        if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
-                        {
-                            break;
-                        }
-                        ++a;
-                    }
+                    break;
+                }
 
-                    if (d < defender.PhaseCount)
-                    {
-                        if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
-                        {
-                            break;
-                        }
-                        ++d;
-                    }
+                // 突撃判定
+                bool isAssaultActive = CheckAssaultActive(rngService, attackerUnit, defenderUnit);
+                if (!isAssaultActive)
+                {
+                    break;
                 }
             }
 
@@ -86,6 +105,15 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                 CurrentHp = combatUnit.Hp;
                 UnitSide = unitSide;
             }
+        }
+
+        private static bool CheckAssaultActive(ICombatRngService rngService, Unit attackerSide, Unit defenderSide)
+        {
+            if (attackerSide.CombatUnit.StatusDetail.HasAssault && attackerSide.CurrentHp >= 25)
+            {
+                return rngService.CheckActivateAssault(attackerSide.CombatUnit.StatusDetail.AttackSpeed, defenderSide.CombatUnit.StatusDetail.AttackSpeed, attackerSide.CurrentHp, attackerSide.UnitSide);
+            }
+            return false;
         }
 
         // ユニットの攻撃を実行し、戦闘が終了したらfalseを返す
@@ -142,11 +170,21 @@ namespace FERNGSolver.Genealogy.Domain.Combat
 
                 if (isHit)
                 {
+                    int damage = isLunaActive ? attackerSide.CombatUnit.Attack : attackerSide.CombatUnit.Attack - defenderSide.CombatUnit.Defense;
+
                     // 必殺判定
-                    if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
+                    if (attackerSide.CombatUnit.CriticalRate > 0 && rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
                     {
-                        // TODO
+                        damage += attackerSide.CombatUnit.Attack; // 必殺は攻撃力を2倍にする
                     }
+
+                    if (isSolActive)
+                    {
+                        attackerSide.CurrentHp = Math.Min(
+                            attackerSide.CombatUnit.StatusDetail.MaxHp,
+                            attackerSide.CurrentHp + Math.Min(defenderSide.CurrentHp, damage));
+                    }
+                    defenderSide.CurrentHp -= damage;
 
                     // TODO 状態変化判定
                 }

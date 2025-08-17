@@ -23,6 +23,7 @@ namespace FERNGSolver.Genealogy.Application.RNG
 
         PlayerHit, // 命中
         PlayerCritical, // 必殺
+        PlayerAssault, // 突撃
         PlayerAstra, // 流星剣判定
         PlayerLuna, // 月光剣判定
         PlayerSol, // 太陽剣判定
@@ -34,6 +35,7 @@ namespace FERNGSolver.Genealogy.Application.RNG
 
         EnemyHit, // 命中
         EnemyCritical, // 必殺
+        EnemyAssault, // 突撃
         EnemyAstra, // 流星剣判定
         EnemyLuna, // 月光剣判定
         EnemySol, // 太陽剣判定

@@ -36,6 +36,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             ContainsCombatCheckBox = new CheckBox();
             CombatGroupBox = new GroupBox();
             groupBox2 = new GroupBox();
+            label20 = new Label();
+            DefenderDefNumericUpDown = new NumericUpDownEx();
             DefenderStatusDetailLabel = new Label();
             DefenderStatusDetailDialogButton = new Button();
             DefenderHpPostconditionMaxNumericUpDown = new NumericUpDownEx();
@@ -50,10 +52,10 @@ namespace FERNGSolver.Genealogy.UI.Search
             label18 = new Label();
             DefenderHitRateNumericUpDown = new NumericUpDownEx();
             DoesDefenderAttackCheckBox = new CheckBox();
-            label19 = new Label();
             DoesDefenderFollowUpAttackCheckBox = new CheckBox();
-            DefenderCriticalRateNumericUpDown = new NumericUpDownEx();
             groupBox1 = new GroupBox();
+            label5 = new Label();
+            AttackerDefNumericUpDown = new NumericUpDownEx();
             AttackerStatusDetailLabel = new Label();
             AttackerStatusDetailDialogButton = new Button();
             AttackerHpPostconditionMaxNumericUpDown = new NumericUpDownEx();
@@ -67,10 +69,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             AttackerAtkNumericUpDown = new NumericUpDownEx();
             label6 = new Label();
             AttackerHitRateNumericUpDown = new NumericUpDownEx();
-            label7 = new Label();
             DoesAttackerFollowUpAttackCheckBox = new CheckBox();
-            AttackerCriticalRateNumericUpDown = new NumericUpDownEx();
             GrowthGroupBox = new GroupBox();
+            IsMgcGrowthNeeded = new CheckBox();
+            MgcGrowthRateNumericUpDown = new NumericUpDownEx();
+            label17 = new Label();
             IsMdfGrowthNeeded = new CheckBox();
             IsDefGrowthNeeded = new CheckBox();
             IsLucGrowthNeeded = new CheckBox();
@@ -102,29 +105,23 @@ namespace FERNGSolver.Genealogy.UI.Search
             label25 = new Label();
             FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
             toolTip1 = new ToolTip(components);
-            label5 = new Label();
-            AttackerDefNumericUpDown = new NumericUpDownEx();
-            IsMgcGrowthNeeded = new CheckBox();
-            MgcGrowthRateNumericUpDown = new NumericUpDownEx();
-            label17 = new Label();
-            label20 = new Label();
-            DefenderDefNumericUpDown = new NumericUpDownEx();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMaxNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderAtkNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHitRateNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)DefenderCriticalRateNumericUpDown).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AttackerDefNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMaxNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerAtkNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHitRateNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)AttackerCriticalRateNumericUpDown).BeginInit();
             GrowthGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MgcGrowthRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)SpdGrowthRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MdfGrowthRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DefGrowthRateNumericUpDown).BeginInit();
@@ -136,9 +133,6 @@ namespace FERNGSolver.Genealogy.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)AttackerDefNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)MgcGrowthRateNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -199,15 +193,30 @@ namespace FERNGSolver.Genealogy.UI.Search
             groupBox2.Controls.Add(label18);
             groupBox2.Controls.Add(DefenderHitRateNumericUpDown);
             groupBox2.Controls.Add(DoesDefenderAttackCheckBox);
-            groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(DoesDefenderFollowUpAttackCheckBox);
-            groupBox2.Controls.Add(DefenderCriticalRateNumericUpDown);
             groupBox2.Location = new Point(14, 191);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(592, 122);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "防御側";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(193, 23);
+            label20.Name = "label20";
+            label20.Size = new Size(34, 15);
+            label20.TabIndex = 122;
+            label20.Text = "守備:";
+            // 
+            // DefenderDefNumericUpDown
+            // 
+            DefenderDefNumericUpDown.Location = new Point(228, 21);
+            DefenderDefNumericUpDown.Name = "DefenderDefNumericUpDown";
+            DefenderDefNumericUpDown.Size = new Size(42, 23);
+            DefenderDefNumericUpDown.TabIndex = 2;
+            DefenderDefNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // DefenderStatusDetailLabel
             // 
@@ -302,7 +311,7 @@ namespace FERNGSolver.Genealogy.UI.Search
             DefenderAtkNumericUpDown.Name = "DefenderAtkNumericUpDown";
             DefenderAtkNumericUpDown.Size = new Size(42, 23);
             DefenderAtkNumericUpDown.TabIndex = 1;
-            DefenderAtkNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            DefenderAtkNumericUpDown.Value = new decimal(new int[] { 20, 0, 0, 0 });
             // 
             // label18
             // 
@@ -324,39 +333,22 @@ namespace FERNGSolver.Genealogy.UI.Search
             // DoesDefenderAttackCheckBox
             // 
             DoesDefenderAttackCheckBox.AutoSize = true;
-            DoesDefenderAttackCheckBox.Location = new Point(413, 42);
+            DoesDefenderAttackCheckBox.Location = new Point(378, 22);
             DoesDefenderAttackCheckBox.Name = "DoesDefenderAttackCheckBox";
             DoesDefenderAttackCheckBox.Size = new Size(50, 19);
-            DoesDefenderAttackCheckBox.TabIndex = 5;
+            DoesDefenderAttackCheckBox.TabIndex = 4;
             DoesDefenderAttackCheckBox.Text = "反撃";
             DoesDefenderAttackCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Location = new Point(373, 23);
-            label19.Name = "label19";
-            label19.Size = new Size(34, 15);
-            label19.TabIndex = 25;
-            label19.Text = "必殺:";
             // 
             // DoesDefenderFollowUpAttackCheckBox
             // 
             DoesDefenderFollowUpAttackCheckBox.AutoSize = true;
-            DoesDefenderFollowUpAttackCheckBox.Location = new Point(477, 42);
+            DoesDefenderFollowUpAttackCheckBox.Location = new Point(442, 22);
             DoesDefenderFollowUpAttackCheckBox.Name = "DoesDefenderFollowUpAttackCheckBox";
             DoesDefenderFollowUpAttackCheckBox.Size = new Size(50, 19);
-            DoesDefenderFollowUpAttackCheckBox.TabIndex = 6;
+            DoesDefenderFollowUpAttackCheckBox.TabIndex = 5;
             DoesDefenderFollowUpAttackCheckBox.Text = "追撃";
             DoesDefenderFollowUpAttackCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // DefenderCriticalRateNumericUpDown
-            // 
-            DefenderCriticalRateNumericUpDown.Location = new Point(408, 21);
-            DefenderCriticalRateNumericUpDown.Name = "DefenderCriticalRateNumericUpDown";
-            DefenderCriticalRateNumericUpDown.Size = new Size(42, 23);
-            DefenderCriticalRateNumericUpDown.TabIndex = 4;
-            DefenderCriticalRateNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // groupBox1
             // 
@@ -376,15 +368,30 @@ namespace FERNGSolver.Genealogy.UI.Search
             groupBox1.Controls.Add(AttackerAtkNumericUpDown);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(AttackerHitRateNumericUpDown);
-            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(DoesAttackerFollowUpAttackCheckBox);
-            groupBox1.Controls.Add(AttackerCriticalRateNumericUpDown);
             groupBox1.Location = new Point(14, 59);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(592, 122);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "攻撃側";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(193, 23);
+            label5.Name = "label5";
+            label5.Size = new Size(34, 15);
+            label5.TabIndex = 120;
+            label5.Text = "守備:";
+            // 
+            // AttackerDefNumericUpDown
+            // 
+            AttackerDefNumericUpDown.Location = new Point(228, 21);
+            AttackerDefNumericUpDown.Name = "AttackerDefNumericUpDown";
+            AttackerDefNumericUpDown.Size = new Size(42, 23);
+            AttackerDefNumericUpDown.TabIndex = 2;
+            AttackerDefNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // AttackerStatusDetailLabel
             // 
@@ -498,32 +505,15 @@ namespace FERNGSolver.Genealogy.UI.Search
             AttackerHitRateNumericUpDown.TabIndex = 3;
             AttackerHitRateNumericUpDown.Value = new decimal(new int[] { 80, 0, 0, 0 });
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(373, 23);
-            label7.Name = "label7";
-            label7.Size = new Size(34, 15);
-            label7.TabIndex = 25;
-            label7.Text = "必殺:";
-            // 
             // DoesAttackerFollowUpAttackCheckBox
             // 
             DoesAttackerFollowUpAttackCheckBox.AutoSize = true;
-            DoesAttackerFollowUpAttackCheckBox.Location = new Point(481, 51);
+            DoesAttackerFollowUpAttackCheckBox.Location = new Point(378, 22);
             DoesAttackerFollowUpAttackCheckBox.Name = "DoesAttackerFollowUpAttackCheckBox";
             DoesAttackerFollowUpAttackCheckBox.Size = new Size(50, 19);
-            DoesAttackerFollowUpAttackCheckBox.TabIndex = 5;
+            DoesAttackerFollowUpAttackCheckBox.TabIndex = 4;
             DoesAttackerFollowUpAttackCheckBox.Text = "追撃";
             DoesAttackerFollowUpAttackCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // AttackerCriticalRateNumericUpDown
-            // 
-            AttackerCriticalRateNumericUpDown.Location = new Point(408, 21);
-            AttackerCriticalRateNumericUpDown.Name = "AttackerCriticalRateNumericUpDown";
-            AttackerCriticalRateNumericUpDown.Size = new Size(42, 23);
-            AttackerCriticalRateNumericUpDown.TabIndex = 4;
-            AttackerCriticalRateNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // GrowthGroupBox
             // 
@@ -558,6 +548,34 @@ namespace FERNGSolver.Genealogy.UI.Search
             GrowthGroupBox.Size = new Size(620, 181);
             GrowthGroupBox.TabIndex = 30;
             GrowthGroupBox.TabStop = false;
+            // 
+            // IsMgcGrowthNeeded
+            // 
+            IsMgcGrowthNeeded.AutoSize = true;
+            IsMgcGrowthNeeded.Checked = true;
+            IsMgcGrowthNeeded.CheckState = CheckState.Checked;
+            IsMgcGrowthNeeded.Location = new Point(93, 118);
+            IsMgcGrowthNeeded.Name = "IsMgcGrowthNeeded";
+            IsMgcGrowthNeeded.Size = new Size(15, 14);
+            IsMgcGrowthNeeded.TabIndex = 22;
+            IsMgcGrowthNeeded.UseVisualStyleBackColor = true;
+            // 
+            // MgcGrowthRateNumericUpDown
+            // 
+            MgcGrowthRateNumericUpDown.Location = new Point(45, 114);
+            MgcGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            MgcGrowthRateNumericUpDown.Name = "MgcGrowthRateNumericUpDown";
+            MgcGrowthRateNumericUpDown.Size = new Size(42, 23);
+            MgcGrowthRateNumericUpDown.TabIndex = 12;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(16, 117);
+            label17.Name = "label17";
+            label17.Size = new Size(31, 15);
+            label17.TabIndex = 48;
+            label17.Text = "魔力";
             // 
             // IsMdfGrowthNeeded
             // 
@@ -836,68 +854,6 @@ namespace FERNGSolver.Genealogy.UI.Search
             FalconKnightConsumeMoveNumericUpDown.TabIndex = 43;
             FalconKnightConsumeMoveNumericUpDown.Value = new decimal(new int[] { 8, 0, 0, 0 });
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(193, 23);
-            label5.Name = "label5";
-            label5.Size = new Size(34, 15);
-            label5.TabIndex = 120;
-            label5.Text = "守備:";
-            // 
-            // AttackerDefNumericUpDown
-            // 
-            AttackerDefNumericUpDown.Location = new Point(228, 21);
-            AttackerDefNumericUpDown.Name = "AttackerDefNumericUpDown";
-            AttackerDefNumericUpDown.Size = new Size(42, 23);
-            AttackerDefNumericUpDown.TabIndex = 2;
-            AttackerDefNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
-            // 
-            // IsMgcGrowthNeeded
-            // 
-            IsMgcGrowthNeeded.AutoSize = true;
-            IsMgcGrowthNeeded.Checked = true;
-            IsMgcGrowthNeeded.CheckState = CheckState.Checked;
-            IsMgcGrowthNeeded.Location = new Point(93, 118);
-            IsMgcGrowthNeeded.Name = "IsMgcGrowthNeeded";
-            IsMgcGrowthNeeded.Size = new Size(15, 14);
-            IsMgcGrowthNeeded.TabIndex = 22;
-            IsMgcGrowthNeeded.UseVisualStyleBackColor = true;
-            // 
-            // MgcGrowthRateNumericUpDown
-            // 
-            MgcGrowthRateNumericUpDown.Location = new Point(45, 114);
-            MgcGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-            MgcGrowthRateNumericUpDown.Name = "MgcGrowthRateNumericUpDown";
-            MgcGrowthRateNumericUpDown.Size = new Size(42, 23);
-            MgcGrowthRateNumericUpDown.TabIndex = 12;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(16, 117);
-            label17.Name = "label17";
-            label17.Size = new Size(31, 15);
-            label17.TabIndex = 48;
-            label17.Text = "魔力";
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new Point(193, 23);
-            label20.Name = "label20";
-            label20.Size = new Size(34, 15);
-            label20.TabIndex = 122;
-            label20.Text = "守備:";
-            // 
-            // DefenderDefNumericUpDown
-            // 
-            DefenderDefNumericUpDown.Location = new Point(228, 21);
-            DefenderDefNumericUpDown.Name = "DefenderDefNumericUpDown";
-            DefenderDefNumericUpDown.Size = new Size(42, 23);
-            DefenderDefNumericUpDown.TabIndex = 2;
-            DefenderDefNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
-            // 
             // MainFormUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -920,22 +876,23 @@ namespace FERNGSolver.Genealogy.UI.Search
             CombatGroupBox.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMaxNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHpNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderAtkNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefenderHitRateNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)DefenderCriticalRateNumericUpDown).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AttackerDefNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMaxNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpPostconditionMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHpNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerAtkNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AttackerHitRateNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)AttackerCriticalRateNumericUpDown).EndInit();
             GrowthGroupBox.ResumeLayout(false);
             GrowthGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)MgcGrowthRateNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)SpdGrowthRateNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)MdfGrowthRateNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)DefGrowthRateNumericUpDown).EndInit();
@@ -947,9 +904,6 @@ namespace FERNGSolver.Genealogy.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)AttackerDefNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)MgcGrowthRateNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -962,8 +916,6 @@ namespace FERNGSolver.Genealogy.UI.Search
         private GroupBox GrowthGroupBox;
         private CheckBox ContainsGrowthCheckBox;
         private CheckBox DoesDefenderAttackCheckBox;
-        private NumericUpDownEx AttackerCriticalRateNumericUpDown;
-        private Label label7;
         private NumericUpDownEx AttackerHitRateNumericUpDown;
         private Label label6;
         private ComboBox GrowthCharacterNameComboBox;
@@ -993,7 +945,6 @@ namespace FERNGSolver.Genealogy.UI.Search
         private TextBox textBox13;
         private Label label18;
         private TextBox textBox14;
-        private Label label19;
         private TextBox textBox15;
         private Label DefenderStatusDetailLabel;
         private CheckBox DoesAttackerFollowUpAttackCheckBox;
@@ -1009,7 +960,6 @@ namespace FERNGSolver.Genealogy.UI.Search
         private NumericUpDownEx DefenderAtkNumericUpDown;
         private NumericUpDownEx DefenderHitRateNumericUpDown;
         private CheckBox DoesDefenderFollowUpAttackCheckBox;
-        private NumericUpDownEx DefenderCriticalRateNumericUpDown;
         private Label label8;
         private Label label9;
         private CheckBox FiltersByDefenderHpPostconditionCheckBox;

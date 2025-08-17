@@ -22,6 +22,11 @@ namespace FERNGSolver.Genealogy.Domain.Combat.Service
         bool CheckCritical(int criticalRate, UnitSide unitSide);
 
         /// <summary>
+        /// 乱数を消費して突撃判定を行います。
+        /// </summary>
+        bool CheckActivateAssault(int attackSpeed, int opponentAttackSpeed, int attackerHp, UnitSide unitSide);
+
+        /// <summary>
         /// 乱数を消費して流星剣の発動判定を行います。
         /// </summary>
         bool CheckActivateAstra(int tec, UnitSide unitSide);

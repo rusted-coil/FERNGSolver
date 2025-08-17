@@ -49,14 +49,14 @@ namespace FERNGSolver.Genealogy.UI.Search
         public int AttackerAtk => (int)AttackerAtkNumericUpDown.Value;
         public int AttackerDef => (int)AttackerDefNumericUpDown.Value;
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
-        public int AttackerCriticalRate => (int)AttackerCriticalRateNumericUpDown.Value;
+        public int AttackerCriticalRate => 0;
         public int AttackerPhaseCount => DoesAttackerFollowUpAttackCheckBox.Checked ? 2 : 1;
         public IUnitStatusDetail AttackerStatusDetail => m_AttackerStatusDetail;
         public int DefenderHp => (int)DefenderHpNumericUpDown.Value;
         public int DefenderAtk => (int)DefenderAtkNumericUpDown.Value;
         public int DefenderDef => (int)DefenderDefNumericUpDown.Value;
         public int DefenderHitRate => (int)DefenderHitRateNumericUpDown.Value;
-        public int DefenderCriticalRate => (int)DefenderCriticalRateNumericUpDown.Value;
+        public int DefenderCriticalRate => 0;
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
         public IUnitStatusDetail DefenderStatusDetail => m_DefenderStatusDetail;
 
@@ -129,14 +129,12 @@ namespace FERNGSolver.Genealogy.UI.Search
             AttackerAtkNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             AttackerDefNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             AttackerHitRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
-            AttackerCriticalRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             DoesAttackerFollowUpAttackCheckBox.CheckedChanged += CombatConditionControlValueChanged;
 
             DefenderHpNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             DefenderAtkNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             DefenderDefNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             DefenderHitRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
-            DefenderCriticalRateNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             DoesDefenderAttackCheckBox.CheckedChanged += CombatConditionControlValueChanged;
             DoesDefenderFollowUpAttackCheckBox.CheckedChanged += CombatConditionControlValueChanged;
 

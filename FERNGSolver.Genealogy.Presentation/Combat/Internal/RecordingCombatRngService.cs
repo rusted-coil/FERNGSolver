@@ -33,6 +33,13 @@ namespace FERNGSolver.Genealogy.Presentation.Combat.Internal
             return isOk;
         }
 
+        public bool CheckActivateAssault(int attackSpeed, int opponentAttackSpeed, int attackerHp, UnitSide unitSide)
+        {
+            bool isOk = m_Underlying.CheckActivateAssault(attackSpeed, opponentAttackSpeed, attackerHp, unitSide);
+            m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerAssault : RandomNumberUsage.EnemyAssault, isOk));
+            return isOk;
+        }
+
         public bool CheckActivateAstra(int tec, UnitSide unitSide)
         {
             bool isOk = m_Underlying.CheckActivateAstra(tec, unitSide);

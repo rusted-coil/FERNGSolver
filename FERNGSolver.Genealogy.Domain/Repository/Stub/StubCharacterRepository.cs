@@ -37,6 +37,14 @@ namespace FERNGSolver.Genealogy.Domain.Repository.Stub
         {
             m_Characters = [
                 new Character("シグルド",110,50,5,40,50,30,40,5),
+                new Character("ノイッシュ",80,40,5,40,30,20,20,5),
+                new Character("アレク",70,30,5,30,40,30,30,5),
+                new Character("アーダン",90,50,5,40,10,20,10,5),
+                new Character("レックス",90,40,5,50,20,20,20,5),
+                new Character("キュアン",110,50,5,50,30,40,10,5),
+                new Character("エスリン",60,30,5,20,30,30,20,10),
+                new Character("フィン",70,30,5,30,40,30,50,5),
+                new Character("ミデェール",60,30,5,30,30,40,10,5),
             ];
         }
     }

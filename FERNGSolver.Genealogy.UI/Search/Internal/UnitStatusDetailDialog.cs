@@ -6,8 +6,6 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
     internal partial class UnitStatusDetailDialog : Form
     {
         private readonly RadioButton[] WeaponTypeRadioButtons;
-        private readonly RadioButton[] SkillTypeRadioButtons;
-        private readonly RadioButton[] BossTypeRadioButtons;
 
         // ReadOnlyなUnitStatusDetailを元に、UnitStatusDetailDialogを初期化します。
         public UnitStatusDetailDialog(IUnitStatusDetail currentStatus)
@@ -19,20 +17,16 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
                 IsWeaponTypeBraveRadioButton,
                 IsWeaponTypeAbsorbRadioButton,
                 IsWeaponTypePoisonRadioButton,
-                IsWeaponTypeCursedRadioButton,
             ];
-            SkillTypeRadioButtons = [
-                IsSkillTypeNoneRadioButton,
-                IsSkillTypeSureStrikeRadioButton,
-                IsSkillTypePierceRadioButton,
-                IsSkillTypeGreatShieldRadioButton,
-                IsSkillTypeSilencerRadioButton,
-            ];
-            BossTypeRadioButtons = [
-                IsBossTypeNoneRadioButton,
-                IsBossTypeBossRadioButton,
-                IsBossTypeFinalBossRadioButton,
-            ];
+
+            HasVantageCheckBox.Checked = currentStatus.HasVantage;
+            HasAstraCheckBox.Checked = currentStatus.HasAstra;
+            HasLunaCheckBox.Checked = currentStatus.HasLuna;
+            HasSolCheckBox.Checked = currentStatus.HasSol;
+            HasContinuationCheckBox.Checked = currentStatus.HasContinuation;
+            HasAssaultCheckBox.Checked = currentStatus.HasAssault;
+            HasGreatShieldCheckBox.Checked = currentStatus.HasGreatShield;
+
 
             /*
             for (int i = 0; i < WeaponTypeRadioButtons.Length; ++i)
@@ -58,6 +52,13 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         // 変更可能なUnitStatusDetailにフォーム内容の下記戻しを行います。
         public void WriteToUnitStatusDetail(UnitStatusDetail unitStatusDetail)
         {
+            unitStatusDetail.HasVantage = HasVantageCheckBox.Checked;
+            unitStatusDetail.HasAstra = HasAstraCheckBox.Checked;
+            unitStatusDetail.HasLuna = HasLunaCheckBox.Checked;
+            unitStatusDetail.HasSol = HasSolCheckBox.Checked;
+            unitStatusDetail.HasContinuation = HasContinuationCheckBox.Checked;
+            unitStatusDetail.HasAssault = HasAssaultCheckBox.Checked;
+            unitStatusDetail.HasGreatShield = HasGreatShieldCheckBox.Checked;
             /*
             unitStatusDetail.WeaponType = (Const.WeaponType)Array.IndexOf(WeaponTypeRadioButtons, WeaponTypeRadioButtons.FirstOrDefault(r => r.Checked));
             unitStatusDetail.SkillType = (Const.SkillType)Array.IndexOf(SkillTypeRadioButtons, SkillTypeRadioButtons.FirstOrDefault(r => r.Checked));
@@ -78,16 +79,6 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         private void IsWeaponTypeAbsorbRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             MaxHpNumericUpDown.Enabled = IsWeaponTypeAbsorbRadioButton.Checked;
-        }
-
-        private void IsWeaponTypeCursedRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            LuckNumericUpDown.Enabled = IsWeaponTypeCursedRadioButton.Checked;
-        }
-
-        private void IsSkillTypePierceRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            OpponentDefNumericUpDown.Enabled = IsSkillTypePierceRadioButton.Checked;
         }
     }
 }
