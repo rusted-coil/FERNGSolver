@@ -46,6 +46,16 @@ namespace FERNGSolver.Genealogy.Domain.Combat
         bool HasGreatShield { get; }
 
         /// <summary>
+        /// 怒りを所持しているかどうかを取得します。
+        /// </summary>
+        bool HasWrath { get; }
+
+        /// <summary>
+        /// 祈りを所持しているかどうかを取得します。
+        /// </summary>
+        bool HasPray { get; }
+
+        /// <summary>
         /// レベルを取得します。
         /// </summary>
         int Level { get; }

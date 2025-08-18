@@ -40,6 +40,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsWeaponTypeAbsorbRadioButton = new RadioButton();
             IsWeaponTypePoisonRadioButton = new RadioButton();
             groupBox2 = new GroupBox();
+            HasPrayCheckBox = new CheckBox();
+            HasWrathCheckBox = new CheckBox();
             HasSolCheckBox = new CheckBox();
             HasLunaCheckBox = new CheckBox();
             HasAstraCheckBox = new CheckBox();
@@ -55,11 +57,11 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             HasVantageCheckBox = new CheckBox();
             OkButton = new Button();
             groupBox3 = new GroupBox();
-            HasCriticalSkillCheckBox = new CheckBox();
-            HasSupportCheckBox = new CheckBox();
-            IsEffectiveCheckBox = new CheckBox();
-            label6 = new Label();
             WeaponStarNumericUpDown = new NumericUpDownEx();
+            label6 = new Label();
+            IsEffectiveCheckBox = new CheckBox();
+            HasSupportCheckBox = new CheckBox();
+            HasCriticalSkillCheckBox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)LevelNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxHpNumericUpDown).BeginInit();
             groupBox1.SuspendLayout();
@@ -168,6 +170,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(HasPrayCheckBox);
+            groupBox2.Controls.Add(HasWrathCheckBox);
             groupBox2.Controls.Add(HasSolCheckBox);
             groupBox2.Controls.Add(HasLunaCheckBox);
             groupBox2.Controls.Add(HasAstraCheckBox);
@@ -185,10 +189,30 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             groupBox2.Controls.Add(LevelNumericUpDown);
             groupBox2.Location = new Point(228, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(199, 204);
+            groupBox2.Size = new Size(199, 252);
             groupBox2.TabIndex = 127;
             groupBox2.TabStop = false;
             groupBox2.Text = "スキル";
+            // 
+            // HasPrayCheckBox
+            // 
+            HasPrayCheckBox.AutoSize = true;
+            HasPrayCheckBox.Location = new Point(15, 226);
+            HasPrayCheckBox.Name = "HasPrayCheckBox";
+            HasPrayCheckBox.Size = new Size(46, 19);
+            HasPrayCheckBox.TabIndex = 146;
+            HasPrayCheckBox.Text = "祈り";
+            HasPrayCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // HasWrathCheckBox
+            // 
+            HasWrathCheckBox.AutoSize = true;
+            HasWrathCheckBox.Location = new Point(15, 201);
+            HasWrathCheckBox.Name = "HasWrathCheckBox";
+            HasWrathCheckBox.Size = new Size(46, 19);
+            HasWrathCheckBox.TabIndex = 145;
+            HasWrathCheckBox.Text = "怒り";
+            HasWrathCheckBox.UseVisualStyleBackColor = true;
             // 
             // HasSolCheckBox
             // 
@@ -337,25 +361,23 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             groupBox3.TabStop = false;
             groupBox3.Text = "必殺";
             // 
-            // HasCriticalSkillCheckBox
+            // WeaponStarNumericUpDown
             // 
-            HasCriticalSkillCheckBox.AutoSize = true;
-            HasCriticalSkillCheckBox.Location = new Point(15, 22);
-            HasCriticalSkillCheckBox.Name = "HasCriticalSkillCheckBox";
-            HasCriticalSkillCheckBox.Size = new Size(102, 19);
-            HasCriticalSkillCheckBox.TabIndex = 145;
-            HasCriticalSkillCheckBox.Text = "必殺スキル所持";
-            HasCriticalSkillCheckBox.UseVisualStyleBackColor = true;
+            WeaponStarNumericUpDown.Enabled = false;
+            WeaponStarNumericUpDown.Location = new Point(77, 98);
+            WeaponStarNumericUpDown.Name = "WeaponStarNumericUpDown";
+            WeaponStarNumericUpDown.Size = new Size(42, 23);
+            WeaponStarNumericUpDown.TabIndex = 128;
+            WeaponStarNumericUpDown.Value = new decimal(new int[] { 50, 0, 0, 0 });
             // 
-            // HasSupportCheckBox
+            // label6
             // 
-            HasSupportCheckBox.AutoSize = true;
-            HasSupportCheckBox.Location = new Point(15, 47);
-            HasSupportCheckBox.Name = "HasSupportCheckBox";
-            HasSupportCheckBox.Size = new Size(74, 19);
-            HasSupportCheckBox.TabIndex = 146;
-            HasSupportCheckBox.Text = "支援効果";
-            HasSupportCheckBox.UseVisualStyleBackColor = true;
+            label6.AutoSize = true;
+            label6.Location = new Point(15, 100);
+            label6.Name = "label6";
+            label6.Size = new Size(56, 15);
+            label6.TabIndex = 148;
+            label6.Text = "武器の★:";
             // 
             // IsEffectiveCheckBox
             // 
@@ -367,23 +389,25 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsEffectiveCheckBox.Text = "特効";
             IsEffectiveCheckBox.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // HasSupportCheckBox
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(15, 100);
-            label6.Name = "label6";
-            label6.Size = new Size(56, 15);
-            label6.TabIndex = 148;
-            label6.Text = "武器の★:";
+            HasSupportCheckBox.AutoSize = true;
+            HasSupportCheckBox.Location = new Point(15, 47);
+            HasSupportCheckBox.Name = "HasSupportCheckBox";
+            HasSupportCheckBox.Size = new Size(74, 19);
+            HasSupportCheckBox.TabIndex = 146;
+            HasSupportCheckBox.Text = "支援効果";
+            HasSupportCheckBox.UseVisualStyleBackColor = true;
             // 
-            // WeaponStarNumericUpDown
+            // HasCriticalSkillCheckBox
             // 
-            WeaponStarNumericUpDown.Enabled = false;
-            WeaponStarNumericUpDown.Location = new Point(77, 98);
-            WeaponStarNumericUpDown.Name = "WeaponStarNumericUpDown";
-            WeaponStarNumericUpDown.Size = new Size(42, 23);
-            WeaponStarNumericUpDown.TabIndex = 128;
-            WeaponStarNumericUpDown.Value = new decimal(new int[] { 50, 0, 0, 0 });
+            HasCriticalSkillCheckBox.AutoSize = true;
+            HasCriticalSkillCheckBox.Location = new Point(15, 22);
+            HasCriticalSkillCheckBox.Name = "HasCriticalSkillCheckBox";
+            HasCriticalSkillCheckBox.Size = new Size(102, 19);
+            HasCriticalSkillCheckBox.TabIndex = 145;
+            HasCriticalSkillCheckBox.Text = "必殺スキル所持";
+            HasCriticalSkillCheckBox.UseVisualStyleBackColor = true;
             // 
             // UnitStatusDetailDialog
             // 
@@ -444,5 +468,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         private NumericUpDownEx WeaponStarNumericUpDown;
         private Label label6;
         private CheckBox IsEffectiveCheckBox;
+        private CheckBox HasPrayCheckBox;
+        private CheckBox HasWrathCheckBox;
     }
 }

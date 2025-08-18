@@ -19,6 +19,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         public bool HasContinuation { get; set; } = false;
         public bool HasAssault { get; set; } = false;
         public bool HasGreatShield { get; set; } = false;
+        public bool HasWrath { get; set; } = false;
+        public bool HasPray { get; set; } = false;
 
         // 必殺関連
         public bool HasCriticalSkill { get; set; } = false;
@@ -70,6 +72,14 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             if (HasGreatShield)
             {
                 sb.Append($"[大盾({Level}%)]");
+            }
+            if (HasWrath)
+            {
+                sb.Append($"[怒り]");
+            }
+            if (HasPray)
+            {
+                sb.Append($"[祈り]");
             }
 
             int criticalRate = Util.GetCriticalRate(Tec, HasCriticalSkill, HasSupport, IsEffective, WeaponStarCount);

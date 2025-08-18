@@ -35,6 +35,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             HasContinuationCheckBox.Checked = state.HasContinuation;
             HasAssaultCheckBox.Checked = state.HasAssault;
             HasGreatShieldCheckBox.Checked = state.HasGreatShield;
+            HasWrathCheckBox.Checked = state.HasWrath;
+            HasPrayCheckBox.Checked = state.HasPray;
 
             HasCriticalSkillCheckBox.Checked = state.HasCriticalSkill;
             HasSupportCheckBox.Checked = state.HasSupport;
@@ -58,6 +60,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             m_State.HasContinuation = HasContinuationCheckBox.Checked;
             m_State.HasAssault = HasAssaultCheckBox.Checked;
             m_State.HasGreatShield = HasGreatShieldCheckBox.Checked;
+            m_State.HasWrath = HasWrathCheckBox.Checked;
+            m_State.HasPray = HasPrayCheckBox.Checked;
 
             m_State.HasCriticalSkill = HasCriticalSkillCheckBox.Checked;
             m_State.HasSupport = HasSupportCheckBox.Checked;
