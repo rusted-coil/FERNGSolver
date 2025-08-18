@@ -22,6 +22,11 @@ namespace FERNGSolver.Genealogy.Domain.Combat.Service
         bool CheckCritical(int criticalRate, UnitSide unitSide);
 
         /// <summary>
+        /// 乱数を消費して状態異常武器の成功判定を行います。
+        /// </summary>
+        bool CheckSleep(int sleepRate, UnitSide unitSide);
+
+        /// <summary>
         /// 乱数を消費して突撃判定を行います。
         /// </summary>
         bool CheckActivateAssault(int attackSpeed, int opponentAttackSpeed, int attackerHp, UnitSide unitSide);

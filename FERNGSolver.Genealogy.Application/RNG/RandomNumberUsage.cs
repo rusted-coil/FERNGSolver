@@ -29,9 +29,11 @@ namespace FERNGSolver.Genealogy.Application.RNG
         PlayerSol, // 太陽剣判定
         PlayerContinuation, // 連続判定
         PlayerGreatShield, // 大盾判定
+        PlayerSleep, // 状態異常判定
+        PlayerSleepTurn, // 状態異常ターン数判定
 
         PlayerStart = PlayerHit,
-        PlayerEnd = PlayerGreatShield,
+        PlayerEnd = PlayerSleepTurn,
 
         EnemyHit, // 命中
         EnemyCritical, // 必殺
@@ -41,9 +43,11 @@ namespace FERNGSolver.Genealogy.Application.RNG
         EnemySol, // 太陽剣判定
         EnemyContinuation, // 連続判定
         EnemyGreatShield, // 大盾判定
+        EnemySleep, // 状態異常判定
+        EnemySleepTurn, // 状態異常ターン数判定
 
         EnemyStart = EnemyHit,
-        EnemyEnd = EnemyGreatShield,
+        EnemyEnd = EnemySleepTurn,
     }
 
     public static class RandomNumberUsageExtensions

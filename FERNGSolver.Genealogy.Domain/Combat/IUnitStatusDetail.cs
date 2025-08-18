@@ -74,5 +74,17 @@ namespace FERNGSolver.Genealogy.Domain.Combat
         /// 攻速を取得します。
         /// </summary>
         int AttackSpeed { get; }
+
+        /// <summary>
+        /// 相手の攻速を取得します。
+        /// <para> * ※スキルフラグと集約するために、このユニットの突撃にはこちらの値を使用します。</para>
+        /// </summary>
+        int OpponentAttackSpeed { get; }
+
+        /// <summary>
+        /// 相手の魔防を取得します。
+        /// <para> * ※武器フラグと集約するために、このユニットの状態異常武器判定にはこの値を使用します。</para>
+        /// </summary>
+        int OpponentMdf { get; }
     }
 }

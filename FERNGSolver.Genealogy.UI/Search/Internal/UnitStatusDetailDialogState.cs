@@ -11,6 +11,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         public int Tec { get; set; } = 10;
         public int AttackSpeed { get; set; } = 10;
         public int OpponentAttackSpeed { get; set; } = 10;
+        public int OpponentMdf { get; set; } = 5;
 
         public bool HasVantage { get; set; } = false;
         public bool HasAstra { get; set; } = false;
@@ -40,7 +41,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
                 case Const.WeaponType.Absorb:
                     sb.Append($"[吸収(Max:{MaxHp})]");
                     break;
-                case Const.WeaponType.Poison:
+                case Const.WeaponType.Sleep:
                     sb.Append("[状態異常]");
                     break;
             }

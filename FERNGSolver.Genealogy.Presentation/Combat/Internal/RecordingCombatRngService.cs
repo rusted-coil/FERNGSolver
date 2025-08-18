@@ -1,7 +1,6 @@
 using FERNGSolver.Common.Domain.RNG;
 using FERNGSolver.Genealogy.Application.RNG;
 using FERNGSolver.Genealogy.Domain.Combat.Service;
-using System.Diagnostics;
 
 namespace FERNGSolver.Genealogy.Presentation.Combat.Internal
 {
@@ -30,6 +29,22 @@ namespace FERNGSolver.Genealogy.Presentation.Combat.Internal
         {
             bool isOk = m_Underlying.CheckCritical(criticalRate, unitSide);
             m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerCritical : RandomNumberUsage.EnemyCritical, isOk));
+            return isOk;
+        }
+
+        public bool CheckSleep(int sleepRate, UnitSide unitSide)
+        {
+            bool isOk = m_Underlying.CheckSleep(sleepRate, unitSide);
+            // 内部処理に依存してしまうが、判定OKだった場合は2個、NGだった場合は1個の乱数を消費する
+            if (isOk)
+            {
+                m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerSleep : RandomNumberUsage.EnemySleep, true));
+                m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerSleepTurn : RandomNumberUsage.EnemySleepTurn, false));
+            }
+            else
+            {
+                m_UsedRandomNumbers.Add((unitSide == UnitSide.Player ? RandomNumberUsage.PlayerSleep : RandomNumberUsage.EnemySleep, false));
+            }
             return isOk;
         }
 

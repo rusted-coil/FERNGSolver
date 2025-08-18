@@ -23,7 +23,6 @@ namespace FERNGSolver.Genealogy.Domain.Combat
         //----
         //・待ち伏せ用に最大HPの入力欄
         //・祈り
-        //・状態異常判定
 
         /// <summary>
         /// RNGを進め、戦闘をシミュレートした結果を得ます。
@@ -202,10 +201,20 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                     }
                     defenderSide.CurrentHp -= damage;
 
-                    // TODO 状態変化判定
+                    // 状態変化判定
+                    if (attackerSide.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Sleep)
+                    {
+                        int sleepRate = 30 - attackerSide.CombatUnit.StatusDetail.OpponentMdf;
+                        if (sleepRate < 0)
+                        {
+                            sleepRate = 100; // 負の場合は100%になる
+                        }
+                        if (rngService.CheckSleep(sleepRate, attackerSide.UnitSide))
+                        {
+                            return false; // 状態異常にかかったら戦闘終了
+                        }
+                    }
                 }
-
-                // TODO スリープの剣かバサークの剣がかかったら戦闘終了
 
                 if (attackerSide.CurrentHp <= 0)
                 {

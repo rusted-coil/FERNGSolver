@@ -25,6 +25,8 @@ namespace FERNGSolver.Genealogy.UI.RngView.Internal
                 RandomNumberUsage.PlayerSol => "太",
                 RandomNumberUsage.PlayerContinuation => "連",
                 RandomNumberUsage.PlayerGreatShield => "盾",
+                RandomNumberUsage.PlayerSleep => "状",
+                RandomNumberUsage.PlayerSleepTurn => "続",
                 RandomNumberUsage.EnemyHit => "命",
                 RandomNumberUsage.EnemyCritical => "必",
                 RandomNumberUsage.EnemyAssault => "突",
@@ -33,6 +35,8 @@ namespace FERNGSolver.Genealogy.UI.RngView.Internal
                 RandomNumberUsage.EnemySol => "太",
                 RandomNumberUsage.EnemyContinuation => "連",
                 RandomNumberUsage.EnemyGreatShield => "盾",
+                RandomNumberUsage.EnemySleep => "状",
+                RandomNumberUsage.EnemySleepTurn => "続",
                 _ => "",
             };
         }

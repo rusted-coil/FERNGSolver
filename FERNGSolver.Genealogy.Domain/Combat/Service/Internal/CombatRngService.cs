@@ -22,6 +22,18 @@ namespace FERNGSolver.Genealogy.Domain.Combat.Service.Internal
         // 必殺判定
         public bool CheckCritical(int criticalRate, UnitSide unitSide) => m_Rng.Next() < criticalRate;
 
+        // 状態異常判定
+        public bool CheckSleep(int sleepRate, UnitSide unitSide)
+        {
+            if (m_Rng.Next() < sleepRate)
+            {
+                // 状態異常に成功した場合は続けてターン数を決定する
+                m_Rng.Next();
+                return true;
+            }
+            return false;
+        }
+
         // 突撃: (自分の攻速-相手の攻速+HP÷2)[%]で発動
         public bool CheckActivateAssault(int attackSpeed, int opponentAttackSpeed, int attackerHp, UnitSide unitSide) => m_Rng.Next() < (attackSpeed - opponentAttackSpeed + attackerHp / 2);
 
