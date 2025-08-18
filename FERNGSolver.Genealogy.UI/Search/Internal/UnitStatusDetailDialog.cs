@@ -1,15 +1,17 @@
 using FERNGSolver.Genealogy.Domain.Combat;
-using FERNGSolver.Genealogy.Presentation.ViewContracts;
 
 namespace FERNGSolver.Genealogy.UI.Search.Internal
 {
     internal partial class UnitStatusDetailDialog : Form
     {
         private readonly RadioButton[] WeaponTypeRadioButtons;
+        private readonly UnitStatusDetailDialogState m_State;
 
-        // ReadOnlyなUnitStatusDetailを元に、UnitStatusDetailDialogを初期化します。
-        public UnitStatusDetailDialog(IUnitStatusDetail currentStatus)
+        // 初期化・書き戻しを行うStateを指定して初期化します。
+        public UnitStatusDetailDialog(UnitStatusDetailDialogState state)
         {
+            m_State = state;
+
             InitializeComponent();
 
             WeaponTypeRadioButtons = [
@@ -19,59 +21,49 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
                 IsWeaponTypePoisonRadioButton,
             ];
 
-            HasVantageCheckBox.Checked = currentStatus.HasVantage;
-            HasAstraCheckBox.Checked = currentStatus.HasAstra;
-            HasLunaCheckBox.Checked = currentStatus.HasLuna;
-            HasSolCheckBox.Checked = currentStatus.HasSol;
-            HasContinuationCheckBox.Checked = currentStatus.HasContinuation;
-            HasAssaultCheckBox.Checked = currentStatus.HasAssault;
-            HasGreatShieldCheckBox.Checked = currentStatus.HasGreatShield;
+            WeaponTypeRadioButtons[(int)m_State.WeaponType].Checked = true;
+            LevelNumericUpDown.Value = state.Level;
+            MaxHpNumericUpDown.Value = state.MaxHp;
+            TecNumericUpDown.Value = state.Tec;
+            AttackSpeedNumericUpDown.Value = state.AttackSpeed;
+            OpponentAttackSpeedNumericUpDown.Value = state.OpponentAttackSpeed;
 
+            HasVantageCheckBox.Checked = state.HasVantage;
+            HasAstraCheckBox.Checked = state.HasAstra;
+            HasLunaCheckBox.Checked = state.HasLuna;
+            HasSolCheckBox.Checked = state.HasSol;
+            HasContinuationCheckBox.Checked = state.HasContinuation;
+            HasAssaultCheckBox.Checked = state.HasAssault;
+            HasGreatShieldCheckBox.Checked = state.HasGreatShield;
 
-            /*
-            for (int i = 0; i < WeaponTypeRadioButtons.Length; ++i)
-            {
-                WeaponTypeRadioButtons[i].Checked = (i == (int)currentStatus.WeaponType);
-            }
-            for (int i = 0; i < SkillTypeRadioButtons.Length; ++i)
-            {
-                SkillTypeRadioButtons[i].Checked = (i == (int)currentStatus.SkillType);
-            }
-            for (int i = 0; i < BossTypeRadioButtons.Length; ++i)
-            {
-                BossTypeRadioButtons[i].Checked = (i == (int)currentStatus.BossType);
-            }
-
-            LevelNumericUpDown.Value = currentStatus.Level;
-            MaxHpNumericUpDown.Value = currentStatus.MaxHp;
-            LuckNumericUpDown.Value = currentStatus.Luck;
-            OpponentDefNumericUpDown.Value = currentStatus.OpponentDefense;
-            */
-        }
-
-        // 変更可能なUnitStatusDetailにフォーム内容の下記戻しを行います。
-        public void WriteToUnitStatusDetail(UnitStatusDetail unitStatusDetail)
-        {
-            unitStatusDetail.HasVantage = HasVantageCheckBox.Checked;
-            unitStatusDetail.HasAstra = HasAstraCheckBox.Checked;
-            unitStatusDetail.HasLuna = HasLunaCheckBox.Checked;
-            unitStatusDetail.HasSol = HasSolCheckBox.Checked;
-            unitStatusDetail.HasContinuation = HasContinuationCheckBox.Checked;
-            unitStatusDetail.HasAssault = HasAssaultCheckBox.Checked;
-            unitStatusDetail.HasGreatShield = HasGreatShieldCheckBox.Checked;
-            /*
-            unitStatusDetail.WeaponType = (Const.WeaponType)Array.IndexOf(WeaponTypeRadioButtons, WeaponTypeRadioButtons.FirstOrDefault(r => r.Checked));
-            unitStatusDetail.SkillType = (Const.SkillType)Array.IndexOf(SkillTypeRadioButtons, SkillTypeRadioButtons.FirstOrDefault(r => r.Checked));
-            unitStatusDetail.BossType = (Const.BossType)Array.IndexOf(BossTypeRadioButtons, BossTypeRadioButtons.FirstOrDefault(r => r.Checked));
-            unitStatusDetail.Level = (int)LevelNumericUpDown.Value;
-            unitStatusDetail.MaxHp = (int)MaxHpNumericUpDown.Value;
-            unitStatusDetail.Luck = (int)LuckNumericUpDown.Value;
-            unitStatusDetail.OpponentDefense = (int)OpponentDefNumericUpDown.Value;
-            */
+            HasCriticalSkillCheckBox.Checked = state.HasCriticalSkill;
+            HasSupportCheckBox.Checked = state.HasSupport;
+            IsEffectiveCheckBox.Checked = state.IsEffective;
+            WeaponStarNumericUpDown.Value = state.WeaponStarCount;
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            m_State.WeaponType = (Const.WeaponType)Array.IndexOf(WeaponTypeRadioButtons, WeaponTypeRadioButtons.FirstOrDefault(r => r.Checked));
+            m_State.Level = (int)LevelNumericUpDown.Value;
+            m_State.MaxHp = (int)MaxHpNumericUpDown.Value;
+            m_State.Tec = (int)TecNumericUpDown.Value;
+            m_State.AttackSpeed = (int)AttackSpeedNumericUpDown.Value;
+            m_State.OpponentAttackSpeed = (int)OpponentAttackSpeedNumericUpDown.Value;
+
+            m_State.HasVantage = HasVantageCheckBox.Checked;
+            m_State.HasAstra = HasAstraCheckBox.Checked;
+            m_State.HasLuna = HasLunaCheckBox.Checked;
+            m_State.HasSol = HasSolCheckBox.Checked;
+            m_State.HasContinuation = HasContinuationCheckBox.Checked;
+            m_State.HasAssault = HasAssaultCheckBox.Checked;
+            m_State.HasGreatShield = HasGreatShieldCheckBox.Checked;
+
+            m_State.HasCriticalSkill = HasCriticalSkillCheckBox.Checked;
+            m_State.HasSupport = HasSupportCheckBox.Checked;
+            m_State.IsEffective = IsEffectiveCheckBox.Checked;
+            m_State.WeaponStarCount = (int)WeaponStarNumericUpDown.Value;
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

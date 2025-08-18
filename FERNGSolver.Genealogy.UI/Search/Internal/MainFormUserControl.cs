@@ -49,19 +49,19 @@ namespace FERNGSolver.Genealogy.UI.Search
         public int AttackerAtk => (int)AttackerAtkNumericUpDown.Value;
         public int AttackerDef => (int)AttackerDefNumericUpDown.Value;
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
-        public int AttackerCriticalRate => 0;
+        public int AttackerCriticalRate => Util.GetCriticalRate(m_AttackerStatusDetail.Tec, m_AttackerStatusDetail.HasCriticalSkill, m_AttackerStatusDetail.HasSupport, m_AttackerStatusDetail.IsEffective, m_AttackerStatusDetail.WeaponStarCount);
         public int AttackerPhaseCount => DoesAttackerFollowUpAttackCheckBox.Checked ? 2 : 1;
         public IUnitStatusDetail AttackerStatusDetail => m_AttackerStatusDetail;
         public int DefenderHp => (int)DefenderHpNumericUpDown.Value;
         public int DefenderAtk => (int)DefenderAtkNumericUpDown.Value;
         public int DefenderDef => (int)DefenderDefNumericUpDown.Value;
         public int DefenderHitRate => (int)DefenderHitRateNumericUpDown.Value;
-        public int DefenderCriticalRate => 0;
+        public int DefenderCriticalRate => Util.GetCriticalRate(m_DefenderStatusDetail.Tec, m_DefenderStatusDetail.HasCriticalSkill, m_DefenderStatusDetail.HasSupport, m_DefenderStatusDetail.IsEffective, m_DefenderStatusDetail.WeaponStarCount);
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
         public IUnitStatusDetail DefenderStatusDetail => m_DefenderStatusDetail;
 
-        private UnitStatusDetail m_AttackerStatusDetail = new UnitStatusDetail();
-        private UnitStatusDetail m_DefenderStatusDetail = new UnitStatusDetail();
+        private UnitStatusDetailDialogState m_AttackerStatusDetail = new UnitStatusDetailDialogState();
+        private UnitStatusDetailDialogState m_DefenderStatusDetail = new UnitStatusDetailDialogState();
 
         // 戦闘事後条件
         public int AttackerHpPostconditionMin => FiltersByAttackerHpPostconditionCheckBox.Checked ? (int)AttackerHpPostconditionMinNumericUpDown.Value : 0;
@@ -183,7 +183,7 @@ namespace FERNGSolver.Genealogy.UI.Search
         private void AttackerStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_AttackerStatusDetail, AttackerStatusDetailLabel);
         private void DefenderStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_DefenderStatusDetail, DefenderStatusDetailLabel);
 
-        private void OpenStatusDetailDialog(UnitStatusDetail targetStatus, Label targetStatusLabel)
+        private void OpenStatusDetailDialog(UnitStatusDetailDialogState targetStatus, Label targetStatusLabel)
         {
             using (var form = new UnitStatusDetailDialog(targetStatus))
             {
@@ -191,7 +191,6 @@ namespace FERNGSolver.Genealogy.UI.Search
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    form.WriteToUnitStatusDetail(targetStatus);
                     targetStatusLabel.Text = targetStatus.ToString();
 
                     // 「戦闘を行う」にチェックが入っている時のみ条件が変化したものとして通知を行う
