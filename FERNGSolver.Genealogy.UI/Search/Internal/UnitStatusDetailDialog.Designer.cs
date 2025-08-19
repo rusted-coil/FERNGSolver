@@ -45,16 +45,16 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             HasSolCheckBox = new CheckBox();
             HasLunaCheckBox = new CheckBox();
             HasAstraCheckBox = new CheckBox();
-            label4 = new Label();
-            TecNumericUpDown = new NumericUpDownEx();
             HasGreatShieldCheckBox = new CheckBox();
-            label5 = new Label();
-            OpponentAttackSpeedNumericUpDown = new NumericUpDownEx();
             HasAssaultCheckBox = new CheckBox();
-            label3 = new Label();
-            AttackSpeedNumericUpDown = new NumericUpDownEx();
             HasContinuationCheckBox = new CheckBox();
             HasVantageCheckBox = new CheckBox();
+            label4 = new Label();
+            TecNumericUpDown = new NumericUpDownEx();
+            label5 = new Label();
+            OpponentAttackSpeedNumericUpDown = new NumericUpDownEx();
+            label3 = new Label();
+            AttackSpeedNumericUpDown = new NumericUpDownEx();
             OkButton = new Button();
             groupBox3 = new GroupBox();
             WeaponStarNumericUpDown = new NumericUpDownEx();
@@ -62,6 +62,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsEffectiveCheckBox = new CheckBox();
             HasSupportCheckBox = new CheckBox();
             HasCriticalSkillCheckBox = new CheckBox();
+            label7 = new Label();
+            OpponentMdfNumericUpDown = new NumericUpDownEx();
             ((System.ComponentModel.ISupportInitialize)LevelNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxHpNumericUpDown).BeginInit();
             groupBox1.SuspendLayout();
@@ -71,12 +73,13 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             ((System.ComponentModel.ISupportInitialize)AttackSpeedNumericUpDown).BeginInit();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)WeaponStarNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)OpponentMdfNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(120, 102);
+            label1.Location = new Point(12, 166);
             label1.Name = "label1";
             label1.Size = new Size(22, 15);
             label1.TabIndex = 120;
@@ -84,16 +87,16 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // LevelNumericUpDown
             // 
-            LevelNumericUpDown.Location = new Point(148, 100);
+            LevelNumericUpDown.Location = new Point(40, 164);
             LevelNumericUpDown.Name = "LevelNumericUpDown";
             LevelNumericUpDown.Size = new Size(42, 23);
-            LevelNumericUpDown.TabIndex = 119;
+            LevelNumericUpDown.TabIndex = 4;
             LevelNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(93, 77);
+            label2.Location = new Point(100, 166);
             label2.Name = "label2";
             label2.Size = new Size(50, 15);
             label2.TabIndex = 122;
@@ -102,10 +105,10 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // MaxHpNumericUpDown
             // 
             MaxHpNumericUpDown.Enabled = false;
-            MaxHpNumericUpDown.Location = new Point(149, 75);
+            MaxHpNumericUpDown.Location = new Point(156, 164);
             MaxHpNumericUpDown.Name = "MaxHpNumericUpDown";
             MaxHpNumericUpDown.Size = new Size(42, 23);
-            MaxHpNumericUpDown.TabIndex = 121;
+            MaxHpNumericUpDown.TabIndex = 5;
             MaxHpNumericUpDown.Value = new decimal(new int[] { 30, 0, 0, 0 });
             // 
             // IsWeaponTypeNormalRadioButton
@@ -114,10 +117,11 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsWeaponTypeNormalRadioButton.Location = new Point(15, 25);
             IsWeaponTypeNormalRadioButton.Name = "IsWeaponTypeNormalRadioButton";
             IsWeaponTypeNormalRadioButton.Size = new Size(73, 19);
-            IsWeaponTypeNormalRadioButton.TabIndex = 123;
+            IsWeaponTypeNormalRadioButton.TabIndex = 1;
             IsWeaponTypeNormalRadioButton.TabStop = true;
             IsWeaponTypeNormalRadioButton.Text = "通常武器";
             IsWeaponTypeNormalRadioButton.UseVisualStyleBackColor = true;
+            IsWeaponTypeNormalRadioButton.CheckedChanged += RadioButtonControlStateChenged;
             // 
             // IsWeaponTypeBraveRadioButton
             // 
@@ -125,23 +129,22 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsWeaponTypeBraveRadioButton.Location = new Point(15, 50);
             IsWeaponTypeBraveRadioButton.Name = "IsWeaponTypeBraveRadioButton";
             IsWeaponTypeBraveRadioButton.Size = new Size(49, 19);
-            IsWeaponTypeBraveRadioButton.TabIndex = 124;
+            IsWeaponTypeBraveRadioButton.TabIndex = 2;
             IsWeaponTypeBraveRadioButton.TabStop = true;
             IsWeaponTypeBraveRadioButton.Text = "勇者";
             IsWeaponTypeBraveRadioButton.UseVisualStyleBackColor = true;
+            IsWeaponTypeBraveRadioButton.CheckedChanged += RadioButtonControlStateChenged;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(IsWeaponTypeAbsorbRadioButton);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(MaxHpNumericUpDown);
             groupBox1.Controls.Add(IsWeaponTypePoisonRadioButton);
             groupBox1.Controls.Add(IsWeaponTypeNormalRadioButton);
             groupBox1.Controls.Add(IsWeaponTypeBraveRadioButton);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(210, 131);
-            groupBox1.TabIndex = 125;
+            groupBox1.Size = new Size(132, 138);
+            groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "武器";
             // 
@@ -151,11 +154,11 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsWeaponTypeAbsorbRadioButton.Location = new Point(15, 75);
             IsWeaponTypeAbsorbRadioButton.Name = "IsWeaponTypeAbsorbRadioButton";
             IsWeaponTypeAbsorbRadioButton.Size = new Size(49, 19);
-            IsWeaponTypeAbsorbRadioButton.TabIndex = 127;
+            IsWeaponTypeAbsorbRadioButton.TabIndex = 3;
             IsWeaponTypeAbsorbRadioButton.TabStop = true;
             IsWeaponTypeAbsorbRadioButton.Text = "吸収";
             IsWeaponTypeAbsorbRadioButton.UseVisualStyleBackColor = true;
-            IsWeaponTypeAbsorbRadioButton.CheckedChanged += IsWeaponTypeAbsorbRadioButton_CheckedChanged;
+            IsWeaponTypeAbsorbRadioButton.CheckedChanged += RadioButtonControlStateChenged;
             // 
             // IsWeaponTypePoisonRadioButton
             // 
@@ -163,10 +166,11 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             IsWeaponTypePoisonRadioButton.Location = new Point(15, 100);
             IsWeaponTypePoisonRadioButton.Name = "IsWeaponTypePoisonRadioButton";
             IsWeaponTypePoisonRadioButton.Size = new Size(73, 19);
-            IsWeaponTypePoisonRadioButton.TabIndex = 125;
+            IsWeaponTypePoisonRadioButton.TabIndex = 4;
             IsWeaponTypePoisonRadioButton.TabStop = true;
             IsWeaponTypePoisonRadioButton.Text = "状態異常";
             IsWeaponTypePoisonRadioButton.UseVisualStyleBackColor = true;
+            IsWeaponTypePoisonRadioButton.CheckedChanged += RadioButtonControlStateChenged;
             // 
             // groupBox2
             // 
@@ -175,79 +179,120 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             groupBox2.Controls.Add(HasSolCheckBox);
             groupBox2.Controls.Add(HasLunaCheckBox);
             groupBox2.Controls.Add(HasAstraCheckBox);
-            groupBox2.Controls.Add(label4);
-            groupBox2.Controls.Add(TecNumericUpDown);
             groupBox2.Controls.Add(HasGreatShieldCheckBox);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(OpponentAttackSpeedNumericUpDown);
             groupBox2.Controls.Add(HasAssaultCheckBox);
-            groupBox2.Controls.Add(label3);
-            groupBox2.Controls.Add(AttackSpeedNumericUpDown);
             groupBox2.Controls.Add(HasContinuationCheckBox);
             groupBox2.Controls.Add(HasVantageCheckBox);
-            groupBox2.Controls.Add(label1);
-            groupBox2.Controls.Add(LevelNumericUpDown);
-            groupBox2.Location = new Point(228, 12);
+            groupBox2.Location = new Point(156, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(199, 252);
-            groupBox2.TabIndex = 127;
+            groupBox2.Size = new Size(259, 138);
+            groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "スキル";
             // 
             // HasPrayCheckBox
             // 
             HasPrayCheckBox.AutoSize = true;
-            HasPrayCheckBox.Location = new Point(15, 226);
+            HasPrayCheckBox.Location = new Point(195, 51);
             HasPrayCheckBox.Name = "HasPrayCheckBox";
             HasPrayCheckBox.Size = new Size(46, 19);
-            HasPrayCheckBox.TabIndex = 146;
+            HasPrayCheckBox.TabIndex = 9;
             HasPrayCheckBox.Text = "祈り";
             HasPrayCheckBox.UseVisualStyleBackColor = true;
+            HasPrayCheckBox.CheckedChanged += ParameterControlStateChenged;
             // 
             // HasWrathCheckBox
             // 
             HasWrathCheckBox.AutoSize = true;
-            HasWrathCheckBox.Location = new Point(15, 201);
+            HasWrathCheckBox.Location = new Point(15, 101);
             HasWrathCheckBox.Name = "HasWrathCheckBox";
             HasWrathCheckBox.Size = new Size(46, 19);
-            HasWrathCheckBox.TabIndex = 145;
+            HasWrathCheckBox.TabIndex = 4;
             HasWrathCheckBox.Text = "怒り";
             HasWrathCheckBox.UseVisualStyleBackColor = true;
+            HasWrathCheckBox.CheckedChanged += ParameterControlStateChenged;
             // 
             // HasSolCheckBox
             // 
             HasSolCheckBox.AutoSize = true;
-            HasSolCheckBox.Location = new Point(15, 176);
+            HasSolCheckBox.Location = new Point(105, 75);
             HasSolCheckBox.Name = "HasSolCheckBox";
             HasSolCheckBox.Size = new Size(62, 19);
-            HasSolCheckBox.TabIndex = 144;
+            HasSolCheckBox.TabIndex = 7;
             HasSolCheckBox.Text = "太陽剣";
             HasSolCheckBox.UseVisualStyleBackColor = true;
+            HasSolCheckBox.CheckedChanged += ParameterControlStateChenged;
             // 
             // HasLunaCheckBox
             // 
             HasLunaCheckBox.AutoSize = true;
-            HasLunaCheckBox.Location = new Point(15, 151);
+            HasLunaCheckBox.Location = new Point(105, 50);
             HasLunaCheckBox.Name = "HasLunaCheckBox";
             HasLunaCheckBox.Size = new Size(62, 19);
-            HasLunaCheckBox.TabIndex = 143;
+            HasLunaCheckBox.TabIndex = 6;
             HasLunaCheckBox.Text = "月光剣";
             HasLunaCheckBox.UseVisualStyleBackColor = true;
+            HasLunaCheckBox.CheckedChanged += ParameterControlStateChenged;
             // 
             // HasAstraCheckBox
             // 
             HasAstraCheckBox.AutoSize = true;
-            HasAstraCheckBox.Location = new Point(15, 126);
+            HasAstraCheckBox.Location = new Point(105, 25);
             HasAstraCheckBox.Name = "HasAstraCheckBox";
             HasAstraCheckBox.Size = new Size(62, 19);
-            HasAstraCheckBox.TabIndex = 142;
+            HasAstraCheckBox.TabIndex = 5;
             HasAstraCheckBox.Text = "流星剣";
             HasAstraCheckBox.UseVisualStyleBackColor = true;
+            HasAstraCheckBox.CheckedChanged += ParameterControlStateChenged;
+            // 
+            // HasGreatShieldCheckBox
+            // 
+            HasGreatShieldCheckBox.AutoSize = true;
+            HasGreatShieldCheckBox.Location = new Point(195, 26);
+            HasGreatShieldCheckBox.Name = "HasGreatShieldCheckBox";
+            HasGreatShieldCheckBox.Size = new Size(50, 19);
+            HasGreatShieldCheckBox.TabIndex = 8;
+            HasGreatShieldCheckBox.Text = "大盾";
+            HasGreatShieldCheckBox.UseVisualStyleBackColor = true;
+            HasGreatShieldCheckBox.CheckedChanged += ParameterControlStateChenged;
+            // 
+            // HasAssaultCheckBox
+            // 
+            HasAssaultCheckBox.AutoSize = true;
+            HasAssaultCheckBox.Location = new Point(15, 51);
+            HasAssaultCheckBox.Name = "HasAssaultCheckBox";
+            HasAssaultCheckBox.Size = new Size(50, 19);
+            HasAssaultCheckBox.TabIndex = 2;
+            HasAssaultCheckBox.Text = "突撃";
+            HasAssaultCheckBox.UseVisualStyleBackColor = true;
+            HasAssaultCheckBox.CheckedChanged += ParameterControlStateChenged;
+            // 
+            // HasContinuationCheckBox
+            // 
+            HasContinuationCheckBox.AutoSize = true;
+            HasContinuationCheckBox.Location = new Point(15, 26);
+            HasContinuationCheckBox.Name = "HasContinuationCheckBox";
+            HasContinuationCheckBox.Size = new Size(50, 19);
+            HasContinuationCheckBox.TabIndex = 1;
+            HasContinuationCheckBox.Text = "連続";
+            HasContinuationCheckBox.UseVisualStyleBackColor = true;
+            HasContinuationCheckBox.CheckedChanged += ParameterControlStateChenged;
+            // 
+            // HasVantageCheckBox
+            // 
+            HasVantageCheckBox.AutoSize = true;
+            HasVantageCheckBox.Location = new Point(15, 76);
+            HasVantageCheckBox.Name = "HasVantageCheckBox";
+            HasVantageCheckBox.Size = new Size(69, 19);
+            HasVantageCheckBox.TabIndex = 3;
+            HasVantageCheckBox.Text = "待ち伏せ";
+            HasVantageCheckBox.UseVisualStyleBackColor = true;
+            HasVantageCheckBox.CheckedChanged += ParameterControlStateChenged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(120, 127);
+            label4.Location = new Point(216, 166);
             label4.Name = "label4";
             label4.Size = new Size(22, 15);
             label4.TabIndex = 141;
@@ -255,26 +300,16 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // TecNumericUpDown
             // 
-            TecNumericUpDown.Location = new Point(148, 125);
+            TecNumericUpDown.Location = new Point(244, 164);
             TecNumericUpDown.Name = "TecNumericUpDown";
             TecNumericUpDown.Size = new Size(42, 23);
-            TecNumericUpDown.TabIndex = 140;
+            TecNumericUpDown.TabIndex = 6;
             TecNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
-            // 
-            // HasGreatShieldCheckBox
-            // 
-            HasGreatShieldCheckBox.AutoSize = true;
-            HasGreatShieldCheckBox.Location = new Point(15, 101);
-            HasGreatShieldCheckBox.Name = "HasGreatShieldCheckBox";
-            HasGreatShieldCheckBox.Size = new Size(50, 19);
-            HasGreatShieldCheckBox.TabIndex = 139;
-            HasGreatShieldCheckBox.Text = "大盾";
-            HasGreatShieldCheckBox.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(86, 77);
+            label5.Location = new Point(404, 166);
             label5.Name = "label5";
             label5.Size = new Size(56, 15);
             label5.TabIndex = 138;
@@ -282,27 +317,17 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // OpponentAttackSpeedNumericUpDown
             // 
-            OpponentAttackSpeedNumericUpDown.Location = new Point(148, 75);
+            OpponentAttackSpeedNumericUpDown.Location = new Point(466, 164);
             OpponentAttackSpeedNumericUpDown.Minimum = new decimal(new int[] { 50, 0, 0, int.MinValue });
             OpponentAttackSpeedNumericUpDown.Name = "OpponentAttackSpeedNumericUpDown";
             OpponentAttackSpeedNumericUpDown.Size = new Size(42, 23);
-            OpponentAttackSpeedNumericUpDown.TabIndex = 137;
+            OpponentAttackSpeedNumericUpDown.TabIndex = 8;
             OpponentAttackSpeedNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
-            // 
-            // HasAssaultCheckBox
-            // 
-            HasAssaultCheckBox.AutoSize = true;
-            HasAssaultCheckBox.Location = new Point(15, 76);
-            HasAssaultCheckBox.Name = "HasAssaultCheckBox";
-            HasAssaultCheckBox.Size = new Size(50, 19);
-            HasAssaultCheckBox.TabIndex = 136;
-            HasAssaultCheckBox.Text = "突撃";
-            HasAssaultCheckBox.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(108, 52);
+            label3.Location = new Point(304, 166);
             label3.Name = "label3";
             label3.Size = new Size(34, 15);
             label3.TabIndex = 135;
@@ -310,36 +335,17 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // 
             // AttackSpeedNumericUpDown
             // 
-            AttackSpeedNumericUpDown.Location = new Point(148, 50);
+            AttackSpeedNumericUpDown.BackColor = SystemColors.Window;
+            AttackSpeedNumericUpDown.Location = new Point(344, 164);
             AttackSpeedNumericUpDown.Minimum = new decimal(new int[] { 50, 0, 0, int.MinValue });
             AttackSpeedNumericUpDown.Name = "AttackSpeedNumericUpDown";
             AttackSpeedNumericUpDown.Size = new Size(42, 23);
-            AttackSpeedNumericUpDown.TabIndex = 134;
+            AttackSpeedNumericUpDown.TabIndex = 7;
             AttackSpeedNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
-            // 
-            // HasContinuationCheckBox
-            // 
-            HasContinuationCheckBox.AutoSize = true;
-            HasContinuationCheckBox.Location = new Point(15, 51);
-            HasContinuationCheckBox.Name = "HasContinuationCheckBox";
-            HasContinuationCheckBox.Size = new Size(50, 19);
-            HasContinuationCheckBox.TabIndex = 133;
-            HasContinuationCheckBox.Text = "連続";
-            HasContinuationCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // HasVantageCheckBox
-            // 
-            HasVantageCheckBox.AutoSize = true;
-            HasVantageCheckBox.Location = new Point(15, 26);
-            HasVantageCheckBox.Name = "HasVantageCheckBox";
-            HasVantageCheckBox.Size = new Size(69, 19);
-            HasVantageCheckBox.TabIndex = 132;
-            HasVantageCheckBox.Text = "待ち伏せ";
-            HasVantageCheckBox.UseVisualStyleBackColor = true;
             // 
             // OkButton
             // 
-            OkButton.Location = new Point(175, 356);
+            OkButton.Location = new Point(277, 207);
             OkButton.Name = "OkButton";
             OkButton.Size = new Size(92, 31);
             OkButton.TabIndex = 129;
@@ -354,26 +360,26 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             groupBox3.Controls.Add(IsEffectiveCheckBox);
             groupBox3.Controls.Add(HasSupportCheckBox);
             groupBox3.Controls.Add(HasCriticalSkillCheckBox);
-            groupBox3.Location = new Point(12, 149);
+            groupBox3.Location = new Point(421, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(191, 141);
-            groupBox3.TabIndex = 130;
+            groupBox3.Size = new Size(209, 138);
+            groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "必殺";
             // 
             // WeaponStarNumericUpDown
             // 
-            WeaponStarNumericUpDown.Enabled = false;
-            WeaponStarNumericUpDown.Location = new Point(77, 98);
+            WeaponStarNumericUpDown.Location = new Point(74, 101);
             WeaponStarNumericUpDown.Name = "WeaponStarNumericUpDown";
             WeaponStarNumericUpDown.Size = new Size(42, 23);
-            WeaponStarNumericUpDown.TabIndex = 128;
+            WeaponStarNumericUpDown.TabIndex = 4;
             WeaponStarNumericUpDown.Value = new decimal(new int[] { 50, 0, 0, 0 });
+            WeaponStarNumericUpDown.ValueChanged += ParameterControlStateChenged;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(15, 100);
+            label6.Location = new Point(12, 103);
             label6.Name = "label6";
             label6.Size = new Size(56, 15);
             label6.TabIndex = 148;
@@ -382,42 +388,75 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             // IsEffectiveCheckBox
             // 
             IsEffectiveCheckBox.AutoSize = true;
-            IsEffectiveCheckBox.Location = new Point(15, 72);
+            IsEffectiveCheckBox.Location = new Point(15, 76);
             IsEffectiveCheckBox.Name = "IsEffectiveCheckBox";
             IsEffectiveCheckBox.Size = new Size(50, 19);
-            IsEffectiveCheckBox.TabIndex = 147;
+            IsEffectiveCheckBox.TabIndex = 3;
             IsEffectiveCheckBox.Text = "特効";
             IsEffectiveCheckBox.UseVisualStyleBackColor = true;
+            IsEffectiveCheckBox.CheckedChanged += ParameterControlStateChenged;
             // 
             // HasSupportCheckBox
             // 
             HasSupportCheckBox.AutoSize = true;
-            HasSupportCheckBox.Location = new Point(15, 47);
+            HasSupportCheckBox.Location = new Point(15, 51);
             HasSupportCheckBox.Name = "HasSupportCheckBox";
             HasSupportCheckBox.Size = new Size(74, 19);
-            HasSupportCheckBox.TabIndex = 146;
+            HasSupportCheckBox.TabIndex = 2;
             HasSupportCheckBox.Text = "支援効果";
             HasSupportCheckBox.UseVisualStyleBackColor = true;
+            HasSupportCheckBox.CheckedChanged += ParameterControlStateChenged;
             // 
             // HasCriticalSkillCheckBox
             // 
             HasCriticalSkillCheckBox.AutoSize = true;
-            HasCriticalSkillCheckBox.Location = new Point(15, 22);
+            HasCriticalSkillCheckBox.Location = new Point(15, 26);
             HasCriticalSkillCheckBox.Name = "HasCriticalSkillCheckBox";
             HasCriticalSkillCheckBox.Size = new Size(102, 19);
-            HasCriticalSkillCheckBox.TabIndex = 145;
+            HasCriticalSkillCheckBox.TabIndex = 1;
             HasCriticalSkillCheckBox.Text = "必殺スキル所持";
             HasCriticalSkillCheckBox.UseVisualStyleBackColor = true;
+            HasCriticalSkillCheckBox.CheckedChanged += ParameterControlStateChenged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(526, 166);
+            label7.Name = "label7";
+            label7.Size = new Size(56, 15);
+            label7.TabIndex = 143;
+            label7.Text = "敵の魔防:";
+            // 
+            // OpponentMdfNumericUpDown
+            // 
+            OpponentMdfNumericUpDown.Location = new Point(588, 164);
+            OpponentMdfNumericUpDown.Minimum = new decimal(new int[] { 50, 0, 0, int.MinValue });
+            OpponentMdfNumericUpDown.Name = "OpponentMdfNumericUpDown";
+            OpponentMdfNumericUpDown.Size = new Size(42, 23);
+            OpponentMdfNumericUpDown.TabIndex = 9;
+            OpponentMdfNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // UnitStatusDetailDialog
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(440, 399);
+            ClientSize = new Size(642, 249);
+            Controls.Add(label7);
+            Controls.Add(OpponentMdfNumericUpDown);
             Controls.Add(groupBox3);
+            Controls.Add(label2);
+            Controls.Add(MaxHpNumericUpDown);
             Controls.Add(OkButton);
             Controls.Add(groupBox2);
+            Controls.Add(label4);
+            Controls.Add(label5);
+            Controls.Add(OpponentAttackSpeedNumericUpDown);
+            Controls.Add(TecNumericUpDown);
             Controls.Add(groupBox1);
+            Controls.Add(label1);
+            Controls.Add(label3);
+            Controls.Add(AttackSpeedNumericUpDown);
+            Controls.Add(LevelNumericUpDown);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "UnitStatusDetailDialog";
             Text = "詳細設定";
@@ -433,7 +472,9 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)WeaponStarNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)OpponentMdfNumericUpDown).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -470,5 +511,7 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         private CheckBox IsEffectiveCheckBox;
         private CheckBox HasPrayCheckBox;
         private CheckBox HasWrathCheckBox;
+        private Label label7;
+        private NumericUpDownEx OpponentMdfNumericUpDown;
     }
 }
