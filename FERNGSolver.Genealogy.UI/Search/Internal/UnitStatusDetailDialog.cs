@@ -68,6 +68,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
             ];
 
             // パラメータの依存関係を登録
+            // 「どの判定に何のパラメータが使われるか」は本来Domain領域に定義した方がいいと思う
+            // やるなら例えばパラメータごとにタグを用意して、Domain側はタグの依存関係のみを提供、UI側でそれに基づいてコントロールを紐づけるといった感じ？
             ParameterControlDependencies = [
                 // Lv依存は大盾
                 [ new CheckBoxWrapper(HasGreatShieldCheckBox) ],
@@ -148,8 +150,6 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
         private void ParameterControlStateChenged(object sender, EventArgs e) => RefreshParameterControlState();
 
         // チェックボックスの状況によって設定できるパラメータを制御
-        // 「どの判定に何のパラメータが使われるか」は本来Domain領域に定義した方がいいと思う
-
         private void RefreshParameterControlState()
         {
             for (int a = 0; a < ParameterControls.Length; ++a)
@@ -164,8 +164,8 @@ namespace FERNGSolver.Genealogy.UI.Search.Internal
                         break;
                     }
                 }
-                ParameterControls[a].Enabled = isEnabled;
                 ParameterControls[a].BackColor = isEnabled ? Color.Yellow : SystemColors.Window;
+                ParameterControls[a].Enabled = isEnabled;
             }
         }
     }
