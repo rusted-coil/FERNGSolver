@@ -10,6 +10,16 @@ namespace FERNGSolver.Genealogy.Presentation.ViewContracts
         bool ContainsCombat { get; }
 
         /// <summary>
+        /// 闘技場かどうかを取得します。
+        /// </summary>
+        bool IsArena { get; }
+
+        /// <summary>
+        /// 敵が先攻かどうかを取得します。
+        /// </summary>
+        bool IsOpponentFirst { get; }
+
+        /// <summary>
         /// 攻撃側のHPを取得します。
         /// </summary>
         int AttackerHp { get; }

@@ -45,6 +45,8 @@ namespace FERNGSolver.Genealogy.UI.Search
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
+        public bool IsArena => IsArenaCheckBox.Checked;
+        public bool IsOpponentFirst => IsOpponentFirstCheckBox.Checked;
         public int AttackerHp => (int)AttackerHpNumericUpDown.Value;
         public int AttackerAtk => (int)AttackerAtkNumericUpDown.Value;
         public int AttackerDef => (int)AttackerDefNumericUpDown.Value;
@@ -124,6 +126,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             #region 検索条件にかかわるコントロールの値が変化した時、外部に通知する用のイベントハンドラを登録
 
             ContainsCombatCheckBox.CheckedChanged += SearchConditionControlValueChanged;
+
+            IsArenaCheckBox.CheckedChanged += SearchConditionControlValueChanged;
+            IsOpponentFirstCheckBox.CheckedChanged += SearchConditionControlValueChanged;
 
             AttackerHpNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             AttackerAtkNumericUpDown.ValueChanged += CombatConditionControlValueChanged;

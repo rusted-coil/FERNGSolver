@@ -35,6 +35,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             label1 = new Label();
             ContainsCombatCheckBox = new CheckBox();
             CombatGroupBox = new GroupBox();
+            IsOpponentFirstCheckBox = new CheckBox();
+            IsArenaCheckBox = new CheckBox();
             groupBox2 = new GroupBox();
             label20 = new Label();
             DefenderDefNumericUpDown = new NumericUpDownEx();
@@ -105,6 +107,10 @@ namespace FERNGSolver.Genealogy.UI.Search
             label25 = new Label();
             FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
             toolTip1 = new ToolTip(components);
+            groupBox3 = new GroupBox();
+            checkBox1 = new CheckBox();
+            label7 = new Label();
+            numericUpDownEx1 = new NumericUpDownEx();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).BeginInit();
@@ -133,6 +139,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).BeginInit();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownEx1).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -165,14 +173,36 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // CombatGroupBox
             // 
+            CombatGroupBox.Controls.Add(IsOpponentFirstCheckBox);
+            CombatGroupBox.Controls.Add(IsArenaCheckBox);
             CombatGroupBox.Controls.Add(groupBox2);
             CombatGroupBox.Controls.Add(groupBox1);
             CombatGroupBox.Controls.Add(ContainsCombatCheckBox);
-            CombatGroupBox.Location = new Point(11, 12);
+            CombatGroupBox.Location = new Point(11, 76);
             CombatGroupBox.Name = "CombatGroupBox";
             CombatGroupBox.Size = new Size(620, 326);
             CombatGroupBox.TabIndex = 20;
             CombatGroupBox.TabStop = false;
+            // 
+            // IsOpponentFirstCheckBox
+            // 
+            IsOpponentFirstCheckBox.AutoSize = true;
+            IsOpponentFirstCheckBox.Location = new Point(88, 29);
+            IsOpponentFirstCheckBox.Name = "IsOpponentFirstCheckBox";
+            IsOpponentFirstCheckBox.Size = new Size(84, 19);
+            IsOpponentFirstCheckBox.TabIndex = 6;
+            IsOpponentFirstCheckBox.Text = "相手が先攻";
+            IsOpponentFirstCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // IsArenaCheckBox
+            // 
+            IsArenaCheckBox.AutoSize = true;
+            IsArenaCheckBox.Location = new Point(21, 29);
+            IsArenaCheckBox.Name = "IsArenaCheckBox";
+            IsArenaCheckBox.Size = new Size(62, 19);
+            IsArenaCheckBox.TabIndex = 5;
+            IsArenaCheckBox.Text = "闘技場";
+            IsArenaCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -854,11 +884,50 @@ namespace FERNGSolver.Genealogy.UI.Search
             FalconKnightConsumeMoveNumericUpDown.TabIndex = 43;
             FalconKnightConsumeMoveNumericUpDown.Value = new decimal(new int[] { 8, 0, 0, 0 });
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(label7);
+            groupBox3.Controls.Add(numericUpDownEx1);
+            groupBox3.Controls.Add(checkBox1);
+            groupBox3.Location = new Point(12, 12);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(329, 58);
+            groupBox3.TabIndex = 112;
+            groupBox3.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(7, 0);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(95, 19);
+            checkBox1.TabIndex = 0;
+            checkBox1.Text = "闘技場チェック";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(13, 24);
+            label7.Name = "label7";
+            label7.Size = new Size(34, 15);
+            label7.TabIndex = 25;
+            label7.Text = "命中:";
+            // 
+            // numericUpDownEx1
+            // 
+            numericUpDownEx1.Location = new Point(48, 22);
+            numericUpDownEx1.Name = "numericUpDownEx1";
+            numericUpDownEx1.Size = new Size(42, 23);
+            numericUpDownEx1.TabIndex = 24;
+            numericUpDownEx1.Value = new decimal(new int[] { 80, 0, 0, 0 });
+            // 
             // MainFormUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            Controls.Add(groupBox3);
             Controls.Add(FalconKnightConsumeMoveNumericUpDown);
             Controls.Add(label25);
             Controls.Add(label22);
@@ -904,6 +973,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownEx1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -987,5 +1059,11 @@ namespace FERNGSolver.Genealogy.UI.Search
         private Label label17;
         private Label label20;
         private NumericUpDownEx DefenderDefNumericUpDown;
+        private CheckBox IsOpponentFirstCheckBox;
+        private CheckBox IsArenaCheckBox;
+        private GroupBox groupBox3;
+        private CheckBox checkBox1;
+        private Label label7;
+        private NumericUpDownEx numericUpDownEx1;
     }
 }

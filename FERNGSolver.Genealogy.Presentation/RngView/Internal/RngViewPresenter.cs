@@ -49,7 +49,9 @@ namespace FERNGSolver.Genealogy.Presentation.RngView.Internal
             {
                 CombatSimulator.Simulate(recordingService,
                     Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateAttackerUnitFromView(m_MainFormView),
-                    Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateDefenderUnitFromView(m_MainFormView));
+                    Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateDefenderUnitFromView(m_MainFormView),
+                    m_MainFormView.IsArena,
+                    m_MainFormView.IsOpponentFirst);
 
                 // 戦闘に使用した乱数をViewModel化
                 foreach (var pair in recordingService.UsedRandomNumbers)

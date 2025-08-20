@@ -20,69 +20,59 @@ namespace FERNGSolver.Genealogy.Domain.Combat
         //・お互いが突撃を持っていた時の発動判定は？
         //・突撃発動時の2ラウンド目での待ち伏せの発動判定は？
         //・怒りに乱数消費はある？
+        //・闘技場の突撃判定を確認
         //----
-        //・待ち伏せ用に最大HPの入力欄
         //・祈り
 
         /// <summary>
         /// RNGを進め、戦闘をシミュレートした結果を得ます。
         /// </summary>
-        public static Result Simulate(ICombatRngService rngService, ICombatUnit attacker, ICombatUnit defender)
+        public static Result Simulate(ICombatRngService rngService, ICombatUnit attacker, ICombatUnit defender, bool isArena, bool isOpponentFirst)
         {
+            // ここでいうattacker,defenderとは、ツールで入力した「攻撃側」「防御側」のこと
+            // 待ち伏せやisOpponentFirstによって、defenderから先に攻撃することもある
             var attackerUnit = new Unit(attacker, UnitSide.Player);
             var defenderUnit = new Unit(defender, UnitSide.Enemy);
 
             // 攻撃側→防御側の順でPhaseCountがなくなるまで交互に行動を行う
             // どちらかが死んだら終わり
-            while(true)
+            for(int roundIndex = 0; ; ++roundIndex) // 1ラウンドごとのループ
             {
-                int a = 0, d = 0;
-                bool isFinished = false;
-                while (a < attacker.PhaseCount || d < defender.PhaseCount)
+                // システム上の先攻後攻を仮決め
+                var prior = isOpponentFirst ? defenderUnit : attackerUnit;
+                var follower = isOpponentFirst ? attackerUnit : defenderUnit;
+
+                // 仮決めした後攻側が待ち伏せを発動できる場合はさらに入れ替え
+                // 闘技場では初回ラウンドのみ
+                if ((!isArena || roundIndex == 0)
+                   && (follower.CombatUnit.StatusDetail.HasVantage && follower.CurrentHp <= follower.CombatUnit.StatusDetail.MaxHp / 2))
                 {
-                    if (defender.StatusDetail.HasVantage && defenderUnit.CurrentHp <= defender.StatusDetail.MaxHp / 2) // 待ち伏せ
-                    {
-                        if (d < defender.PhaseCount)
-                        {
-                            if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
-                            {
-                                isFinished = true;
-                                break;
-                            }
-                            ++d;
-                        }
+                    var temp = prior;
+                    prior = follower;
+                    follower = temp;
+                }
 
-                        if (a < attacker.PhaseCount)
+                int p = 0, f = 0;
+                bool isFinished = false;
+                while (p < prior.CombatUnit.PhaseCount || f < follower.CombatUnit.PhaseCount)
+                {
+                    if (p < prior.CombatUnit.PhaseCount)
+                    {
+                        if (!ExecutePhase(rngService, prior, follower))
                         {
-                            if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
-                            {
-                                isFinished = true;
-                                break;
-                            }
-                            ++a;
+                            isFinished = true;
+                            break;
                         }
+                        ++p;
                     }
-                    else
+                    if (f < follower.CombatUnit.PhaseCount)
                     {
-                        if (a < attacker.PhaseCount)
+                        if (!ExecutePhase(rngService, follower, prior))
                         {
-                            if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
-                            {
-                                isFinished = true;
-                                break;
-                            }
-                            ++a;
+                            isFinished = true;
+                            break;
                         }
-
-                        if (d < defender.PhaseCount)
-                        {
-                            if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
-                            {
-                                isFinished = true;
-                                break;
-                            }
-                            ++d;
-                        }
+                        ++f;
                     }
                 }
                 if (isFinished)
@@ -92,7 +82,10 @@ namespace FERNGSolver.Genealogy.Domain.Combat
 
                 // 突撃判定
                 bool isAssaultActive = CheckAssaultActive(rngService, attackerUnit, defenderUnit);
-                if (!isAssaultActive)
+
+                // 闘技場の場合、戦闘が終了していなければラウンドを続行
+
+                if (!isAssaultActive && !isArena)
                 {
                     break;
                 }
