@@ -160,6 +160,15 @@ namespace FERNGSolver.Genealogy.Domain.Combat
             for (int i = 0; i < attackCount; ++i)
             {
                 bool isHit = true;
+                int hitRate = attackerSide.CombatUnit.HitRate;
+
+                // 祈り判定
+                if (defenderSide.IsPrayReady && defenderSide.CurrentHp <= 10)
+                {
+                    // HPが10以下の時、(11-HP)×10%を回避率に加算
+                    hitRate = Math.Max(0, hitRate - (11 - defenderSide.CurrentHp) * 10);
+                }
+
                 // 命中判定
                 // 月光剣か太陽剣が発動していたら命中判定は成功扱い
                 if (!isLunaActive && !isSolActive && !rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
