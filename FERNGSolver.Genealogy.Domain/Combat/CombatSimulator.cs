@@ -20,9 +20,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
         //・お互いが突撃を持っていた時の発動判定は？
         //・突撃発動時の2ラウンド目での待ち伏せの発動判定は？
         //・怒りに乱数消費はある？
-        //・闘技場の突撃判定を確認
-        //----
-        //・祈り
+        //・マップ上戦闘（連戦時）の祈りの挙動確認
 
         /// <summary>
         /// RNGを進め、戦闘をシミュレートした結果を得ます。
@@ -80,15 +78,18 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                     break;
                 }
 
-                // 突撃判定
-                bool isAssaultActive = CheckAssaultActive(rngService, attackerUnit, defenderUnit);
+                if (!isArena)
+                {
+                    // 突撃判定
+                    // 闘技場では突撃は判定しない
+                    bool isAssaultActive = CheckAssaultActive(rngService, attackerUnit, defenderUnit);
+                    if (!isAssaultActive)
+                    {
+                        break;
+                    }
+                }
 
                 // 闘技場の場合、戦闘が終了していなければラウンドを続行
-
-                if (!isAssaultActive && !isArena)
-                {
-                    break;
-                }
             }
 
             return new Result(attackerUnit.CurrentHp, defenderUnit.CurrentHp);
@@ -99,12 +100,14 @@ namespace FERNGSolver.Genealogy.Domain.Combat
             public ICombatUnit CombatUnit { get; }
             public int CurrentHp { get; set; }
             public UnitSide UnitSide { get; set; }
+            public bool IsPrayReady { get; set; }
 
             public Unit(ICombatUnit combatUnit, UnitSide unitSide)
             {
                 CombatUnit = combatUnit;
                 CurrentHp = combatUnit.Hp;
                 UnitSide = unitSide;
+                IsPrayReady = combatUnit.StatusDetail.HasPray && combatUnit.Hp >= 11; // 祈りは戦闘開始時のHPが11以上で発動可能
             }
         }
 
