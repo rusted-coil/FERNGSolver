@@ -73,6 +73,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             AttackerHitRateNumericUpDown = new NumericUpDownEx();
             DoesAttackerFollowUpAttackCheckBox = new CheckBox();
             GrowthGroupBox = new GroupBox();
+            label19 = new Label();
+            CharacterFatherNameComboBox = new ComboBox();
             IsMgcGrowthNeeded = new CheckBox();
             MgcGrowthRateNumericUpDown = new NumericUpDownEx();
             label17 = new Label();
@@ -108,9 +110,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
             toolTip1 = new ToolTip(components);
             groupBox3 = new GroupBox();
-            checkBox1 = new CheckBox();
             label7 = new Label();
             numericUpDownEx1 = new NumericUpDownEx();
+            checkBox1 = new CheckBox();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).BeginInit();
@@ -178,7 +180,7 @@ namespace FERNGSolver.Genealogy.UI.Search
             CombatGroupBox.Controls.Add(groupBox2);
             CombatGroupBox.Controls.Add(groupBox1);
             CombatGroupBox.Controls.Add(ContainsCombatCheckBox);
-            CombatGroupBox.Location = new Point(11, 76);
+            CombatGroupBox.Location = new Point(11, 104);
             CombatGroupBox.Name = "CombatGroupBox";
             CombatGroupBox.Size = new Size(620, 326);
             CombatGroupBox.TabIndex = 20;
@@ -547,6 +549,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // GrowthGroupBox
             // 
+            GrowthGroupBox.Controls.Add(label19);
+            GrowthGroupBox.Controls.Add(CharacterFatherNameComboBox);
             GrowthGroupBox.Controls.Add(IsMgcGrowthNeeded);
             GrowthGroupBox.Controls.Add(MgcGrowthRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label17);
@@ -573,18 +577,40 @@ namespace FERNGSolver.Genealogy.UI.Search
             GrowthGroupBox.Controls.Add(label10);
             GrowthGroupBox.Controls.Add(GrowthCharacterNameComboBox);
             GrowthGroupBox.Controls.Add(ContainsGrowthCheckBox);
-            GrowthGroupBox.Location = new Point(11, 409);
+            GrowthGroupBox.Location = new Point(11, 436);
             GrowthGroupBox.Name = "GrowthGroupBox";
-            GrowthGroupBox.Size = new Size(620, 181);
+            GrowthGroupBox.Size = new Size(620, 154);
             GrowthGroupBox.TabIndex = 30;
             GrowthGroupBox.TabStop = false;
             // 
+            // label19
+            // 
+            label19.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label19.AutoSize = true;
+            label19.Location = new Point(14, 62);
+            label19.Name = "label19";
+            label19.Size = new Size(34, 15);
+            label19.TabIndex = 50;
+            label19.Text = "父親:";
+            // 
+            // CharacterFatherNameComboBox
+            // 
+            CharacterFatherNameComboBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            CharacterFatherNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            CharacterFatherNameComboBox.FormattingEnabled = true;
+            CharacterFatherNameComboBox.Location = new Point(49, 59);
+            CharacterFatherNameComboBox.Name = "CharacterFatherNameComboBox";
+            CharacterFatherNameComboBox.Size = new Size(108, 23);
+            CharacterFatherNameComboBox.TabIndex = 49;
+            CharacterFatherNameComboBox.SelectedIndexChanged += CharacterFatherNameComboBox_SelectedIndexChanged;
+            // 
             // IsMgcGrowthNeeded
             // 
+            IsMgcGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsMgcGrowthNeeded.AutoSize = true;
             IsMgcGrowthNeeded.Checked = true;
             IsMgcGrowthNeeded.CheckState = CheckState.Checked;
-            IsMgcGrowthNeeded.Location = new Point(93, 118);
+            IsMgcGrowthNeeded.Location = new Point(245, 91);
             IsMgcGrowthNeeded.Name = "IsMgcGrowthNeeded";
             IsMgcGrowthNeeded.Size = new Size(15, 14);
             IsMgcGrowthNeeded.TabIndex = 22;
@@ -592,7 +618,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // MgcGrowthRateNumericUpDown
             // 
-            MgcGrowthRateNumericUpDown.Location = new Point(45, 114);
+            MgcGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            MgcGrowthRateNumericUpDown.Location = new Point(197, 87);
             MgcGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             MgcGrowthRateNumericUpDown.Name = "MgcGrowthRateNumericUpDown";
             MgcGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -600,8 +627,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label17
             // 
+            label17.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label17.AutoSize = true;
-            label17.Location = new Point(16, 117);
+            label17.Location = new Point(168, 90);
             label17.Name = "label17";
             label17.Size = new Size(31, 15);
             label17.TabIndex = 48;
@@ -609,10 +637,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // IsMdfGrowthNeeded
             // 
+            IsMdfGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsMdfGrowthNeeded.AutoSize = true;
             IsMdfGrowthNeeded.Checked = true;
             IsMdfGrowthNeeded.CheckState = CheckState.Checked;
-            IsMdfGrowthNeeded.Location = new Point(210, 146);
+            IsMdfGrowthNeeded.Location = new Point(362, 119);
             IsMdfGrowthNeeded.Name = "IsMdfGrowthNeeded";
             IsMdfGrowthNeeded.Size = new Size(15, 14);
             IsMdfGrowthNeeded.TabIndex = 27;
@@ -620,10 +649,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // IsDefGrowthNeeded
             // 
+            IsDefGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsDefGrowthNeeded.AutoSize = true;
             IsDefGrowthNeeded.Checked = true;
             IsDefGrowthNeeded.CheckState = CheckState.Checked;
-            IsDefGrowthNeeded.Location = new Point(93, 146);
+            IsDefGrowthNeeded.Location = new Point(245, 119);
             IsDefGrowthNeeded.Name = "IsDefGrowthNeeded";
             IsDefGrowthNeeded.Size = new Size(15, 14);
             IsDefGrowthNeeded.TabIndex = 23;
@@ -631,10 +661,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // IsLucGrowthNeeded
             // 
+            IsLucGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsLucGrowthNeeded.AutoSize = true;
             IsLucGrowthNeeded.Checked = true;
             IsLucGrowthNeeded.CheckState = CheckState.Checked;
-            IsLucGrowthNeeded.Location = new Point(210, 118);
+            IsLucGrowthNeeded.Location = new Point(362, 91);
             IsLucGrowthNeeded.Name = "IsLucGrowthNeeded";
             IsLucGrowthNeeded.Size = new Size(15, 14);
             IsLucGrowthNeeded.TabIndex = 26;
@@ -642,10 +673,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // IsSpdGrowthNeeded
             // 
+            IsSpdGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsSpdGrowthNeeded.AutoSize = true;
             IsSpdGrowthNeeded.Checked = true;
             IsSpdGrowthNeeded.CheckState = CheckState.Checked;
-            IsSpdGrowthNeeded.Location = new Point(210, 90);
+            IsSpdGrowthNeeded.Location = new Point(362, 63);
             IsSpdGrowthNeeded.Name = "IsSpdGrowthNeeded";
             IsSpdGrowthNeeded.Size = new Size(15, 14);
             IsSpdGrowthNeeded.TabIndex = 25;
@@ -653,10 +685,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // IsTecGrowthNeeded
             // 
+            IsTecGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsTecGrowthNeeded.AutoSize = true;
             IsTecGrowthNeeded.Checked = true;
             IsTecGrowthNeeded.CheckState = CheckState.Checked;
-            IsTecGrowthNeeded.Location = new Point(210, 62);
+            IsTecGrowthNeeded.Location = new Point(362, 35);
             IsTecGrowthNeeded.Name = "IsTecGrowthNeeded";
             IsTecGrowthNeeded.Size = new Size(15, 14);
             IsTecGrowthNeeded.TabIndex = 24;
@@ -664,10 +697,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // IsStrGrowthNeeded
             // 
+            IsStrGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsStrGrowthNeeded.AutoSize = true;
             IsStrGrowthNeeded.Checked = true;
             IsStrGrowthNeeded.CheckState = CheckState.Checked;
-            IsStrGrowthNeeded.Location = new Point(93, 90);
+            IsStrGrowthNeeded.Location = new Point(245, 63);
             IsStrGrowthNeeded.Name = "IsStrGrowthNeeded";
             IsStrGrowthNeeded.Size = new Size(15, 14);
             IsStrGrowthNeeded.TabIndex = 21;
@@ -675,10 +709,11 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // IsHpGrowthNeeded
             // 
+            IsHpGrowthNeeded.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             IsHpGrowthNeeded.AutoSize = true;
             IsHpGrowthNeeded.Checked = true;
             IsHpGrowthNeeded.CheckState = CheckState.Checked;
-            IsHpGrowthNeeded.Location = new Point(93, 62);
+            IsHpGrowthNeeded.Location = new Point(245, 35);
             IsHpGrowthNeeded.Name = "IsHpGrowthNeeded";
             IsHpGrowthNeeded.Size = new Size(15, 14);
             IsHpGrowthNeeded.TabIndex = 20;
@@ -686,7 +721,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // SpdGrowthRateNumericUpDown
             // 
-            SpdGrowthRateNumericUpDown.Location = new Point(161, 86);
+            SpdGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            SpdGrowthRateNumericUpDown.Location = new Point(313, 59);
             SpdGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             SpdGrowthRateNumericUpDown.Name = "SpdGrowthRateNumericUpDown";
             SpdGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -694,8 +730,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label16
             // 
+            label16.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label16.AutoSize = true;
-            label16.Location = new Point(132, 89);
+            label16.Location = new Point(284, 62);
             label16.Name = "label16";
             label16.Size = new Size(27, 15);
             label16.TabIndex = 45;
@@ -703,7 +740,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // MdfGrowthRateNumericUpDown
             // 
-            MdfGrowthRateNumericUpDown.Location = new Point(161, 142);
+            MdfGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            MdfGrowthRateNumericUpDown.Location = new Point(313, 115);
             MdfGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             MdfGrowthRateNumericUpDown.Name = "MdfGrowthRateNumericUpDown";
             MdfGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -711,8 +749,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label13
             // 
+            label13.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label13.AutoSize = true;
-            label13.Location = new Point(132, 145);
+            label13.Location = new Point(284, 118);
             label13.Name = "label13";
             label13.Size = new Size(31, 15);
             label13.TabIndex = 43;
@@ -720,7 +759,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // DefGrowthRateNumericUpDown
             // 
-            DefGrowthRateNumericUpDown.Location = new Point(45, 142);
+            DefGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            DefGrowthRateNumericUpDown.Location = new Point(197, 115);
             DefGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             DefGrowthRateNumericUpDown.Name = "DefGrowthRateNumericUpDown";
             DefGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -728,8 +768,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label14
             // 
+            label14.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label14.AutoSize = true;
-            label14.Location = new Point(16, 145);
+            label14.Location = new Point(168, 118);
             label14.Name = "label14";
             label14.Size = new Size(31, 15);
             label14.TabIndex = 41;
@@ -737,7 +778,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // LucGrowthRateNumericUpDown
             // 
-            LucGrowthRateNumericUpDown.Location = new Point(161, 114);
+            LucGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            LucGrowthRateNumericUpDown.Location = new Point(313, 87);
             LucGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             LucGrowthRateNumericUpDown.Name = "LucGrowthRateNumericUpDown";
             LucGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -745,8 +787,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label15
             // 
+            label15.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label15.AutoSize = true;
-            label15.Location = new Point(132, 117);
+            label15.Location = new Point(284, 90);
             label15.Name = "label15";
             label15.Size = new Size(31, 15);
             label15.TabIndex = 39;
@@ -754,7 +797,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // TecGrowthRateNumericUpDown
             // 
-            TecGrowthRateNumericUpDown.Location = new Point(161, 58);
+            TecGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            TecGrowthRateNumericUpDown.Location = new Point(313, 31);
             TecGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             TecGrowthRateNumericUpDown.Name = "TecGrowthRateNumericUpDown";
             TecGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -762,8 +806,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label12
             // 
+            label12.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label12.AutoSize = true;
-            label12.Location = new Point(132, 61);
+            label12.Location = new Point(284, 34);
             label12.Name = "label12";
             label12.Size = new Size(19, 15);
             label12.TabIndex = 37;
@@ -771,7 +816,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // StrGrowthRateNumericUpDown
             // 
-            StrGrowthRateNumericUpDown.Location = new Point(45, 86);
+            StrGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            StrGrowthRateNumericUpDown.Location = new Point(197, 59);
             StrGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             StrGrowthRateNumericUpDown.Name = "StrGrowthRateNumericUpDown";
             StrGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -779,8 +825,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label11
             // 
+            label11.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label11.AutoSize = true;
-            label11.Location = new Point(16, 89);
+            label11.Location = new Point(168, 62);
             label11.Name = "label11";
             label11.Size = new Size(19, 15);
             label11.TabIndex = 35;
@@ -788,7 +835,8 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // HpGrowthRateNumericUpDown
             // 
-            HpGrowthRateNumericUpDown.Location = new Point(45, 58);
+            HpGrowthRateNumericUpDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            HpGrowthRateNumericUpDown.Location = new Point(197, 31);
             HpGrowthRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             HpGrowthRateNumericUpDown.Name = "HpGrowthRateNumericUpDown";
             HpGrowthRateNumericUpDown.Size = new Size(42, 23);
@@ -796,8 +844,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // label10
             // 
+            label10.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label10.AutoSize = true;
-            label10.Location = new Point(16, 61);
+            label10.Location = new Point(168, 34);
             label10.Name = "label10";
             label10.Size = new Size(23, 15);
             label10.TabIndex = 33;
@@ -805,11 +854,12 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // GrowthCharacterNameComboBox
             // 
+            GrowthCharacterNameComboBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             GrowthCharacterNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             GrowthCharacterNameComboBox.FormattingEnabled = true;
-            GrowthCharacterNameComboBox.Location = new Point(16, 25);
+            GrowthCharacterNameComboBox.Location = new Point(14, 30);
             GrowthCharacterNameComboBox.Name = "GrowthCharacterNameComboBox";
-            GrowthCharacterNameComboBox.Size = new Size(134, 23);
+            GrowthCharacterNameComboBox.Size = new Size(143, 23);
             GrowthCharacterNameComboBox.TabIndex = 1;
             GrowthCharacterNameComboBox.SelectedIndexChanged += GrowthCharacterNameComboBox_SelectedIndexChanged;
             // 
@@ -891,19 +941,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             groupBox3.Controls.Add(checkBox1);
             groupBox3.Location = new Point(12, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(329, 58);
+            groupBox3.Size = new Size(619, 86);
             groupBox3.TabIndex = 112;
             groupBox3.TabStop = false;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(7, 0);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(95, 19);
-            checkBox1.TabIndex = 0;
-            checkBox1.Text = "闘技場チェック";
-            checkBox1.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -921,6 +961,16 @@ namespace FERNGSolver.Genealogy.UI.Search
             numericUpDownEx1.Size = new Size(42, 23);
             numericUpDownEx1.TabIndex = 24;
             numericUpDownEx1.Value = new decimal(new int[] { 80, 0, 0, 0 });
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(7, 0);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(95, 19);
+            checkBox1.TabIndex = 0;
+            checkBox1.Text = "闘技場チェック";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // MainFormUserControl
             // 
@@ -1065,5 +1115,7 @@ namespace FERNGSolver.Genealogy.UI.Search
         private CheckBox checkBox1;
         private Label label7;
         private NumericUpDownEx numericUpDownEx1;
+        private Label label19;
+        private ComboBox CharacterFatherNameComboBox;
     }
 }

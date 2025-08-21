@@ -163,10 +163,10 @@ namespace FERNGSolver.Genealogy.UI.Search
             OffsetMaxNumericUpDown.Value = 10000;
         }
 
-        private void GrowthCharacterNameComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshGrowthRate();
-        private void IsGrowthBoostedCheckBox_CheckedChanged(object sender, EventArgs e) => RefreshGrowthRate();
+        private void GrowthCharacterNameComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshGrowthCharacter();
+        private void CharacterFatherNameComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshFather();
 
-        void RefreshGrowthRate()
+        void RefreshGrowthCharacter()
         {
             if (GrowthCharacterNameComboBox.SelectedIndex >= 0 && GrowthCharacterNameComboBox.SelectedIndex < m_Characters.Count)
             {
@@ -177,16 +177,46 @@ namespace FERNGSolver.Genealogy.UI.Search
                     if (fatherCandidates.Count > 0)
                     {
                         character = m_CharacterRepository.GetChild(character, fatherCandidates.First());
+                        CharacterFatherNameComboBox.Items.Clear();
+                        CharacterFatherNameComboBox.Items.AddRange(fatherCandidates.Order().ToArray());
+                        CharacterFatherNameComboBox.SelectedIndex = 0;
+                        CharacterFatherNameComboBox.Enabled = true;
                     }
+                    else
+                    {
+                        CharacterFatherNameComboBox.Items.Clear();
+                        CharacterFatherNameComboBox.Enabled = false;
 
-                    HpGrowthRateNumericUpDown.Value = character.HpGrowthRate;
-                    StrGrowthRateNumericUpDown.Value = character.StrGrowthRate;
-                    MgcGrowthRateNumericUpDown.Value = character.MgcGrowthRate;
-                    DefGrowthRateNumericUpDown.Value = character.DefGrowthRate;
-                    TecGrowthRateNumericUpDown.Value = character.TecGrowthRate;
-                    SpdGrowthRateNumericUpDown.Value = character.SpdGrowthRate;
-                    LucGrowthRateNumericUpDown.Value = character.LucGrowthRate;
-                    MdfGrowthRateNumericUpDown.Value = character.MdfGrowthRate;
+                        HpGrowthRateNumericUpDown.Value = character.HpGrowthRate;
+                        StrGrowthRateNumericUpDown.Value = character.StrGrowthRate;
+                        MgcGrowthRateNumericUpDown.Value = character.MgcGrowthRate;
+                        DefGrowthRateNumericUpDown.Value = character.DefGrowthRate;
+                        TecGrowthRateNumericUpDown.Value = character.TecGrowthRate;
+                        SpdGrowthRateNumericUpDown.Value = character.SpdGrowthRate;
+                        LucGrowthRateNumericUpDown.Value = character.LucGrowthRate;
+                        MdfGrowthRateNumericUpDown.Value = character.MdfGrowthRate;
+                    }
+                }
+            }
+        }
+
+        void RefreshFather()
+        {
+            if (CharacterFatherNameComboBox.Items.Count > 0 && CharacterFatherNameComboBox.SelectedIndex >= 0 && CharacterFatherNameComboBox.SelectedIndex < CharacterFatherNameComboBox.Items.Count)
+            {
+                var character = m_Characters[GrowthCharacterNameComboBox.SelectedIndex];
+                if (!character.IsPartitionData() && CharacterFatherNameComboBox.SelectedItem is string name)
+                {
+                    var child = m_CharacterRepository.GetChild(character, name);
+
+                    HpGrowthRateNumericUpDown.Value = child.HpGrowthRate;
+                    StrGrowthRateNumericUpDown.Value = child.StrGrowthRate;
+                    MgcGrowthRateNumericUpDown.Value = child.MgcGrowthRate;
+                    DefGrowthRateNumericUpDown.Value = child.DefGrowthRate;
+                    TecGrowthRateNumericUpDown.Value = child.TecGrowthRate;
+                    SpdGrowthRateNumericUpDown.Value = child.SpdGrowthRate;
+                    LucGrowthRateNumericUpDown.Value = child.LucGrowthRate;
+                    MdfGrowthRateNumericUpDown.Value = child.MdfGrowthRate;
                 }
             }
         }
@@ -212,5 +242,6 @@ namespace FERNGSolver.Genealogy.UI.Search
                 }
             }
         }
+
     }
 }
