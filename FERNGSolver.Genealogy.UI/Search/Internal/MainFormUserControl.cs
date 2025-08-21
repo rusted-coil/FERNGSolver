@@ -4,6 +4,7 @@ using FERNGSolver.Genealogy.Application.Search.Strategy;
 using FERNGSolver.Genealogy.Domain.Character;
 using FERNGSolver.Genealogy.Domain.Character.Extensions;
 using FERNGSolver.Genealogy.Domain.Combat;
+using FERNGSolver.Genealogy.Domain.Repository;
 using FERNGSolver.Genealogy.Domain.Repository.Stub;
 using FERNGSolver.Genealogy.Presentation.ViewContracts;
 using FERNGSolver.Genealogy.UI.Search.Internal;
@@ -99,6 +100,7 @@ namespace FERNGSolver.Genealogy.UI.Search
         public int FalconKnightMethodMove => (int)FalconKnightConsumeMoveNumericUpDown.Value;
 
         private readonly IMainFormView m_MainFormView;
+        private readonly ICharacterRepository m_CharacterRepository = new StubCharacterRepository(); // 固定値で十分なのでStubクラスを使う
         private readonly IReadOnlyList<ICharacter> m_Characters;
 
         public MainFormUserControl(IMainFormView mainFormView)
@@ -106,9 +108,7 @@ namespace FERNGSolver.Genealogy.UI.Search
             m_MainFormView = mainFormView;
             InitializeComponent();
 
-            // 固定値で十分なのでStubクラスを使う
-            var characterRepository = new StubCharacterRepository();
-            m_Characters = characterRepository.AllCharacters;
+            m_Characters = m_CharacterRepository.BaseCharacters;
             GrowthCharacterNameComboBox.Items.Clear();
             GrowthCharacterNameComboBox.Items.AddRange(m_Characters.Select(x => x.Name).ToArray());
             for (int i = 0; i < m_Characters.Count; ++i)
@@ -173,6 +173,12 @@ namespace FERNGSolver.Genealogy.UI.Search
                 var character = m_Characters[GrowthCharacterNameComboBox.SelectedIndex];
                 if (!character.IsPartitionData())
                 {
+                    var fatherCandidates = m_CharacterRepository.GetFatherCandidates(character);
+                    if (fatherCandidates.Count > 0)
+                    {
+                        character = m_CharacterRepository.GetChild(character, fatherCandidates.First());
+                    }
+
                     HpGrowthRateNumericUpDown.Value = character.HpGrowthRate;
                     StrGrowthRateNumericUpDown.Value = character.StrGrowthRate;
                     MgcGrowthRateNumericUpDown.Value = character.MgcGrowthRate;

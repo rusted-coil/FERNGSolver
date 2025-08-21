@@ -33,8 +33,10 @@ namespace FERNGSolver.Gba.Domain.Repository.Stub
 
         public StubCharacterRepository()
         {
-            m_Characters = [
-                new Character("――【聖魔】――",-1,-1,-1,-1,-1,-1,-1),
+            var commonSeparator = new ICharacter[] { new Character("――――――", -1, -1, -1, -1, -1, -1, -1) };
+
+            var sacredStoneSeparator = new ICharacter[] { new Character("――【聖魔】――", -1, -1, -1, -1, -1, -1, -1) };
+            ICharacter[] sacredStone1 = [
                 new Character("エイリーク",70,40,60,60,30,30,60),
                 new Character("ゼト",85,50,45,45,40,30,25),
                 new Character("ギリアム",90,40,30,30,55,20,30),
@@ -68,6 +70,8 @@ namespace FERNGSolver.Gba.Domain.Repository.Stub
                 new Character("ノール",70,50,40,35,10,45,20),
                 new Character("ミルラ",130,90,85,65,150,30,30),
                 new Character("シレーネ",70,35,50,60,20,50,30),
+            ];
+            ICharacter[] sacredStone2 = [
                 new Character("ケセルダ",85,50,45,45,30,20,20),
                 new Character("オルソン",80,55,45,40,45,30,25),
                 new Character("アーヴ",75,45,50,40,20,45,15),
@@ -78,7 +82,10 @@ namespace FERNGSolver.Gba.Domain.Repository.Stub
                 new Character("ヴァルター",80,40,55,50,20,20,15),
                 new Character("ファード",85,55,40,30,45,25,25),
                 new Character("リオン",85,50,10,10,10,15,30),
-                new Character("――【烈火】――",-1,-1,-1,-1,-1,-1,-1),
+            ];
+
+            var blazingBladeSeparator = new ICharacter[] { new Character("――【烈火】――", -1, -1, -1, -1, -1, -1, -1) };
+            ICharacter[] blazingBlade = [
                 new Character("エリウッド",80,45,50,40,30,35,45),
                 new Character("ロウエン",90,30,30,30,40,30,50),
                 new Character("マーカス",65,30,50,25,15,35,30),
@@ -123,7 +130,10 @@ namespace FERNGSolver.Gba.Domain.Repository.Stub
                 new Character("ニルス",85,5,5,70,30,70,80),
                 new Character("レナート",60,40,30,35,20,40,15),
                 new Character("アトス",0,0,0,0,0,0,0),
-                new Character("――【封印】――",-1,-1,-1,-1,-1,-1,-1),
+            ];
+
+            var bindingBladeSeparator = new ICharacter[] { new Character("――【封印】――", -1, -1, -1, -1, -1, -1, -1) };
+            ICharacter[] bindingBlade = [
                 new Character("ロイ",80,40,50,40,25,30,60),
                 new Character("マーカス",60,25,20,25,15,20,20),
                 new Character("アレン",85,45,40,45,25,10,40),
@@ -179,6 +189,17 @@ namespace FERNGSolver.Gba.Domain.Repository.Stub
                 new Character("ヨーデル",20,30,15,10,10,20,20),
                 new Character("カレル",210,130,140,140,110,100,120),
             ];
+
+            m_Characters =
+                sacredStoneSeparator
+                .Concat(sacredStone1.OrderBy(character => character.Name))
+                .Concat(commonSeparator)
+                .Concat(sacredStone2)
+                .Concat(blazingBladeSeparator)
+                .Concat(blazingBlade.OrderBy(character => character.Name))
+                .Concat(bindingBladeSeparator)
+                .Concat(bindingBlade.OrderBy(character => character.Name))
+                .ToArray();
         }
     }
 }

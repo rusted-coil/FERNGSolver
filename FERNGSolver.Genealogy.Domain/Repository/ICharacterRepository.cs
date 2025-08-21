@@ -23,10 +23,5 @@ namespace FERNGSolver.Genealogy.Domain.Repository
         /// 父親を指定して子供のデータを取得します。
         /// </summary>
         ICharacter GetChild(ICharacter childBase, string fatherName);
-
-        /// <summary>
-        /// 全キャラクターのリストを取得します。
-        /// </summary>
-        IReadOnlyList<ICharacter> AllCharacters { get; }
     }
 }
