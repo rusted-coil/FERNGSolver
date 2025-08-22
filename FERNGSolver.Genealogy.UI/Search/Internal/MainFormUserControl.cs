@@ -96,9 +96,6 @@ namespace FERNGSolver.Genealogy.UI.Search
         public int OffsetMin => (int)OffsetMinNumericUpDown.Value;
         public int OffsetMax => (int)OffsetMaxNumericUpDown.Value;
 
-        // 結果出力用
-        public int FalconKnightMethodMove => (int)FalconKnightConsumeMoveNumericUpDown.Value;
-
         private readonly IMainFormView m_MainFormView;
         private readonly ICharacterRepository m_CharacterRepository = new StubCharacterRepository(); // 固定値で十分なのでStubクラスを使う
         private readonly IReadOnlyList<ICharacter> m_Characters;
@@ -160,7 +157,17 @@ namespace FERNGSolver.Genealogy.UI.Search
         public void InitializeDefaults()
         {
             OffsetMinNumericUpDown.Value = 0;
-            OffsetMaxNumericUpDown.Value = 10000;
+            OffsetMaxNumericUpDown.Value = 1000;
+        }
+
+        private void UsesArenaCheckMethodCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // 闘技場チェックにチェックを入れてる場合は戦闘とレベルアップ検索を無効に
+            bool isChecked = UsesArenaCheckMethodCheckBox.Checked;
+            ContainsCombatCheckBox.Enabled = !isChecked;
+            CombatGroupBox.Enabled = !isChecked;
+            ContainsGrowthCheckBox.Enabled = !isChecked;
+            GrowthGroupBox.Enabled = !isChecked;
         }
 
         private void GrowthCharacterNameComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshGrowthCharacter();
@@ -243,5 +250,23 @@ namespace FERNGSolver.Genealogy.UI.Search
             }
         }
 
+        private void Hit1Button_Click(object sender, EventArgs e) => AddArenaCheckSequence((int)HitRate1NumericUpDown.Value, true);
+        private void Miss1Button_Click(object sender, EventArgs e) => AddArenaCheckSequence((int)HitRate1NumericUpDown.Value, false);
+        private void Hit2Button_Click(object sender, EventArgs e) => AddArenaCheckSequence((int)HitRate2NumericUpDown.Value, true);
+        private void Miss2Button_Click(object sender, EventArgs e) => AddArenaCheckSequence((int)HitRate2NumericUpDown.Value, false);
+        private void AddSkipButton_Click(object sender, EventArgs e) => AddArenaCheckSequence(100, true);
+
+        private void AddArenaCheckSequence(int hitRate, bool isOk)
+        {
+            // 命中率100だったらスキップ扱い（全ての乱数値にマッチするため
+            if (hitRate >= 100)
+            {
+                ArenaCheckSequenceTextBox.AppendText("x,");
+            }
+            else
+            {
+                ArenaCheckSequenceTextBox.AppendText($"{hitRate}{(isOk ? '+' : '-')},");
+            }
+        }
     }
 }

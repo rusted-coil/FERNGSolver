@@ -105,14 +105,19 @@ namespace FERNGSolver.Genealogy.UI.Search
             CurrentRngCountNumericUpDown = new NumericUpDownEx();
             OffsetMinNumericUpDown = new NumericUpDownEx();
             OffsetMaxNumericUpDown = new NumericUpDownEx();
-            label22 = new Label();
-            label25 = new Label();
-            FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
             toolTip1 = new ToolTip(components);
-            groupBox3 = new GroupBox();
+            ArenaCheckGroupBox = new GroupBox();
+            AddSkipButton = new Button();
+            Miss2Button = new Button();
+            Hit2Button = new Button();
+            label28 = new Label();
+            HitRate2NumericUpDown = new NumericUpDownEx();
+            Miss1Button = new Button();
+            Hit1Button = new Button();
+            ArenaCheckSequenceTextBox = new TextBox();
             label7 = new Label();
-            numericUpDownEx1 = new NumericUpDownEx();
-            checkBox1 = new CheckBox();
+            HitRate1NumericUpDown = new NumericUpDownEx();
+            UsesArenaCheckMethodCheckBox = new CheckBox();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).BeginInit();
@@ -140,9 +145,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             ((System.ComponentModel.ISupportInitialize)CurrentRngCountNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).BeginInit();
-            groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownEx1).BeginInit();
+            ArenaCheckGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)HitRate2NumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)HitRate1NumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -905,82 +910,135 @@ namespace FERNGSolver.Genealogy.UI.Search
             OffsetMaxNumericUpDown.Name = "OffsetMaxNumericUpDown";
             OffsetMaxNumericUpDown.Size = new Size(60, 23);
             OffsetMaxNumericUpDown.TabIndex = 42;
-            OffsetMaxNumericUpDown.Value = new decimal(new int[] { 10000, 0, 0, 0 });
+            OffsetMaxNumericUpDown.Value = new decimal(new int[] { 1000, 0, 0, 0 });
             // 
-            // label22
+            // ArenaCheckGroupBox
             // 
-            label22.BackColor = SystemColors.ControlLight;
-            label22.ForeColor = SystemColors.Control;
-            label22.Location = new Point(352, 595);
-            label22.Name = "label22";
-            label22.Size = new Size(1, 30);
-            label22.TabIndex = 44;
+            ArenaCheckGroupBox.Controls.Add(AddSkipButton);
+            ArenaCheckGroupBox.Controls.Add(Miss2Button);
+            ArenaCheckGroupBox.Controls.Add(Hit2Button);
+            ArenaCheckGroupBox.Controls.Add(label28);
+            ArenaCheckGroupBox.Controls.Add(HitRate2NumericUpDown);
+            ArenaCheckGroupBox.Controls.Add(Miss1Button);
+            ArenaCheckGroupBox.Controls.Add(Hit1Button);
+            ArenaCheckGroupBox.Controls.Add(ArenaCheckSequenceTextBox);
+            ArenaCheckGroupBox.Controls.Add(label7);
+            ArenaCheckGroupBox.Controls.Add(HitRate1NumericUpDown);
+            ArenaCheckGroupBox.Controls.Add(UsesArenaCheckMethodCheckBox);
+            ArenaCheckGroupBox.Location = new Point(12, 12);
+            ArenaCheckGroupBox.Name = "ArenaCheckGroupBox";
+            ArenaCheckGroupBox.Size = new Size(619, 86);
+            ArenaCheckGroupBox.TabIndex = 10;
+            ArenaCheckGroupBox.TabStop = false;
             // 
-            // label25
+            // AddSkipButton
             // 
-            label25.AutoSize = true;
-            label25.Location = new Point(369, 603);
-            label25.Name = "label25";
-            label25.Size = new Size(168, 15);
-            label25.TabIndex = 111;
-            label25.Text = "F法消費回数計算に使う移動力: ";
+            AddSkipButton.Location = new Point(312, 24);
+            AddSkipButton.Name = "AddSkipButton";
+            AddSkipButton.Size = new Size(76, 23);
+            AddSkipButton.TabIndex = 7;
+            AddSkipButton.Text = "スキップ";
+            AddSkipButton.UseVisualStyleBackColor = true;
+            AddSkipButton.Click += AddSkipButton_Click;
             // 
-            // FalconKnightConsumeMoveNumericUpDown
+            // Miss2Button
             // 
-            FalconKnightConsumeMoveNumericUpDown.Location = new Point(543, 601);
-            FalconKnightConsumeMoveNumericUpDown.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
-            FalconKnightConsumeMoveNumericUpDown.Name = "FalconKnightConsumeMoveNumericUpDown";
-            FalconKnightConsumeMoveNumericUpDown.Size = new Size(37, 23);
-            FalconKnightConsumeMoveNumericUpDown.TabIndex = 43;
-            FalconKnightConsumeMoveNumericUpDown.Value = new decimal(new int[] { 8, 0, 0, 0 });
+            Miss2Button.Location = new Point(267, 24);
+            Miss2Button.Name = "Miss2Button";
+            Miss2Button.Size = new Size(23, 23);
+            Miss2Button.TabIndex = 6;
+            Miss2Button.Text = "✕";
+            Miss2Button.UseVisualStyleBackColor = true;
+            Miss2Button.Click += Miss2Button_Click;
             // 
-            // groupBox3
+            // Hit2Button
             // 
-            groupBox3.Controls.Add(label7);
-            groupBox3.Controls.Add(numericUpDownEx1);
-            groupBox3.Controls.Add(checkBox1);
-            groupBox3.Location = new Point(12, 12);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(619, 86);
-            groupBox3.TabIndex = 112;
-            groupBox3.TabStop = false;
+            Hit2Button.Location = new Point(244, 24);
+            Hit2Button.Name = "Hit2Button";
+            Hit2Button.Size = new Size(23, 23);
+            Hit2Button.TabIndex = 5;
+            Hit2Button.Text = "◯";
+            Hit2Button.UseVisualStyleBackColor = true;
+            Hit2Button.Click += Hit2Button_Click;
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Location = new Point(159, 27);
+            label28.Name = "label28";
+            label28.Size = new Size(34, 15);
+            label28.TabIndex = 30;
+            label28.Text = "命中:";
+            // 
+            // HitRate2NumericUpDown
+            // 
+            HitRate2NumericUpDown.Location = new Point(194, 24);
+            HitRate2NumericUpDown.Name = "HitRate2NumericUpDown";
+            HitRate2NumericUpDown.Size = new Size(42, 23);
+            HitRate2NumericUpDown.TabIndex = 4;
+            HitRate2NumericUpDown.Value = new decimal(new int[] { 80, 0, 0, 0 });
+            // 
+            // Miss1Button
+            // 
+            Miss1Button.Location = new Point(121, 24);
+            Miss1Button.Name = "Miss1Button";
+            Miss1Button.Size = new Size(23, 23);
+            Miss1Button.TabIndex = 3;
+            Miss1Button.Text = "✕";
+            Miss1Button.UseVisualStyleBackColor = true;
+            Miss1Button.Click += Miss1Button_Click;
+            // 
+            // Hit1Button
+            // 
+            Hit1Button.Location = new Point(98, 24);
+            Hit1Button.Name = "Hit1Button";
+            Hit1Button.Size = new Size(23, 23);
+            Hit1Button.TabIndex = 2;
+            Hit1Button.Text = "◯";
+            Hit1Button.UseVisualStyleBackColor = true;
+            Hit1Button.Click += Hit1Button_Click;
+            // 
+            // ArenaCheckSequenceTextBox
+            // 
+            ArenaCheckSequenceTextBox.Location = new Point(14, 53);
+            ArenaCheckSequenceTextBox.Name = "ArenaCheckSequenceTextBox";
+            ArenaCheckSequenceTextBox.Size = new Size(591, 23);
+            ArenaCheckSequenceTextBox.TabIndex = 10;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(13, 24);
+            label7.Location = new Point(13, 27);
             label7.Name = "label7";
             label7.Size = new Size(34, 15);
             label7.TabIndex = 25;
             label7.Text = "命中:";
             // 
-            // numericUpDownEx1
+            // HitRate1NumericUpDown
             // 
-            numericUpDownEx1.Location = new Point(48, 22);
-            numericUpDownEx1.Name = "numericUpDownEx1";
-            numericUpDownEx1.Size = new Size(42, 23);
-            numericUpDownEx1.TabIndex = 24;
-            numericUpDownEx1.Value = new decimal(new int[] { 80, 0, 0, 0 });
+            HitRate1NumericUpDown.Location = new Point(48, 24);
+            HitRate1NumericUpDown.Name = "HitRate1NumericUpDown";
+            HitRate1NumericUpDown.Size = new Size(42, 23);
+            HitRate1NumericUpDown.TabIndex = 1;
+            HitRate1NumericUpDown.Value = new decimal(new int[] { 80, 0, 0, 0 });
             // 
-            // checkBox1
+            // UsesArenaCheckMethodCheckBox
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(7, 0);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(95, 19);
-            checkBox1.TabIndex = 0;
-            checkBox1.Text = "闘技場チェック";
-            checkBox1.UseVisualStyleBackColor = true;
+            UsesArenaCheckMethodCheckBox.AutoSize = true;
+            UsesArenaCheckMethodCheckBox.Location = new Point(7, 0);
+            UsesArenaCheckMethodCheckBox.Name = "UsesArenaCheckMethodCheckBox";
+            UsesArenaCheckMethodCheckBox.Size = new Size(95, 19);
+            UsesArenaCheckMethodCheckBox.TabIndex = 0;
+            UsesArenaCheckMethodCheckBox.Text = "闘技場チェック";
+            UsesArenaCheckMethodCheckBox.UseVisualStyleBackColor = true;
+            UsesArenaCheckMethodCheckBox.CheckedChanged += UsesArenaCheckMethodCheckBox_CheckedChanged;
             // 
             // MainFormUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            Controls.Add(groupBox3);
-            Controls.Add(FalconKnightConsumeMoveNumericUpDown);
-            Controls.Add(label25);
-            Controls.Add(label22);
+            Controls.Add(ArenaCheckGroupBox);
             Controls.Add(OffsetMaxNumericUpDown);
             Controls.Add(OffsetMinNumericUpDown);
             Controls.Add(CurrentRngCountNumericUpDown);
@@ -1022,10 +1080,10 @@ namespace FERNGSolver.Genealogy.UI.Search
             ((System.ComponentModel.ISupportInitialize)CurrentRngCountNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).EndInit();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownEx1).EndInit();
+            ArenaCheckGroupBox.ResumeLayout(false);
+            ArenaCheckGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)HitRate2NumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)HitRate1NumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1089,9 +1147,6 @@ namespace FERNGSolver.Genealogy.UI.Search
         private NumericUpDownEx CurrentRngCountNumericUpDown;
         private NumericUpDownEx OffsetMinNumericUpDown;
         private NumericUpDownEx OffsetMaxNumericUpDown;
-        private Label label22;
-        private Label label25;
-        private NumericUpDownEx FalconKnightConsumeMoveNumericUpDown;
         private NumericUpDownEx DefenderHpPostconditionMaxNumericUpDown;
         private Label label26;
         private NumericUpDownEx DefenderHpPostconditionMinNumericUpDown;
@@ -1111,11 +1166,19 @@ namespace FERNGSolver.Genealogy.UI.Search
         private NumericUpDownEx DefenderDefNumericUpDown;
         private CheckBox IsOpponentFirstCheckBox;
         private CheckBox IsArenaCheckBox;
-        private GroupBox groupBox3;
-        private CheckBox checkBox1;
+        private GroupBox ArenaCheckGroupBox;
+        private CheckBox UsesArenaCheckMethodCheckBox;
         private Label label7;
-        private NumericUpDownEx numericUpDownEx1;
+        private NumericUpDownEx HitRate1NumericUpDown;
         private Label label19;
         private ComboBox CharacterFatherNameComboBox;
+        private Button AddSkipButton;
+        private Button Miss2Button;
+        private Button Hit2Button;
+        private Label label28;
+        private NumericUpDownEx HitRate2NumericUpDown;
+        private Button Miss1Button;
+        private Button Hit1Button;
+        private TextBox ArenaCheckSequenceTextBox;
     }
 }
