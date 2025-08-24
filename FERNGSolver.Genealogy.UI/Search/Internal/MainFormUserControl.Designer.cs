@@ -910,7 +910,7 @@ namespace FERNGSolver.Genealogy.UI.Search
             OffsetMaxNumericUpDown.Name = "OffsetMaxNumericUpDown";
             OffsetMaxNumericUpDown.Size = new Size(60, 23);
             OffsetMaxNumericUpDown.TabIndex = 42;
-            OffsetMaxNumericUpDown.Value = new decimal(new int[] { 1000, 0, 0, 0 });
+            OffsetMaxNumericUpDown.Value = new decimal(new int[] { 10000, 0, 0, 0 });
             // 
             // ArenaCheckGroupBox
             // 

@@ -145,7 +145,7 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
 
             // 結果表示用RNG処理 重かったら何か考える
             var rng = RngFactory.Create();
-            rng.Advance(currentPosition);
+            rng.Advance(currentPosition + offset);
 
             var viewModel = new CombatAndGrowthSearchResultItemViewModel(currentPosition + offset, offset);
 
