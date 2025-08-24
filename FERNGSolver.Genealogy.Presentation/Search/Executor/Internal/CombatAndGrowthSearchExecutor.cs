@@ -17,7 +17,6 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
     /// </summary>
     internal static class CombatAndGrowthSearchExecutor
     {
-        /*
         public static void ExecuteSearch(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
             var result = ExecuteSearchCore(mainFormView, errorNotifier);
@@ -26,7 +25,7 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
 
         private static IReadOnlyList<ISearchResult> ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.Create();
 
             List<ISearchStrategy> strategies = new List<ISearchStrategy>();
             if (mainFormView.ContainsCombat)
@@ -47,7 +46,8 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
         {
             return StrategyFactory.CreateCombatStrategy(new CombatStrategyArgs
             {
-                IsBindingBlade = view.IsBindingBlade,
+                IsArena = view.IsArena,
+                IsOpponentFirst = view.IsOpponentFirst,
                 Attacker = CreateAttackerUnitFromView(view),
                 Defender = CreateDefenderUnitFromView(view),
                 AttackerHpPostconditionMin = view.AttackerHpPostconditionMin,
@@ -56,7 +56,6 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
                 DefenderHpPostconditionMax = view.DefenderHpPostconditionMax,
             });
         }
-        */
 
         internal static ICombatUnit CreateAttackerUnitFromView(ICombatSettingsView view)
         {
@@ -85,25 +84,27 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
                 StatusDetail = view.DefenderStatusDetail,
             };
         }
-        /*
+
         private static ISearchStrategy CreateGrowthStrategy(IGrowthSettingsView view)
         {
             return StrategyFactory.CreateGrowthStrategy(new GrowthStrategyArgs
             {
                 HpGrowthRate = view.HpGrowthRate,
-                AtkGrowthRate = view.AtkGrowthRate,
+                StrGrowthRate = view.StrGrowthRate,
+                MgcGrowthRate = view.MgcGrowthRate,
+                DefGrowthRate = view.DefGrowthRate,
                 TecGrowthRate = view.TecGrowthRate,
                 SpdGrowthRate = view.SpdGrowthRate,
-                DefGrowthRate = view.DefGrowthRate,
-                MdfGrowthRate = view.MdfGrowthRate,
                 LucGrowthRate = view.LucGrowthRate,
+                MdfGrowthRate = view.MdfGrowthRate,
                 HpSearchType = view.HpSearchType,
-                AtkSearchType = view.AtkSearchType,
+                StrSearchType = view.StrSearchType,
+                MgcSearchType = view.MgcSearchType,
+                DefSearchType = view.DefSearchType,
                 TecSearchType = view.TecSearchType,
                 SpdSearchType = view.SpdSearchType,
-                DefSearchType = view.DefSearchType,
-                MdfSearchType = view.MdfSearchType,
                 LucSearchType = view.LucSearchType,
+                MdfSearchType = view.MdfSearchType,
             });
         }
 
@@ -122,7 +123,6 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
             var columns = new List<ITableColumn> {
                 new SearchResultTableColumn("消費数", "Position"){ Width = 50 },
                 new SearchResultTableColumn("Offset", "Offset"){ Width = 50 },
-                new SearchResultTableColumn("F法消費回数", "FalconKnightMethodConsume"){ Width = 160 },
             };
 
             if (mainFormView.ContainsCombat)
@@ -142,62 +142,26 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
         {
             int currentPosition = mainFormView.CurrentPosition;
             int offset = result.Position - currentPosition;
-            int falconMove = mainFormView.FalconKnightMethodMove;
 
             // 結果表示用RNG処理 重かったら何か考える
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.Create();
             rng.Advance(currentPosition);
 
-            // F法横は✕で止まる、F法縦は◯で止まる
-            // 1回のF法消費は最大でも falconMove - 1 まで
-            int v = 0, h = 0;
-            int vc = 0, hc = 0;
-            for (int i = 0; i < offset; ++i)
-            {
-                if (Domain.RNG.Util.IsRngValueOk(rng.Next()))
-                {
-                    ++h;
-                    if (h == falconMove - 1)
-                    {
-                        h = 0;
-                        hc++;
-                    }
-
-                    v = 0;
-                    vc++;
-                }
-                else
-                {
-                    ++v;
-                    if (v == falconMove - 1)
-                    {
-                        v = 0;
-                        vc++;
-                    }
-
-                    h = 0;
-                    hc++;
-                }
-            }
-
-            var viewModel = new CombatAndGrowthSearchResultItemViewModel(
-                currentPosition + offset, offset,
-                hc, h, vc, v);
+            var viewModel = new CombatAndGrowthSearchResultItemViewModel(currentPosition + offset, offset);
 
             if (mainFormView.ContainsCombat)
             {
-                var combatResult = CombatSimulator.Simulate(CombatRngServiceFactory.Create(rng), CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView), mainFormView.IsBindingBlade);
+                var combatResult = CombatSimulator.Simulate(CombatRngServiceFactory.Create(rng), CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView), mainFormView.IsArena, mainFormView.IsOpponentFirst);
                 viewModel.SetCombatResult(combatResult);
             }
 
             if (mainFormView.ContainsGrowth)
             {
-                var growthResult = GrowthSimulator.Simulate(rng, mainFormView.HpGrowthRate, mainFormView.AtkGrowthRate, mainFormView.TecGrowthRate, mainFormView.SpdGrowthRate, mainFormView.DefGrowthRate, mainFormView.MdfGrowthRate, mainFormView.LucGrowthRate);
+                var growthResult = GrowthSimulator.Simulate(rng, mainFormView.HpGrowthRate, mainFormView.StrGrowthRate, mainFormView.MgcGrowthRate, mainFormView.TecGrowthRate, mainFormView.SpdGrowthRate, mainFormView.LucGrowthRate, mainFormView.DefGrowthRate, mainFormView.MdfGrowthRate);
                 viewModel.SetGrowthResult(growthResult);
             }
 
             return viewModel;
         }
-        */
     }
 }

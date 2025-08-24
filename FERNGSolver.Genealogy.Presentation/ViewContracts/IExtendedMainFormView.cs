@@ -3,7 +3,7 @@ using System.Reactive;
 
 namespace FERNGSolver.Genealogy.Presentation.ViewContracts
 {
-    public interface IExtendedMainFormView : IMainFormView, ICombatSettingsView, IGrowthSettingsView
+    public interface IExtendedMainFormView : IMainFormView, IArenaCheckSettingsView, ICombatSettingsView, IGrowthSettingsView
     {
         /// <summary>
         /// 現在の消費数を取得します。

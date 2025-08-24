@@ -44,6 +44,9 @@ namespace FERNGSolver.Genealogy.UI.Search
             }
         }
 
+        // 闘技場チェック
+        public bool UsesArenaCheck => UsesArenaCheckMethodCheckBox.Checked;
+
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
         public bool IsArena => IsArenaCheckBox.Checked;

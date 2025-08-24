@@ -40,7 +40,7 @@ namespace FERNGSolver.Genealogy.UI.RngView.Internal
             // PositionNumericUpDown
             // 
             PositionNumericUpDown.Location = new Point(48, 5);
-            PositionNumericUpDown.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            PositionNumericUpDown.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             PositionNumericUpDown.Name = "PositionNumericUpDown";
             PositionNumericUpDown.Size = new Size(70, 23);
             PositionNumericUpDown.TabIndex = 1;
