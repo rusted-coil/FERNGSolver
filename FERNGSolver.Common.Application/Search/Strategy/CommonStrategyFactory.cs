@@ -17,6 +17,16 @@ namespace FERNGSolver.Common.Application.Search.Strategy
         }
 
         /// <summary>
+        /// 乱数列が特定の判定に成功するか失敗するかのパターンを判定するストラテジを作成します。
+        /// </summary>
+        /// <param name="highOrLowPattern">判定するパターンのリスト。第一引数に判定値を、第二引数に成功の場合はtrueを指定します。</param>
+        /// <returns></returns>
+        public static ISearchStrategy CreateHighOrLowPatternStrategy(IReadOnlyList<(ushort, bool)> highOrLowPattern)
+        {
+            return new Internal.HighOrLowPatternStrategy(highOrLowPattern);
+        }
+
+        /// <summary>
         /// 複数のストラテジを順番に実行するストラテジを作成します。
         /// <para> * 全てが条件を満たす時のみcheckでtrueを返します。</para>
         /// </summary>

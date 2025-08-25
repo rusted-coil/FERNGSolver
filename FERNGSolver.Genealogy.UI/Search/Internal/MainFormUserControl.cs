@@ -46,6 +46,7 @@ namespace FERNGSolver.Genealogy.UI.Search
 
         // 闘技場チェック
         public bool UsesArenaCheck => UsesArenaCheckMethodCheckBox.Checked;
+        public string HighOrLowPatternString => ArenaCheckSequenceTextBox.Text;
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
@@ -268,7 +269,7 @@ namespace FERNGSolver.Genealogy.UI.Search
             }
             else
             {
-                ArenaCheckSequenceTextBox.AppendText($"{hitRate}{(isOk ? '+' : '-')},");
+                ArenaCheckSequenceTextBox.AppendText($"{hitRate}{(isOk ? '-' : '+')},"); // 判定成功は「乱数値が目標値より小さい」ことであるため、OKなら-(未満)、NGなら+(以上)となる
             }
         }
     }

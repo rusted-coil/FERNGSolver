@@ -9,5 +9,10 @@ namespace FERNGSolver.Genealogy.Presentation.ViewContracts
         /// 闘技場チェックを使用するかどうかを取得します。
         /// </summary>
         bool UsesArenaCheck { get; }
+
+        /// <summary>
+        /// High/Lowパターンの文字列を取得します。
+        /// </summary>
+        string HighOrLowPatternString { get; }
     }
 }

@@ -34,7 +34,7 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Internal
 
             if (m_MainFormView.UsesArenaCheck)
             {
-//                Executor.Internal.FalconKnightMethodSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                Executor.Internal.ArenaCheckSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
             }
             else
             {
