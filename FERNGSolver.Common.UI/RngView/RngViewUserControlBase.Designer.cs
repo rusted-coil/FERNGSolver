@@ -48,6 +48,7 @@ namespace FERNGSolver.Common.UI.RngView
             Controls.Add(RemoveButton);
             DoubleBuffered = true;
             Name = "RngViewUserControlBase";
+            Size = new Size(398, 105);
             ResumeLayout(false);
         }
 
