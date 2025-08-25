@@ -28,7 +28,7 @@ namespace FERNGSolver.UI
             // 作品個別コントロールを初期化
             var entries = new IMainFormEntry[]{
                 Genealogy.UI.MainFormEntryProvider.Create(errorNotifier),
-                Thracia.UI.MainFormEntryProvider.Create(errorNotifier),
+//                Thracia.UI.MainFormEntryProvider.Create(errorNotifier),
                 Gba.UI.MainFormEntryProvider.Create(gbaConfigService, errorNotifier),
             };
             form.SetEntries(entries);
