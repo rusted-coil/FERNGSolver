@@ -96,6 +96,7 @@ namespace FERNGSolver.UI.Internal
             // 
             // AddRngViewButton
             // 
+            AddRngViewButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             AddRngViewButton.Location = new Point(613, 6);
             AddRngViewButton.Name = "AddRngViewButton";
             AddRngViewButton.Size = new Size(58, 23);
