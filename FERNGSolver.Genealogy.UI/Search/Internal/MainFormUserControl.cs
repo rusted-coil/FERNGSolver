@@ -47,6 +47,7 @@ namespace FERNGSolver.Genealogy.UI.Search
         // 闘技場チェック
         public bool UsesArenaCheck => UsesArenaCheckMethodCheckBox.Checked;
         public string HighOrLowPatternString => ArenaCheckSequenceTextBox.Text;
+        public bool AddsOffset => AddsOffsetCheckBox.Checked;
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;

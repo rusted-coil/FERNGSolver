@@ -15,8 +15,8 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
     {
         public static void ExecuteSearch(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
-            var result = ExecuteSearchCore(mainFormView, errorNotifier);
-            ShowResults(mainFormView, result);
+            var (results, patternCount) = ExecuteSearchCore(mainFormView, errorNotifier);
+            ShowResults(mainFormView, results, patternCount);
         }
 
         private class ResultViewModel : IRngStateResultViewModel
@@ -24,7 +24,7 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
             public required string Position { get; init; }
         }
 
-        private static IReadOnlyList<ISearchResult> ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
+        private static (IReadOnlyList<ISearchResult> results, int patternCount) ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
             var rng = RngFactory.Create();
 
@@ -36,20 +36,21 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
             catch (Exception e)
             {
                 errorNotifier.NotifyError($"cx列のパースに失敗しました。\n-----\n{e.ToString()}");
-                return Array.Empty<ISearchResult>();
+                return (Array.Empty<ISearchResult>(), 0);
             }
 
-            return Searcher.Search(
+            return (Searcher.Search(
                 rng, mainFormView.CurrentPosition + mainFormView.OffsetMin, mainFormView.CurrentPosition + mainFormView.OffsetMax,
-                CommonStrategyFactory.CreateHighOrLowPatternStrategy(highOrLowPattern));
+                CommonStrategyFactory.CreateHighOrLowPatternStrategy(highOrLowPattern)), highOrLowPattern.Count);
         }
 
-        private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)
+        private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results, int patternCount)
         {
             var viewModels = new ResultViewModel[results.Count];
             for (int i = 0; i < viewModels.Length && i < 100; ++i)
             {
-                viewModels[i] = new ResultViewModel { Position = results[i].Position.ToString() };
+                int offset = mainFormView.AddsOffset ? results[i].Position + patternCount : results[i].Position;
+                viewModels[i] = new ResultViewModel { Position = offset.ToString() };
             }
             mainFormView.ShowSearchResults(
                 [new SearchResultTableColumn("消費数", "Position") { Width = 50 }],

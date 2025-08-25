@@ -14,5 +14,10 @@ namespace FERNGSolver.Genealogy.Presentation.ViewContracts
         /// High/Lowパターンの文字列を取得します。
         /// </summary>
         string HighOrLowPatternString { get; }
+
+        /// <summary>
+        /// チェックに使った消費分を消費数に加算するかどうかを取得します。
+        /// </summary>
+        bool AddsOffset { get; }
     }
 }

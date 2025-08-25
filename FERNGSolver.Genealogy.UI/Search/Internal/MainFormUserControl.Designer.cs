@@ -118,6 +118,7 @@ namespace FERNGSolver.Genealogy.UI.Search
             label7 = new Label();
             HitRate1NumericUpDown = new NumericUpDownEx();
             UsesArenaCheckMethodCheckBox = new CheckBox();
+            AddsOffsetCheckBox = new CheckBox();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DefenderDefNumericUpDown).BeginInit();
@@ -914,6 +915,7 @@ namespace FERNGSolver.Genealogy.UI.Search
             // 
             // ArenaCheckGroupBox
             // 
+            ArenaCheckGroupBox.Controls.Add(AddsOffsetCheckBox);
             ArenaCheckGroupBox.Controls.Add(AddSkipButton);
             ArenaCheckGroupBox.Controls.Add(Miss2Button);
             ArenaCheckGroupBox.Controls.Add(Hit2Button);
@@ -1032,6 +1034,16 @@ namespace FERNGSolver.Genealogy.UI.Search
             UsesArenaCheckMethodCheckBox.Text = "闘技場チェック";
             UsesArenaCheckMethodCheckBox.UseVisualStyleBackColor = true;
             UsesArenaCheckMethodCheckBox.CheckedChanged += UsesArenaCheckMethodCheckBox_CheckedChanged;
+            // 
+            // AddsOffsetCheckBox
+            // 
+            AddsOffsetCheckBox.AutoSize = true;
+            AddsOffsetCheckBox.Location = new Point(465, 26);
+            AddsOffsetCheckBox.Name = "AddsOffsetCheckBox";
+            AddsOffsetCheckBox.Size = new Size(140, 19);
+            AddsOffsetCheckBox.TabIndex = 31;
+            AddsOffsetCheckBox.Text = "入力分を消費数に加算";
+            AddsOffsetCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainFormUserControl
             // 
@@ -1180,5 +1192,6 @@ namespace FERNGSolver.Genealogy.UI.Search
         private Button Miss1Button;
         private Button Hit1Button;
         private TextBox ArenaCheckSequenceTextBox;
+        private CheckBox AddsOffsetCheckBox;
     }
 }
