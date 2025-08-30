@@ -6,10 +6,9 @@ using FERNGSolver.Gba.Application.Search.Strategy;
 using FERNGSolver.Gba.Domain.Character;
 using FERNGSolver.Gba.Domain.Character.Extensions;
 using FERNGSolver.Gba.Domain.Combat;
-using FERNGSolver.Gba.Domain.Repository.Stub;
+using FERNGSolver.Gba.Domain.Repository;
 using FERNGSolver.Gba.Presentation.FalconKnight;
 using FERNGSolver.Gba.Presentation.ViewContracts;
-using FERNGSolver.Gba.UI.Internal;
 using FERNGSolver.Gba.UI.Search.Internal;
 using FormRx.Button;
 using System.Reactive;
@@ -56,7 +55,7 @@ namespace FERNGSolver.Gba.UI.Search
 
         // 戦闘
         public bool ContainsCombat => ContainsCombatCheckBox.Checked;
-        public bool IsBindingBlade => IsBindingBladeRadioButton.Checked;
+        public bool IsBindingBlade => m_Title == Titles.Title.BindingBlade;
         public int AttackerHp => (int)AttackerHpNumericUpDown.Value;
         public int AttackerPower => (int)AttackerPowerNumericUpDown.Value;
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
@@ -107,18 +106,18 @@ namespace FERNGSolver.Gba.UI.Search
         private Form? m_FalconKnightToolForm = null;
 
         private readonly IMainFormView m_MainFormView;
+        private readonly Titles.Title m_Title;
         private readonly IReadOnlyList<ICharacter> m_Characters;
         private readonly IButton m_FalconKnightToolOpenButton;
 
-        public MainFormUserControl(IMainFormView mainFormView)
+        public MainFormUserControl(IMainFormView mainFormView, Titles.Title title, ICharacterRepository characterRepository)
         {
             m_MainFormView = mainFormView;
+            m_Title = title;
             InitializeComponent();
 
             m_FalconKnightToolOpenButton = ButtonFactory.CreateButton(FalconKnightToolOpenButton);
 
-            // 固定値で十分なのでStubクラスを使う
-            var characterRepository = new StubCharacterRepository();
             m_Characters = characterRepository.AllCharacters;
             GrowthCharacterNameComboBox.Items.Clear();
             GrowthCharacterNameComboBox.Items.AddRange(m_Characters.Select(x => x.Name).ToArray());
@@ -137,8 +136,6 @@ namespace FERNGSolver.Gba.UI.Search
             #region 検索条件にかかわるコントロールの値が変化した時、外部に通知する用のイベントハンドラを登録
 
             ContainsCombatCheckBox.CheckedChanged += SearchConditionControlValueChanged;
-
-            IsBindingBladeRadioButton.CheckedChanged += CombatConditionControlValueChanged;
 
             AttackerHpNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
             AttackerPowerNumericUpDown.ValueChanged += CombatConditionControlValueChanged;
@@ -168,7 +165,6 @@ namespace FERNGSolver.Gba.UI.Search
 
         public void ReflectConfig(IConfig config)
         {
-            IsBindingBladeRadioButton.Checked = config.IsBindingBlade;
         }
 
         public void InitializeDefaults()
@@ -185,7 +181,7 @@ namespace FERNGSolver.Gba.UI.Search
             }
             else
             {
-                m_FalconKnightToolForm = FalconKnightToolLauncher.CreateToolForm(FalconKnightToolEntryFactory.Create(MainFormEntry.Title, AddCxString));
+                m_FalconKnightToolForm = FalconKnightToolLauncher.CreateToolForm(FalconKnightToolEntryFactory.Create(m_Title.ConvertToString(), AddCxString));
                 m_FalconKnightToolForm.FormClosed += (object? sender, FormClosedEventArgs e) => {
                     m_FalconKnightToolForm = null;
                 };
@@ -234,16 +230,20 @@ namespace FERNGSolver.Gba.UI.Search
 
         private void AttackerStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_AttackerStatusDetail, AttackerStatusDetailLabel);
         private void DefenderStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_DefenderStatusDetail, DefenderStatusDetailLabel);
-
         private void OpenStatusDetailDialog(UnitStatusDetail targetStatus, Label targetStatusLabel)
         {
-            using (var form = new UnitStatusDetailDialog(targetStatus))
+            using (IUnitStatusDetailDialog dialog = m_Title switch {
+                Titles.Title.BindingBlade => new BindingBladeUnitStatusDetailDialog(targetStatus),
+                Titles.Title.BlazingBlade => new BlazingBladeUnitStatusDetailDialog(targetStatus),
+                Titles.Title.SacredStones => new SacredStonesUnitStatusDetailDialog(targetStatus),
+                _ => throw new NotSupportedException(),
+            })
             {
-                form.StartPosition = FormStartPosition.CenterParent;
-                var result = form.ShowDialog();
+                dialog.Form.StartPosition = FormStartPosition.CenterParent;
+                var result = dialog.Form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    form.WriteToUnitStatusDetail(targetStatus);
+                    dialog.WriteToUnitStatusDetail(targetStatus);
                     targetStatusLabel.Text = targetStatus.ToString();
 
                     // 「戦闘を行う」にチェックが入っている時のみ条件が変化したものとして通知を行う
@@ -253,6 +253,11 @@ namespace FERNGSolver.Gba.UI.Search
                     }
                 }
             }
+        }
+
+        private void MainFormUserControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

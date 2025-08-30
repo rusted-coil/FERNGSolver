@@ -19,6 +19,12 @@
     <Compile Update="RngView\Internal\RngViewUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Search\Internal\BindingBladeUnitStatusDetailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Search\Internal\BlazingBladeUnitStatusDetailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

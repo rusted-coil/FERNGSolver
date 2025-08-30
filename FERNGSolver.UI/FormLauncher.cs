@@ -29,7 +29,9 @@ namespace FERNGSolver.UI
             var entries = new IMainFormEntry[]{
                 Genealogy.UI.MainFormEntryProvider.Create(errorNotifier),
 //                Thracia.UI.MainFormEntryProvider.Create(errorNotifier),
-                Gba.UI.MainFormEntryProvider.Create(gbaConfigService, errorNotifier),
+                Gba.UI.MainFormEntryProvider.CreateBindingBlade(gbaConfigService, errorNotifier),
+                Gba.UI.MainFormEntryProvider.CreateBlazingBlade(gbaConfigService, errorNotifier),
+                Gba.UI.MainFormEntryProvider.CreateSacredStones(gbaConfigService, errorNotifier),
             };
             form.SetEntries(entries);
 

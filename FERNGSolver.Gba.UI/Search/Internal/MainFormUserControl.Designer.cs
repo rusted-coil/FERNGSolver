@@ -35,9 +35,6 @@ namespace FERNGSolver.Gba.UI.Search
             label1 = new Label();
             ContainsCombatCheckBox = new CheckBox();
             CombatGroupBox = new GroupBox();
-            radioButton2 = new RadioButton();
-            IsBindingBladeRadioButton = new RadioButton();
-            label5 = new Label();
             groupBox2 = new GroupBox();
             DefenderStatusDetailLabel = new Label();
             DefenderStatusDetailDialogButton = new Button();
@@ -145,7 +142,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(253, 603);
+            label2.Location = new Point(253, 569);
             label2.Name = "label2";
             label2.Size = new Size(19, 15);
             label2.TabIndex = 14;
@@ -154,7 +151,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(170, 603);
+            label1.Location = new Point(170, 569);
             label1.Name = "label1";
             label1.Size = new Size(15, 15);
             label1.TabIndex = 11;
@@ -172,50 +169,14 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // CombatGroupBox
             // 
-            CombatGroupBox.Controls.Add(radioButton2);
-            CombatGroupBox.Controls.Add(IsBindingBladeRadioButton);
-            CombatGroupBox.Controls.Add(label5);
             CombatGroupBox.Controls.Add(groupBox2);
             CombatGroupBox.Controls.Add(groupBox1);
             CombatGroupBox.Controls.Add(ContainsCombatCheckBox);
             CombatGroupBox.Location = new Point(11, 77);
             CombatGroupBox.Name = "CombatGroupBox";
-            CombatGroupBox.Size = new Size(620, 326);
+            CombatGroupBox.Size = new Size(620, 292);
             CombatGroupBox.TabIndex = 20;
             CombatGroupBox.TabStop = false;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Checked = true;
-            radioButton2.Location = new Point(133, 26);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(78, 19);
-            radioButton2.TabIndex = 2;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "烈火/聖魔";
-            radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // IsBindingBladeRadioButton
-            // 
-            IsBindingBladeRadioButton.AutoSize = true;
-            IsBindingBladeRadioButton.Location = new Point(78, 26);
-            IsBindingBladeRadioButton.Name = "IsBindingBladeRadioButton";
-            IsBindingBladeRadioButton.Size = new Size(49, 19);
-            IsBindingBladeRadioButton.TabIndex = 1;
-            IsBindingBladeRadioButton.Text = "封印";
-            IsBindingBladeRadioButton.UseVisualStyleBackColor = true;
-            IsBindingBladeRadioButton.CheckedChanged += PersistentConfigControlValueChanged;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(14, 28);
-            label5.Name = "label5";
-            label5.Size = new Size(58, 15);
-            label5.TabIndex = 3;
-            label5.Text = "計算方式:";
-            toolTip1.SetToolTip(label5, "必殺が出た際の瞬殺判定の有無に影響します。\r\n烈火以降は瞬殺スキルの所持にかかわらず、必殺が出た場合に必ず1消費します。");
             // 
             // groupBox2
             // 
@@ -237,7 +198,7 @@ namespace FERNGSolver.Gba.UI.Search
             groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(DoesDefenderFollowUpAttackCheckBox);
             groupBox2.Controls.Add(DefenderCriticalRateNumericUpDown);
-            groupBox2.Location = new Point(14, 191);
+            groupBox2.Location = new Point(14, 157);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(592, 122);
             groupBox2.TabIndex = 4;
@@ -412,7 +373,7 @@ namespace FERNGSolver.Gba.UI.Search
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(DoesAttackerFollowUpAttackCheckBox);
             groupBox1.Controls.Add(AttackerCriticalRateNumericUpDown);
-            groupBox1.Location = new Point(14, 59);
+            groupBox1.Location = new Point(14, 25);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(592, 122);
             groupBox1.TabIndex = 3;
@@ -584,7 +545,7 @@ namespace FERNGSolver.Gba.UI.Search
             GrowthGroupBox.Controls.Add(label10);
             GrowthGroupBox.Controls.Add(GrowthCharacterNameComboBox);
             GrowthGroupBox.Controls.Add(ContainsGrowthCheckBox);
-            GrowthGroupBox.Location = new Point(11, 409);
+            GrowthGroupBox.Location = new Point(11, 375);
             GrowthGroupBox.Name = "GrowthGroupBox";
             GrowthGroupBox.Size = new Size(620, 181);
             GrowthGroupBox.TabIndex = 30;
@@ -880,7 +841,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new Point(22, 603);
+            label21.Location = new Point(22, 569);
             label21.Name = "label21";
             label21.Size = new Size(80, 15);
             label21.TabIndex = 107;
@@ -888,7 +849,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // CurrentRngCountNumericUpDown
             // 
-            CurrentRngCountNumericUpDown.Location = new Point(108, 601);
+            CurrentRngCountNumericUpDown.Location = new Point(108, 567);
             CurrentRngCountNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             CurrentRngCountNumericUpDown.Name = "CurrentRngCountNumericUpDown";
             CurrentRngCountNumericUpDown.Size = new Size(60, 23);
@@ -896,7 +857,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // OffsetMinNumericUpDown
             // 
-            OffsetMinNumericUpDown.Location = new Point(187, 601);
+            OffsetMinNumericUpDown.Location = new Point(187, 567);
             OffsetMinNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             OffsetMinNumericUpDown.Name = "OffsetMinNumericUpDown";
             OffsetMinNumericUpDown.Size = new Size(60, 23);
@@ -904,7 +865,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // OffsetMaxNumericUpDown
             // 
-            OffsetMaxNumericUpDown.Location = new Point(278, 601);
+            OffsetMaxNumericUpDown.Location = new Point(278, 567);
             OffsetMaxNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             OffsetMaxNumericUpDown.Name = "OffsetMaxNumericUpDown";
             OffsetMaxNumericUpDown.Size = new Size(60, 23);
@@ -915,7 +876,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             label22.BackColor = SystemColors.ControlLight;
             label22.ForeColor = SystemColors.Control;
-            label22.Location = new Point(352, 595);
+            label22.Location = new Point(352, 561);
             label22.Name = "label22";
             label22.Size = new Size(1, 30);
             label22.TabIndex = 44;
@@ -923,7 +884,7 @@ namespace FERNGSolver.Gba.UI.Search
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new Point(369, 603);
+            label25.Location = new Point(369, 569);
             label25.Name = "label25";
             label25.Size = new Size(168, 15);
             label25.TabIndex = 111;
@@ -931,7 +892,7 @@ namespace FERNGSolver.Gba.UI.Search
             // 
             // FalconKnightConsumeMoveNumericUpDown
             // 
-            FalconKnightConsumeMoveNumericUpDown.Location = new Point(543, 601);
+            FalconKnightConsumeMoveNumericUpDown.Location = new Point(543, 567);
             FalconKnightConsumeMoveNumericUpDown.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
             FalconKnightConsumeMoveNumericUpDown.Name = "FalconKnightConsumeMoveNumericUpDown";
             FalconKnightConsumeMoveNumericUpDown.Size = new Size(37, 23);
@@ -956,7 +917,7 @@ namespace FERNGSolver.Gba.UI.Search
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "MainFormUserControl";
-            Size = new Size(640, 635);
+            Size = new Size(640, 600);
             CombatGroupBox.ResumeLayout(false);
             CombatGroupBox.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -1060,9 +1021,6 @@ namespace FERNGSolver.Gba.UI.Search
         private Label label8;
         private Label label9;
         private CheckBox FiltersByDefenderHpPostconditionCheckBox;
-        private RadioButton radioButton2;
-        private RadioButton IsBindingBladeRadioButton;
-        private Label label5;
         private Label label21;
         private NumericUpDownEx CurrentRngCountNumericUpDown;
         private NumericUpDownEx OffsetMinNumericUpDown;

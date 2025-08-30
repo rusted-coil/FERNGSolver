@@ -3,6 +3,7 @@ using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.Common.UI.Interfaces;
 using FERNGSolver.Gba.Application.Config;
+using FERNGSolver.Gba.Domain.Repository;
 using FERNGSolver.Gba.Presentation.RngView.ViewContracts;
 using FERNGSolver.Gba.Presentation.Search;
 using FERNGSolver.Gba.Presentation.ViewContracts;
@@ -13,26 +14,30 @@ using System.Reactive.Disposables;
 
 namespace FERNGSolver.Gba.UI.Internal
 {
-    public class MainFormEntry : IMainFormEntry
+    internal sealed class MainFormEntry : IMainFormEntry
     {
-        public static string Title => "GBA";
-        string IMainFormEntry.Title => Title;
+        public string Title { get; }
 
         private IExtendedMainFormView? m_ExtendedMainFormView = null;
         private IRngViewListView? m_RngViewListView = null;
 
+        private readonly Titles.Title m_Title;
+        private readonly ICharacterRepository m_CharacterRepository;
         private readonly IConfigService m_ConfigService;
         private readonly IErrorNotifier m_ErrorNotifier;
 
-        public MainFormEntry(IConfigService configService, IErrorNotifier errorNotifier)
+        public MainFormEntry(Titles.Title title, ICharacterRepository characterRepository, IConfigService configService, IErrorNotifier errorNotifier)
         {
+            m_Title = title;
+            Title = title.ConvertToString();
+            m_CharacterRepository = characterRepository;
             m_ConfigService = configService;
             m_ErrorNotifier = errorNotifier;
         }
 
         public UserControl CreateSearchConditionUserControl(IMainFormView mainFormView, Panel rngViewListViewPanel)
         {
-            var userControl = new MainFormUserControl(mainFormView);
+            var userControl = new MainFormUserControl(mainFormView, m_Title, m_CharacterRepository);
             m_ExtendedMainFormView = userControl;
 
             var disposables = new CompositeDisposable();

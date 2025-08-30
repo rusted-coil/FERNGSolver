@@ -54,7 +54,7 @@ namespace FERNGSolver.UI.Internal
             // 
             SearchButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             SearchButton.BackColor = Color.Yellow;
-            SearchButton.Location = new Point(269, 684);
+            SearchButton.Location = new Point(269, 508);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(140, 32);
             SearchButton.TabIndex = 0;
@@ -79,7 +79,7 @@ namespace FERNGSolver.UI.Internal
             ResultsTabControl.Location = new Point(672, 33);
             ResultsTabControl.Name = "ResultsTabControl";
             ResultsTabControl.SelectedIndex = 0;
-            ResultsTabControl.Size = new Size(687, 689);
+            ResultsTabControl.Size = new Size(687, 513);
             ResultsTabControl.TabIndex = 3;
             // 
             // RngViewTabPage
@@ -89,7 +89,7 @@ namespace FERNGSolver.UI.Internal
             RngViewTabPage.Location = new Point(4, 24);
             RngViewTabPage.Name = "RngViewTabPage";
             RngViewTabPage.Padding = new Padding(3);
-            RngViewTabPage.Size = new Size(679, 661);
+            RngViewTabPage.Size = new Size(679, 485);
             RngViewTabPage.TabIndex = 1;
             RngViewTabPage.Text = "乱数ビューア";
             RngViewTabPage.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@ namespace FERNGSolver.UI.Internal
             RngViewPanel.BackColor = Color.DimGray;
             RngViewPanel.Location = new Point(6, 36);
             RngViewPanel.Name = "RngViewPanel";
-            RngViewPanel.Size = new Size(665, 619);
+            RngViewPanel.Size = new Size(665, 443);
             RngViewPanel.TabIndex = 2;
             // 
             // SearchResultsTabPage
@@ -147,26 +147,26 @@ namespace FERNGSolver.UI.Internal
             SearchConditionPanel.BackColor = SystemColors.Window;
             SearchConditionPanel.Location = new Point(12, 33);
             SearchConditionPanel.Name = "SearchConditionPanel";
-            SearchConditionPanel.Size = new Size(654, 643);
+            SearchConditionPanel.Size = new Size(654, 467);
             SearchConditionPanel.TabIndex = 5;
             // 
             // SearchResultContextMenuStrip
             // 
             SearchResultContextMenuStrip.Items.AddRange(new ToolStripItem[] { ResultToRngViewMenuItem, AllResultToRngViewMenuItem });
             SearchResultContextMenuStrip.Name = "SearchResultContextMenuStrip";
-            SearchResultContextMenuStrip.Size = new Size(308, 48);
+            SearchResultContextMenuStrip.Size = new Size(309, 48);
             // 
             // ResultToRngViewMenuItem
             // 
             ResultToRngViewMenuItem.Name = "ResultToRngViewMenuItem";
-            ResultToRngViewMenuItem.Size = new Size(307, 22);
+            ResultToRngViewMenuItem.Size = new Size(308, 22);
             ResultToRngViewMenuItem.Text = "この結果を乱数ビューアに追加";
             ResultToRngViewMenuItem.Click += ResultToRngViewMenuItem_Click;
             // 
             // AllResultToRngViewMenuItem
             // 
             AllResultToRngViewMenuItem.Name = "AllResultToRngViewMenuItem";
-            AllResultToRngViewMenuItem.Size = new Size(307, 22);
+            AllResultToRngViewMenuItem.Size = new Size(308, 22);
             AllResultToRngViewMenuItem.Text = "全ての検索結果を乱数ビューアに追加(最大10個)";
             AllResultToRngViewMenuItem.Click += AllResultToRngViewMenuItem_Click;
             // 
@@ -174,7 +174,7 @@ namespace FERNGSolver.UI.Internal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1359, 726);
+            ClientSize = new Size(1359, 550);
             Controls.Add(SearchConditionPanel);
             Controls.Add(ResultsTabControl);
             Controls.Add(SearchButton);

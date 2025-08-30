@@ -57,7 +57,7 @@ namespace FERNGSolver.Gba.UI.Search.Internal
                         sb.Append("[ボス]");
                         break;
                     case Const.BossType.FinalBoss:
-                        sb.Append("[魔王]");
+                        sb.Append("[ラスボス]");
                         break;
                 }
 
