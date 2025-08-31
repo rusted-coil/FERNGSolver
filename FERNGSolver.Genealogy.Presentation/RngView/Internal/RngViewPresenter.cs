@@ -40,6 +40,7 @@ namespace FERNGSolver.Genealogy.Presentation.RngView.Internal
             // rngを回して乱数の使用用途を計算し、previewRngで実際の乱数値を取得する
 
             List<RandomNumberViewModel> viewModels = new List<RandomNumberViewModel>();
+            List<int> partitions = new List<int>();
 
             // 契機をシミュレート
 
@@ -54,13 +55,19 @@ namespace FERNGSolver.Genealogy.Presentation.RngView.Internal
                     m_MainFormView.IsOpponentFirst);
 
                 // 戦闘に使用した乱数をViewModel化
-                foreach (var pair in recordingService.UsedRandomNumbers)
+                int roundIndex = 0;
+                foreach (var used in recordingService.UsedRandomNumbers)
                 {
+                    if (used.RoundIndex > roundIndex)
+                    {
+                        partitions.Add(viewModels.Count);
+                        roundIndex = used.RoundIndex;
+                    }
                     viewModels.Add(new RandomNumberViewModel
                     {
                         Value = previewRng.Next(),
-                        Usage = pair.Usage,
-                        IsOk = pair.IsOk,
+                        Usage = used.Usage,
+                        IsOk = used.IsOk,
                     });
                 }
             }
@@ -99,7 +106,7 @@ namespace FERNGSolver.Genealogy.Presentation.RngView.Internal
                 });
             }
 
-            m_View.SetRandomNumbers(viewModels);
+            m_View.SetRandomNumbers(viewModels, partitions);
         }
     }
 }

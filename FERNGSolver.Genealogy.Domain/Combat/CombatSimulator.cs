@@ -8,11 +8,13 @@ namespace FERNGSolver.Genealogy.Domain.Combat
         {
             public int AttackerHp { get; }
             public int DefenderHp { get; }
+            public int RoundCount { get; }
 
-            public Result(int attackerHp, int defenderHp)
+            public Result(int attackerHp, int defenderHp, int roundCount)
             {
                 AttackerHp = attackerHp;
                 DefenderHp = defenderHp;
+                RoundCount = roundCount;
             }
         }
 
@@ -34,7 +36,8 @@ namespace FERNGSolver.Genealogy.Domain.Combat
 
             // 攻撃側→防御側の順でPhaseCountがなくなるまで交互に行動を行う
             // どちらかが死んだら終わり
-            for(int roundIndex = 0; ; ++roundIndex) // 1ラウンドごとのループ
+            int roundIndex = 0;
+            for(roundIndex = 0; ; ++roundIndex) // 1ラウンドごとのループ
             {
                 // システム上の先攻後攻を仮決め
                 var prior = isOpponentFirst ? defenderUnit : attackerUnit;
@@ -56,7 +59,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                 {
                     if (p < prior.CombatUnit.PhaseCount)
                     {
-                        if (!ExecutePhase(rngService, prior, follower))
+                        if (!ExecutePhase(rngService, prior, follower, roundIndex))
                         {
                             isFinished = true;
                             break;
@@ -65,7 +68,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                     }
                     if (f < follower.CombatUnit.PhaseCount)
                     {
-                        if (!ExecutePhase(rngService, follower, prior))
+                        if (!ExecutePhase(rngService, follower, prior, roundIndex))
                         {
                             isFinished = true;
                             break;
@@ -82,7 +85,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                 {
                     // 突撃判定
                     // 闘技場では突撃は判定しない
-                    bool isAssaultActive = CheckAssaultActive(rngService, attackerUnit, defenderUnit);
+                    bool isAssaultActive = CheckAssaultActive(rngService, attackerUnit, defenderUnit, roundIndex);
                     if (!isAssaultActive)
                     {
                         break;
@@ -92,7 +95,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                 // 闘技場の場合、戦闘が終了していなければラウンドを続行
             }
 
-            return new Result(attackerUnit.CurrentHp, defenderUnit.CurrentHp);
+            return new Result(attackerUnit.CurrentHp, defenderUnit.CurrentHp, roundIndex + 1);
         }
 
         private class Unit
@@ -111,41 +114,41 @@ namespace FERNGSolver.Genealogy.Domain.Combat
             }
         }
 
-        private static bool CheckAssaultActive(ICombatRngService rngService, Unit attackerSide, Unit defenderSide)
+        private static bool CheckAssaultActive(ICombatRngService rngService, Unit attackerSide, Unit defenderSide, int roundIndex)
         {
             if (attackerSide.CombatUnit.StatusDetail.HasAssault && attackerSide.CurrentHp >= 25)
             {
-                return rngService.CheckActivateAssault(attackerSide.CombatUnit.StatusDetail.AttackSpeed, defenderSide.CombatUnit.StatusDetail.AttackSpeed, attackerSide.CurrentHp, attackerSide.UnitSide);
+                return rngService.CheckActivateAssault(attackerSide.CombatUnit.StatusDetail.AttackSpeed, defenderSide.CombatUnit.StatusDetail.AttackSpeed, attackerSide.CurrentHp, attackerSide.UnitSide, roundIndex);
             }
             return false;
         }
 
         // ユニットの攻撃を実行し、戦闘が終了したらfalseを返す
-        private static bool ExecutePhase(ICombatRngService rngService, Unit attackerSide, Unit defenderSide)
+        private static bool ExecutePhase(ICombatRngService rngService, Unit attackerSide, Unit defenderSide, int roundIndex)
         {
             int attackCount = 1;
             bool isLunaActive = false;
             bool isSolActive = false;
 
             // 流星剣判定
-            if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+            if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide, roundIndex))
             {
                 attackCount = (attackerSide.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Brave ? 10 : 5);
             }
             else
             {
                 // 月光剣判定
-                if (attackerSide.CombatUnit.StatusDetail.HasLuna && rngService.CheckActivateLuna(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                if (attackerSide.CombatUnit.StatusDetail.HasLuna && rngService.CheckActivateLuna(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide, roundIndex))
                 {
                     isLunaActive = true;
                 }
                 // 太陽剣判定
-                if (attackerSide.CombatUnit.StatusDetail.HasSol && rngService.CheckActivateSol(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                if (attackerSide.CombatUnit.StatusDetail.HasSol && rngService.CheckActivateSol(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide, roundIndex))
                 {
                     isSolActive = true;
                 }
                 // 連続判定
-                if (attackerSide.CombatUnit.StatusDetail.HasContinuation && rngService.CheckActivateContinuation(attackerSide.CombatUnit.StatusDetail.AttackSpeed, attackerSide.UnitSide))
+                if (attackerSide.CombatUnit.StatusDetail.HasContinuation && rngService.CheckActivateContinuation(attackerSide.CombatUnit.StatusDetail.AttackSpeed, attackerSide.UnitSide, roundIndex))
                 {
                     attackCount = 2;
                 }
@@ -171,14 +174,14 @@ namespace FERNGSolver.Genealogy.Domain.Combat
 
                 // 命中判定
                 // 月光剣か太陽剣が発動していたら命中判定は成功扱い
-                if (!isLunaActive && !isSolActive && !rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
+                if (!isLunaActive && !isSolActive && !rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide, roundIndex))
                 {
                     isHit = false;
                 }
                 // 大盾判定
                 if (isHit && defenderSide.CombatUnit.StatusDetail.HasGreatShield
                     && attackerSide.CombatUnit.StatusDetail.WeaponType != Const.WeaponType.Absorb // 吸収武器に対しては大盾は発動しない(太陽剣に対しては発動する)
-                    && rngService.CheckActivateGreatShield(defenderSide.CombatUnit.StatusDetail.Level, defenderSide.UnitSide))
+                    && rngService.CheckActivateGreatShield(defenderSide.CombatUnit.StatusDetail.Level, defenderSide.UnitSide, roundIndex))
                 {
                     isHit = false;
                 }
@@ -193,7 +196,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                     {
                         criticalRate = 100; // 怒りが発動している場合、必殺率は100%
                     }
-                    if (criticalRate > 0 && rngService.CheckCritical(criticalRate, attackerSide.UnitSide))
+                    if (criticalRate > 0 && rngService.CheckCritical(criticalRate, attackerSide.UnitSide, roundIndex))
                     {
                         damage += attackerSide.CombatUnit.Attack; // 必殺は攻撃力を2倍にする
                     }
@@ -214,7 +217,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                         {
                             sleepRate = 100; // 負の場合は100%になる
                         }
-                        if (rngService.CheckSleep(sleepRate, attackerSide.UnitSide))
+                        if (rngService.CheckSleep(sleepRate, attackerSide.UnitSide, roundIndex))
                         {
                             return false; // 状態異常にかかったら戦闘終了
                         }

@@ -17,6 +17,8 @@ namespace FERNGSolver.Common.UI.RngView
         private const int UsageOffsetY = 20; // 乱数値の使用状況表示のY座標オフセット
         private const int UsageLineLength = 16;
         protected const int UsageLineOffsetY = 16;
+        private const int PartitionOffsetX = -3;
+        private const int PartitionLineLength = 20;
 
         // ブラシとペンのキャッシュ
         protected static readonly (Brush Brush, Pen Pen) DefaultDrawer = (Brushes.Black, Pens.Black);
@@ -45,6 +47,7 @@ namespace FERNGSolver.Common.UI.RngView
         int ViewHeight => SupportsFalconKnightMethod ? 105 : 85;
 
         private TViewModel[] m_RandomNumberViewModels = Array.Empty<TViewModel>();
+        private int[] m_PartitionPositions = Array.Empty<int>();
 
         public RngViewUserControlBase()
         {
@@ -57,6 +60,15 @@ namespace FERNGSolver.Common.UI.RngView
         public void SetRandomNumbers(IReadOnlyList<TViewModel> viewModels)
         {
             m_RandomNumberViewModels = viewModels.ToArray();
+            m_PartitionPositions = Array.Empty<int>();
+            Invalidate();
+        }
+
+        // viewModelsに乱数の内容を、partitionPositionsに区切り線を出したい位置（[n]番目のViewModelの前に出したい場合はnを指定）を渡す
+        public void SetRandomNumbers(IReadOnlyList<TViewModel> viewModels, IEnumerable<int> partitionPositions)
+        {
+            m_RandomNumberViewModels = viewModels.ToArray();
+            m_PartitionPositions = partitionPositions.ToArray();
             Invalidate();
         }
 
@@ -97,6 +109,18 @@ namespace FERNGSolver.Common.UI.RngView
                 else
                 {
                     skipCount--;
+                }
+            }
+            if (m_PartitionPositions.Length > 0)
+            {
+                var y = (SupportsFalconKnightMethod ? RngNumberStartY + CxOffsetY : RngNumberStartY) + UsageOffsetY;
+                for (int i = 0; i < m_PartitionPositions.Length; ++i)
+                {
+                    if (m_PartitionPositions[i] < m_RandomNumberViewModels.Length)
+                    {
+                        var x = RngNumberStartX + m_PartitionPositions[i] * RngNumberIntervalX + PartitionOffsetX;
+                        g.DrawLine(Pens.LightGray, x, y, x, y + PartitionLineLength);
+                    }
                 }
             }
         }

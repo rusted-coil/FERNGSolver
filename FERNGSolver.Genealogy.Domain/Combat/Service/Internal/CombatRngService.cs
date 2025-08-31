@@ -17,13 +17,13 @@ namespace FERNGSolver.Genealogy.Domain.Combat.Service.Internal
         }
 
         // 命中判定
-        public bool CheckHit(int hitRate, UnitSide unitSide) => m_Rng.Next() < hitRate;
+        public bool CheckHit(int hitRate, UnitSide unitSide, int roundIndex) => m_Rng.Next() < hitRate;
 
         // 必殺判定
-        public bool CheckCritical(int criticalRate, UnitSide unitSide) => m_Rng.Next() < criticalRate;
+        public bool CheckCritical(int criticalRate, UnitSide unitSide, int roundIndex) => m_Rng.Next() < criticalRate;
 
         // 状態異常判定
-        public bool CheckSleep(int sleepRate, UnitSide unitSide)
+        public bool CheckSleep(int sleepRate, UnitSide unitSide, int roundIndex)
         {
             if (m_Rng.Next() < sleepRate)
             {
@@ -35,21 +35,21 @@ namespace FERNGSolver.Genealogy.Domain.Combat.Service.Internal
         }
 
         // 突撃: (自分の攻速-相手の攻速+HP÷2)[%]で発動
-        public bool CheckActivateAssault(int attackSpeed, int opponentAttackSpeed, int attackerHp, UnitSide unitSide) => m_Rng.Next() < (attackSpeed - opponentAttackSpeed + attackerHp / 2);
+        public bool CheckActivateAssault(int attackSpeed, int opponentAttackSpeed, int attackerHp, UnitSide unitSide, int roundIndex) => m_Rng.Next() < (attackSpeed - opponentAttackSpeed + attackerHp / 2);
 
         // 流星剣: 技[%]で発動
-        public bool CheckActivateAstra(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+        public bool CheckActivateAstra(int tec, UnitSide unitSide, int roundIndex) => m_Rng.Next() < tec;
 
         // 月光剣: 技[%]で発動
-        public bool CheckActivateLuna(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+        public bool CheckActivateLuna(int tec, UnitSide unitSide, int roundIndex) => m_Rng.Next() < tec;
 
         // 太陽剣: 技[%]で発動
-        public bool CheckActivateSol(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+        public bool CheckActivateSol(int tec, UnitSide unitSide, int roundIndex) => m_Rng.Next() < tec;
 
         // 連続: 攻速+20[%]で発動
-        public bool CheckActivateContinuation(int attackSpeed, UnitSide unitSide) => m_Rng.Next() < (attackSpeed + 20);
+        public bool CheckActivateContinuation(int attackSpeed, UnitSide unitSide, int roundIndex) => m_Rng.Next() < (attackSpeed + 20);
 
         // 大盾: Lv[%]で発動
-        public bool CheckActivateGreatShield(int level, UnitSide unitSide) => m_Rng.Next() < level;
+        public bool CheckActivateGreatShield(int level, UnitSide unitSide, int roundIndex) => m_Rng.Next() < level;
     }
 }

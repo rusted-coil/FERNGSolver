@@ -15,6 +15,8 @@ namespace FERNGSolver.Genealogy.Presentation.RngView.ViewContracts
         /// <summary>
         /// 表示する乱数列をセットします。
         /// </summary>
-        void SetRandomNumbers(IReadOnlyList<IRandomNumberViewModel> viewModels);
+        /// <param name="viewModels">表示したい乱数1つあたりviewModel1つを持つリスト</param>
+        /// <param name="partitionPositions">区切り線を出したい位置（[n]番目のViewModelの前に出したい場合はnを指定）</param>
+        void SetRandomNumbers(IReadOnlyList<IRandomNumberViewModel> viewModels, IEnumerable<int> partitionPositions);
     }
 }
