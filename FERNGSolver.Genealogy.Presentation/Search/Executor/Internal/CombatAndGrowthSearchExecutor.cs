@@ -7,6 +7,7 @@ using FERNGSolver.Genealogy.Domain.Combat;
 using FERNGSolver.Genealogy.Domain.Combat.Service;
 using FERNGSolver.Genealogy.Domain.Growth;
 using FERNGSolver.Genealogy.Domain.RNG;
+using FERNGSolver.Genealogy.Presentation.Combat.Internal;
 using FERNGSolver.Genealogy.Presentation.Search.Internal;
 using FERNGSolver.Genealogy.Presentation.ViewContracts;
 
@@ -135,6 +136,11 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
                 columns.Add(new SearchResultTableColumn("レベルアップ結果", "GrowthResult") { Width = 310 });
             }
 
+            if (mainFormView.ContainsCombat || mainFormView.ContainsGrowth)
+            {
+                columns.Add(new SearchResultTableColumn("終了後", "AfterPosition") { Width = 50 });
+            }
+
             return columns;
         }
 
@@ -142,23 +148,32 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
         {
             int currentPosition = mainFormView.CurrentPosition;
             int offset = result.Position - currentPosition;
+            int afterPosition = result.Position;
 
             // 結果表示用RNG処理 重かったら何か考える
             var rng = RngFactory.Create();
             rng.Advance(currentPosition + offset);
+            var rngService = new RecordingCombatRngService(CombatRngServiceFactory.Create(rng));
 
             var viewModel = new CombatAndGrowthSearchResultItemViewModel(currentPosition + offset, offset);
 
             if (mainFormView.ContainsCombat)
             {
-                var combatResult = CombatSimulator.Simulate(CombatRngServiceFactory.Create(rng), CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView), mainFormView.IsArena, mainFormView.IsOpponentFirst);
+                var combatResult = CombatSimulator.Simulate(rngService, CreateAttackerUnitFromView(mainFormView), CreateDefenderUnitFromView(mainFormView), mainFormView.IsArena, mainFormView.IsOpponentFirst);
                 viewModel.SetCombatResult(combatResult);
+                afterPosition += rngService.UsedRandomNumbers.Count;
             }
 
             if (mainFormView.ContainsGrowth)
             {
                 var growthResult = GrowthSimulator.Simulate(rng, mainFormView.HpGrowthRate, mainFormView.StrGrowthRate, mainFormView.MgcGrowthRate, mainFormView.TecGrowthRate, mainFormView.SpdGrowthRate, mainFormView.LucGrowthRate, mainFormView.DefGrowthRate, mainFormView.MdfGrowthRate);
                 viewModel.SetGrowthResult(growthResult);
+                afterPosition += growthResult.Count;
+            }
+
+            if (mainFormView.ContainsCombat || mainFormView.ContainsGrowth)
+            {
+                viewModel.SetAfterPosition(afterPosition);
             }
 
             return viewModel;

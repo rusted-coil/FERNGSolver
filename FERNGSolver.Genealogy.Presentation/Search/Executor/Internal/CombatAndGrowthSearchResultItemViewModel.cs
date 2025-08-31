@@ -9,6 +9,7 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
         public string Offset { get; }
         public string CombatResult { get; private set; } = string.Empty;
         public string GrowthResult { get; private set; } = string.Empty;
+        public string AfterPosition { get; private set; } = string.Empty;
 
         public CombatAndGrowthSearchResultItemViewModel(int position, int offset)
         {
@@ -45,6 +46,11 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
             }
 
             GrowthResult = sb.ToString();
+        }
+
+        public void SetAfterPosition(int afterPosition)
+        {
+            AfterPosition = afterPosition.ToString();
         }
     }
 }
