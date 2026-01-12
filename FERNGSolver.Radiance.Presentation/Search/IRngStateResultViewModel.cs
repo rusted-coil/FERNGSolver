@@ -1,0 +1,18 @@
+namespace FERNGSolver.Radiance.Presentation.Search
+{
+    /// <summary>
+    /// RNGの状態を含む結果のビューモデルインターフェースです。
+    /// </summary>
+    public interface IRngStateResultViewModel
+    {
+        /// <summary>
+        /// Map番号を表す文字列を取得します。
+        /// </summary>
+        string TableIndex { get; }
+
+        /// <summary>
+        /// 乱数の消費数を表す文字列を取得します。
+        /// </summary>
+        string Position { get; }
+    }
+}

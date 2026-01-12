@@ -10,6 +10,8 @@
     <ProjectReference Include="..\FERNGSolver.Common.Application\FERNGSolver.Common.Application.csproj" />
     <ProjectReference Include="..\FERNGSolver.Common.Presentation\FERNGSolver.Common.Presentation.csproj" />
     <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Presentation\FERNGSolver.FalconKnightTool.Presentation.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Radiance.Application\FERNGSolver.Radiance.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Radiance.Domain\FERNGSolver.Radiance.Domain.csproj" />
   </ItemGroup>
 
 </Project>

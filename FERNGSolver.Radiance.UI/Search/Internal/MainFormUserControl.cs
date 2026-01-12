@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Presentation.Interfaces;
 using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.FalconKnightTool.UI;
+using FERNGSolver.Radiance.Application.Search.Strategy;
 using FERNGSolver.Radiance.Domain.Character;
 using FERNGSolver.Radiance.Domain.Repository;
 using FERNGSolver.Radiance.Domain.Repository.Stub;
@@ -77,13 +78,13 @@ namespace FERNGSolver.Radiance.UI.Search
         // レベルアップ
         public bool ContainsGrowth => ContainsGrowthCheckBox.Checked;
         public int HpGrowthRate => (int)GrowthHpRateNumericUpDown.Value;
-        public int AtkGrowthRate => (int)GrowthStrRateNumericUpDown.Value;
+        public int StrGrowthRate => (int)GrowthStrRateNumericUpDown.Value;
+        public int MgcGrowthRate => (int)GrowthMgcRateNumericUpDown.Value;
         public int TecGrowthRate => (int)GrowthTecRateNumericUpDown.Value;
         public int SpdGrowthRate => (int)GrowthSpdRateNumericUpDown.Value;
+        public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
         public int DefGrowthRate => (int)GrowthDefRateNumericUpDown.Value;
         public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
-        public int LucGrowthRate => (int)GrowthLucRateNumericUpDown.Value;
-        /*
         public GrowthSearchType HpSearchType => IsHpGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType AtkSearchType => IsAtkGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType TecSearchType => IsTecGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
@@ -91,7 +92,6 @@ namespace FERNGSolver.Radiance.UI.Search
         public GrowthSearchType DefSearchType => IsDefGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType MdfSearchType => IsMdfGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType LucSearchType => IsLucGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
-        */
 
         // 検索条件
         public int CurrentPosition => (int)CurrentRngCountNumericUpDown.Value;

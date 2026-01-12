@@ -46,7 +46,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Internal
 
             if (m_MainFormView.UsesFalconKnightMethod)
             {
-//                Executor.Internal.FalconKnightMethodSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                Executor.Internal.FalconKnightMethodSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
             }
             else
             {
@@ -56,11 +56,11 @@ namespace FERNGSolver.Radiance.Presentation.Search.Internal
 
         private bool ValidateView()
         {
-//            if (!m_MainFormView.UsesFalconKnightMethod && !m_MainFormView.ContainsCombat && !m_MainFormView.ContainsGrowth)
-//            {
-//                m_ErrorNotifier.NotifyError("検索条件が選択されていません。");
-//                return false;
-//            }
+            if (!m_MainFormView.UsesFalconKnightMethod && !m_MainFormView.ContainsCombat && !m_MainFormView.ContainsGrowth)
+            {
+                m_ErrorNotifier.NotifyError("検索条件が選択されていません。");
+                return false;
+            }
             return true;
         }
 

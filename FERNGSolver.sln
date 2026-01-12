@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Radiance.Presen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Radiance.Domain", "FERNGSolver.Radiance.Domain\FERNGSolver.Radiance.Domain.csproj", "{43C70313-5B13-4E48-92AD-33A1124873F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Radiance.Application", "FERNGSolver.Radiance.Application\FERNGSolver.Radiance.Application.csproj", "{243180FE-6F0A-4608-848B-09206450B0D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +221,10 @@ Global
 		{43C70313-5B13-4E48-92AD-33A1124873F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C70313-5B13-4E48-92AD-33A1124873F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C70313-5B13-4E48-92AD-33A1124873F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{243180FE-6F0A-4608-848B-09206450B0D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{243180FE-6F0A-4608-848B-09206450B0D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{243180FE-6F0A-4608-848B-09206450B0D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{243180FE-6F0A-4608-848B-09206450B0D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -251,6 +257,7 @@ Global
 		{7A6E8682-802E-4A9B-BC7D-F2EABED9FA9F} = {8D163BED-361D-46F6-9495-1D3AFAD437D0}
 		{B8CA4DCC-FD52-4CAC-B899-731DA0528449} = {8D163BED-361D-46F6-9495-1D3AFAD437D0}
 		{43C70313-5B13-4E48-92AD-33A1124873F1} = {8D163BED-361D-46F6-9495-1D3AFAD437D0}
+		{243180FE-6F0A-4608-848B-09206450B0D7} = {8D163BED-361D-46F6-9495-1D3AFAD437D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C1D57B-9A5F-435F-8A5C-5CE76D13C833}
