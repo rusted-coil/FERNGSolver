@@ -32,6 +32,7 @@ namespace FERNGSolver.UI
                 Gba.UI.MainFormEntryProvider.CreateBindingBlade(gbaConfigService, errorNotifier),
                 Gba.UI.MainFormEntryProvider.CreateBlazingBlade(gbaConfigService, errorNotifier),
                 Gba.UI.MainFormEntryProvider.CreateSacredStones(gbaConfigService, errorNotifier),
+                Radiance.UI.MainFormEntryProvider.Create(errorNotifier),
             };
             form.SetEntries(entries);
 

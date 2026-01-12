@@ -13,6 +13,7 @@
     <ProjectReference Include="..\FERNGSolver.Gba.UI\FERNGSolver.Gba.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Genealogy.UI\FERNGSolver.Genealogy.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Presentation\FERNGSolver.Presentation.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Radiance.UI\FERNGSolver.Radiance.UI.csproj" />
     <ProjectReference Include="..\FERNGSolver.Thracia.UI\FERNGSolver.Thracia.UI.csproj" />
     <ProjectReference Include="..\FormRx\FormRx.csproj" />
   </ItemGroup>

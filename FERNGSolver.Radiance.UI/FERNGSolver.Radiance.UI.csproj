@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Common.Application\FERNGSolver.Common.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Common.UI\FERNGSolver.Common.UI.csproj" />
+    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.UI\FERNGSolver.FalconKnightTool.UI.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Radiance.Domain\FERNGSolver.Radiance.Domain.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Radiance.Presentation\FERNGSolver.Radiance.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Search\Internal\MainFormUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>
