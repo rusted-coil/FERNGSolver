@@ -11,15 +11,6 @@ namespace FERNGSolver.Radiance.Domain.Combat
             Cursed, // デビルアクス
         }
 
-        public enum SkillType
-        {
-            None,
-            SureStrike, // 必的
-            Pierce, // 貫通
-            GreatShield, // 大盾
-            Silencer, // 瞬殺
-        }
-
         public enum BossType
         {
             None,

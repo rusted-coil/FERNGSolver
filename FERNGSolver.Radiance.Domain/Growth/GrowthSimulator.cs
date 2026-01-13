@@ -12,31 +12,25 @@ namespace FERNGSolver.Radiance.Domain.Growth
         {
             int[] results = new int[growthRates.Length];
             int sum = 0;
-            int retryCount = 0; // 無音救済は2回まで再抽選
 
-            do
+            // 蒼炎は無音救済なし？
+
+            for (int i = 0; i < results.Length; ++i)
             {
-                for (int i = 0; i < results.Length; ++i)
+                int rate = growthRates[i];
+
+                // 成長率100%以上はその数値分確定成長
+                results[i] = rate / 100;
+                rate -= (results[i] * 100);
+
+                // 成長率0でも乱数は消費する
+
+                if (rng.Next() < rate)
                 {
-                    int rate = growthRates[i];
-
-                    // 成長率100%以上はその数値分確定成長
-                    results[i] = rate / 100;
-                    rate -= (results[i] * 100);
-
-                    // 成長率0でも乱数は消費する
-
-                    if (rng.Next() < rate)
-                    {
-                        results[i]++;
-                    }
-                    sum += results[i];
+                    results[i]++;
                 }
-                if ((++retryCount) >= 3)
-                {
-                    break;
-                }
-            } while (sum == 0);
+                sum += results[i];
+            }
 
             return results;
         }

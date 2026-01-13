@@ -35,13 +35,6 @@ namespace FERNGSolver.Radiance.Domain.Combat
                     {
                         break;
                     }
-                    if (attacker.StatusDetail.WeaponType == Const.WeaponType.Brave)
-                    {
-                        if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
-                        {
-                            break;
-                        }
-                    }
                     ++a;
                 }
 
@@ -50,13 +43,6 @@ namespace FERNGSolver.Radiance.Domain.Combat
                     if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
                     {
                         break;
-                    }
-                    if (defender.StatusDetail.WeaponType == Const.WeaponType.Brave)
-                    {
-                        if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
-                        {
-                            break;
-                        }
                     }
                     ++d;
                 }
@@ -80,18 +66,86 @@ namespace FERNGSolver.Radiance.Domain.Combat
         }
 
         private static int GetLevel(this Unit unit) => unit.CombatUnit.StatusDetail.Level;
-        private static bool HasSureStrike(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.SureStrike;
-        private static bool HasGreatShield(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.GreatShield;
-        private static bool HasPierce(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.Pierce;
-        private static bool HasSilencer(this Unit unit) => unit.CombatUnit.StatusDetail.SkillType == Const.SkillType.Silencer;
         private static bool IsAbsorbWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Absorb;
         private static bool IsPoisonWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Poison;
         private static bool IsCursedWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Cursed;
+
+        enum AttackType
+        {
+            Normal,
+            Sol,
+            Luna,
+            Astra,
+        }
 
         // フェーズを実行し、Unitを更新する
         // どちらかが死んでいたらfalseを返す
         private static bool ExecutePhase(ICombatRngService rngService, Unit attackerSide, Unit defenderSide)
         {
+            int attackCount = attackerSide.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Brave ? 2 : 1;
+
+            // 連続判定
+            if (attackerSide.CombatUnit.StatusDetail.HasAdept && rngService.CheckActivateAdept(attackerSide.CombatUnit.StatusDetail.Tech, attackerSide.UnitSide))
+            {
+                attackCount *= 2;
+            }
+
+            List<AttackType> attackTypes = new List<AttackType>();
+            for (int i = 0; i < attackCount; ++i)
+            {
+                // 天空判定
+                if (attackerSide.CombatUnit.StatusDetail.HasAether && rngService.CheckActivateAether(attackerSide.CombatUnit.StatusDetail.Tech, attackerSide.UnitSide))
+                {
+                    // 太陽→月光の2回攻撃
+                    attackTypes.Add(AttackType.Sol);
+                    attackTypes.Add(AttackType.Luna);
+                }
+                // 流星判定
+                else if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tech, attackerSide.UnitSide))
+                {
+                    // ダメージ半分の5回攻撃
+                    attackTypes.Add(AttackType.Astra);
+                    attackTypes.Add(AttackType.Astra);
+                    attackTypes.Add(AttackType.Astra);
+                    attackTypes.Add(AttackType.Astra);
+                    attackTypes.Add(AttackType.Astra);
+                }
+                else
+                {
+                    attackTypes.Add(AttackType.Normal);
+                }
+            }
+
+            for (int i = 0; i < attackTypes.Count; ++i)
+            {
+                // 命中判定
+                if (rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
+                {
+                    // 必殺判定
+                    if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
+                    {
+                    }
+                    // 武器破壊判定
+                    if (attackerSide.CombatUnit.StatusDetail.HasCorrode)
+                    {
+                    }
+                    // 衝撃判定（戦闘には影響なし）
+                    // 鳴動判定
+                    // 月光判定
+                    // 陽光判定
+                    // 瞬殺判定
+                    // カウンター判定
+                    // 祈り判定
+                    // キャンセル判定
+                    // 狙撃判定
+                    // 太陽判定
+                    // 翼の守護判定
+                    // 
+                }
+            }
+
+            /*
+
             bool isHit = false;
             bool isGreatShieldActive = false;
             bool isPierceActive = false;
@@ -169,7 +223,7 @@ namespace FERNGSolver.Radiance.Domain.Combat
                         defenderSide.CurrentHp -= damage;
                     }
                 }
-            }
+            }*/
 
             bool result = true;
             if (attackerSide.CurrentHp <= 0)

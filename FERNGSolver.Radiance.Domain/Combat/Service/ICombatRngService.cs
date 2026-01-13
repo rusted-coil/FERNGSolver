@@ -9,7 +9,7 @@ namespace FERNGSolver.Radiance.Domain.Combat.Service
     public interface ICombatRngService
     {
         /// <summary>
-        /// 乱数を消費して命中判定を行います。
+        /// 乱数を2個消費して命中判定を行います。
         /// </summary>
         bool CheckHit(int hitRate, UnitSide unitSide);
 
@@ -19,24 +19,19 @@ namespace FERNGSolver.Radiance.Domain.Combat.Service
         bool CheckCritical(int criticalRate, UnitSide unitSide);
 
         /// <summary>
-        /// 乱数を消費して必的の発動判定を行います。
+        /// 乱数を消費して連続の発動判定を行います。
         /// </summary>
-        bool CheckActivateSureStrike(int level, UnitSide unitSide);
+        bool CheckActivateAdept(int tec, UnitSide unitSide);
 
         /// <summary>
-        /// 乱数を消費して貫通の発動判定を行います。
+        /// 乱数を消費して天空の発動判定を行います。
         /// </summary>
-        bool CheckActivatePierce(int level, UnitSide unitSide);
+        bool CheckActivateAether(int tec, UnitSide unitSide);
 
         /// <summary>
-        /// 乱数を消費して大盾の発動判定を行います。
+        /// 乱数を消費して流星の発動判定を行います。
         /// </summary>
-        bool CheckActivateGreatShield(int level, UnitSide unitSide);
-
-        /// <summary>
-        /// 乱数を消費して瞬殺の発動判定を行います。
-        /// </summary>
-        bool CheckActivateSilencer(Const.BossType bossType, bool hasSkill, UnitSide unitSide); // スキルの有無自体にかかわらず判定自体は行われる
+        bool CheckActivateAstra(int tec, UnitSide unitSide);
 
         /// <summary>
         /// 乱数を消費してデビルアクスの呪いの発動判定を行います。
