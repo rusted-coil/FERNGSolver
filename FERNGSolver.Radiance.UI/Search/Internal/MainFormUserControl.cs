@@ -68,8 +68,8 @@ namespace FERNGSolver.Radiance.UI.Search
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
         public IUnitStatusDetail DefenderStatusDetail => m_DefenderStatusDetail;
 
-        private UnitStatusDetail m_AttackerStatusDetail = new UnitStatusDetail();
-        private UnitStatusDetail m_DefenderStatusDetail = new UnitStatusDetail();
+        private UnitStatusDetailDialogState m_AttackerStatusDetail = new UnitStatusDetailDialogState();
+        private UnitStatusDetailDialogState m_DefenderStatusDetail = new UnitStatusDetailDialogState();
 
         // 戦闘事後条件
         public int AttackerHpPostconditionMin => FiltersByAttackerHpPostconditionCheckBox.Checked ? (int)AttackerHpPostconditionMinNumericUpDown.Value : 0;

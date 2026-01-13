@@ -120,7 +120,7 @@ namespace FERNGSolver.Radiance.Domain.Combat
         /// <summary>
         /// 技を取得します。
         /// </summary>
-        int Tech { get; }
+        int Tec { get; }
 
         /// <summary>
         /// 幸運を取得します。

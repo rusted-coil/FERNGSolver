@@ -85,7 +85,7 @@ namespace FERNGSolver.Radiance.Domain.Combat
             int attackCount = attackerSide.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Brave ? 2 : 1;
 
             // 連続判定
-            if (attackerSide.CombatUnit.StatusDetail.HasAdept && rngService.CheckActivateAdept(attackerSide.CombatUnit.StatusDetail.Tech, attackerSide.UnitSide))
+            if (attackerSide.CombatUnit.StatusDetail.HasAdept && rngService.CheckActivateAdept(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
             {
                 attackCount *= 2;
             }
@@ -94,14 +94,14 @@ namespace FERNGSolver.Radiance.Domain.Combat
             for (int i = 0; i < attackCount; ++i)
             {
                 // 天空判定
-                if (attackerSide.CombatUnit.StatusDetail.HasAether && rngService.CheckActivateAether(attackerSide.CombatUnit.StatusDetail.Tech, attackerSide.UnitSide))
+                if (attackerSide.CombatUnit.StatusDetail.HasAether && rngService.CheckActivateAether(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                 {
                     // 太陽→月光の2回攻撃
                     attackTypes.Add(AttackType.Sol);
                     attackTypes.Add(AttackType.Luna);
                 }
                 // 流星判定
-                else if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tech, attackerSide.UnitSide))
+                else if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                 {
                     // ダメージ半分の5回攻撃
                     attackTypes.Add(AttackType.Astra);
