@@ -112,6 +112,8 @@ namespace FERNGSolver.Radiance.UI.Search
             label25 = new Label();
             FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
             toolTip1 = new ToolTip(components);
+            TableIndexNumericUpDown = new NumericUpDownEx();
+            IsSpecificTableCheckBox = new CheckBox();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMaxNumericUpDown).BeginInit();
@@ -141,12 +143,13 @@ namespace FERNGSolver.Radiance.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TableIndexNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(253, 569);
+            label2.Location = new Point(253, 599);
             label2.Name = "label2";
             label2.Size = new Size(19, 15);
             label2.TabIndex = 14;
@@ -155,7 +158,7 @@ namespace FERNGSolver.Radiance.UI.Search
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(170, 569);
+            label1.Location = new Point(170, 599);
             label1.Name = "label1";
             label1.Size = new Size(15, 15);
             label1.TabIndex = 11;
@@ -874,7 +877,7 @@ namespace FERNGSolver.Radiance.UI.Search
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new Point(22, 569);
+            label21.Location = new Point(22, 599);
             label21.Name = "label21";
             label21.Size = new Size(80, 15);
             label21.TabIndex = 107;
@@ -882,27 +885,27 @@ namespace FERNGSolver.Radiance.UI.Search
             // 
             // CurrentRngCountNumericUpDown
             // 
-            CurrentRngCountNumericUpDown.Location = new Point(108, 567);
+            CurrentRngCountNumericUpDown.Location = new Point(108, 597);
             CurrentRngCountNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             CurrentRngCountNumericUpDown.Name = "CurrentRngCountNumericUpDown";
             CurrentRngCountNumericUpDown.Size = new Size(60, 23);
-            CurrentRngCountNumericUpDown.TabIndex = 40;
+            CurrentRngCountNumericUpDown.TabIndex = 42;
             // 
             // OffsetMinNumericUpDown
             // 
-            OffsetMinNumericUpDown.Location = new Point(187, 567);
+            OffsetMinNumericUpDown.Location = new Point(187, 597);
             OffsetMinNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             OffsetMinNumericUpDown.Name = "OffsetMinNumericUpDown";
             OffsetMinNumericUpDown.Size = new Size(60, 23);
-            OffsetMinNumericUpDown.TabIndex = 41;
+            OffsetMinNumericUpDown.TabIndex = 43;
             // 
             // OffsetMaxNumericUpDown
             // 
-            OffsetMaxNumericUpDown.Location = new Point(278, 567);
+            OffsetMaxNumericUpDown.Location = new Point(278, 597);
             OffsetMaxNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             OffsetMaxNumericUpDown.Name = "OffsetMaxNumericUpDown";
             OffsetMaxNumericUpDown.Size = new Size(60, 23);
-            OffsetMaxNumericUpDown.TabIndex = 42;
+            OffsetMaxNumericUpDown.TabIndex = 44;
             OffsetMaxNumericUpDown.Value = new decimal(new int[] { 10000, 0, 0, 0 });
             // 
             // label22
@@ -911,7 +914,7 @@ namespace FERNGSolver.Radiance.UI.Search
             label22.ForeColor = SystemColors.Control;
             label22.Location = new Point(352, 561);
             label22.Name = "label22";
-            label22.Size = new Size(1, 30);
+            label22.Size = new Size(1, 60);
             label22.TabIndex = 44;
             // 
             // label25
@@ -929,14 +932,34 @@ namespace FERNGSolver.Radiance.UI.Search
             FalconKnightConsumeMoveNumericUpDown.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
             FalconKnightConsumeMoveNumericUpDown.Name = "FalconKnightConsumeMoveNumericUpDown";
             FalconKnightConsumeMoveNumericUpDown.Size = new Size(37, 23);
-            FalconKnightConsumeMoveNumericUpDown.TabIndex = 43;
+            FalconKnightConsumeMoveNumericUpDown.TabIndex = 45;
             FalconKnightConsumeMoveNumericUpDown.Value = new decimal(new int[] { 8, 0, 0, 0 });
+            // 
+            // TableIndexNumericUpDown
+            // 
+            TableIndexNumericUpDown.Location = new Point(140, 567);
+            TableIndexNumericUpDown.Maximum = new decimal(new int[] { 63, 0, 0, 0 });
+            TableIndexNumericUpDown.Name = "TableIndexNumericUpDown";
+            TableIndexNumericUpDown.Size = new Size(37, 23);
+            TableIndexNumericUpDown.TabIndex = 41;
+            // 
+            // IsSpecificTableCheckBox
+            // 
+            IsSpecificTableCheckBox.AutoSize = true;
+            IsSpecificTableCheckBox.Location = new Point(25, 568);
+            IsSpecificTableCheckBox.Name = "IsSpecificTableCheckBox";
+            IsSpecificTableCheckBox.Size = new Size(119, 19);
+            IsSpecificTableCheckBox.TabIndex = 40;
+            IsSpecificTableCheckBox.Text = "指定テーブルのみ: #";
+            IsSpecificTableCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainFormUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            Controls.Add(TableIndexNumericUpDown);
+            Controls.Add(IsSpecificTableCheckBox);
             Controls.Add(FalconKnightConsumeMoveNumericUpDown);
             Controls.Add(label25);
             Controls.Add(label22);
@@ -950,7 +973,7 @@ namespace FERNGSolver.Radiance.UI.Search
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "MainFormUserControl";
-            Size = new Size(640, 600);
+            Size = new Size(640, 630);
             CombatGroupBox.ResumeLayout(false);
             CombatGroupBox.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -985,6 +1008,7 @@ namespace FERNGSolver.Radiance.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TableIndexNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1075,5 +1099,7 @@ namespace FERNGSolver.Radiance.UI.Search
         private CheckBox IsMgcGrowthNeeded;
         private NumericUpDownEx GrowthMgcRateNumericUpDown;
         private Label label5;
+        private NumericUpDownEx TableIndexNumericUpDown;
+        private CheckBox IsSpecificTableCheckBox;
     }
 }

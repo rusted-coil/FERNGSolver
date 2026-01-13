@@ -59,7 +59,8 @@ namespace FERNGSolver.Radiance.UI.Internal
             {
                 if (viewModel is IRngStateResultViewModel rngState)
                 {
-                    m_RngViewListView.AddView(m_ExtendedMainFormView, int.Parse(rngState.TableIndex), int.Parse(rngState.Position));
+                    // テーブル番号は#から始まるので、Substring(1)で#を除去してからintに変換
+                    m_RngViewListView.AddView(m_ExtendedMainFormView, int.Parse(rngState.TableIndex.Substring(1)), int.Parse(rngState.Position));
                 }
             }
         }

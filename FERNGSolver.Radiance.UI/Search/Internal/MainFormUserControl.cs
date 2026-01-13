@@ -97,14 +97,13 @@ namespace FERNGSolver.Radiance.UI.Search
         public GrowthSearchType MdfSearchType => IsMdfGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
 
         // 検索条件
+        public int? SearchTableIndex => IsSpecificTableCheckBox.Checked ? (int)TableIndexNumericUpDown.Value : null;
         public int CurrentPosition => (int)CurrentRngCountNumericUpDown.Value;
         public int OffsetMin => (int)OffsetMinNumericUpDown.Value;
         public int OffsetMax => (int)OffsetMaxNumericUpDown.Value;
 
         // 結果出力用
         public int FalconKnightMethodMove => (int)FalconKnightConsumeMoveNumericUpDown.Value;
-
-        public int? SearchTableIndex => throw new NotImplementedException();
 
         private Form? m_FalconKnightToolForm = null;
 
@@ -125,8 +124,8 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthCharacterNameComboBox.Items.AddRange(m_Characters.Select(x => x.Name).ToArray());
             GrowthCharacterNameComboBox.SelectedIndex = 0;
 
-//            AttackerStatusDetailLabel.Text = m_AttackerStatusDetail.ToString();
-//            DefenderStatusDetailLabel.Text = m_DefenderStatusDetail.ToString();
+            AttackerStatusDetailLabel.Text = m_AttackerStatusDetail.ToString();
+            DefenderStatusDetailLabel.Text = m_DefenderStatusDetail.ToString();
 
             #region 検索条件にかかわるコントロールの値が変化した時、外部に通知する用のイベントハンドラを登録
 
@@ -149,6 +148,7 @@ namespace FERNGSolver.Radiance.UI.Search
 
             GrowthHpRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
             GrowthStrRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
+            GrowthMgcRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
             GrowthTecRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
             GrowthSpdRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;
             GrowthLucRateNumericUpDown.ValueChanged += GrowthConditionControlValueChanged;

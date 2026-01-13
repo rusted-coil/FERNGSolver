@@ -41,9 +41,14 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
 
             for (int i = 0; i < Domain.RNG.Const.TableCount; ++i)
             {
+                if (mainFormView.SearchTableIndex != null && mainFormView.SearchTableIndex.Value != i)
+                {
+                    continue;
+                }
+
                 var rng = RngFactory.Create(i);
                 results.AddRange(Searcher.Search(
-                    i, rng, 0, 10000,
+                    i, rng, mainFormView.CurrentPosition + mainFormView.OffsetMin, mainFormView.CurrentPosition + mainFormView.OffsetMax,
                     strategy));
             }
             return results;
@@ -102,11 +107,12 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
                 MdfGrowthRate = view.MdfGrowthRate,
                 HpSearchType = view.HpSearchType,
                 StrSearchType = view.StrSearchType,
+                MgcSearchType = view.MgcSearchType,
                 TecSearchType = view.TecSearchType,
                 SpdSearchType = view.SpdSearchType,
+                LucSearchType = view.LucSearchType,
                 DefSearchType = view.DefSearchType,
                 MdfSearchType = view.MdfSearchType,
-                LucSearchType = view.LucSearchType,
             });
         }
 
@@ -123,6 +129,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
         private static IReadOnlyList<ITableColumn> CreateResultColumns(IExtendedMainFormView mainFormView)
         {
             var columns = new List<ITableColumn> {
+                new SearchResultTableColumn("テーブル", "TableIndex") { Width = 50 },
                 new SearchResultTableColumn("消費数", "Position"){ Width = 50 },
                 new SearchResultTableColumn("Offset", "Offset"){ Width = 50 },
                 new SearchResultTableColumn("F法消費回数", "FalconKnightMethodConsume"){ Width = 160 },
@@ -135,7 +142,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
 
             if (mainFormView.ContainsGrowth)
             {
-                columns.Add(new SearchResultTableColumn("レベルアップ結果", "GrowthResult") { Width = 310 });
+                columns.Add(new SearchResultTableColumn("レベルアップ結果", "GrowthResult") { Width = 360 });
             }
 
             return columns;

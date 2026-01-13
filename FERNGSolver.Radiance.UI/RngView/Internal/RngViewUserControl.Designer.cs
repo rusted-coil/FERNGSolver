@@ -35,8 +35,8 @@ namespace FERNGSolver.Radiance.UI.RngView.Internal
 
             const int topControlY = 5;
             const int tableIndexLocationX = 3;
-            const int tableIndexLabelWidth = 35;
-            const int positionLocationX = 90;
+            const int tableIndexLabelWidth = 55;
+            const int positionLocationX = 110;
             const int positionLabelWidth = 46;
 
             int controlCount = 0;
@@ -47,7 +47,7 @@ namespace FERNGSolver.Radiance.UI.RngView.Internal
                 TableIndexLabel.Name = "TableIndexLabel";
                 TableIndexLabel.TabIndex = controlCount;
 
-                TableIndexLabel.Text = "Map:";
+                TableIndexLabel.Text = "テーブル: #";
                 TableIndexLabel.Location = new Point(tableIndexLocationX, topControlY + 2);
                 TableIndexLabel.Size = new Size(tableIndexLabelWidth, 15);
 

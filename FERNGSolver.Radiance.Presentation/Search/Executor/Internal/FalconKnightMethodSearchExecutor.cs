@@ -44,9 +44,14 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
 
             for (int i = 0; i < Domain.RNG.Const.TableCount; ++i)
             {
+                if (mainFormView.SearchTableIndex != null && mainFormView.SearchTableIndex.Value != i)
+                {
+                    continue;
+                }
+
                 var rng = RngFactory.Create(i);
                 results.AddRange(Searcher.Search(
-                    i, rng, 0, 10000,
+                    i, rng, mainFormView.CurrentPosition + mainFormView.OffsetMin, mainFormView.CurrentPosition + mainFormView.OffsetMax,
                     CommonStrategyFactory.CreateFalconKnightPatternStrategy(cxPattern, Util.IsRngValueOk)));
             }
             return results;
@@ -58,10 +63,10 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
             for (int i = 0; i < viewModels.Length && i < 100; ++i)
             {
                 int offset = mainFormView.AddsCxOffset ? results[i].Position + mainFormView.CxString.Length : results[i].Position;
-                viewModels[i] = new ResultViewModel { TableIndex = results[i].TableIndex.ToString(), Position = offset.ToString() };
+                viewModels[i] = new ResultViewModel { TableIndex = $"#{results[i].TableIndex}", Position = offset.ToString() };
             }
             mainFormView.ShowSearchResults([
-                new SearchResultTableColumn("Map", "TableIndex") { Width = 30 },
+                new SearchResultTableColumn("テーブル", "TableIndex") { Width = 50 },
                 new SearchResultTableColumn("消費数", "Position") { Width = 50 }
             ],
             typeof(ResultViewModel), viewModels);

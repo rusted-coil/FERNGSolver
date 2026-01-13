@@ -17,7 +17,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
             int falconHorizontalCount, int falconHorizontalRemain,
             int falconVerticalCount, int falconVerticalRemain)
         {
-            TableIndex = tableIndex.ToString();
+            TableIndex = $"#{tableIndex}";
             Position = position.ToString();
             Offset = $"+{offset}";
 
@@ -60,7 +60,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
 
         public void SetGrowthResult(IReadOnlyList<int> growths)
         {
-            string[] stats = ["HP", "力", "技", "速さ", "守備", "魔防", "幸運"];
+            string[] stats = ["HP", "力", "魔力", "技", "速さ", "幸運", "守備", "魔防"];
 
             var sb = new StringBuilder();
             bool b = false;

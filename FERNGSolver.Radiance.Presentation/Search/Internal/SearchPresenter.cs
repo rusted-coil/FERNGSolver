@@ -8,7 +8,6 @@ namespace FERNGSolver.Radiance.Presentation.Search.Internal
     internal sealed class SearchPresenter : ISearchPresenter
     {
         private readonly IExtendedMainFormView m_MainFormView;
-//        private readonly IConfigService m_ConfigService;
         private readonly IErrorNotifier m_ErrorNotifier;
 
         CompositeDisposable m_Disposables = new CompositeDisposable();
@@ -16,15 +15,10 @@ namespace FERNGSolver.Radiance.Presentation.Search.Internal
         public SearchPresenter(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
             m_MainFormView = mainFormView;
-//            m_ConfigService = configService;
             m_ErrorNotifier = errorNotifier;
-
-//            m_MainFormView.ReflectConfig(m_ConfigService.Config);
 
             mainFormView.FalconKnightToolOpenButtonClicked.Subscribe(_ => OpenFalconKnightTool()).AddTo(m_Disposables);
             mainFormView.SearchButtonClicked.Subscribe(_ => ExecuteSearch()).AddTo(m_Disposables);
-
-//            mainFormView.PersistentConfigChanged.Subscribe(_ => OnPersistentConfigChanged()).AddTo(m_Disposables);
         }
 
         public void Dispose()
@@ -50,7 +44,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Internal
             }
             else
             {
-//                Executor.Internal.CombatAndGrowthSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                Executor.Internal.CombatAndGrowthSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
             }
         }
 
@@ -62,13 +56,6 @@ namespace FERNGSolver.Radiance.Presentation.Search.Internal
                 return false;
             }
             return true;
-        }
-
-        private void OnPersistentConfigChanged()
-        {
-//            m_ConfigService.Config.IsBindingBlade = m_MainFormView.IsBindingBlade;
-
-//            m_ConfigService.Serialize();
         }
     }
 }

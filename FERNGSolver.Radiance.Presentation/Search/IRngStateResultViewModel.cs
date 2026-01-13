@@ -6,7 +6,7 @@ namespace FERNGSolver.Radiance.Presentation.Search
     public interface IRngStateResultViewModel
     {
         /// <summary>
-        /// Map番号を表す文字列を取得します。
+        /// テーブル番号を表す文字列を取得します。
         /// </summary>
         string TableIndex { get; }
 

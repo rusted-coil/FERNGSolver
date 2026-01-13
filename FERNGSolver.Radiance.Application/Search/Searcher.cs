@@ -21,17 +21,14 @@ namespace FERNGSolver.Radiance.Application.Search
             var result = new List<ISearchResult>();
 
             var currentRng = initialRng.Clone();
-            for (int i = 0; i < positionMin; ++i)
-            {
-                currentRng.Next();
-            }
+            currentRng.Advance(positionMin);
 
             for (int i = 0; i <= positionMax - positionMin; ++i)
             {
                 var tempRng = currentRng.Clone();
                 if (strategy.CheckAndAdvance(tempRng))
                 {
-                    result.Add(new Internal.SearchResult(tableIndex, i));
+                    result.Add(new Internal.SearchResult(tableIndex, positionMin + i));
                 }
 
                 currentRng.Next();
