@@ -15,21 +15,23 @@ namespace FERNGSolver.Radiance.Application.Search.Strategy.Internal
             m_Args = args;
             m_GrowthRates = [
                 args.HpGrowthRate,
-                args.AtkGrowthRate,
+                args.StrGrowthRate,
+                args.MgcGrowthRate,
                 args.TecGrowthRate,
                 args.SpdGrowthRate,
+                args.LucGrowthRate,
                 args.DefGrowthRate,
-                args.MdfGrowthRate,
-                args.LucGrowthRate
+                args.MdfGrowthRate
             ];
             m_SearchTypes = [
                 args.HpSearchType,
-                args.AtkSearchType,
+                args.StrSearchType,
+                args.MgcSearchType,
                 args.TecSearchType,
                 args.SpdSearchType,
+                args.LucSearchType,
                 args.DefSearchType,
-                args.MdfSearchType,
-                args.LucSearchType
+                args.MdfSearchType
             ];
         }
 
@@ -37,12 +39,13 @@ namespace FERNGSolver.Radiance.Application.Search.Strategy.Internal
         {
             var result = GrowthSimulator.Simulate(rng,
                 m_Args.HpGrowthRate,
-                m_Args.AtkGrowthRate,
+                m_Args.StrGrowthRate,
+                m_Args.MgcGrowthRate,
                 m_Args.TecGrowthRate,
                 m_Args.SpdGrowthRate,
+                m_Args.LucGrowthRate,
                 m_Args.DefGrowthRate,
-                m_Args.MdfGrowthRate,
-                m_Args.LucGrowthRate);
+                m_Args.MdfGrowthRate);
 
             for (int i = 0; i < result.Count; ++i)
             {

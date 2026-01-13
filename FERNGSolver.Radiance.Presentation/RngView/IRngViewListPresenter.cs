@@ -8,6 +8,6 @@ namespace FERNGSolver.Radiance.Presentation.RngView
         /// <summary>
         /// 乱数の初期位置を指定して乱数ビューを追加します。
         /// </summary>
-        void AddRngView(int initialPosition);
+        void AddRngView(int tableIndex, int initialPosition);
     }
 }

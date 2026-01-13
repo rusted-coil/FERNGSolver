@@ -71,13 +71,16 @@ namespace FERNGSolver.Radiance.UI.Search
             DoesAttackerFollowUpAttackCheckBox = new CheckBox();
             AttackerCriticalRateNumericUpDown = new NumericUpDownEx();
             GrowthGroupBox = new GroupBox();
+            IsMgcGrowthNeeded = new CheckBox();
+            GrowthMgcRateNumericUpDown = new NumericUpDownEx();
+            label5 = new Label();
             IsGrowthBoostedCheckBox = new CheckBox();
             IsMdfGrowthNeeded = new CheckBox();
             IsDefGrowthNeeded = new CheckBox();
             IsLucGrowthNeeded = new CheckBox();
             IsSpdGrowthNeeded = new CheckBox();
             IsTecGrowthNeeded = new CheckBox();
-            IsAtkGrowthNeeded = new CheckBox();
+            IsStrGrowthNeeded = new CheckBox();
             IsHpGrowthNeeded = new CheckBox();
             GrowthSpdRateNumericUpDown = new NumericUpDownEx();
             label16 = new Label();
@@ -109,9 +112,6 @@ namespace FERNGSolver.Radiance.UI.Search
             label25 = new Label();
             FalconKnightConsumeMoveNumericUpDown = new NumericUpDownEx();
             toolTip1 = new ToolTip(components);
-            checkBox1 = new CheckBox();
-            GrowthMgcRateNumericUpDown = new NumericUpDownEx();
-            label5 = new Label();
             CombatGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DefenderHpPostconditionMaxNumericUpDown).BeginInit();
@@ -128,6 +128,7 @@ namespace FERNGSolver.Radiance.UI.Search
             ((System.ComponentModel.ISupportInitialize)AttackerHitRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AttackerCriticalRateNumericUpDown).BeginInit();
             GrowthGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GrowthMgcRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GrowthSpdRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GrowthMdfRateNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GrowthDefRateNumericUpDown).BeginInit();
@@ -140,7 +141,6 @@ namespace FERNGSolver.Radiance.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)GrowthMgcRateNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -523,7 +523,7 @@ namespace FERNGSolver.Radiance.UI.Search
             // 
             // GrowthGroupBox
             // 
-            GrowthGroupBox.Controls.Add(checkBox1);
+            GrowthGroupBox.Controls.Add(IsMgcGrowthNeeded);
             GrowthGroupBox.Controls.Add(GrowthMgcRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label5);
             GrowthGroupBox.Controls.Add(IsGrowthBoostedCheckBox);
@@ -532,7 +532,7 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthGroupBox.Controls.Add(IsLucGrowthNeeded);
             GrowthGroupBox.Controls.Add(IsSpdGrowthNeeded);
             GrowthGroupBox.Controls.Add(IsTecGrowthNeeded);
-            GrowthGroupBox.Controls.Add(IsAtkGrowthNeeded);
+            GrowthGroupBox.Controls.Add(IsStrGrowthNeeded);
             GrowthGroupBox.Controls.Add(IsHpGrowthNeeded);
             GrowthGroupBox.Controls.Add(GrowthSpdRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label16);
@@ -556,6 +556,34 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthGroupBox.TabIndex = 30;
             GrowthGroupBox.TabStop = false;
             // 
+            // IsMgcGrowthNeeded
+            // 
+            IsMgcGrowthNeeded.AutoSize = true;
+            IsMgcGrowthNeeded.Checked = true;
+            IsMgcGrowthNeeded.CheckState = CheckState.Checked;
+            IsMgcGrowthNeeded.Location = new Point(93, 118);
+            IsMgcGrowthNeeded.Name = "IsMgcGrowthNeeded";
+            IsMgcGrowthNeeded.Size = new Size(15, 14);
+            IsMgcGrowthNeeded.TabIndex = 22;
+            IsMgcGrowthNeeded.UseVisualStyleBackColor = true;
+            // 
+            // GrowthMgcRateNumericUpDown
+            // 
+            GrowthMgcRateNumericUpDown.Location = new Point(45, 114);
+            GrowthMgcRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            GrowthMgcRateNumericUpDown.Name = "GrowthMgcRateNumericUpDown";
+            GrowthMgcRateNumericUpDown.Size = new Size(42, 23);
+            GrowthMgcRateNumericUpDown.TabIndex = 12;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(16, 117);
+            label5.Name = "label5";
+            label5.Size = new Size(31, 15);
+            label5.TabIndex = 48;
+            label5.Text = "魔力";
+            // 
             // IsGrowthBoostedCheckBox
             // 
             IsGrowthBoostedCheckBox.AutoSize = true;
@@ -575,7 +603,7 @@ namespace FERNGSolver.Radiance.UI.Search
             IsMdfGrowthNeeded.Location = new Point(210, 146);
             IsMdfGrowthNeeded.Name = "IsMdfGrowthNeeded";
             IsMdfGrowthNeeded.Size = new Size(15, 14);
-            IsMdfGrowthNeeded.TabIndex = 26;
+            IsMdfGrowthNeeded.TabIndex = 27;
             IsMdfGrowthNeeded.UseVisualStyleBackColor = true;
             // 
             // IsDefGrowthNeeded
@@ -586,7 +614,7 @@ namespace FERNGSolver.Radiance.UI.Search
             IsDefGrowthNeeded.Location = new Point(210, 118);
             IsDefGrowthNeeded.Name = "IsDefGrowthNeeded";
             IsDefGrowthNeeded.Size = new Size(15, 14);
-            IsDefGrowthNeeded.TabIndex = 25;
+            IsDefGrowthNeeded.TabIndex = 26;
             IsDefGrowthNeeded.UseVisualStyleBackColor = true;
             // 
             // IsLucGrowthNeeded
@@ -597,7 +625,7 @@ namespace FERNGSolver.Radiance.UI.Search
             IsLucGrowthNeeded.Location = new Point(210, 90);
             IsLucGrowthNeeded.Name = "IsLucGrowthNeeded";
             IsLucGrowthNeeded.Size = new Size(15, 14);
-            IsLucGrowthNeeded.TabIndex = 24;
+            IsLucGrowthNeeded.TabIndex = 25;
             IsLucGrowthNeeded.UseVisualStyleBackColor = true;
             // 
             // IsSpdGrowthNeeded
@@ -608,7 +636,7 @@ namespace FERNGSolver.Radiance.UI.Search
             IsSpdGrowthNeeded.Location = new Point(209, 62);
             IsSpdGrowthNeeded.Name = "IsSpdGrowthNeeded";
             IsSpdGrowthNeeded.Size = new Size(15, 14);
-            IsSpdGrowthNeeded.TabIndex = 23;
+            IsSpdGrowthNeeded.TabIndex = 24;
             IsSpdGrowthNeeded.UseVisualStyleBackColor = true;
             // 
             // IsTecGrowthNeeded
@@ -619,19 +647,19 @@ namespace FERNGSolver.Radiance.UI.Search
             IsTecGrowthNeeded.Location = new Point(93, 145);
             IsTecGrowthNeeded.Name = "IsTecGrowthNeeded";
             IsTecGrowthNeeded.Size = new Size(15, 14);
-            IsTecGrowthNeeded.TabIndex = 22;
+            IsTecGrowthNeeded.TabIndex = 23;
             IsTecGrowthNeeded.UseVisualStyleBackColor = true;
             // 
-            // IsAtkGrowthNeeded
+            // IsStrGrowthNeeded
             // 
-            IsAtkGrowthNeeded.AutoSize = true;
-            IsAtkGrowthNeeded.Checked = true;
-            IsAtkGrowthNeeded.CheckState = CheckState.Checked;
-            IsAtkGrowthNeeded.Location = new Point(93, 90);
-            IsAtkGrowthNeeded.Name = "IsAtkGrowthNeeded";
-            IsAtkGrowthNeeded.Size = new Size(15, 14);
-            IsAtkGrowthNeeded.TabIndex = 21;
-            IsAtkGrowthNeeded.UseVisualStyleBackColor = true;
+            IsStrGrowthNeeded.AutoSize = true;
+            IsStrGrowthNeeded.Checked = true;
+            IsStrGrowthNeeded.CheckState = CheckState.Checked;
+            IsStrGrowthNeeded.Location = new Point(93, 90);
+            IsStrGrowthNeeded.Name = "IsStrGrowthNeeded";
+            IsStrGrowthNeeded.Size = new Size(15, 14);
+            IsStrGrowthNeeded.TabIndex = 21;
+            IsStrGrowthNeeded.UseVisualStyleBackColor = true;
             // 
             // IsHpGrowthNeeded
             // 
@@ -650,7 +678,7 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthSpdRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthSpdRateNumericUpDown.Name = "GrowthSpdRateNumericUpDown";
             GrowthSpdRateNumericUpDown.Size = new Size(42, 23);
-            GrowthSpdRateNumericUpDown.TabIndex = 13;
+            GrowthSpdRateNumericUpDown.TabIndex = 14;
             // 
             // label16
             // 
@@ -667,7 +695,7 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthMdfRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthMdfRateNumericUpDown.Name = "GrowthMdfRateNumericUpDown";
             GrowthMdfRateNumericUpDown.Size = new Size(42, 23);
-            GrowthMdfRateNumericUpDown.TabIndex = 16;
+            GrowthMdfRateNumericUpDown.TabIndex = 17;
             // 
             // label13
             // 
@@ -684,7 +712,7 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthDefRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthDefRateNumericUpDown.Name = "GrowthDefRateNumericUpDown";
             GrowthDefRateNumericUpDown.Size = new Size(42, 23);
-            GrowthDefRateNumericUpDown.TabIndex = 15;
+            GrowthDefRateNumericUpDown.TabIndex = 16;
             // 
             // label14
             // 
@@ -701,7 +729,7 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthLucRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthLucRateNumericUpDown.Name = "GrowthLucRateNumericUpDown";
             GrowthLucRateNumericUpDown.Size = new Size(42, 23);
-            GrowthLucRateNumericUpDown.TabIndex = 14;
+            GrowthLucRateNumericUpDown.TabIndex = 15;
             // 
             // label15
             // 
@@ -718,7 +746,7 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthTecRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             GrowthTecRateNumericUpDown.Name = "GrowthTecRateNumericUpDown";
             GrowthTecRateNumericUpDown.Size = new Size(42, 23);
-            GrowthTecRateNumericUpDown.TabIndex = 12;
+            GrowthTecRateNumericUpDown.TabIndex = 13;
             // 
             // label12
             // 
@@ -904,34 +932,6 @@ namespace FERNGSolver.Radiance.UI.Search
             FalconKnightConsumeMoveNumericUpDown.TabIndex = 43;
             FalconKnightConsumeMoveNumericUpDown.Value = new decimal(new int[] { 8, 0, 0, 0 });
             // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Checked = true;
-            checkBox1.CheckState = CheckState.Checked;
-            checkBox1.Location = new Point(93, 118);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(15, 14);
-            checkBox1.TabIndex = 47;
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // GrowthMgcRateNumericUpDown
-            // 
-            GrowthMgcRateNumericUpDown.Location = new Point(45, 114);
-            GrowthMgcRateNumericUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-            GrowthMgcRateNumericUpDown.Name = "GrowthMgcRateNumericUpDown";
-            GrowthMgcRateNumericUpDown.Size = new Size(42, 23);
-            GrowthMgcRateNumericUpDown.TabIndex = 46;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(16, 117);
-            label5.Name = "label5";
-            label5.Size = new Size(31, 15);
-            label5.TabIndex = 48;
-            label5.Text = "魔力";
-            // 
             // MainFormUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -971,6 +971,7 @@ namespace FERNGSolver.Radiance.UI.Search
             ((System.ComponentModel.ISupportInitialize)AttackerCriticalRateNumericUpDown).EndInit();
             GrowthGroupBox.ResumeLayout(false);
             GrowthGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)GrowthMgcRateNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)GrowthSpdRateNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)GrowthMdfRateNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)GrowthDefRateNumericUpDown).EndInit();
@@ -984,7 +985,6 @@ namespace FERNGSolver.Radiance.UI.Search
             ((System.ComponentModel.ISupportInitialize)OffsetMinNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)OffsetMaxNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)FalconKnightConsumeMoveNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)GrowthMgcRateNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1007,7 +1007,7 @@ namespace FERNGSolver.Radiance.UI.Search
         private CheckBox IsLucGrowthNeeded;
         private CheckBox IsSpdGrowthNeeded;
         private CheckBox IsTecGrowthNeeded;
-        private CheckBox IsAtkGrowthNeeded;
+        private CheckBox IsStrGrowthNeeded;
         private CheckBox IsHpGrowthNeeded;
         private NumericUpDownEx GrowthSpdRateNumericUpDown;
         private Label label16;
@@ -1072,7 +1072,7 @@ namespace FERNGSolver.Radiance.UI.Search
         private Label AttackerStatusDetailLabel;
         private Button AttackerStatusDetailDialogButton;
         private ToolTip toolTip1;
-        private CheckBox checkBox1;
+        private CheckBox IsMgcGrowthNeeded;
         private NumericUpDownEx GrowthMgcRateNumericUpDown;
         private Label label5;
     }

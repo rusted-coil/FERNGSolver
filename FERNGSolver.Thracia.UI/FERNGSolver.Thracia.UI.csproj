@@ -12,4 +12,8 @@
     <ProjectReference Include="..\FERNGSolver.Thracia.Presentation\FERNGSolver.Thracia.Presentation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RngView\Internal\" />
+  </ItemGroup>
+
 </Project>

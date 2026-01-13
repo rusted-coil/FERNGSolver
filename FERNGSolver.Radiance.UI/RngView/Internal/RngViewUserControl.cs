@@ -14,21 +14,25 @@ namespace FERNGSolver.Radiance.UI.RngView.Internal
         private const int HitUsageOffsetX = 5;
         private const int HitUsageLineLength = 27;
 
+        public int TableIndex => 0;
         public int CurrentPosition => (int)PositionNumericUpDown.Value;
 
-        private BehaviorSubject<int> m_PositionChanged;
-        public IObservable<int> PositionChanged => m_PositionChanged;
+        private BehaviorSubject<(int, int)> m_PositionChanged;
+        public IObservable<(int, int)> PositionChanged => m_PositionChanged;
 
-        public RngViewUserControl(int initialPosition) : base()
+        public RngViewUserControl(int tableIndex, int initialPosition) : base()
         {
             InitializeComponent();
 
             // ValueChangedイベントのハンドラを一時的に解除して初期値をセット
+            TableIndexNumericUpDown.ValueChanged -= TableIndexNumericUpDown_ValueChanged;
+            TableIndexNumericUpDown.Value = tableIndex;
+            TableIndexNumericUpDown.ValueChanged += TableIndexNumericUpDown_ValueChanged;
             PositionNumericUpDown.ValueChanged -= PositionNumericUpDown_ValueChanged;
             PositionNumericUpDown.Value = initialPosition;
             PositionNumericUpDown.ValueChanged += PositionNumericUpDown_ValueChanged;
 
-            m_PositionChanged = new BehaviorSubject<int>((int)PositionNumericUpDown.Value);
+            m_PositionChanged = new BehaviorSubject<(int, int)>((tableIndex, (int)PositionNumericUpDown.Value));
         }
 
         protected override (Brush Brush, Pen Pen) GetUsageDrawer(IRandomNumberViewModel viewModel)
@@ -71,6 +75,7 @@ namespace FERNGSolver.Radiance.UI.RngView.Internal
             return 0;
         }
 
-        private void PositionNumericUpDown_ValueChanged(object? sender, EventArgs e) => m_PositionChanged.OnNext((int)PositionNumericUpDown.Value);
+        private void TableIndexNumericUpDown_ValueChanged(object? sender, EventArgs e) => m_PositionChanged.OnNext(((int)TableIndexNumericUpDown.Value, (int)PositionNumericUpDown.Value));
+        private void PositionNumericUpDown_ValueChanged(object? sender, EventArgs e) => m_PositionChanged.OnNext(((int)TableIndexNumericUpDown.Value, (int)PositionNumericUpDown.Value));
     }
 }

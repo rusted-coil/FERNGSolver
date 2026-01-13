@@ -3,11 +3,13 @@ using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.FalconKnightTool.UI;
 using FERNGSolver.Radiance.Application.Search.Strategy;
 using FERNGSolver.Radiance.Domain.Character;
+using FERNGSolver.Radiance.Domain.Combat;
 using FERNGSolver.Radiance.Domain.Repository;
 using FERNGSolver.Radiance.Domain.Repository.Stub;
 using FERNGSolver.Radiance.Presentation.FalconKnight;
 using FERNGSolver.Radiance.Presentation.ViewContracts;
 using FERNGSolver.Radiance.UI.Internal;
+using FERNGSolver.Radiance.UI.Search.Internal;
 using FormRx.Button;
 using System.Reactive;
 using System.Reactive.Subjects;
@@ -58,16 +60,16 @@ namespace FERNGSolver.Radiance.UI.Search
         public int AttackerHitRate => (int)AttackerHitRateNumericUpDown.Value;
         public int AttackerCriticalRate => (int)AttackerCriticalRateNumericUpDown.Value;
         public int AttackerPhaseCount => DoesAttackerFollowUpAttackCheckBox.Checked ? 2 : 1;
-//        public IUnitStatusDetail AttackerStatusDetail => m_AttackerStatusDetail;
+        public IUnitStatusDetail AttackerStatusDetail => m_AttackerStatusDetail;
         public int DefenderHp => (int)DefenderHpNumericUpDown.Value;
         public int DefenderPower => (int)DefenderPowerNumericUpDown.Value;
         public int DefenderHitRate => (int)DefenderHitRateNumericUpDown.Value;
         public int DefenderCriticalRate => (int)DefenderCriticalRateNumericUpDown.Value;
         public int DefenderPhaseCount => DoesDefenderAttackCheckBox.Checked ? (DoesDefenderFollowUpAttackCheckBox.Checked ? 2 : 1) : 0;
-//        public IUnitStatusDetail DefenderStatusDetail => m_DefenderStatusDetail;
+        public IUnitStatusDetail DefenderStatusDetail => m_DefenderStatusDetail;
 
-//        private UnitStatusDetail m_AttackerStatusDetail = new UnitStatusDetail();
-//        private UnitStatusDetail m_DefenderStatusDetail = new UnitStatusDetail();
+        private UnitStatusDetail m_AttackerStatusDetail = new UnitStatusDetail();
+        private UnitStatusDetail m_DefenderStatusDetail = new UnitStatusDetail();
 
         // 戦闘事後条件
         public int AttackerHpPostconditionMin => FiltersByAttackerHpPostconditionCheckBox.Checked ? (int)AttackerHpPostconditionMinNumericUpDown.Value : 0;
@@ -86,12 +88,13 @@ namespace FERNGSolver.Radiance.UI.Search
         public int DefGrowthRate => (int)GrowthDefRateNumericUpDown.Value;
         public int MdfGrowthRate => (int)GrowthMdfRateNumericUpDown.Value;
         public GrowthSearchType HpSearchType => IsHpGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
-        public GrowthSearchType AtkSearchType => IsAtkGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType StrSearchType => IsStrGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType MgcSearchType => IsMgcGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType TecSearchType => IsTecGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType SpdSearchType => IsSpdGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+        public GrowthSearchType LucSearchType => IsLucGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType DefSearchType => IsDefGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
         public GrowthSearchType MdfSearchType => IsMdfGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
-        public GrowthSearchType LucSearchType => IsLucGrowthNeeded.Checked ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
 
         // 検索条件
         public int CurrentPosition => (int)CurrentRngCountNumericUpDown.Value;
@@ -100,6 +103,8 @@ namespace FERNGSolver.Radiance.UI.Search
 
         // 結果出力用
         public int FalconKnightMethodMove => (int)FalconKnightConsumeMoveNumericUpDown.Value;
+
+        public int? SearchTableIndex => throw new NotImplementedException();
 
         private Form? m_FalconKnightToolForm = null;
 

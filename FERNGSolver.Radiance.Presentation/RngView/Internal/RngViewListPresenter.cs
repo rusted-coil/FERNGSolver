@@ -1,4 +1,3 @@
-using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.Radiance.Presentation.RngView.ViewContracts;
 using FERNGSolver.Radiance.Presentation.ViewContracts;
 using System.Reactive.Disposables;
@@ -18,7 +17,7 @@ namespace FERNGSolver.Radiance.Presentation.RngView.Internal
             m_ListView = listView;
 
             // 初期状態で1つ追加
-            m_ListView.AddView(m_MainFormView, 0);
+            m_ListView.AddView(m_MainFormView, 0, 0);
         }
 
         public void Dispose()
@@ -26,9 +25,9 @@ namespace FERNGSolver.Radiance.Presentation.RngView.Internal
             m_Disposables.Dispose();
         }
 
-        public void AddRngView(int initialPosition)
+        public void AddRngView(int tableIndex, int initialPosition)
         {
-            m_ListView.AddView(m_MainFormView, initialPosition);
+            m_ListView.AddView(m_MainFormView, tableIndex, initialPosition);
         }
     }
 }

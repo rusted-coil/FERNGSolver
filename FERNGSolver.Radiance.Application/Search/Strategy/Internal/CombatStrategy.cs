@@ -16,7 +16,7 @@ namespace FERNGSolver.Radiance.Application.Search.Strategy.Internal
         {
             m_Args = args;
 
-            m_CombatRngService = CombatRngServiceFactory.Create(RngFactory.CreateDefault());
+            m_CombatRngService = CombatRngServiceFactory.Create(RngFactory.Create(0)); // 後でRNGをセットするのでダミーで初期化
         }
 
         public bool CheckAndAdvance(IRng rng)

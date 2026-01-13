@@ -24,9 +24,9 @@ namespace FERNGSolver.Radiance.UI.RngView.Internal
             m_ListViewPanel.Controls.Clear();
         }
 
-        public void AddView(IExtendedMainFormView mainFormView, int initialPosition)
+        public void AddView(IExtendedMainFormView mainFormView, int tableIndex, int initialPosition)
         {
-            var userControl = new RngViewUserControl(initialPosition);
+            var userControl = new RngViewUserControl(tableIndex, initialPosition);
             AddUserControl(userControl);
 
             var disposables = new CompositeDisposable();

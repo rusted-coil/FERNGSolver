@@ -50,8 +50,7 @@ namespace FERNGSolver.Radiance.Presentation.RngView.Internal
             {
                 CombatSimulator.Simulate(recordingService,
                     Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateAttackerUnitFromView(m_MainFormView),
-                    Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateDefenderUnitFromView(m_MainFormView),
-                    m_MainFormView.IsBindingBlade);
+                    Search.Executor.Internal.CombatAndGrowthSearchExecutor.CreateDefenderUnitFromView(m_MainFormView));
 
                 // 戦闘に使用した乱数をViewModel化
                 foreach (var pair in recordingService.UsedRandomNumbers)
@@ -69,12 +68,13 @@ namespace FERNGSolver.Radiance.Presentation.RngView.Internal
             {
                 var growth = GrowthSimulator.Simulate(rng,
                     m_MainFormView.HpGrowthRate,
-                    m_MainFormView.AtkGrowthRate,
+                    m_MainFormView.StrGrowthRate,
+                    m_MainFormView.MgcGrowthRate,
                     m_MainFormView.TecGrowthRate,
                     m_MainFormView.SpdGrowthRate,
+                    m_MainFormView.LucGrowthRate,
                     m_MainFormView.DefGrowthRate,
-                    m_MainFormView.MdfGrowthRate,
-                    m_MainFormView.LucGrowthRate);
+                    m_MainFormView.MdfGrowthRate);
 
                 for (int i = 0; i < growth.Count; ++i)
                 {

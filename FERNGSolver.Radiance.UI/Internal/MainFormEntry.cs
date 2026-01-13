@@ -2,8 +2,12 @@ using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Presentation.Extensions;
 using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.Common.UI.Interfaces;
+using FERNGSolver.Radiance.Presentation.RngView.ViewContracts;
 using FERNGSolver.Radiance.Presentation.Search;
+using FERNGSolver.Radiance.Presentation.ViewContracts;
+using FERNGSolver.Radiance.UI.RngView.Internal;
 using FERNGSolver.Radiance.UI.Search;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 
 namespace FERNGSolver.Radiance.UI.Internal
@@ -12,6 +16,9 @@ namespace FERNGSolver.Radiance.UI.Internal
     {
         public static string Title => "蒼炎の軌跡";
         string IMainFormEntry.Title => Title;
+
+        private IExtendedMainFormView? m_ExtendedMainFormView = null;
+        private IRngViewListView? m_RngViewListView = null;
 
         private readonly IErrorNotifier m_ErrorNotifier;
 
@@ -23,15 +30,38 @@ namespace FERNGSolver.Radiance.UI.Internal
         public UserControl CreateSearchConditionUserControl(IMainFormView mainFormView, Panel rngViewListViewPanel)
         {
             var userControl = new MainFormUserControl(mainFormView);
+            m_ExtendedMainFormView = userControl;
 
             var disposables = new CompositeDisposable();
 
             PresenterFactory.Create(userControl, m_ErrorNotifier).AddTo(disposables);
 
+            var rngViewListView = new RngViewListView(rngViewListViewPanel);
+            rngViewListView.AddTo(disposables);
+            m_RngViewListView = rngViewListView;
+
+            Presentation.RngView.PresenterFactory.CreateListPresenter(userControl, m_RngViewListView).AddTo(disposables);
+            mainFormView.AddRngViewButtonClicked.Subscribe(_ => m_RngViewListView.AddView(userControl, 0, 0)).AddTo(disposables);
+            mainFormView.AddRngViewRequestedFromSearchResults.Subscribe(AddRngViewFromSearchResults).AddTo(disposables);
+
             // UserControlの破棄時にPresenterも破棄
             userControl.Disposed += (sender, args) => disposables.Dispose();
 
             return userControl;
+        }
+
+        private void AddRngViewFromSearchResults(IEnumerable<object> viewModels)
+        {
+            Debug.Assert(m_ExtendedMainFormView != null, "m_ExtendedMainFormView should not be null");
+            Debug.Assert(m_RngViewListView != null, "m_RngViewListView should not be null");
+
+            foreach (var viewModel in viewModels)
+            {
+                if (viewModel is IRngStateResultViewModel rngState)
+                {
+                    m_RngViewListView.AddView(m_ExtendedMainFormView, int.Parse(rngState.TableIndex), int.Parse(rngState.Position));
+                }
+            }
         }
     }
 }
