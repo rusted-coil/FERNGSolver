@@ -229,6 +229,7 @@ namespace FERNGSolver.Radiance.UI.Search
             DefenderStatusDetailDialogButton.TabIndex = 6;
             DefenderStatusDetailDialogButton.Text = "詳細設定";
             DefenderStatusDetailDialogButton.UseVisualStyleBackColor = true;
+            DefenderStatusDetailDialogButton.Click += DefenderStatusDetailDialogButton_Click;
             // 
             // DefenderHpPostconditionMaxNumericUpDown
             // 
@@ -403,6 +404,7 @@ namespace FERNGSolver.Radiance.UI.Search
             AttackerStatusDetailDialogButton.TabIndex = 6;
             AttackerStatusDetailDialogButton.Text = "詳細設定";
             AttackerStatusDetailDialogButton.UseVisualStyleBackColor = true;
+            AttackerStatusDetailDialogButton.Click += AttackerStatusDetailDialogButton_Click;
             // 
             // AttackerHpPostconditionMaxNumericUpDown
             // 

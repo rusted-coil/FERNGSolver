@@ -55,20 +55,17 @@ namespace FERNGSolver.Radiance.Domain.Combat
         {
             public ICombatUnit CombatUnit { get; }
             public int CurrentHp { get; set; }
+            public int WeaponUses { get; set; }
             public UnitSide UnitSide { get; }
 
             public Unit(ICombatUnit combatUnit, UnitSide unitSide)
             {
                 CombatUnit = combatUnit;
                 CurrentHp = combatUnit.Hp;
+                WeaponUses = combatUnit.StatusDetail.WeaponUses;
                 UnitSide = unitSide;
             }
         }
-
-        private static int GetLevel(this Unit unit) => unit.CombatUnit.StatusDetail.Level;
-        private static bool IsAbsorbWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Absorb;
-        private static bool IsPoisonWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Poison;
-        private static bool IsCursedWeapon(this Unit unit) => unit.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Cursed;
 
         enum AttackType
         {
@@ -94,14 +91,19 @@ namespace FERNGSolver.Radiance.Domain.Combat
             for (int i = 0; i < attackCount; ++i)
             {
                 // 天空判定
-                if (attackerSide.CombatUnit.StatusDetail.HasAether && rngService.CheckActivateAether(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                if (attackerSide.CombatUnit.StatusDetail.HasAether
+                    && attackerSide.CombatUnit.StatusDetail.WeaponType != Const.WeaponType.MagicSword // 剣の間接攻撃では発動しない
+                    && rngService.CheckActivateAether(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                 {
                     // 太陽→月光の2回攻撃
                     attackTypes.Add(AttackType.Sol);
                     attackTypes.Add(AttackType.Luna);
                 }
                 // 流星判定
-                else if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                else if (attackerSide.CombatUnit.StatusDetail.HasAstra
+                    && attackerSide.CombatUnit.StatusDetail.WeaponType != Const.WeaponType.MagicSword // 剣の間接攻撃では発動しない
+                    && attackerSide.WeaponUses >= 2 // 流星は武器耐久残り2以上の時のみ判定
+                    && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                 {
                     // ダメージ半分の5回攻撃
                     attackTypes.Add(AttackType.Astra);
@@ -116,31 +118,93 @@ namespace FERNGSolver.Radiance.Domain.Combat
                 }
             }
 
+            int counterDamage = 0;
+
             for (int i = 0; i < attackTypes.Count; ++i)
             {
+                // 武器耐久がなくなっていたら打ち切り
+                if (attackerSide.WeaponUses <= 0)
+                {
+                    break;
+                }
+
                 // 命中判定
                 if (rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
                 {
+                    int damage = attackerSide.CombatUnit.Power;
+                    bool isCritical = false;
+
                     // 必殺判定
                     if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
                     {
+                        damage *= 3;
+                        isCritical = true;
                     }
                     // 武器破壊判定
-                    if (attackerSide.CombatUnit.StatusDetail.HasCorrode)
+                    if (attackerSide.CombatUnit.StatusDetail.HasCorrode && rngService.CheckActivateCorrode(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    {
+                        // CEIL(Lv/4)
+                        defenderSide.WeaponUses -= (attackerSide.CombatUnit.StatusDetail.Level + 3) / 4;
+                    }
+                    // 衝撃判定
+                    if (attackerSide.CombatUnit.StatusDetail.HasStun && rngService.CheckActivateStun(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    {
+                        // 戦闘には影響なし
+                    }
+                    // 鳴動判定
+                    // TODO 相手が漆黒の騎士とアシュナードなら判定しない
+                    if (attackerSide.CombatUnit.StatusDetail.HasColossus && rngService.CheckActivateColossus(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    {
+                        // 魔法攻撃武器でも力で計算
+                        damage += (attackerSide.CombatUnit.StatusDetail.Str / 4);
+                    }
+                    // 月光判定
+                    if (attackTypes[i] == AttackType.Luna || (attackerSide.CombatUnit.StatusDetail.HasLuna && attackerSide.CombatUnit.StatusDetail.WeaponType != Const.WeaponType.MagicSword && rngService.CheckActivateLuna(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide)))
+                    {
+                        // 必殺が出ていても上書きして月光の素のダメージを適用する
+                        damage = attackerSide.CombatUnit.Power + attackerSide.CombatUnit.StatusDetail.OpponentDefense / 2;
+                    }
+                    // 陽光判定
+                    if (attackerSide.CombatUnit.StatusDetail.HasFlare && rngService.CheckActivateFlare(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    {
+                        // 必殺が出ていても上書きして陽光の素のダメージを適用する
+                        damage = attackerSide.CombatUnit.Power + attackerSide.CombatUnit.StatusDetail.OpponentDefense / 2;
+                    }
+                    // 瞬殺判定
+                    // 必殺発動時しか瞬殺の効果は無いが、スキルを持っていれば判定は行う
+                    // TODO 相手がボスなら判定しない
+                    if (attackerSide.CombatUnit.StatusDetail.HasLethality && rngService.CheckActivateLethality(attackerSide.UnitSide) && isCritical)
+                    {
+                        damage = defenderSide.CurrentHp;
+                    }
+                    // カウンター判定
+                    // TODO 相手が漆黒の騎士とアシュナードなら判定しない
+                    if (defenderSide.CombatUnit.StatusDetail.HasCounter && rngService.CheckActivateCounter(defenderSide.CombatUnit.StatusDetail.Tec, defenderSide.UnitSide))
+                    {
+                        counterDamage += damage / 2;
+                    }
+                    // 祈り判定
+                    if (defenderSide.CombatUnit.StatusDetail.HasMiracle && defenderSide.CurrentHp <= damage && rngService.CheckActivateMiracle(defenderSide.CombatUnit.StatusDetail.Luck, defenderSide.UnitSide))
+                    {
+                        damage = defenderSide.CurrentHp / 2;
+                    }
+                    // キャンセル判定
+                    if (attackerSide.CombatUnit.StatusDetail.HasGuard && rngService.CheckActivateGuard(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                     {
                     }
-                    // 衝撃判定（戦闘には影響なし）
-                    // 鳴動判定
-                    // 月光判定
-                    // 陽光判定
-                    // 瞬殺判定
-                    // カウンター判定
-                    // 祈り判定
-                    // キャンセル判定
                     // 狙撃判定
+                    if (attackerSide.CombatUnit.StatusDetail.HasDeadeye && rngService.CheckActivateDeadeye(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    {
+                    }
                     // 太陽判定
+                    if (attackerSide.CombatUnit.StatusDetail.HasSol && rngService.CheckActivateSol(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    {
+                    }
                     // 翼の守護判定
-                    // 
+                    if (defenderSide.CombatUnit.StatusDetail.HasCancel && rngService.CheckActivateCancel(defenderSide.CombatUnit.StatusDetail.Tec, defenderSide.UnitSide))
+                    {
+                        damage = 0;
+                    }
                 }
             }
 

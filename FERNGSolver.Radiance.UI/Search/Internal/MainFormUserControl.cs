@@ -216,23 +216,16 @@ namespace FERNGSolver.Radiance.UI.Search
             }
         }
 
-        /*
         private void AttackerStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_AttackerStatusDetail, AttackerStatusDetailLabel);
         private void DefenderStatusDetailDialogButton_Click(object sender, EventArgs e) => OpenStatusDetailDialog(m_DefenderStatusDetail, DefenderStatusDetailLabel);
-        private void OpenStatusDetailDialog(UnitStatusDetail targetStatus, Label targetStatusLabel)
+        private void OpenStatusDetailDialog(UnitStatusDetailDialogState targetStatus, Label targetStatusLabel)
         {
-            using (IUnitStatusDetailDialog dialog = m_Title switch {
-                Titles.Title.BindingBlade => new BindingBladeUnitStatusDetailDialog(targetStatus),
-                Titles.Title.BlazingBlade => new BlazingBladeUnitStatusDetailDialog(targetStatus),
-                Titles.Title.SacredStones => new SacredStonesUnitStatusDetailDialog(targetStatus),
-                _ => throw new NotSupportedException(),
-            })
+            using (var form = new UnitStatusDetailDialog(targetStatus))
             {
-                dialog.Form.StartPosition = FormStartPosition.CenterParent;
-                var result = dialog.Form.ShowDialog();
+                form.StartPosition = FormStartPosition.CenterParent;
+                var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    dialog.WriteToUnitStatusDetail(targetStatus);
                     targetStatusLabel.Text = targetStatus.ToString();
 
                     // 「戦闘を行う」にチェックが入っている時のみ条件が変化したものとして通知を行う
@@ -243,7 +236,6 @@ namespace FERNGSolver.Radiance.UI.Search
                 }
             }
         }
-        */
 
         private void MainFormUserControl_Load(object sender, EventArgs e)
         {

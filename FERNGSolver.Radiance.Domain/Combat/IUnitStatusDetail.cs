@@ -8,6 +8,11 @@ namespace FERNGSolver.Radiance.Domain.Combat
         Const.WeaponType WeaponType { get; }
 
         /// <summary>
+        /// ボス属性を取得します。
+        /// </summary>
+        Const.BossType BossType { get; }
+
+        /// <summary>
         /// 待ち伏せを所持しているかどうかを取得します。
         /// </summary>
         bool HasVantage { get; }
@@ -98,11 +103,6 @@ namespace FERNGSolver.Radiance.Domain.Combat
         bool HasCancel { get; }
 
         /// <summary>
-        /// ボス属性を取得します。
-        /// </summary>
-        Const.BossType BossType { get; }
-
-        /// <summary>
         /// 武器の残り使用回数を取得します。
         /// </summary>
         int WeaponUses { get; }
@@ -116,6 +116,11 @@ namespace FERNGSolver.Radiance.Domain.Combat
         /// 最大HPを取得します。
         /// </summary>
         int MaxHp { get; }
+
+        /// <summary>
+        /// 力を取得します。
+        /// </summary>
+        int Str { get; }
 
         /// <summary>
         /// 技を取得します。

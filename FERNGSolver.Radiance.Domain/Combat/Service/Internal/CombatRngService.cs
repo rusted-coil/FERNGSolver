@@ -31,7 +31,40 @@ namespace FERNGSolver.Radiance.Domain.Combat.Service.Internal
         // 流星判定
         public bool CheckActivateAstra(int tec, UnitSide unitSide) => m_Rng.Next() < tec / 2;
 
-        // デビルアクス
-        public bool CheckActivateCurse(int luck, UnitSide unitSide) => m_Rng.Next() < Util.GetCurseRate(luck);
+        // 月光判定
+        public bool CheckActivateLuna(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+
+        // 太陽判定
+        public bool CheckActivateSol(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+
+        // 陽光判定
+        public bool CheckActivateFlare(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+
+        // 瞬殺判定
+        public bool CheckActivateLethality(UnitSide unitSide) => m_Rng.Next() < 50;
+
+        // 武器破壊判定
+        public bool CheckActivateCorrode(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+
+        // 衝撃判定
+        public bool CheckActivateStun(int tec, UnitSide unitSide) => m_Rng.Next() < tec / 2;
+
+        // 鳴動判定
+        public bool CheckActivateColossus(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+
+        // カウンター判定
+        public bool CheckActivateCounter(int tec, UnitSide unitSide) => m_Rng.Next() < tec / 2;
+
+        // 祈り判定
+        public bool CheckActivateMiracle(int luck, UnitSide unitSide) => m_Rng.Next() < luck;
+
+        // キャンセル判定
+        public bool CheckActivateGuard(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
+
+        // 狙撃判定
+        public bool CheckActivateDeadeye(int tec, UnitSide unitSide) => m_Rng.Next() < tec / 2;
+
+        // 翼の守護判定
+        public bool CheckActivateCancel(int tec, UnitSide unitSide) => m_Rng.Next() < tec;
     }
 }

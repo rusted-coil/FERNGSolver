@@ -24,26 +24,46 @@ namespace FERNGSolver.Radiance.Application.RNG
         PlayerHit1, // 実効命中率その1
         PlayerHit2, // 実効命中率その2
         PlayerCritical, // 必殺
-        PlayerSureStrike, // 必的判定
-        PlayerPierce, // 貫通判定
-        PlayerGreatShield, // 大盾判定
-        PlayerSilencer, // 瞬殺判定
-        PlayerCurse, // 呪い判定
+        PlayerAdept, // 連続判定
+        PlayerAether, // 天空判定
+        PlayerAstra, // 流星判定
+        PlayerLuna, // 月光判定
+        PlayerSol, // 太陽判定
+        PlayerFlare, // 陽光判定
+        PlayerLethality, // 瞬殺判定
+        PlayerCorrode, // 武器破壊判定
+        PlayerStun, // 衝撃判定
+        PlayerColossus, // 鳴動判定
+        PlayerCounter, // カウンター判定
+        PlayerMiracle, // 祈り判定
+        PlayerGuard, // キャンセル判定
+        PlayerDeadeye, // 狙撃判定
+        PlayerCancel, // 翼の守護判定
 
         PlayerStart = PlayerHit1,
-        PlayerEnd = PlayerCurse,
+        PlayerEnd = PlayerCancel,
 
         EnemyHit1, // 実効命中率その1
         EnemyHit2, // 実効命中率その2
         EnemyCritical, // 必殺
-        EnemySureStrike, // 必的判定
-        EnemyPierce, // 貫通判定
-        EnemyGreatShield, // 大盾判定
-        EnemySilencer, // 瞬殺判定
-        EnemyCurse, // 呪い判定
+        EnemyAdept, // 連続判定
+        EnemyAether, // 天空判定
+        EnemyAstra, // 流星判定
+        EnemyLuna, // 月光判定
+        EnemySol, // 太陽判定
+        EnemyFlare, // 陽光判定
+        EnemyLethality, // 瞬殺判定
+        EnemyCorrode, // 武器破壊判定
+        EnemyStun, // 衝撃判定
+        EnemyColossus, // 鳴動判定
+        EnemyCounter, // カウンター判定
+        EnemyMiracle, // 祈り判定
+        EnemyGuard, // キャンセル判定
+        EnemyDeadeye, // 狙撃判定
+        EnemyCancel, // 翼の守護判定
 
         EnemyStart = EnemyHit1,
-        EnemyEnd = EnemyCurse,
+        EnemyEnd = EnemyCancel,
     }
 
     public static class RandomNumberUsageExtensions
