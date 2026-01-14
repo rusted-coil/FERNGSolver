@@ -5,6 +5,7 @@ namespace FERNGSolver.Radiance.UI.Search.Internal
     internal partial class UnitStatusDetailDialog : Form
     {
         private readonly RadioButton[] WeaponTypeRadioButtons;
+        private readonly RadioButton[] BossTypeRadioButtons;
         private readonly UnitStatusDetailDialogState m_State;
         private readonly Control[] ParameterControls;
         private readonly ICheckable[][] ParameterControlDependencies;
@@ -55,45 +56,71 @@ namespace FERNGSolver.Radiance.UI.Search.Internal
             WeaponTypeRadioButtons = [
                 IsWeaponTypeNormalRadioButton,
                 IsWeaponTypeBraveRadioButton,
+                IsWeaponTypeMagicSwordRadioButton,
                 IsWeaponTypeAbsorbRadioButton,
-                IsWeaponTypePoisonRadioButton,
+            ];
+            BossTypeRadioButtons = [
+                IsBossTypeNoneRadioButton,
+                IsBossTypeBossRadioButton,
+                IsBossTypeFinalBossRadioButton,
             ];
             ParameterControls = [
                 LevelNumericUpDown,
                 MaxHpNumericUpDown,
+                StrNumericUpDown,
                 TecNumericUpDown,
-                AttackSpeedNumericUpDown,
-                OpponentAttackSpeedNumericUpDown,
-                OpponentMdfNumericUpDown,
+                LuckNumericUpDown,
+                OpponentDefNumericUpDown,
             ];
 
-            /*
             // パラメータの依存関係を登録
             // 「どの判定に何のパラメータが使われるか」は本来Domain領域に定義した方がいいと思う
             // やるなら例えばパラメータごとにタグを用意して、Domain側はタグの依存関係のみを提供、UI側でそれに基づいてコントロールを紐づけるといった感じ？
             ParameterControlDependencies = [
-                // Lv依存は大盾
-                [ new CheckBoxWrapper(HasGreatShieldCheckBox) ],
-                // 最大HP依存は吸収武器、待ち伏せ、怒り、太陽剣
-                [ new RadioButtonWrapper(IsWeaponTypeAbsorbRadioButton), new CheckBoxWrapper(HasVantageCheckBox), new CheckBoxWrapper(HasWrathCheckBox), new CheckBoxWrapper(HasSolCheckBox) ],
-                // 技依存は流星剣、月光剣、太陽剣、必殺スキル、武器の★必殺
-                [ new CheckBoxWrapper(HasAstraCheckBox), new CheckBoxWrapper(HasLunaCheckBox), new CheckBoxWrapper(HasSolCheckBox), new CheckBoxWrapper(HasCriticalSkillCheckBox), new NumericUpDownWrapper(WeaponStarNumericUpDown, 50) ],
-                // 攻速依存は連続、突撃
-                [ new CheckBoxWrapper(HasAdeptCheckBox), new CheckBoxWrapper(HasAssaultCheckBox) ],
-                // 相手の攻速依存は突撃
-                [ new CheckBoxWrapper(HasAssaultCheckBox) ],
-                // 相手の魔防依存は状態異常
-                [ new RadioButtonWrapper(IsWeaponTypePoisonRadioButton) ],   
+                // Lv依存は武器破壊
+                [ new CheckBoxWrapper(HasCorrodeCheckBox) ],
+                // 最大HP依存は吸収武器、怒り、勇将、天空、太陽
+                [   new RadioButtonWrapper(IsWeaponTypeAbsorbRadioButton),
+                    new CheckBoxWrapper(HasWrathCheckBox),
+                    new CheckBoxWrapper(HasResolveCheckBox),
+                    new CheckBoxWrapper(HasAetherCheckBox),
+                    new CheckBoxWrapper(HasSolCheckBox) ],
+                // 力依存は勇将、鳴動
+                [   new CheckBoxWrapper(HasResolveCheckBox),
+                    new CheckBoxWrapper(HasColossusCheckBox) ],
+                // 技依存は連続、勇将、武器破壊、衝撃、鳴動、天空、流星、月光、太陽、陽光、カウンター、キャンセル、狙撃、翼の守護
+                [   new CheckBoxWrapper(HasAdeptCheckBox),
+                    new CheckBoxWrapper(HasResolveCheckBox),
+                    new CheckBoxWrapper(HasCorrodeCheckBox),
+                    new CheckBoxWrapper(HasStunCheckBox),
+                    new CheckBoxWrapper(HasColossusCheckBox),
+                    new CheckBoxWrapper(HasAetherCheckBox),
+                    new CheckBoxWrapper(HasAstraCheckBox),
+                    new CheckBoxWrapper(HasLunaCheckBox),
+                    new CheckBoxWrapper(HasSolCheckBox),
+                    new CheckBoxWrapper(HasFlareCheckBox),
+                    new CheckBoxWrapper(HasCounterCheckBox),
+                    new CheckBoxWrapper(HasGuardCheckBox),
+                    new CheckBoxWrapper(HasDeadeyeCheckBox),
+                    new CheckBoxWrapper(HasCancelCheckBox) ],
+                // 幸運依存は祈り
+                [ new CheckBoxWrapper(HasMiracleCheckBox) ],
+                // 相手の守備/魔防依存は天空、月光、陽光
+                [   new CheckBoxWrapper(HasAetherCheckBox),
+                    new CheckBoxWrapper(HasLunaCheckBox),
+                    new CheckBoxWrapper(HasFlareCheckBox)],
             ];
 
+            WeaponUsesNumericUpDown.Value = state.WeaponUses;
             WeaponTypeRadioButtons[(int)m_State.WeaponType].Checked = true;
+            BossTypeRadioButtons[(int)m_State.BossType].Checked = true;
             LevelNumericUpDown.Value = state.Level;
             MaxHpNumericUpDown.Value = state.MaxHp;
+            StrNumericUpDown.Value = state.Str;
             TecNumericUpDown.Value = state.Tec;
-            AttackSpeedNumericUpDown.Value = state.AttackSpeed;
-            OpponentAttackSpeedNumericUpDown.Value = state.OpponentAttackSpeed;
-            OpponentMdfNumericUpDown.Value = state.OpponentMdf;
-            */
+            LuckNumericUpDown.Value = state.Luck;
+            OpponentDefNumericUpDown.Value = state.OpponentDefense;
+            
             HasVantageCheckBox.Checked = state.HasVantage;
             HasAdeptCheckBox.Checked = state.HasAdept;
             HasWrathCheckBox.Checked = state.HasWrath;
@@ -118,15 +145,15 @@ namespace FERNGSolver.Radiance.UI.Search.Internal
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            /*
+            m_State.WeaponUses = (int)WeaponUsesNumericUpDown.Value;
             m_State.WeaponType = (Const.WeaponType)Array.IndexOf(WeaponTypeRadioButtons, WeaponTypeRadioButtons.FirstOrDefault(r => r.Checked));
+            m_State.BossType = (Const.BossType)Array.IndexOf(BossTypeRadioButtons, BossTypeRadioButtons.FirstOrDefault(r => r.Checked));
             m_State.Level = (int)LevelNumericUpDown.Value;
             m_State.MaxHp = (int)MaxHpNumericUpDown.Value;
+            m_State.Str = (int)StrNumericUpDown.Value;
             m_State.Tec = (int)TecNumericUpDown.Value;
-            m_State.AttackSpeed = (int)AttackSpeedNumericUpDown.Value;
-            m_State.OpponentAttackSpeed = (int)OpponentAttackSpeedNumericUpDown.Value;
-            m_State.OpponentMdf = (int)OpponentMdfNumericUpDown.Value;
-            */
+            m_State.Luck = (int)LuckNumericUpDown.Value;
+            m_State.OpponentDefense = (int)OpponentDefNumericUpDown.Value;
 
             m_State.HasVantage = HasVantageCheckBox.Checked;
             m_State.HasAdept = HasAdeptCheckBox.Checked;
@@ -163,7 +190,6 @@ namespace FERNGSolver.Radiance.UI.Search.Internal
         // チェックボックスの状況によって設定できるパラメータを制御
         private void RefreshParameterControlState()
         {
-            /*
             for (int a = 0; a < ParameterControls.Length; ++a)
             {
                 bool isEnabled = false;
@@ -179,7 +205,6 @@ namespace FERNGSolver.Radiance.UI.Search.Internal
                 ParameterControls[a].BackColor = isEnabled ? Color.Yellow : SystemColors.Window;
                 ParameterControls[a].Enabled = isEnabled;
             }
-            */
         }
     }
 }

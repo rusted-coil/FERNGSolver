@@ -114,8 +114,8 @@ namespace FERNGSolver.Radiance.Domain.Combat
                 // 流星判定
                 else if (attackerSide.CombatUnit.StatusDetail.HasAstra
                     && attackerSide.CombatUnit.StatusDetail.WeaponType != Const.WeaponType.MagicSword // 剣の間接攻撃では発動しない
-                    && attackerSide.WeaponUses >= 2 // 流星は武器耐久残り2以上の時のみ判定
-                    && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide)
+                    && attackerSide.WeaponUses >= 2) // 流星は武器耐久残り2以上の時のみ発動（判定はする）
                 {
                     // ダメージ半分の5回攻撃
                     attackTypes.Add(AttackType.Astra);
@@ -140,18 +140,31 @@ namespace FERNGSolver.Radiance.Domain.Combat
                     break;
                 }
 
-                // 命中判定
-                if (rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
+                int hitRate = attackerSide.CombatUnit.HitRate;
+                int damage = attackerSide.CombatUnit.Power;
+
+                // 勇将補正
+                if (attackerSide.CombatUnit.StatusDetail.HasResolve && attackerSide.CurrentHp * 2 <= attackerSide.CombatUnit.StatusDetail.MaxHp)
                 {
-                    int damage = attackerSide.CombatUnit.Power;
+                    damage += attackerSide.CombatUnit.StatusDetail.Str / 2;
+                    hitRate += attackerSide.CombatUnit.StatusDetail.Tec; // 命中=技×2+幸運+武器命中など　勇将は技を1.5倍にする
+                }
+
+                // 命中判定
+                if (rngService.CheckHit(hitRate, attackerSide.UnitSide))
+                {
                     int heal = 0;
                     bool isCritical = false;
 
-                    // TODO 怒り補正
-                    // TODO 勇将補正
+                    int criticalRate = attackerSide.CombatUnit.CriticalRate;
+                    // 怒り補正
+                    if (attackerSide.CombatUnit.StatusDetail.HasWrath && attackerSide.CurrentHp * 2 <= attackerSide.CombatUnit.StatusDetail.MaxHp)
+                    {
+                        criticalRate = Math.Min(100, criticalRate + 50);
+                    }
 
                     // 必殺判定
-                    if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
+                    if (rngService.CheckCritical(criticalRate, attackerSide.UnitSide))
                     {
                         damage *= 3;
                         isCritical = true;
@@ -174,8 +187,8 @@ namespace FERNGSolver.Radiance.Domain.Combat
                         // 戦闘には影響なし
                     }
                     // 鳴動判定
-                    // TODO 相手が漆黒の騎士とアシュナードなら判定しない
-                    if (attackerSide.CombatUnit.StatusDetail.HasColossus && rngService.CheckActivateColossus(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    // 相手が漆黒の騎士とアシュナードなら判定しない
+                    if (attackerSide.CombatUnit.StatusDetail.HasColossus && defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss && rngService.CheckActivateColossus(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                     {
                         // 魔法攻撃武器でも力で計算
                         damage += (attackerSide.CombatUnit.StatusDetail.Str / 4);
@@ -194,14 +207,14 @@ namespace FERNGSolver.Radiance.Domain.Combat
                     }
                     // 瞬殺判定
                     // 必殺発動時しか瞬殺の効果は無いが、スキルを持っていれば判定は行う
-                    // TODO 相手がボスなら判定しない
-                    if (attackerSide.CombatUnit.StatusDetail.HasLethality && rngService.CheckActivateLethality(attackerSide.UnitSide) && isCritical)
+                    // 相手がボスなら判定しない
+                    if (attackerSide.CombatUnit.StatusDetail.HasLethality && defenderSide.CombatUnit.StatusDetail.BossType == Const.BossType.None && rngService.CheckActivateLethality(attackerSide.UnitSide) && isCritical)
                     {
                         damage = defenderSide.CurrentHp;
                     }
                     // カウンター判定
-                    // TODO 相手が漆黒の騎士とアシュナードなら判定しない
-                    if (defenderSide.CombatUnit.StatusDetail.HasCounter && rngService.CheckActivateCounter(defenderSide.CombatUnit.StatusDetail.Tec, defenderSide.UnitSide))
+                    // 相手が漆黒の騎士とアシュナードなら判定しない
+                    if (defenderSide.CombatUnit.StatusDetail.HasCounter && attackerSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss && rngService.CheckActivateCounter(defenderSide.CombatUnit.StatusDetail.Tec, defenderSide.UnitSide))
                     {
                         counterDamage += damage / 2;
                     }
@@ -221,7 +234,13 @@ namespace FERNGSolver.Radiance.Domain.Combat
                         defenderSide.IsCancelled = true;
                     }
                     // 太陽判定
-                    if (attackerSide.CombatUnit.StatusDetail.HasSol && rngService.CheckActivateSol(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
+                    if (attackTypes[i] == AttackType.Sol || (attackerSide.CombatUnit.StatusDetail.HasSol && rngService.CheckActivateSol(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide)))
+                    {
+                        heal = damage;
+                    }
+                    // 吸収武器
+                    // 吸収武器かつ太陽所持でも太陽の発動判定は行う。回復量は累積しない
+                    if (attackerSide.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Absorb)
                     {
                         heal = damage;
                     }
