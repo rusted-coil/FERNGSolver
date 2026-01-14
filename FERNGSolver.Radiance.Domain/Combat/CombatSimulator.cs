@@ -26,25 +26,36 @@ namespace FERNGSolver.Radiance.Domain.Combat
 
             // 攻撃側→防御側の順でPhaseCountがなくなるまで交互に攻撃を行う
             // どちらかが死んだら終わり
-            int a = 0, d = 0;
-            while (a < attacker.PhaseCount || d < defender.PhaseCount)
+            var prior = defenderUnit.CombatUnit.StatusDetail.HasVantage ? defenderUnit : attackerUnit;
+            var follower = defenderUnit.CombatUnit.StatusDetail.HasVantage ? attackerUnit : defenderUnit;
+
+            int p = 0, f = 0;
+            while (p < prior.CombatUnit.PhaseCount || f < follower.CombatUnit.PhaseCount)
             {
-                if (a < attacker.PhaseCount)
+                if (p < prior.CombatUnit.PhaseCount)
                 {
-                    if (!ExecutePhase(rngService, attackerUnit, defenderUnit))
+                    if (!ExecutePhase(rngService, prior, follower))
                     {
                         break;
                     }
-                    ++a;
+                    ++p;
+                    if (follower.IsCancelled)
+                    {
+                        f = follower.CombatUnit.PhaseCount;
+                    }
                 }
 
-                if (d < defender.PhaseCount)
+                if (f < follower.CombatUnit.PhaseCount)
                 {
-                    if (!ExecutePhase(rngService, defenderUnit, attackerUnit))
+                    if (!ExecutePhase(rngService, follower, prior))
                     {
                         break;
                     }
-                    ++d;
+                    ++f;
+                    if (prior.IsCancelled)
+                    {
+                        p = prior.CombatUnit.PhaseCount;
+                    }
                 }
             }
 
@@ -54,9 +65,10 @@ namespace FERNGSolver.Radiance.Domain.Combat
         private class Unit
         {
             public ICombatUnit CombatUnit { get; }
+            public UnitSide UnitSide { get; }
             public int CurrentHp { get; set; }
             public int WeaponUses { get; set; }
-            public UnitSide UnitSide { get; }
+            public bool IsCancelled { get; set; } = false;
 
             public Unit(ICombatUnit combatUnit, UnitSide unitSide)
             {
@@ -132,13 +144,23 @@ namespace FERNGSolver.Radiance.Domain.Combat
                 if (rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
                 {
                     int damage = attackerSide.CombatUnit.Power;
+                    int heal = 0;
                     bool isCritical = false;
+
+                    // TODO 怒り補正
+                    // TODO 勇将補正
 
                     // 必殺判定
                     if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
                     {
                         damage *= 3;
                         isCritical = true;
+                    }
+                    // 流星補正
+                    if (attackTypes[i] == AttackType.Astra)
+                    {
+                        // CEIL(ダメージ/2)
+                        damage = (damage + 1) / 2;
                     }
                     // 武器破壊判定
                     if (attackerSide.CombatUnit.StatusDetail.HasCorrode && rngService.CheckActivateCorrode(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
@@ -191,116 +213,57 @@ namespace FERNGSolver.Radiance.Domain.Combat
                     // キャンセル判定
                     if (attackerSide.CombatUnit.StatusDetail.HasGuard && rngService.CheckActivateGuard(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                     {
+                        defenderSide.IsCancelled = true;
                     }
                     // 狙撃判定
                     if (attackerSide.CombatUnit.StatusDetail.HasDeadeye && rngService.CheckActivateDeadeye(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                     {
+                        defenderSide.IsCancelled = true;
                     }
                     // 太陽判定
                     if (attackerSide.CombatUnit.StatusDetail.HasSol && rngService.CheckActivateSol(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide))
                     {
+                        heal = damage;
                     }
                     // 翼の守護判定
                     if (defenderSide.CombatUnit.StatusDetail.HasCancel && rngService.CheckActivateCancel(defenderSide.CombatUnit.StatusDetail.Tec, defenderSide.UnitSide))
                     {
                         damage = 0;
                     }
-                }
-            }
 
-            /*
+                    attackerSide.CurrentHp = Math.Min(attackerSide.CombatUnit.StatusDetail.MaxHp, attackerSide.CurrentHp + heal);
+                    defenderSide.CurrentHp -= damage;
 
-            bool isHit = false;
-            bool isGreatShieldActive = false;
-            bool isPierceActive = false;
-            bool isSilencerActive = false;
-            int damage = 0;
-
-            // 必的判定
-            if (attackerSide.HasSureStrike() && rngService.CheckActivateSureStrike(attackerSide.GetLevel(), attackerSide.UnitSide))
-            {
-                isHit = true;
-            }
-            // 命中判定
-            else if (rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide))
-            {
-                isHit = true;
-
-                // 大盾判定
-                // 武器が毒/ストーンの時、大盾判定をスキップ
-                if (!attackerSide.IsPoisonWeapon() && defenderSide.HasGreatShield() && rngService.CheckActivateGreatShield(defenderSide.GetLevel(), defenderSide.UnitSide))
-                {
-                    isGreatShieldActive = true;
-                }
-                // 貫通判定
-                else if(attackerSide.HasPierce() && rngService.CheckActivatePierce(attackerSide.GetLevel(), attackerSide.UnitSide))
-                {
-                    isPierceActive = true;
-                }
-            }
-
-            if (isHit)
-            {
-                // 貫通ダメージは必殺に乗る
-                int power = (isPierceActive ? attackerSide.CombatUnit.Power + attackerSide.CombatUnit.StatusDetail.OpponentDefense : attackerSide.CombatUnit.Power);
-
-                // 命中していたら必殺判定
-                if (rngService.CheckCritical(attackerSide.CombatUnit.CriticalRate, attackerSide.UnitSide))
-                {
-                    // 必殺が出たら瞬殺判定（封印以外）
-                    // 瞬殺のみスキルを持っていなくても判定する
-                    // 敵がラスボスなら瞬殺判定をスキップ
-                    if(defenderSide.CombatUnit.StatusDetail.BossType != Const.BossType.FinalBoss
-                        && rngService.CheckActivateSilencer(defenderSide.CombatUnit.StatusDetail.BossType, attackerSide.HasSilencer(), attackerSide.UnitSide))
+                    bool result = true;
+                    if (attackerSide.CurrentHp <= 0)
                     {
-                        isSilencerActive = true;
+                        attackerSide.CurrentHp = 0;
+                        result = false;
                     }
-                    damage = power * 3;
-                }
-                else
-                {
-                    damage = power;
-                }
-
-                // TODO 自分がデビルアクスの呪い発動で相手が大盾発動の場合、受けるダメージは？
-
-                // デビルアクス判定
-                // アサシンは斧を持てないので呪いと瞬殺は両立しない
-                if (attackerSide.IsCursedWeapon() && rngService.CheckActivateCurse(attackerSide.CombatUnit.StatusDetail.Luck, attackerSide.UnitSide))
-                {
-                    attackerSide.CurrentHp -= damage;
-                }
-                else if (isSilencerActive)
-                {
-                    defenderSide.CurrentHp = 0; // 瞬殺は大盾を無視する
-                }
-                else
-                {
-                    if (!isGreatShieldActive)
+                    if (defenderSide.CurrentHp <= 0)
                     {
-                        if (attackerSide.IsAbsorbWeapon())
-                        {
-                            attackerSide.CurrentHp = Math.Min(
-                                attackerSide.CombatUnit.StatusDetail.MaxHp,
-                                attackerSide.CurrentHp + Math.Min(defenderSide.CurrentHp, damage));
-                        }
-                        defenderSide.CurrentHp -= damage;
+                        defenderSide.CurrentHp = 0;
+                        result = false;
+                    }
+                    if (!result)
+                    {
+                        return false;
                     }
                 }
-            }*/
+            }
 
-            bool result = true;
-            if (attackerSide.CurrentHp <= 0)
+            // カウンター適用
+            if (counterDamage > 0)
             {
-                attackerSide.CurrentHp = 0;
-                result = false;
+                attackerSide.CurrentHp -= counterDamage;
+                if (attackerSide.CurrentHp <= 0)
+                {
+                    attackerSide.CurrentHp = 0;
+                    return false;
+                }
             }
-            if (defenderSide.CurrentHp <= 0)
-            {
-                defenderSide.CurrentHp = 0;
-                result = false;
-            }
-            return result;
+
+            return true;
         }
     }
 }
