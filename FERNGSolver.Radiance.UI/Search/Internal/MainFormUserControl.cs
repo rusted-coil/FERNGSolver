@@ -3,6 +3,7 @@ using FERNGSolver.Common.Presentation.ViewContracts;
 using FERNGSolver.FalconKnightTool.UI;
 using FERNGSolver.Radiance.Application.Search.Strategy;
 using FERNGSolver.Radiance.Domain.Character;
+using FERNGSolver.Radiance.Domain.Character.Extensions;
 using FERNGSolver.Radiance.Domain.Combat;
 using FERNGSolver.Radiance.Domain.Repository;
 using FERNGSolver.Radiance.Domain.Repository.Stub;
@@ -204,7 +205,20 @@ namespace FERNGSolver.Radiance.UI.Search
         {
             if (GrowthCharacterNameComboBox.SelectedIndex >= 0 && GrowthCharacterNameComboBox.SelectedIndex < m_Characters.Count)
             {
-                var character = m_Characters[GrowthCharacterNameComboBox.SelectedIndex];
+                var character = m_Characters[GrowthCharacterNameComboBox.SelectedIndex]
+                    .Boost(new ICharacterExtensions.BoostArgs {
+                        HasSwordBand = HasSwordBandCheckBox.Checked,
+                        HasFighterBand = HasFighterBandCheckBox.Checked,
+                        HasArcherBand = HasArcherBandCheckBox.Checked,
+                        HasKnightBand = HasKnightBandCheckBox.Checked,
+                        HasPaladinBand = HasPaladinBandCheckBox.Checked,
+                        HasPegasusBand = HasPegasusBandCheckBox.Checked,
+                        HasWyvernBand = HasWyvernBandCheckBox.Checked,
+                        HasMageBand = HasMageBandCheckBox.Checked,
+                        HasPriestBand = HasPriestBandCheckBox.Checked,
+                        HasThiefBand = HasThiefBandCheckBox.Checked,
+                        HasKnightWard = HasKnightWardCheckBox.Checked,
+                    });
                 GrowthHpRateNumericUpDown.Value = character.HpGrowthRate;
                 GrowthStrRateNumericUpDown.Value = character.StrGrowthRate;
                 GrowthMgcRateNumericUpDown.Value = character.MgcGrowthRate;

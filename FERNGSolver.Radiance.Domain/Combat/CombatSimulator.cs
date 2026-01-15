@@ -252,6 +252,7 @@ namespace FERNGSolver.Radiance.Domain.Combat
 
                     attackerSide.CurrentHp = Math.Min(attackerSide.CombatUnit.StatusDetail.MaxHp, attackerSide.CurrentHp + heal);
                     defenderSide.CurrentHp -= damage;
+                    attackerSide.WeaponUses -= 1;
 
                     bool result = true;
                     if (attackerSide.CurrentHp <= 0)

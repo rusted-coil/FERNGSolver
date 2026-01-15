@@ -71,10 +71,20 @@ namespace FERNGSolver.Radiance.UI.Search
             DoesAttackerFollowUpAttackCheckBox = new CheckBox();
             AttackerCriticalRateNumericUpDown = new NumericUpDownEx();
             GrowthGroupBox = new GroupBox();
+            HasKnightWardCheckBox = new CheckBox();
+            HasThiefBandCheckBox = new CheckBox();
+            HasPriestBandCheckBox = new CheckBox();
+            HasMageBandCheckBox = new CheckBox();
+            HasWyvernBandCheckBox = new CheckBox();
+            HasPegasusBandCheckBox = new CheckBox();
+            HasPaladinBandCheckBox = new CheckBox();
+            HasKnightBandCheckBox = new CheckBox();
+            HasArcherBandCheckBox = new CheckBox();
+            HasFighterBandCheckBox = new CheckBox();
             IsMgcGrowthNeeded = new CheckBox();
             GrowthMgcRateNumericUpDown = new NumericUpDownEx();
             label5 = new Label();
-            IsGrowthBoostedCheckBox = new CheckBox();
+            HasSwordBandCheckBox = new CheckBox();
             IsMdfGrowthNeeded = new CheckBox();
             IsDefGrowthNeeded = new CheckBox();
             IsLucGrowthNeeded = new CheckBox();
@@ -528,10 +538,20 @@ namespace FERNGSolver.Radiance.UI.Search
             // 
             // GrowthGroupBox
             // 
+            GrowthGroupBox.Controls.Add(HasKnightWardCheckBox);
+            GrowthGroupBox.Controls.Add(HasThiefBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasPriestBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasMageBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasWyvernBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasPegasusBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasPaladinBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasKnightBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasArcherBandCheckBox);
+            GrowthGroupBox.Controls.Add(HasFighterBandCheckBox);
             GrowthGroupBox.Controls.Add(IsMgcGrowthNeeded);
             GrowthGroupBox.Controls.Add(GrowthMgcRateNumericUpDown);
             GrowthGroupBox.Controls.Add(label5);
-            GrowthGroupBox.Controls.Add(IsGrowthBoostedCheckBox);
+            GrowthGroupBox.Controls.Add(HasSwordBandCheckBox);
             GrowthGroupBox.Controls.Add(IsMdfGrowthNeeded);
             GrowthGroupBox.Controls.Add(IsDefGrowthNeeded);
             GrowthGroupBox.Controls.Add(IsLucGrowthNeeded);
@@ -561,6 +581,116 @@ namespace FERNGSolver.Radiance.UI.Search
             GrowthGroupBox.TabIndex = 30;
             GrowthGroupBox.TabStop = false;
             // 
+            // HasKnightWardCheckBox
+            // 
+            HasKnightWardCheckBox.AutoSize = true;
+            HasKnightWardCheckBox.Location = new Point(498, 44);
+            HasKnightWardCheckBox.Name = "HasKnightWardCheckBox";
+            HasKnightWardCheckBox.Size = new Size(80, 19);
+            HasKnightWardCheckBox.TabIndex = 41;
+            HasKnightWardCheckBox.Text = "騎士の護り";
+            HasKnightWardCheckBox.UseVisualStyleBackColor = true;
+            HasKnightWardCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasThiefBandCheckBox
+            // 
+            HasThiefBandCheckBox.AutoSize = true;
+            HasThiefBandCheckBox.Location = new Point(384, 144);
+            HasThiefBandCheckBox.Name = "HasThiefBandCheckBox";
+            HasThiefBandCheckBox.Size = new Size(84, 19);
+            HasThiefBandCheckBox.TabIndex = 40;
+            HasThiefBandCheckBox.Text = "盗賊の腕輪";
+            HasThiefBandCheckBox.UseVisualStyleBackColor = true;
+            HasThiefBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasPriestBandCheckBox
+            // 
+            HasPriestBandCheckBox.AutoSize = true;
+            HasPriestBandCheckBox.Location = new Point(384, 119);
+            HasPriestBandCheckBox.Name = "HasPriestBandCheckBox";
+            HasPriestBandCheckBox.Size = new Size(84, 19);
+            HasPriestBandCheckBox.TabIndex = 39;
+            HasPriestBandCheckBox.Text = "神官の腕輪";
+            HasPriestBandCheckBox.UseVisualStyleBackColor = true;
+            HasPriestBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasMageBandCheckBox
+            // 
+            HasMageBandCheckBox.AutoSize = true;
+            HasMageBandCheckBox.Location = new Point(384, 94);
+            HasMageBandCheckBox.Name = "HasMageBandCheckBox";
+            HasMageBandCheckBox.Size = new Size(96, 19);
+            HasMageBandCheckBox.TabIndex = 38;
+            HasMageBandCheckBox.Text = "魔道士の腕輪";
+            HasMageBandCheckBox.UseVisualStyleBackColor = true;
+            HasMageBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasWyvernBandCheckBox
+            // 
+            HasWyvernBandCheckBox.AutoSize = true;
+            HasWyvernBandCheckBox.Location = new Point(384, 69);
+            HasWyvernBandCheckBox.Name = "HasWyvernBandCheckBox";
+            HasWyvernBandCheckBox.Size = new Size(96, 19);
+            HasWyvernBandCheckBox.TabIndex = 37;
+            HasWyvernBandCheckBox.Text = "竜騎士の腕輪";
+            HasWyvernBandCheckBox.UseVisualStyleBackColor = true;
+            HasWyvernBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasPegasusBandCheckBox
+            // 
+            HasPegasusBandCheckBox.AutoSize = true;
+            HasPegasusBandCheckBox.Location = new Point(384, 44);
+            HasPegasusBandCheckBox.Name = "HasPegasusBandCheckBox";
+            HasPegasusBandCheckBox.Size = new Size(108, 19);
+            HasPegasusBandCheckBox.TabIndex = 36;
+            HasPegasusBandCheckBox.Text = "天馬騎士の腕輪";
+            HasPegasusBandCheckBox.UseVisualStyleBackColor = true;
+            HasPegasusBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasPaladinBandCheckBox
+            // 
+            HasPaladinBandCheckBox.AutoSize = true;
+            HasPaladinBandCheckBox.Location = new Point(273, 144);
+            HasPaladinBandCheckBox.Name = "HasPaladinBandCheckBox";
+            HasPaladinBandCheckBox.Size = new Size(84, 19);
+            HasPaladinBandCheckBox.TabIndex = 35;
+            HasPaladinBandCheckBox.Text = "騎士の腕輪";
+            HasPaladinBandCheckBox.UseVisualStyleBackColor = true;
+            HasPaladinBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasKnightBandCheckBox
+            // 
+            HasKnightBandCheckBox.AutoSize = true;
+            HasKnightBandCheckBox.Location = new Point(273, 119);
+            HasKnightBandCheckBox.Name = "HasKnightBandCheckBox";
+            HasKnightBandCheckBox.Size = new Size(96, 19);
+            HasKnightBandCheckBox.TabIndex = 34;
+            HasKnightBandCheckBox.Text = "重歩兵の腕輪";
+            HasKnightBandCheckBox.UseVisualStyleBackColor = true;
+            HasKnightBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasArcherBandCheckBox
+            // 
+            HasArcherBandCheckBox.AutoSize = true;
+            HasArcherBandCheckBox.Location = new Point(273, 94);
+            HasArcherBandCheckBox.Name = "HasArcherBandCheckBox";
+            HasArcherBandCheckBox.Size = new Size(84, 19);
+            HasArcherBandCheckBox.TabIndex = 33;
+            HasArcherBandCheckBox.Text = "弓兵の腕輪";
+            HasArcherBandCheckBox.UseVisualStyleBackColor = true;
+            HasArcherBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
+            // HasFighterBandCheckBox
+            // 
+            HasFighterBandCheckBox.AutoSize = true;
+            HasFighterBandCheckBox.Location = new Point(273, 69);
+            HasFighterBandCheckBox.Name = "HasFighterBandCheckBox";
+            HasFighterBandCheckBox.Size = new Size(84, 19);
+            HasFighterBandCheckBox.TabIndex = 32;
+            HasFighterBandCheckBox.Text = "戦士の腕輪";
+            HasFighterBandCheckBox.UseVisualStyleBackColor = true;
+            HasFighterBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            // 
             // IsMgcGrowthNeeded
             // 
             IsMgcGrowthNeeded.AutoSize = true;
@@ -589,16 +719,16 @@ namespace FERNGSolver.Radiance.UI.Search
             label5.TabIndex = 48;
             label5.Text = "魔力";
             // 
-            // IsGrowthBoostedCheckBox
+            // HasSwordBandCheckBox
             // 
-            IsGrowthBoostedCheckBox.AutoSize = true;
-            IsGrowthBoostedCheckBox.Location = new Point(156, 27);
-            IsGrowthBoostedCheckBox.Name = "IsGrowthBoostedCheckBox";
-            IsGrowthBoostedCheckBox.Size = new Size(90, 19);
-            IsGrowthBoostedCheckBox.TabIndex = 2;
-            IsGrowthBoostedCheckBox.Text = "アフア/メティス";
-            IsGrowthBoostedCheckBox.UseVisualStyleBackColor = true;
-            IsGrowthBoostedCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
+            HasSwordBandCheckBox.AutoSize = true;
+            HasSwordBandCheckBox.Location = new Point(273, 44);
+            HasSwordBandCheckBox.Name = "HasSwordBandCheckBox";
+            HasSwordBandCheckBox.Size = new Size(84, 19);
+            HasSwordBandCheckBox.TabIndex = 31;
+            HasSwordBandCheckBox.Text = "剣士の腕輪";
+            HasSwordBandCheckBox.UseVisualStyleBackColor = true;
+            HasSwordBandCheckBox.CheckedChanged += IsGrowthBoostedCheckBox_CheckedChanged;
             // 
             // IsMdfGrowthNeeded
             // 
@@ -1063,7 +1193,7 @@ namespace FERNGSolver.Radiance.UI.Search
         private TextBox CxStringTextBox;
         private CheckBox AddsCxOffsetCheckBox;
         private Button FalconKnightToolOpenButton;
-        private CheckBox IsGrowthBoostedCheckBox;
+        private CheckBox HasSwordBandCheckBox;
         private CheckBox DoesAttackerFollowUpAttackCheckBox;
         private GroupBox groupBox1;
         private Label label24;
@@ -1103,5 +1233,15 @@ namespace FERNGSolver.Radiance.UI.Search
         private Label label5;
         private NumericUpDownEx TableIndexNumericUpDown;
         private CheckBox IsSpecificTableCheckBox;
+        private CheckBox HasKnightWardCheckBox;
+        private CheckBox HasThiefBandCheckBox;
+        private CheckBox HasPriestBandCheckBox;
+        private CheckBox HasMageBandCheckBox;
+        private CheckBox HasWyvernBandCheckBox;
+        private CheckBox HasPegasusBandCheckBox;
+        private CheckBox HasPaladinBandCheckBox;
+        private CheckBox HasKnightBandCheckBox;
+        private CheckBox HasArcherBandCheckBox;
+        private CheckBox HasFighterBandCheckBox;
     }
 }
