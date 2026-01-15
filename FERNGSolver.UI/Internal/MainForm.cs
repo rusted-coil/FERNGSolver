@@ -42,7 +42,7 @@ namespace FERNGSolver.UI.Internal
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
             m_AddRngViewButton = ButtonFactory.CreateButton(AddRngViewButton);
 
-            this.Text = "FERNGSolver v2.0.0";
+            this.Text = "FERNGSolver v3.0.0";
         }
 
         public void SetEntries(params IMainFormEntry[] entries)

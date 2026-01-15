@@ -1022,6 +1022,7 @@ namespace FERNGSolver.Radiance.UI.Search
             CurrentRngCountNumericUpDown.Name = "CurrentRngCountNumericUpDown";
             CurrentRngCountNumericUpDown.Size = new Size(60, 23);
             CurrentRngCountNumericUpDown.TabIndex = 42;
+            CurrentRngCountNumericUpDown.Value = new decimal(new int[] { 600, 0, 0, 0 });
             // 
             // OffsetMinNumericUpDown
             // 
