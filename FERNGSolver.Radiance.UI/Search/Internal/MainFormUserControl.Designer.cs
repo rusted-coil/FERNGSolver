@@ -972,6 +972,8 @@ namespace FERNGSolver.Radiance.UI.Search
             // AddsCxOffsetCheckBox
             // 
             AddsCxOffsetCheckBox.AutoSize = true;
+            AddsCxOffsetCheckBox.Checked = true;
+            AddsCxOffsetCheckBox.CheckState = CheckState.Checked;
             AddsCxOffsetCheckBox.Location = new Point(344, 24);
             AddsCxOffsetCheckBox.Name = "AddsCxOffsetCheckBox";
             AddsCxOffsetCheckBox.Size = new Size(140, 19);
