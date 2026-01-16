@@ -14,7 +14,7 @@ namespace FERNGSolver.Radiance.UI.RngView.Internal
         private const int HitUsageOffsetX = 5;
         private const int HitUsageLineLength = 27;
 
-        public int TableIndex => 0;
+        public int TableIndex => (int)TableIndexNumericUpDown.Value;
         public int CurrentPosition => (int)PositionNumericUpDown.Value;
 
         private BehaviorSubject<(int, int)> m_PositionChanged;
