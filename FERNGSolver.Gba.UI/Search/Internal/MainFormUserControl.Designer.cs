@@ -866,7 +866,7 @@ namespace FERNGSolver.Gba.UI.Search
             // OffsetMaxNumericUpDown
             // 
             OffsetMaxNumericUpDown.Location = new Point(278, 567);
-            OffsetMaxNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            OffsetMaxNumericUpDown.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             OffsetMaxNumericUpDown.Name = "OffsetMaxNumericUpDown";
             OffsetMaxNumericUpDown.Size = new Size(60, 23);
             OffsetMaxNumericUpDown.TabIndex = 42;
