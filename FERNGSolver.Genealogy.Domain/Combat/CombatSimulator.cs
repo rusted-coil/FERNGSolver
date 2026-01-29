@@ -123,6 +123,42 @@ namespace FERNGSolver.Genealogy.Domain.Combat
             return false;
         }
 
+        static bool CheckActivateAstra(ICombatRngService rngService, Unit attackerSide, Unit defenderSide, int roundIndex)
+        {
+            // 聖戦はどちらかのユニットが特殊剣スキルを持っていたらどちらの攻撃でも乱数消費をする
+            // ただし実際にスキルを持っていないなら必ず失敗する
+            int probability = attackerSide.CombatUnit.StatusDetail.HasAstra ? attackerSide.CombatUnit.StatusDetail.Tec : 0;
+            if (attackerSide.CombatUnit.StatusDetail.HasAstra || defenderSide.CombatUnit.StatusDetail.HasAstra)
+            {
+                return rngService.CheckActivateAstra(probability, attackerSide.UnitSide, roundIndex);
+            }
+            return false;
+        }
+
+        static bool CheckActivateSol(ICombatRngService rngService, Unit attackerSide, Unit defenderSide, int roundIndex)
+        {
+            // 聖戦はどちらかのユニットが特殊剣スキルを持っていたらどちらの攻撃でも乱数消費をする
+            // ただし実際にスキルを持っていないなら必ず失敗する
+            int probability = attackerSide.CombatUnit.StatusDetail.HasSol ? attackerSide.CombatUnit.StatusDetail.Tec : 0;
+            if (attackerSide.CombatUnit.StatusDetail.HasSol || defenderSide.CombatUnit.StatusDetail.HasSol)
+            {
+                return rngService.CheckActivateSol(probability, attackerSide.UnitSide, roundIndex);
+            }
+            return false;
+        }
+
+        static bool CheckActivateLuna(ICombatRngService rngService, Unit attackerSide, Unit defenderSide, int roundIndex)
+        {
+            // 聖戦はどちらかのユニットが特殊剣スキルを持っていたらどちらの攻撃でも乱数消費をする
+            // ただし実際にスキルを持っていないなら必ず失敗する
+            int probability = attackerSide.CombatUnit.StatusDetail.HasLuna ? attackerSide.CombatUnit.StatusDetail.Tec : 0;
+            if (attackerSide.CombatUnit.StatusDetail.HasLuna || defenderSide.CombatUnit.StatusDetail.HasLuna)
+            {
+                return rngService.CheckActivateLuna(probability, attackerSide.UnitSide, roundIndex);
+            }
+            return false;
+        }
+
         // ユニットの攻撃を実行し、戦闘が終了したらfalseを返す
         private static bool ExecutePhase(ICombatRngService rngService, Unit attackerSide, Unit defenderSide, int roundIndex)
         {
@@ -130,22 +166,20 @@ namespace FERNGSolver.Genealogy.Domain.Combat
             bool isLunaActive = false;
             bool isSolActive = false;
 
-            // TODO どちらかが特殊剣スキルを持っていた場合、両者の攻撃時に判定が行われる（もちろん効果は発動しない）
-
             // 流星剣判定
-            if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide, roundIndex))
+            if (CheckActivateAstra(rngService, attackerSide, defenderSide, roundIndex))
             {
                 attackCount = (attackerSide.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Brave ? 10 : 5);
             }
             else
             {
                 // 月光剣判定
-                if (attackerSide.CombatUnit.StatusDetail.HasLuna && rngService.CheckActivateLuna(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide, roundIndex))
+                if (CheckActivateLuna(rngService, attackerSide, defenderSide, roundIndex))
                 {
                     isLunaActive = true;
                 }
                 // 太陽剣判定
-                if (attackerSide.CombatUnit.StatusDetail.HasSol && rngService.CheckActivateSol(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide, roundIndex))
+                if (CheckActivateSol(rngService, attackerSide, defenderSide, roundIndex))
                 {
                     isSolActive = true;
                 }
