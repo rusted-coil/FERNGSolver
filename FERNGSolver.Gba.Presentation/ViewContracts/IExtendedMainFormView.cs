@@ -7,6 +7,11 @@ namespace FERNGSolver.Gba.Presentation.ViewContracts
     public interface IExtendedMainFormView : IMainFormView, IFalconKnightMethodSettingsView, ICombatSettingsView, IGrowthSettingsView
     {
         /// <summary>
+        /// 計算方式が封印の剣かどうかを取得します。
+        /// </summary>
+        bool IsBindingBlade { get; }
+
+        /// <summary>
         /// 現在の消費数を取得します。
         /// </summary>
         int CurrentPosition { get; }

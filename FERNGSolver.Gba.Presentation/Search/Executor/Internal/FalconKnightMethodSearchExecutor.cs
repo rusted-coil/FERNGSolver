@@ -26,7 +26,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
         private static IReadOnlyList<ISearchResult> ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(mainFormView.IsBindingBlade);
 
             IReadOnlyList<bool> cxPattern;
             try

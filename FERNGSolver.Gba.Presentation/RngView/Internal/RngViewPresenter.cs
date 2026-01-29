@@ -33,7 +33,7 @@ namespace FERNGSolver.Gba.Presentation.RngView.Internal
 
         private void PositionChanged(int position)
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(m_MainFormView.IsBindingBlade);
             rng.Advance(position);
             var previewRng = rng.Clone();
 

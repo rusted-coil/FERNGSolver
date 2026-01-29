@@ -25,12 +25,12 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
         private static IReadOnlyList<ISearchResult> ExecuteSearchCore(IExtendedMainFormView mainFormView, IErrorNotifier errorNotifier)
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(mainFormView.IsBindingBlade);
 
             List<ISearchStrategy> strategies = new List<ISearchStrategy>();
             if (mainFormView.ContainsCombat)
             {
-                strategies.Add(CreateCombatStrategy(mainFormView));
+                strategies.Add(CreateCombatStrategy(mainFormView, mainFormView.IsBindingBlade));
             }
             if (mainFormView.ContainsGrowth)
             {
@@ -42,11 +42,11 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
                 CommonStrategyFactory.CreateSequentialStrategy(strategies.ToArray()));
         }
 
-        private static ISearchStrategy CreateCombatStrategy(ICombatSettingsView view)
+        private static ISearchStrategy CreateCombatStrategy(ICombatSettingsView view, bool isBindingBlade)
         {
             return StrategyFactory.CreateCombatStrategy(new CombatStrategyArgs
             {
-                IsBindingBlade = view.IsBindingBlade,
+                IsBindingBlade = isBindingBlade,
                 Attacker = CreateAttackerUnitFromView(view),
                 Defender = CreateDefenderUnitFromView(view),
                 AttackerHpPostconditionMin = view.AttackerHpPostconditionMin,
@@ -141,7 +141,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             int falconMove = mainFormView.FalconKnightMethodMove;
 
             // 結果表示用RNG処理 重かったら何か考える
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(mainFormView.IsBindingBlade);
             rng.Advance(currentPosition);
 
             // F法横は✕で止まる、F法縦は◯で止まる

@@ -16,7 +16,7 @@ namespace FERNGSolver.Gba.Application.Search.Strategy.Internal
         {
             m_Args = args;
 
-            m_CombatRngService = CombatRngServiceFactory.Create(RngFactory.CreateDefault());
+            m_CombatRngService = CombatRngServiceFactory.Create(RngFactory.CreateDefault(m_Args.IsBindingBlade));
         }
 
         public bool CheckAndAdvance(IRng rng)

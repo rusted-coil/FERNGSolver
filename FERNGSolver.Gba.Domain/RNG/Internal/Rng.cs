@@ -7,11 +7,14 @@ namespace FERNGSolver.Gba.Domain.RNG.Internal
         private ushort[] state = new ushort[3];
         public IReadOnlyList<ushort> States => state;
 
-        public Rng(ushort seed0, ushort seed1, ushort seed2)
+        private readonly bool m_isBindingBlade;
+
+        public Rng(ushort seed0, ushort seed1, ushort seed2, bool isBindingBlade)
         {
             state[0] = seed0;
             state[1] = seed1;
             state[2] = seed2;
+            m_isBindingBlade = isBindingBlade;
         }
 
         // 0～99 の値を返す
@@ -26,12 +29,19 @@ namespace FERNGSolver.Gba.Domain.RNG.Internal
             state[1] = state[0];
             state[0] = result;
 
-            return (ushort)(((uint)result * 100) >> 16);
+            if (m_isBindingBlade)
+            {
+                return (ushort)(result / 655);
+            }
+            else
+            {
+                return (ushort)(((uint)result * 100) >> 16);
+            }
         }
 
         public ICloneableRng Clone()
         {
-            return new Rng(state[0], state[1], state[2]);
+            return new Rng(state[0], state[1], state[2], m_isBindingBlade);
         }
     }
 }
