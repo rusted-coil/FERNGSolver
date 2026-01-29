@@ -130,6 +130,8 @@ namespace FERNGSolver.Genealogy.Domain.Combat
             bool isLunaActive = false;
             bool isSolActive = false;
 
+            // TODO どちらかが特殊剣スキルを持っていた場合、両者の攻撃時に判定が行われる（もちろん効果は発動しない）
+
             // 流星剣判定
             if (attackerSide.CombatUnit.StatusDetail.HasAstra && rngService.CheckActivateAstra(attackerSide.CombatUnit.StatusDetail.Tec, attackerSide.UnitSide, roundIndex))
             {
