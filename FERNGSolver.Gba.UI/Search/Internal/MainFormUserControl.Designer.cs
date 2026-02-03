@@ -850,7 +850,7 @@ namespace FERNGSolver.Gba.UI.Search
             // CurrentRngCountNumericUpDown
             // 
             CurrentRngCountNumericUpDown.Location = new Point(108, 567);
-            CurrentRngCountNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            CurrentRngCountNumericUpDown.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             CurrentRngCountNumericUpDown.Name = "CurrentRngCountNumericUpDown";
             CurrentRngCountNumericUpDown.Size = new Size(60, 23);
             CurrentRngCountNumericUpDown.TabIndex = 40;
@@ -858,7 +858,7 @@ namespace FERNGSolver.Gba.UI.Search
             // OffsetMinNumericUpDown
             // 
             OffsetMinNumericUpDown.Location = new Point(187, 567);
-            OffsetMinNumericUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            OffsetMinNumericUpDown.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             OffsetMinNumericUpDown.Name = "OffsetMinNumericUpDown";
             OffsetMinNumericUpDown.Size = new Size(60, 23);
             OffsetMinNumericUpDown.TabIndex = 41;
