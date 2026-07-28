@@ -1,0 +1,53 @@
+@using FERNGSolver.Common.Presentation.Interfaces
+
+@if (Columns == null || Rows == null || Rows.Count == 0)
+{
+    <p><em>結果はありません。</em></p>
+}
+else
+{
+    <table class="results-table">
+        <thead>
+            <tr>
+                @foreach (var column in Columns)
+                {
+                    <th style="width: @(column.Width)px">@column.HeaderText</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Rows)
+            {
+                @if (row != null)
+                {
+                    <tr>
+                        @foreach (var column in Columns)
+                        {
+                            <td>@GetValue(row, column.PropertyName)</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    /// <summary>
+    /// 表示する列情報を取得または設定します。
+    /// </summary>
+    [Parameter]
+    public IReadOnlyList<ITableColumn>? Columns { get; set; }
+
+    /// <summary>
+    /// 表示する行（ViewModel）のリストを取得または設定します。
+    /// <para> * 検索結果の生成元仕様により、100件目以降はnullが含まれる場合があるため、描画時に読み飛ばします。</para>
+    /// </summary>
+    [Parameter]
+    public IReadOnlyList<object>? Rows { get; set; }
+
+    private static object? GetValue(object row, string propertyName)
+    {
+        return row.GetType().GetProperty(propertyName)?.GetValue(row);
+    }
+}
