@@ -1,35 +1,26 @@
 @using FERNGSolver.Common.Presentation.Interfaces
 
-@if (Columns == null || Rows == null || Rows.Count == 0)
+@if (Columns == null || Rows == null || ValidRows.Count == 0)
 {
-    <p><em>結果はありません。</em></p>
+    <MudAlert Severity="Severity.Info" Class="mt-4">結果はありません。</MudAlert>
 }
 else
 {
-    <table class="results-table">
-        <thead>
-            <tr>
-                @foreach (var column in Columns)
-                {
-                    <th style="width: @(column.Width)px">@column.HeaderText</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in Rows)
+    <MudTable Items="@ValidRows" Hover="true" Dense="true" Bordered="true" Striped="true"
+              Breakpoint="Breakpoint.Sm" Class="mt-4">
+        <HeaderContent>
+            @foreach (var column in Columns)
             {
-                @if (row != null)
-                {
-                    <tr>
-                        @foreach (var column in Columns)
-                        {
-                            <td>@GetValue(row, column.PropertyName)</td>
-                        }
-                    </tr>
-                }
+                <MudTh>@column.HeaderText</MudTh>
             }
-        </tbody>
-    </table>
+        </HeaderContent>
+        <RowTemplate Context="row">
+            @foreach (var column in Columns)
+            {
+                <MudTd DataLabel="@column.HeaderText">@GetValue(row, column.PropertyName)</MudTd>
+            }
+        </RowTemplate>
+    </MudTable>
 }
 
 @code {
@@ -45,6 +36,9 @@ else
     /// </summary>
     [Parameter]
     public IReadOnlyList<object>? Rows { get; set; }
+
+    private IReadOnlyList<object> ValidRows =>
+        Rows?.Where(row => row != null).ToList() ?? new List<object>();
 
     private static object? GetValue(object row, string propertyName)
     {

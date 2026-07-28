@@ -12,30 +12,33 @@
 @implements IExtendedMainFormView
 @implements IDisposable
 
-<h1>蒼炎の軌跡 乱数調整ツール（Web版プロトタイプ）</h1>
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4 mb-8">
+    <MudText Typo="Typo.h4" Class="mb-4">蒼炎の軌跡 乱数調整ツール（Web版プロトタイプ）</MudText>
 
-<div class="search-form">
-    <label>
-        現在の消費数:
-        <input type="number" @bind="m_CurrentPosition" @bind:event="oninput" />
-    </label>
-    <label>
-        最小消費数（オフセット）:
-        <input type="number" @bind="m_OffsetMin" @bind:event="oninput" />
-    </label>
-    <label>
-        最大消費数（オフセット）:
-        <input type="number" @bind="m_OffsetMax" @bind:event="oninput" />
-    </label>
-    <button @onclick="OnSearchClicked">検索</button>
-</div>
+    <MudPaper Class="pa-4 mb-4" Elevation="2">
+        <MudGrid>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_CurrentPosition" Label="現在の消費数" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_OffsetMin" Label="最小消費数（オフセット）" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_OffsetMax" Label="最大消費数（オフセット）" Variant="Variant.Outlined" />
+            </MudItem>
+        </MudGrid>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSearchClicked" Class="mt-4" FullWidth="true">
+            検索
+        </MudButton>
+    </MudPaper>
 
-@if (m_ErrorMessage != null)
-{
-    <p class="error">@m_ErrorMessage</p>
-}
+    @if (m_ErrorMessage != null)
+    {
+        <MudAlert Severity="Severity.Error" Class="mb-4">@m_ErrorMessage</MudAlert>
+    }
 
-<ResultsTable Columns="m_Columns" Rows="m_ViewModels" />
+    <ResultsTable Columns="m_Columns" Rows="m_ViewModels" />
+</MudContainer>
 
 @code {
     // --- IMainFormView ---
