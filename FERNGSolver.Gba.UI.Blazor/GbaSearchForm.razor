@@ -1,0 +1,165 @@
+@using System.Reactive
+@using System.Reactive.Disposables
+@using System.Reactive.Linq
+@using System.Reactive.Subjects
+@using FERNGSolver.Common.Presentation.Interfaces
+@using FERNGSolver.Common.Presentation.Extensions
+@using FERNGSolver.Gba.Application.Config
+@using FERNGSolver.Gba.Application.Search.Strategy
+@using FERNGSolver.Gba.Domain.Combat
+@using FERNGSolver.Gba.Presentation.ViewContracts
+@using FERNGSolver.Gba.UI.Blazor.Internal
+@using FERNGSolver.Common.UI.Blazor
+@implements IExtendedMainFormView
+@implements IDisposable
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4 mb-8">
+    <MudText Typo="Typo.h4" Class="mb-4">@TitleName 乱数調整ツール（Web版プロトタイプ）</MudText>
+
+    <MudPaper Class="pa-4 mb-4" Elevation="2">
+        <MudGrid>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_CurrentPosition" Label="現在の消費数" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_OffsetMin" Label="最小消費数（オフセット）" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_OffsetMax" Label="最大消費数（オフセット）" Variant="Variant.Outlined" />
+            </MudItem>
+        </MudGrid>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSearchClicked" Class="mt-4" FullWidth="true">
+            検索
+        </MudButton>
+    </MudPaper>
+
+    @if (m_ErrorMessage != null)
+    {
+        <MudAlert Severity="Severity.Error" Class="mb-4">@m_ErrorMessage</MudAlert>
+    }
+
+    <ResultsTable Columns="m_Columns" Rows="m_ViewModels" />
+</MudContainer>
+
+@code {
+    /// <summary>
+    /// 計算方式が封印の剣かどうかを固定で指定します（タイトルごとに別ビルドのため、実行時に切り替えません）。
+    /// </summary>
+    [Parameter]
+    public bool IsBindingBlade { get; set; }
+
+    /// <summary>
+    /// 画面に表示するタイトル名を指定します。
+    /// </summary>
+    [Parameter]
+    public string TitleName { get; set; } = string.Empty;
+
+    // --- IMainFormView ---
+    public IObservable<Unit> SearchButtonClicked => m_SearchButtonClicked;
+    private readonly Subject<Unit> m_SearchButtonClicked = new();
+
+    private IReadOnlyList<ITableColumn>? m_Columns;
+    private IReadOnlyList<object>? m_ViewModels;
+
+    public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
+    {
+        m_Columns = columns;
+        m_ViewModels = viewModels;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public IObservable<Unit> AddRngViewButtonClicked => Observable.Never<Unit>();
+    public IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults => Observable.Never<IEnumerable<object>>();
+
+    // --- 検索条件（今回のプロトタイプで実際に使用する項目） ---
+    private int m_CurrentPosition = 0;
+    private int m_OffsetMin = 0;
+    private int m_OffsetMax = 10000;
+    private string? m_ErrorMessage;
+
+    public int CurrentPosition => m_CurrentPosition;
+    public int OffsetMin => m_OffsetMin;
+    public int OffsetMax => m_OffsetMax;
+    public int FalconKnightMethodMove => 0;
+    public IObservable<Unit> SearchConditionChanged => Observable.Never<Unit>();
+
+    // --- コンフィグ（タイトルごとに固定、永続化なし） ---
+    void IExtendedMainFormView.ReflectConfig(IConfig config) { }
+    public IObservable<Unit> PersistentConfigChanged => Observable.Never<Unit>();
+
+    // --- ファルコンナイト法（今回は未対応、固定値で無効化） ---
+    public bool UsesFalconKnightMethod => false;
+    public string CxString => string.Empty;
+    public bool AddsCxOffset => false;
+    public IObservable<Unit> FalconKnightToolOpenButtonClicked => Observable.Never<Unit>();
+    public void OpenFalconKnightTool() { }
+
+    // --- 戦闘（今回は未対応、固定値で無効化） ---
+    public bool ContainsCombat => false;
+    public int AttackerHp => 0;
+    public int AttackerPower => 0;
+    public int AttackerHitRate => 0;
+    public int AttackerCriticalRate => 0;
+    public int AttackerPhaseCount => 1;
+    public IUnitStatusDetail AttackerStatusDetail { get; } = new EmptyUnitStatusDetail();
+    public int DefenderHp => 0;
+    public int DefenderPower => 0;
+    public int DefenderHitRate => 0;
+    public int DefenderCriticalRate => 0;
+    public int DefenderPhaseCount => 0;
+    public IUnitStatusDetail DefenderStatusDetail { get; } = new EmptyUnitStatusDetail();
+    public int AttackerHpPostconditionMin => 0;
+    public int AttackerHpPostconditionMax => 999;
+    public int DefenderHpPostconditionMin => 0;
+    public int DefenderHpPostconditionMax => 999;
+
+    // --- レベルアップ ---
+    // * 「検索条件が選択されていません」エラーを回避するため、レベルアップ検索を固定で有効にします。
+    // * 各能力のSearchTypeはNotConsidered固定のため、フィルタとしては機能せず、
+    //   指定した消費数範囲を単純に列挙する動作になります（RNGは正しく消費されます）。
+    public bool ContainsGrowth => true;
+    public int HpGrowthRate => 0;
+    public int AtkGrowthRate => 0;
+    public int TecGrowthRate => 0;
+    public int SpdGrowthRate => 0;
+    public int DefGrowthRate => 0;
+    public int MdfGrowthRate => 0;
+    public int LucGrowthRate => 0;
+    public GrowthSearchType HpSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType AtkSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType TecSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType SpdSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType DefSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType MdfSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType LucSearchType => GrowthSearchType.NotConsidered;
+
+    // --- Presenter接続 ---
+    private readonly CompositeDisposable m_Disposables = new();
+    private readonly NullErrorNotifier m_ErrorNotifier = new();
+
+    protected override void OnInitialized()
+    {
+        m_ErrorNotifier.OnError = message =>
+        {
+            m_ErrorMessage = message;
+            InvokeAsync(StateHasChanged);
+        };
+
+        var configService = new StaticConfigService(IsBindingBlade);
+
+        Gba.Presentation.Search.PresenterFactory
+            .Create(this, configService, m_ErrorNotifier)
+            .AddTo(m_Disposables);
+    }
+
+    private void OnSearchClicked()
+    {
+        m_ErrorMessage = null;
+        m_SearchButtonClicked.OnNext(Unit.Default);
+    }
+
+    public void Dispose()
+    {
+        m_Disposables.Dispose();
+    }
+}

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.29" />
+    <PackageReference Include="MudBlazor" Version="9.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Common.Application\FERNGSolver.Common.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Common.UI.Blazor\FERNGSolver.Common.UI.Blazor.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Gba.Application\FERNGSolver.Gba.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Gba.Domain\FERNGSolver.Gba.Domain.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Gba.Presentation\FERNGSolver.Gba.Presentation.csproj" />
+  </ItemGroup>
+
+</Project>
