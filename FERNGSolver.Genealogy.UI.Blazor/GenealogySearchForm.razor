@@ -1,0 +1,149 @@
+@using System.Reactive
+@using System.Reactive.Disposables
+@using System.Reactive.Linq
+@using System.Reactive.Subjects
+@using FERNGSolver.Common.Presentation.Interfaces
+@using FERNGSolver.Common.Presentation.Extensions
+@using FERNGSolver.Genealogy.Application.Search.Strategy
+@using FERNGSolver.Genealogy.Domain.Combat
+@using FERNGSolver.Genealogy.Presentation.ViewContracts
+@using FERNGSolver.Genealogy.UI.Blazor.Internal
+@using FERNGSolver.Common.UI.Blazor
+@implements IExtendedMainFormView
+@implements IDisposable
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4 mb-8">
+    <MudText Typo="Typo.h4" Class="mb-4">聖戦の系譜 乱数調整ツール（Web版プロトタイプ）</MudText>
+
+    <MudPaper Class="pa-4 mb-4" Elevation="2">
+        <MudGrid>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_CurrentPosition" Label="現在の消費数" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_OffsetMin" Label="最小消費数（オフセット）" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudNumericField T="int" @bind-Value="m_OffsetMax" Label="最大消費数（オフセット）" Variant="Variant.Outlined" />
+            </MudItem>
+        </MudGrid>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSearchClicked" Class="mt-4" FullWidth="true">
+            検索
+        </MudButton>
+    </MudPaper>
+
+    @if (m_ErrorMessage != null)
+    {
+        <MudAlert Severity="Severity.Error" Class="mb-4">@m_ErrorMessage</MudAlert>
+    }
+
+    <ResultsTable Columns="m_Columns" Rows="m_ViewModels" />
+</MudContainer>
+
+@code {
+    // --- IMainFormView ---
+    public IObservable<Unit> SearchButtonClicked => m_SearchButtonClicked;
+    private readonly Subject<Unit> m_SearchButtonClicked = new();
+
+    private IReadOnlyList<ITableColumn>? m_Columns;
+    private IReadOnlyList<object>? m_ViewModels;
+
+    public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
+    {
+        m_Columns = columns;
+        m_ViewModels = viewModels;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public IObservable<Unit> AddRngViewButtonClicked => Observable.Never<Unit>();
+    public IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults => Observable.Never<IEnumerable<object>>();
+
+    // --- 検索条件（今回のプロトタイプで実際に使用する項目） ---
+    private int m_CurrentPosition = 0;
+    private int m_OffsetMin = 0;
+    private int m_OffsetMax = 10000;
+    private string? m_ErrorMessage;
+
+    public int CurrentPosition => m_CurrentPosition;
+    public int OffsetMin => m_OffsetMin;
+    public int OffsetMax => m_OffsetMax;
+    public IObservable<Unit> SearchConditionChanged => Observable.Never<Unit>();
+
+    // --- 闘技場チェック（今回は未対応、固定値で無効化） ---
+    public bool UsesArenaCheck => false;
+    public string HighOrLowPatternString => string.Empty;
+    public bool AddsOffset => false;
+
+    // --- 戦闘（今回は未対応、固定値で無効化） ---
+    public bool ContainsCombat => false;
+    public bool IsArena => false;
+    public bool IsOpponentFirst => false;
+    public int AttackerHp => 0;
+    public int AttackerAtk => 0;
+    public int AttackerDef => 0;
+    public int AttackerHitRate => 0;
+    public int AttackerCriticalRate => 0;
+    public int AttackerPhaseCount => 1;
+    public IUnitStatusDetail AttackerStatusDetail { get; } = new EmptyUnitStatusDetail();
+    public int DefenderHp => 0;
+    public int DefenderAtk => 0;
+    public int DefenderDef => 0;
+    public int DefenderHitRate => 0;
+    public int DefenderCriticalRate => 0;
+    public int DefenderPhaseCount => 0;
+    public IUnitStatusDetail DefenderStatusDetail { get; } = new EmptyUnitStatusDetail();
+    public int AttackerHpPostconditionMin => 0;
+    public int AttackerHpPostconditionMax => 999;
+    public int DefenderHpPostconditionMin => 0;
+    public int DefenderHpPostconditionMax => 999;
+
+    // --- レベルアップ ---
+    // * 「検索条件が選択されていません」エラーを回避するため、レベルアップ検索を固定で有効にします。
+    // * 各能力のSearchTypeはNotConsidered固定のため、フィルタとしては機能せず、
+    //   指定した消費数範囲を単純に列挙する動作になります（RNGは正しく消費されます）。
+    public bool ContainsGrowth => true;
+    public int HpGrowthRate => 0;
+    public int StrGrowthRate => 0;
+    public int MgcGrowthRate => 0;
+    public int TecGrowthRate => 0;
+    public int SpdGrowthRate => 0;
+    public int LucGrowthRate => 0;
+    public int DefGrowthRate => 0;
+    public int MdfGrowthRate => 0;
+    public GrowthSearchType HpSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType StrSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType MgcSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType TecSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType SpdSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType LucSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType DefSearchType => GrowthSearchType.NotConsidered;
+    public GrowthSearchType MdfSearchType => GrowthSearchType.NotConsidered;
+
+    // --- Presenter接続 ---
+    private readonly CompositeDisposable m_Disposables = new();
+    private readonly NullErrorNotifier m_ErrorNotifier = new();
+
+    protected override void OnInitialized()
+    {
+        m_ErrorNotifier.OnError = message =>
+        {
+            m_ErrorMessage = message;
+            InvokeAsync(StateHasChanged);
+        };
+
+        Genealogy.Presentation.Search.PresenterFactory
+            .Create(this, m_ErrorNotifier)
+            .AddTo(m_Disposables);
+    }
+
+    private void OnSearchClicked()
+    {
+        m_ErrorMessage = null;
+        m_SearchButtonClicked.OnNext(Unit.Default);
+    }
+
+    public void Dispose()
+    {
+        m_Disposables.Dispose();
+    }
+}
