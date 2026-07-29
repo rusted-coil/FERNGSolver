@@ -91,7 +91,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Common.UI.Blazo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Radiance.UI.Blazor", "FERNGSolver.Radiance.UI.Blazor\FERNGSolver.Radiance.UI.Blazor.csproj", "{832853C4-A306-4E6D-8EAC-C1C821472B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Web", "FERNGSolver.Web\FERNGSolver.Web.csproj", "{5067FFDC-E30D-45D0-B4DA-49E227BFD557}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FERNGSolver.Radiance.Web", "FERNGSolver.Radiance.Web\FERNGSolver.Radiance.Web.csproj", "{5067FFDC-E30D-45D0-B4DA-49E227BFD557}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
