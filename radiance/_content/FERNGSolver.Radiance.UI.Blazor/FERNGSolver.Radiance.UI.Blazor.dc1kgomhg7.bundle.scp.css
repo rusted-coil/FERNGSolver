@@ -1,0 +1,90 @@
+/* _content/FERNGSolver.Radiance.UI.Blazor/RadianceSearchForm.razor.rz.scp.css */
+/*
+ * レイアウトの responsive な入れ替えは、このスコープ付きCSSのグリッドエリア定義のみで行います。
+ * C#/Razor側は「どのエリアに何を描画するか」だけを担当し、配置（右/下）はここで完結させることで、
+ * 手動でのレイアウト調整（ブレークポイント値の変更や列幅の調整など）をこのファイルの変更だけで
+ * 完結できるようにしています。
+ */
+
+.radiance-workspace[b-24iocjfx96] {
+    display: grid;
+    gap: 16px;
+    align-items: start;
+
+    /* PC/タブレット（横に広い場合）: 条件+結果を左列、乱数ビューアを右列に表示 */
+    grid-template-columns: minmax(320px, 480px) 1fr;
+    grid-template-areas:
+        "condition rng"
+        "results   rng";
+}
+
+.workspace-area--condition[b-24iocjfx96] {
+    grid-area: condition;
+}
+
+.workspace-area--results[b-24iocjfx96] {
+    grid-area: results;
+}
+
+.workspace-area--rng[b-24iocjfx96] {
+    grid-area: rng;
+}
+
+/* スマホなど縦長の場合: 条件→結果→乱数ビューアの縦一列に切り替え */
+@media (max-width: 959.98px) {
+    .radiance-workspace[b-24iocjfx96] {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "condition"
+            "results"
+            "rng";
+    }
+}
+/* _content/FERNGSolver.Radiance.UI.Blazor/RngViewCard.razor.rz.scp.css */
+.rng-value-grid[b-858d4pcast] {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+    gap: 4px;
+}
+
+.rng-value-cell[b-858d4pcast] {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+.rng-value[b-858d4pcast] {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.rng-ok-mark[b-858d4pcast] {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.rng-usage[b-858d4pcast] {
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+.rng-usage-result[b-858d4pcast] {
+    white-space: nowrap;
+}
+
+.rng-side-growth[b-858d4pcast] {
+    color: darkgreen;
+    border-color: darkgreen;
+}
+
+.rng-side-player[b-858d4pcast] {
+    color: blue;
+    border-color: blue;
+}
+
+.rng-side-enemy[b-858d4pcast] {
+    color: red;
+    border-color: red;
+}
