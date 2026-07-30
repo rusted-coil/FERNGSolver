@@ -1,0 +1,125 @@
+@using System.Reactive.Subjects
+@using FERNGSolver.Radiance.Application.RNG
+@using FERNGSolver.Radiance.Domain.Combat.Service
+@using FERNGSolver.Radiance.Presentation.RngView
+@using FERNGSolver.Radiance.Presentation.RngView.ViewContracts
+@using FERNGSolver.Radiance.Presentation.ViewContracts
+@using FERNGSolver.Radiance.UI.Blazor.Internal
+@implements IRngView
+@implements IDisposable
+
+<MudPaper Class="pa-3 mb-3" Elevation="1">
+    <div class="d-flex align-center flex-wrap gap-4 mb-2">
+        <MudNumericField T="int" Value="m_TableIndex" ValueChanged="OnTableIndexChanged" Label="テーブル番号"
+                          Variant="Variant.Outlined" Style="max-width:140px" Margin="Margin.Dense" />
+        <MudNumericField T="int" Value="m_Position" ValueChanged="OnPositionChanged" Label="消費数"
+                          Variant="Variant.Outlined" Style="max-width:140px" Margin="Margin.Dense" />
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="() => OnRemove.InvokeAsync()" />
+    </div>
+
+    <div class="rng-value-grid">
+        @foreach (var viewModel in m_ViewModels)
+        {
+            <div class="rng-value-cell @GetSideClass(viewModel)">
+                <div class="rng-value">@viewModel.Value</div>
+                <div class="rng-ok-mark">@(Domain.RNG.Util.IsRngValueOk(viewModel.Value) ? "○" : "×")</div>
+                @if (viewModel.Usage != RandomNumberUsage.None)
+                {
+                    <div class="rng-usage">@viewModel.Usage.ToDisplayString()</div>
+                    @if (viewModel.IsOk.HasValue)
+                    {
+                        <div class="rng-usage-result">@(viewModel.IsOk.Value ? "成功" : "失敗")</div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</MudPaper>
+
+@code {
+    /// <summary>
+    /// このRNGビューアが問い合わせる先の検索条件（メインフォーム）を取得または設定します。
+    /// </summary>
+    [Parameter, EditorRequired]
+    public IExtendedMainFormView MainFormView { get; set; } = null!;
+
+    /// <summary>
+    /// 初期表示時のテーブル番号を取得または設定します。
+    /// </summary>
+    [Parameter]
+    public int InitialTableIndex { get; set; }
+
+    /// <summary>
+    /// 初期表示時の消費数を取得または設定します。
+    /// </summary>
+    [Parameter]
+    public int InitialPosition { get; set; }
+
+    /// <summary>
+    /// このRNGビューアを閉じる（削除する）ボタンが押された時に呼び出されるコールバックを取得または設定します。
+    /// </summary>
+    [Parameter]
+    public EventCallback OnRemove { get; set; }
+
+    private int m_TableIndex;
+    private int m_Position;
+    private IReadOnlyList<IRandomNumberViewModel> m_ViewModels = Array.Empty<IRandomNumberViewModel>();
+    private BehaviorSubject<(int, int)>? m_PositionChanged;
+    private IRngViewPresenter? m_Presenter;
+
+    // --- IRngView ---
+    public int TableIndex => m_TableIndex;
+    public int CurrentPosition => m_Position;
+    public IObservable<(int, int)> PositionChanged => m_PositionChanged!;
+
+    public void SetRandomNumbers(IReadOnlyList<IRandomNumberViewModel> viewModels)
+    {
+        m_ViewModels = viewModels;
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected override void OnInitialized()
+    {
+        m_TableIndex = InitialTableIndex;
+        m_Position = InitialPosition;
+        m_PositionChanged = new BehaviorSubject<(int, int)>((m_TableIndex, m_Position));
+
+        m_Presenter = Radiance.Presentation.RngView.PresenterFactory.CreateViewPresenter(MainFormView, this);
+    }
+
+    private void OnTableIndexChanged(int value)
+    {
+        m_TableIndex = value;
+        m_PositionChanged?.OnNext((m_TableIndex, m_Position));
+    }
+
+    private void OnPositionChanged(int value)
+    {
+        m_Position = value;
+        m_PositionChanged?.OnNext((m_TableIndex, m_Position));
+    }
+
+    private static string GetSideClass(IRandomNumberViewModel viewModel)
+    {
+        if (viewModel.Usage == RandomNumberUsage.None)
+        {
+            return "";
+        }
+        if (viewModel.Usage.IsGrowth())
+        {
+            return "rng-side-growth";
+        }
+        return viewModel.Usage.GetUnitSide() switch
+        {
+            UnitSide.Player => "rng-side-player",
+            UnitSide.Enemy => "rng-side-enemy",
+            _ => "",
+        };
+    }
+
+    public void Dispose()
+    {
+        m_Presenter?.Dispose();
+    }
+}

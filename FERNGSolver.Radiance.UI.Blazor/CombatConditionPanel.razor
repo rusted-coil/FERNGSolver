@@ -1,0 +1,114 @@
+@using FERNGSolver.Radiance.UI.Blazor.Internal
+@inject IDialogService DialogService
+
+@* 攻撃側 *@
+<MudText Typo="Typo.subtitle2" Class="mb-2">攻撃側</MudText>
+<MudGrid Class="mb-2">
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.AttackerHp" Label="HP" Variant="Variant.Outlined" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.AttackerPower" Label="威力" Variant="Variant.Outlined" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.AttackerHitRate" Label="命中" Variant="Variant.Outlined" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.AttackerCriticalRate" Label="必殺" Variant="Variant.Outlined" />
+    </MudItem>
+</MudGrid>
+<MudCheckBox T="bool" @bind-Value="State.AttackerFollowsUpAttack" Label="追撃" Class="mb-2" />
+<div class="d-flex align-center gap-4 mb-4">
+    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="() => OpenStatusDetailDialogAsync(isAttacker: true)">
+        詳細設定
+    </MudButton>
+    <MudText Typo="Typo.body2">@State.AttackerStatusDetail.ToString()</MudText>
+</div>
+
+@* 防御側 *@
+<MudText Typo="Typo.subtitle2" Class="mb-2">防御側</MudText>
+<MudGrid Class="mb-2">
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.DefenderHp" Label="HP" Variant="Variant.Outlined" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.DefenderPower" Label="威力" Variant="Variant.Outlined" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.DefenderHitRate" Label="命中" Variant="Variant.Outlined" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.DefenderCriticalRate" Label="必殺" Variant="Variant.Outlined" />
+    </MudItem>
+</MudGrid>
+<div class="d-flex gap-4 mb-2">
+    <MudCheckBox T="bool" @bind-Value="State.DefenderCountersAttack" Label="反撃" />
+    <MudCheckBox T="bool" @bind-Value="State.DefenderFollowsUpAttack" Label="追撃" Disabled="@(!State.DefenderCountersAttack)" />
+</div>
+<div class="d-flex align-center gap-4 mb-4">
+    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="() => OpenStatusDetailDialogAsync(isAttacker: false)">
+        詳細設定
+    </MudButton>
+    <MudText Typo="Typo.body2">@State.DefenderStatusDetail.ToString()</MudText>
+</div>
+
+<MudDivider Class="mb-4" />
+
+@* 戦闘終了後のHPによる絞り込み *@
+<MudCheckBox T="bool" @bind-Value="State.FiltersByAttackerHpPostcondition" Label="攻撃側の戦闘終了後HPで絞り込み" />
+@if (State.FiltersByAttackerHpPostcondition)
+{
+    <MudGrid Class="mb-2 ml-6">
+        <MudItem xs="6" sm="3">
+            <MudNumericField T="int" @bind-Value="State.AttackerHpPostconditionMin" Label="最小" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudNumericField T="int" @bind-Value="State.AttackerHpPostconditionMax" Label="最大" Variant="Variant.Outlined" />
+        </MudItem>
+    </MudGrid>
+}
+
+<MudCheckBox T="bool" @bind-Value="State.FiltersByDefenderHpPostcondition" Label="防御側の戦闘終了後HPで絞り込み" />
+@if (State.FiltersByDefenderHpPostcondition)
+{
+    <MudGrid Class="mb-2 ml-6">
+        <MudItem xs="6" sm="3">
+            <MudNumericField T="int" @bind-Value="State.DefenderHpPostconditionMin" Label="最小" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudNumericField T="int" @bind-Value="State.DefenderHpPostconditionMax" Label="最大" Variant="Variant.Outlined" />
+        </MudItem>
+    </MudGrid>
+}
+
+@code {
+    /// <summary>
+    /// このパネルが編集する戦闘条件の状態を取得または設定します。
+    /// <para> * 呼び出し元（<see cref="FERNGSolver.Radiance.UI.Blazor.RadianceSearchForm"/>）と状態を共有するため、参照型のまま受け渡します。</para>
+    /// </summary>
+    [Parameter, EditorRequired]
+    public CombatConditionState State { get; set; } = null!;
+
+    private async Task OpenStatusDetailDialogAsync(bool isAttacker)
+    {
+        var target = isAttacker ? State.AttackerStatusDetail : State.DefenderStatusDetail;
+        var parameters = new DialogParameters { [nameof(UnitStatusDetailDialog.InitialState)] = target };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseOnEscapeKey = true };
+        var title = isAttacker ? "攻撃側の詳細設定" : "防御側の詳細設定";
+
+        var dialogReference = await DialogService.ShowAsync<UnitStatusDetailDialog>(title, parameters, options);
+        var result = await dialogReference.Result;
+        if (result is not null && !result.Canceled && result.Data is UnitStatusDetailState newState)
+        {
+            if (isAttacker)
+            {
+                State.AttackerStatusDetail = newState;
+            }
+            else
+            {
+                State.DefenderStatusDetail = newState;
+            }
+            StateHasChanged();
+        }
+    }
+}

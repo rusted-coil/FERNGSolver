@@ -6,8 +6,8 @@
 }
 else
 {
-    <MudTable Items="@ValidRows" Hover="true" Dense="true" Bordered="true" Striped="true"
-              Breakpoint="Breakpoint.Sm" Class="mt-4">
+    <MudTable T="object" Items="@ValidRows" Hover="true" Dense="true" Bordered="true" Striped="true"
+              Breakpoint="Breakpoint.Sm" Class="mt-4" OnRowClick="HandleRowClick">
         <HeaderContent>
             @foreach (var column in Columns)
             {
@@ -37,11 +37,21 @@ else
     [Parameter]
     public IReadOnlyList<object>? Rows { get; set; }
 
+    /// <summary>
+    /// 行がクリックされた時に呼び出されるコールバックを取得または設定します。
+    /// <para> * 呼び出し元が特定の用途（RNGビューアへの追加など）に使うためのフックです。指定しなければ何も起こりません。</para>
+    /// </summary>
+    [Parameter]
+    public EventCallback<object> OnRowClick { get; set; }
+
     private IReadOnlyList<object> ValidRows =>
         Rows?.Where(row => row != null).ToList() ?? new List<object>();
+
+    private Task HandleRowClick(MudBlazor.TableRowClickEventArgs<object> args) => OnRowClick.InvokeAsync(args.Item);
 
     private static object? GetValue(object row, string propertyName)
     {
         return row.GetType().GetProperty(propertyName)?.GetValue(row);
     }
 }
+

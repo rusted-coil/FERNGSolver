@@ -1,0 +1,93 @@
+@using FERNGSolver.Radiance.Domain.Combat
+@using FERNGSolver.Radiance.UI.Blazor.Internal
+
+<MudDialog>
+    <DialogContent>
+        <MudGrid Class="mb-2">
+            <MudItem xs="6" sm="4">
+                <MudNumericField T="int" @bind-Value="m_State.Level" Label="Lv" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="6" sm="4">
+                <MudNumericField T="int" @bind-Value="m_State.MaxHp" Label="最大HP" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="6" sm="4">
+                <MudNumericField T="int" @bind-Value="m_State.Str" Label="力" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="6" sm="4">
+                <MudNumericField T="int" @bind-Value="m_State.Tec" Label="技" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="6" sm="4">
+                <MudNumericField T="int" @bind-Value="m_State.Luck" Label="幸運" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="6" sm="4">
+                <MudNumericField T="int" @bind-Value="m_State.OpponentDefense" Label="敵の守備/魔防" Variant="Variant.Outlined" />
+            </MudItem>
+        </MudGrid>
+
+        <MudDivider Class="my-4" />
+
+        <MudText Typo="Typo.subtitle2" Class="mb-2">武器</MudText>
+        <MudRadioGroup T="Const.WeaponType" @bind-Value="m_State.WeaponType" Class="d-flex flex-wrap mb-2">
+            <MudRadio T="Const.WeaponType" Value="Const.WeaponType.Normal" Class="mr-4">通常武器</MudRadio>
+            <MudRadio T="Const.WeaponType" Value="Const.WeaponType.Brave" Class="mr-4">勇者</MudRadio>
+            <MudRadio T="Const.WeaponType" Value="Const.WeaponType.MagicSword" Class="mr-4">剣の間接攻撃</MudRadio>
+            <MudRadio T="Const.WeaponType" Value="Const.WeaponType.Absorb">吸収</MudRadio>
+        </MudRadioGroup>
+        <MudNumericField T="int" @bind-Value="m_State.WeaponUses" Label="残り回数" Variant="Variant.Outlined" Style="max-width:160px" Class="mb-4" />
+
+        <MudText Typo="Typo.subtitle2" Class="mb-2">スキル</MudText>
+        <MudGrid Class="mb-2">
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasVantage" Label="待ち伏せ" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasAdept" Label="連続" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasWrath" Label="怒り" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasResolve" Label="勇将" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasMiracle" Label="祈り" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasCounter" Label="カウンター" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasAether" Label="天空" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasAstra" Label="流星" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasLuna" Label="月光" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasSol" Label="太陽" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasFlare" Label="陽光" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasStun" Label="衝撃" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasColossus" Label="鳴動" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasDeadeye" Label="狙撃" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasLethality" Label="瞬殺" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasGuard" Label="キャンセル" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasCorrode" Label="武器破壊" Dense="true" /></MudItem>
+            <MudItem xs="6" sm="4"><MudCheckBox T="bool" @bind-Value="m_State.HasCancel" Label="翼の守護" Dense="true" /></MudItem>
+        </MudGrid>
+
+        <MudText Typo="Typo.subtitle2" Class="mb-2">ボス属性</MudText>
+        <MudRadioGroup T="Const.BossType" @bind-Value="m_State.BossType" Class="d-flex flex-wrap">
+            <MudRadio T="Const.BossType" Value="Const.BossType.None" Class="mr-4">なし</MudRadio>
+            <MudRadio T="Const.BossType" Value="Const.BossType.Boss" Class="mr-4">ボス</MudRadio>
+            <MudRadio T="Const.BossType" Value="Const.BossType.FinalBoss">漆黒の騎士/アシュナード</MudRadio>
+        </MudRadioGroup>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">キャンセル</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">OK</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private IMudDialogInstance MudDialog { get; set; } = null!;
+
+    /// <summary>
+    /// 編集対象の初期状態を取得または設定します。
+    /// <para> * キャンセル時に呼び出し元の値を変更しないよう、内部では複製 (<see cref="UnitStatusDetailState.Clone"/>) を編集します。</para>
+    /// </summary>
+    [Parameter, EditorRequired]
+    public UnitStatusDetailState InitialState { get; set; } = null!;
+
+    private UnitStatusDetailState m_State = null!;
+
+    protected override void OnInitialized()
+    {
+        m_State = InitialState.Clone();
+    }
+
+    private void Submit() => MudDialog.Close(DialogResult.Ok(m_State));
+    private void Cancel() => MudDialog.Cancel();
+}

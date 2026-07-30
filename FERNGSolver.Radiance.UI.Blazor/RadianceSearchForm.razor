@@ -6,38 +6,100 @@
 @using FERNGSolver.Common.Presentation.Extensions
 @using FERNGSolver.Radiance.Application.Search.Strategy
 @using FERNGSolver.Radiance.Domain.Combat
+@using FERNGSolver.Radiance.Presentation.RngView
+@using FERNGSolver.Radiance.Presentation.RngView.ViewContracts
+@using FERNGSolver.Radiance.Presentation.Search
 @using FERNGSolver.Radiance.Presentation.ViewContracts
 @using FERNGSolver.Radiance.UI.Blazor.Internal
 @using FERNGSolver.Common.UI.Blazor
 @implements IExtendedMainFormView
+@implements IRngViewListView
 @implements IDisposable
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4 mb-8">
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4 mb-8">
     <MudText Typo="Typo.h4" Class="mb-4">蒼炎の軌跡 乱数調整ツール（Web版プロトタイプ）</MudText>
 
-    <MudPaper Class="pa-4 mb-4" Elevation="2">
-        <MudGrid>
-            <MudItem xs="12" sm="4">
-                <MudNumericField T="int" @bind-Value="m_CurrentPosition" Label="現在の消費数" Variant="Variant.Outlined" />
-            </MudItem>
-            <MudItem xs="12" sm="4">
-                <MudNumericField T="int" @bind-Value="m_OffsetMin" Label="最小消費数（オフセット）" Variant="Variant.Outlined" />
-            </MudItem>
-            <MudItem xs="12" sm="4">
-                <MudNumericField T="int" @bind-Value="m_OffsetMax" Label="最大消費数（オフセット）" Variant="Variant.Outlined" />
-            </MudItem>
-        </MudGrid>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSearchClicked" Class="mt-4" FullWidth="true">
-            検索
-        </MudButton>
-    </MudPaper>
+    @* レイアウトの左右/上下切り替えはCSS(RadianceSearchForm.razor.css)のグリッドエリアのみで行い、
+       C#側はモードに応じたアコーディオンの出し分けだけに専念させています。 *@
+    <div class="radiance-workspace">
+        <div class="workspace-area workspace-area--condition">
+            <MudPaper Class="pa-4 mb-4" Elevation="2">
+                <MudGrid>
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="int" @bind-Value="m_CurrentPosition" Label="現在の消費数" Variant="Variant.Outlined" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="int" @bind-Value="m_OffsetMin" Label="最小消費数（オフセット）" Variant="Variant.Outlined" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="int" @bind-Value="m_OffsetMax" Label="最大消費数（オフセット）" Variant="Variant.Outlined" />
+                    </MudItem>
+                </MudGrid>
 
-    @if (m_ErrorMessage != null)
-    {
-        <MudAlert Severity="Severity.Error" Class="mb-4">@m_ErrorMessage</MudAlert>
-    }
+                <MudSelect T="SearchMode" @bind-Value="m_SearchMode" Label="検索方法" Variant="Variant.Outlined" Class="mt-4">
+                    @foreach (var mode in s_SearchModeLabels.Keys)
+                    {
+                        <MudSelectItem T="SearchMode" Value="@mode">@s_SearchModeLabels[mode]</MudSelectItem>
+                    }
+                </MudSelect>
 
-    <ResultsTable Columns="m_Columns" Rows="m_ViewModels" />
+                @* モードに応じて必要なアコーディオンのみを表示します。中身は今後のステップで移植予定です。 *@
+                <MudExpansionPanels Class="mt-4" MultiExpansion="true">
+                    @if (m_SearchMode == SearchMode.FalconKnightMethod)
+                    {
+                        <MudExpansionPanel Text="ファルコンナイト法" Expanded="true">
+                            <FalconKnightConditionPanel State="m_FalconKnightCondition" />
+                        </MudExpansionPanel>
+                    }
+                    @if (m_SearchMode is SearchMode.Combat or SearchMode.CombatAndGrowth)
+                    {
+                        <MudExpansionPanel Text="戦闘条件" Expanded="true">
+                            <CombatConditionPanel State="m_CombatCondition" />
+                        </MudExpansionPanel>
+                    }
+                    @if (m_SearchMode is SearchMode.Growth or SearchMode.CombatAndGrowth)
+                    {
+                        <MudExpansionPanel Text="レベルアップ条件" Expanded="true">
+                            <GrowthConditionPanel State="m_GrowthCondition" />
+                        </MudExpansionPanel>
+                    }
+                </MudExpansionPanels>
+
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSearchClicked" Class="mt-4" FullWidth="true">
+                    検索
+                </MudButton>
+            </MudPaper>
+
+            @if (m_ErrorMessage != null)
+            {
+                <MudAlert Severity="Severity.Error" Class="mb-4">@m_ErrorMessage</MudAlert>
+            }
+        </div>
+
+        <div class="workspace-area workspace-area--results">
+            <ResultsTable Columns="m_Columns" Rows="m_ViewModels" OnRowClick="OnResultRowClicked" />
+        </div>
+
+        <div class="workspace-area workspace-area--rng">
+            <MudPaper Class="pa-4" Elevation="2">
+                <div class="d-flex align-center gap-4 mb-2">
+                    <MudText Typo="Typo.subtitle1">乱数ビューア</MudText>
+                    <MudSpacer />
+                    <MudButton Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="OnAddRngViewButtonClicked">
+                        + 追加
+                    </MudButton>
+                </div>
+                <MudText Typo="Typo.caption" Class="mb-2">
+                    検索結果の行をクリックすると、その消費数の乱数ビューアを追加できます。
+                </MudText>
+                @foreach (var entry in m_RngViewEntries)
+                {
+                    <RngViewCard @key="entry.Id" MainFormView="this" InitialTableIndex="entry.TableIndex" InitialPosition="entry.InitialPosition"
+                                 OnRemove="() => RemoveRngView(entry.Id)" />
+                }
+            </MudPaper>
+        </div>
+    </div>
 </MudContainer>
 
 @code {
@@ -55,14 +117,46 @@
         InvokeAsync(StateHasChanged);
     }
 
-    public IObservable<Unit> AddRngViewButtonClicked => Observable.Never<Unit>();
-    public IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults => Observable.Never<IEnumerable<object>>();
+    public IObservable<Unit> AddRngViewButtonClicked => m_AddRngViewButtonClicked;
+    private readonly Subject<Unit> m_AddRngViewButtonClicked = new();
+
+    public IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults => m_AddRngViewRequestedFromSearchResults;
+    private readonly Subject<IEnumerable<object>> m_AddRngViewRequestedFromSearchResults = new();
+
+    private void OnAddRngViewButtonClicked() => m_AddRngViewButtonClicked.OnNext(Unit.Default);
+
+    private void OnResultRowClicked(object row) => m_AddRngViewRequestedFromSearchResults.OnNext(new[] { row });
 
     // --- 検索条件（今回のプロトタイプで実際に使用する項目） ---
     private int m_CurrentPosition = 0;
     private int m_OffsetMin = 0;
     private int m_OffsetMax = 10000;
     private string? m_ErrorMessage;
+
+    // --- 検索方法（左ペイン上部のコンボボックス） ---
+    // * ContainsCombat/ContainsGrowth/UsesFalconKnightMethodはいずれもこのモードから導出する。
+    private SearchMode m_SearchMode = SearchMode.Growth;
+
+    // --- ファルコンナイト法条件（FalconKnightConditionPanelと状態を共有） ---
+    private readonly FalconKnightConditionState m_FalconKnightCondition = new();
+
+    // --- 戦闘条件（CombatConditionPanelと状態を共有） ---
+    private readonly CombatConditionState m_CombatCondition = new();
+
+    // --- レベルアップ条件（GrowthConditionPanelと状態を共有） ---
+    private readonly GrowthConditionState m_GrowthCondition = new();
+
+    // --- 乱数ビューア（RngViewCardを並べるための状態） ---
+    private readonly List<RngViewEntry> m_RngViewEntries = new();
+    private sealed record RngViewEntry(Guid Id, int TableIndex, int InitialPosition);
+
+    private static readonly Dictionary<SearchMode, string> s_SearchModeLabels = new()
+    {
+        [SearchMode.FalconKnightMethod] = "ファルコンナイト法検索",
+        [SearchMode.Combat] = "戦闘検索",
+        [SearchMode.Growth] = "レベルアップ検索",
+        [SearchMode.CombatAndGrowth] = "戦闘＋レベルアップ検索",
+    };
 
     public int CurrentPosition => m_CurrentPosition;
     public int OffsetMin => m_OffsetMin;
@@ -71,53 +165,57 @@
     public int FalconKnightMethodMove => 0;
     public IObservable<Unit> SearchConditionChanged => Observable.Never<Unit>();
 
-    // --- ファルコンナイト法（今回は未対応、固定値で無効化） ---
-    public bool UsesFalconKnightMethod => false;
-    public string CxString => string.Empty;
-    public bool AddsCxOffset => false;
+    // --- ファルコンナイト法 ---
+    // * 補助ツール（cx列作成ダイアログ）は今回未移植のため、開くボタン自体を用意していない。
+    public bool UsesFalconKnightMethod => m_SearchMode == SearchMode.FalconKnightMethod;
+    public string CxString => m_FalconKnightCondition.CxString;
+    public bool AddsCxOffset => m_FalconKnightCondition.AddsCxOffset;
     public IObservable<Unit> FalconKnightToolOpenButtonClicked => Observable.Never<Unit>();
     public void OpenFalconKnightTool() { }
 
-    // --- 戦闘（今回は未対応、固定値で無効化） ---
-    public bool ContainsCombat => false;
-    public int AttackerHp => 0;
-    public int AttackerPower => 0;
-    public int AttackerHitRate => 0;
-    public int AttackerCriticalRate => 0;
-    public int AttackerPhaseCount => 1;
-    public IUnitStatusDetail AttackerStatusDetail { get; } = new EmptyUnitStatusDetail();
-    public int DefenderHp => 0;
-    public int DefenderPower => 0;
-    public int DefenderHitRate => 0;
-    public int DefenderCriticalRate => 0;
-    public int DefenderPhaseCount => 0;
-    public IUnitStatusDetail DefenderStatusDetail { get; } = new EmptyUnitStatusDetail();
-    public int AttackerHpPostconditionMin => 0;
-    public int AttackerHpPostconditionMax => 999;
-    public int DefenderHpPostconditionMin => 0;
-    public int DefenderHpPostconditionMax => 999;
+    // --- 戦闘 ---
+    // * 各種ステータスはCombatConditionPanelで編集するm_CombatConditionから取得する。
+    // * キャラクター固有スキル等の詳細設定（AttackerStatusDetail/DefenderStatusDetail）はUnitStatusDetailDialog
+    //   （MudDialog）で編集され、m_CombatConditionが保持する。
+    public bool ContainsCombat => m_SearchMode is SearchMode.Combat or SearchMode.CombatAndGrowth;
+    public int AttackerHp => m_CombatCondition.AttackerHp;
+    public int AttackerPower => m_CombatCondition.AttackerPower;
+    public int AttackerHitRate => m_CombatCondition.AttackerHitRate;
+    public int AttackerCriticalRate => m_CombatCondition.AttackerCriticalRate;
+    public int AttackerPhaseCount => m_CombatCondition.AttackerPhaseCount;
+    public IUnitStatusDetail AttackerStatusDetail => m_CombatCondition.AttackerStatusDetail;
+    public int DefenderHp => m_CombatCondition.DefenderHp;
+    public int DefenderPower => m_CombatCondition.DefenderPower;
+    public int DefenderHitRate => m_CombatCondition.DefenderHitRate;
+    public int DefenderCriticalRate => m_CombatCondition.DefenderCriticalRate;
+    public int DefenderPhaseCount => m_CombatCondition.DefenderPhaseCount;
+    public IUnitStatusDetail DefenderStatusDetail => m_CombatCondition.DefenderStatusDetail;
+    public int AttackerHpPostconditionMin => m_CombatCondition.FiltersByAttackerHpPostcondition ? m_CombatCondition.AttackerHpPostconditionMin : 0;
+    public int AttackerHpPostconditionMax => m_CombatCondition.FiltersByAttackerHpPostcondition ? m_CombatCondition.AttackerHpPostconditionMax : 999;
+    public int DefenderHpPostconditionMin => m_CombatCondition.FiltersByDefenderHpPostcondition ? m_CombatCondition.DefenderHpPostconditionMin : 0;
+    public int DefenderHpPostconditionMax => m_CombatCondition.FiltersByDefenderHpPostcondition ? m_CombatCondition.DefenderHpPostconditionMax : 999;
 
     // --- レベルアップ ---
-    // * 「検索条件が選択されていません」エラーを回避するため、レベルアップ検索を固定で有効にします。
-    // * 各能力のSearchTypeはNotConsidered固定のため、フィルタとしては機能せず、
-    //   指定した消費数範囲を単純に列挙する動作になります（RNGは正しく消費されます）。
-    public bool ContainsGrowth => true;
-    public int HpGrowthRate => 0;
-    public int StrGrowthRate => 0;
-    public int MgcGrowthRate => 0;
-    public int TecGrowthRate => 0;
-    public int SpdGrowthRate => 0;
-    public int LucGrowthRate => 0;
-    public int DefGrowthRate => 0;
-    public int MdfGrowthRate => 0;
-    public GrowthSearchType HpSearchType => GrowthSearchType.NotConsidered;
-    public GrowthSearchType StrSearchType => GrowthSearchType.NotConsidered;
-    public GrowthSearchType MgcSearchType => GrowthSearchType.NotConsidered;
-    public GrowthSearchType TecSearchType => GrowthSearchType.NotConsidered;
-    public GrowthSearchType SpdSearchType => GrowthSearchType.NotConsidered;
-    public GrowthSearchType LucSearchType => GrowthSearchType.NotConsidered;
-    public GrowthSearchType DefSearchType => GrowthSearchType.NotConsidered;
-    public GrowthSearchType MdfSearchType => GrowthSearchType.NotConsidered;
+    // * 各成長率/必要フラグはGrowthConditionPanelで編集するm_GrowthConditionから取得する。
+    // * Windows版にあるキャラクター選択による成長率自動入力（腕輪等の補正含む）は今回未移植のため、
+    //   各成長率は手入力のみとなる。
+    public bool ContainsGrowth => m_SearchMode is SearchMode.Growth or SearchMode.CombatAndGrowth;
+    public int HpGrowthRate => m_GrowthCondition.HpGrowthRate;
+    public int StrGrowthRate => m_GrowthCondition.StrGrowthRate;
+    public int MgcGrowthRate => m_GrowthCondition.MgcGrowthRate;
+    public int TecGrowthRate => m_GrowthCondition.TecGrowthRate;
+    public int SpdGrowthRate => m_GrowthCondition.SpdGrowthRate;
+    public int LucGrowthRate => m_GrowthCondition.LucGrowthRate;
+    public int DefGrowthRate => m_GrowthCondition.DefGrowthRate;
+    public int MdfGrowthRate => m_GrowthCondition.MdfGrowthRate;
+    public GrowthSearchType HpSearchType => m_GrowthCondition.RequiresHpUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+    public GrowthSearchType StrSearchType => m_GrowthCondition.RequiresStrUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+    public GrowthSearchType MgcSearchType => m_GrowthCondition.RequiresMgcUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+    public GrowthSearchType TecSearchType => m_GrowthCondition.RequiresTecUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+    public GrowthSearchType SpdSearchType => m_GrowthCondition.RequiresSpdUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+    public GrowthSearchType LucSearchType => m_GrowthCondition.RequiresLucUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+    public GrowthSearchType DefSearchType => m_GrowthCondition.RequiresDefUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
+    public GrowthSearchType MdfSearchType => m_GrowthCondition.RequiresMdfUp ? GrowthSearchType.MustUp : GrowthSearchType.NotConsidered;
 
     // --- Presenter接続 ---
     private readonly CompositeDisposable m_Disposables = new();
@@ -134,6 +232,40 @@
         Radiance.Presentation.Search.PresenterFactory
             .Create(this, m_ErrorNotifier)
             .AddTo(m_Disposables);
+
+        // --- 乱数ビューア ---
+        // * 自分自身がIExtendedMainFormViewとIRngViewListViewを両方実装しているため、
+        //   Windows版でMainFormEntryが行っていた配線をここで行う。
+        AddRngViewButtonClicked.Subscribe(_ => AddView(this, 0, 0)).AddTo(m_Disposables);
+        AddRngViewRequestedFromSearchResults.Subscribe(HandleAddRngViewRequestedFromSearchResults).AddTo(m_Disposables);
+        Radiance.Presentation.RngView.PresenterFactory
+            .CreateListPresenter(this, this)
+            .AddTo(m_Disposables);
+    }
+
+    // --- IRngViewListView ---
+    public void AddView(IExtendedMainFormView mainFormView, int tableIndex, int initialPosition)
+    {
+        m_RngViewEntries.Insert(0, new RngViewEntry(Guid.NewGuid(), tableIndex, initialPosition));
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void RemoveRngView(Guid id)
+    {
+        m_RngViewEntries.RemoveAll(entry => entry.Id == id);
+        StateHasChanged();
+    }
+
+    private void HandleAddRngViewRequestedFromSearchResults(IEnumerable<object> viewModels)
+    {
+        foreach (var viewModel in viewModels)
+        {
+            if (viewModel is IRngStateResultViewModel rngState)
+            {
+                // テーブル番号は#から始まるので、Substring(1)で#を除去してからintに変換
+                AddView(this, int.Parse(rngState.TableIndex.Substring(1)), int.Parse(rngState.Position));
+            }
+        }
     }
 
     private void OnSearchClicked()

@@ -1,0 +1,47 @@
+.rng-value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+    gap: 4px;
+}
+
+.rng-value-cell {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+.rng-value {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.rng-ok-mark {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.rng-usage {
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+.rng-usage-result {
+    white-space: nowrap;
+}
+
+.rng-side-growth {
+    color: darkgreen;
+    border-color: darkgreen;
+}
+
+.rng-side-player {
+    color: blue;
+    border-color: blue;
+}
+
+.rng-side-enemy {
+    color: red;
+    border-color: red;
+}

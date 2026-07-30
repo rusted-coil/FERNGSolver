@@ -1,0 +1,19 @@
+@using FERNGSolver.Radiance.UI.Blazor.Internal
+
+<MudTextField T="string" @bind-Value="State.CxString" Label="cx列" Variant="Variant.Outlined" Class="mb-4"
+              HelperText="'c'と'x'のみで入力してください（例: cxcxcc）" />
+
+<MudCheckBox T="bool" @bind-Value="State.AddsCxOffset" Label="入力分を消費数に加算" Class="mb-4" />
+
+<MudAlert Severity="Severity.Info">
+    補助ツール（cx列作成ダイアログ）は今回のステップでは未移植です。cx列は直接入力してください。
+</MudAlert>
+
+@code {
+    /// <summary>
+    /// このパネルが編集するファルコンナイト法条件の状態を取得または設定します。
+    /// <para> * 呼び出し元（<see cref="FERNGSolver.Radiance.UI.Blazor.RadianceSearchForm"/>）と状態を共有するため、参照型のまま受け渡します。</para>
+    /// </summary>
+    [Parameter, EditorRequired]
+    public FalconKnightConditionState State { get; set; } = null!;
+}

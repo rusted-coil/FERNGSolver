@@ -1,0 +1,127 @@
+@using FERNGSolver.Radiance.Domain.Character
+@using FERNGSolver.Radiance.Domain.Character.Extensions
+@using FERNGSolver.Radiance.Domain.Repository.Stub
+@using FERNGSolver.Radiance.UI.Blazor.Internal
+
+<MudText Typo="Typo.subtitle2" Class="mb-2">キャラクター選択による自動入力（任意）</MudText>
+<MudGrid Class="mb-2">
+    <MudItem xs="12" sm="6">
+        <MudSelect T="int" @bind-Value="m_SelectedCharacterIndex" @bind-Value:after="RefreshGrowthRate" Label="キャラクター" Variant="Variant.Outlined">
+            @for (var i = 0; i < m_Characters.Count; i++)
+            {
+                var index = i;
+                <MudSelectItem T="int" Value="@index">@m_Characters[index].Name</MudSelectItem>
+            }
+        </MudSelect>
+    </MudItem>
+</MudGrid>
+<div class="d-flex flex-wrap gap-2 mb-4">
+    <MudCheckBox T="bool" @bind-Value="m_HasSwordBand" @bind-Value:after="RefreshGrowthRate" Label="剣士の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasFighterBand" @bind-Value:after="RefreshGrowthRate" Label="戦士の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasArcherBand" @bind-Value:after="RefreshGrowthRate" Label="弓兵の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasKnightBand" @bind-Value:after="RefreshGrowthRate" Label="重歩兵の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasPaladinBand" @bind-Value:after="RefreshGrowthRate" Label="騎士の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasPegasusBand" @bind-Value:after="RefreshGrowthRate" Label="天馬騎士の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasWyvernBand" @bind-Value:after="RefreshGrowthRate" Label="竜騎士の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasMageBand" @bind-Value:after="RefreshGrowthRate" Label="魔道士の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasPriestBand" @bind-Value:after="RefreshGrowthRate" Label="神官の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasThiefBand" @bind-Value:after="RefreshGrowthRate" Label="盗賊の腕輪" Dense="true" />
+    <MudCheckBox T="bool" @bind-Value="m_HasKnightWard" @bind-Value:after="RefreshGrowthRate" Label="騎士の護り" Dense="true" />
+</div>
+
+<MudText Typo="Typo.body2" Class="mb-2">
+    各能力の成長率（%）と、「上昇が必要」かどうかを指定してください。チェックを外すと、その能力の上昇有無は考慮されません。
+</MudText>
+
+<MudGrid Class="mb-2">
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.HpGrowthRate" Label="HP成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresHpUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.StrGrowthRate" Label="力成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresStrUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.MgcGrowthRate" Label="魔力成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresMgcUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.TecGrowthRate" Label="技成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresTecUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.SpdGrowthRate" Label="速さ成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresSpdUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.LucGrowthRate" Label="幸運成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresLucUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.DefGrowthRate" Label="守備成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresDefUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudNumericField T="int" @bind-Value="State.MdfGrowthRate" Label="魔防成長率" Variant="Variant.Outlined" />
+        <MudCheckBox T="bool" @bind-Value="State.RequiresMdfUp" Label="上昇が必要" Dense="true" />
+    </MudItem>
+</MudGrid>
+
+@code {
+    /// <summary>
+    /// このパネルが編集するレベルアップ条件の状態を取得または設定します。
+    /// <para> * 呼び出し元（<see cref="FERNGSolver.Radiance.UI.Blazor.RadianceSearchForm"/>）と状態を共有するため、参照型のまま受け渡します。</para>
+    /// </summary>
+    [Parameter, EditorRequired]
+    public GrowthConditionState State { get; set; } = null!;
+
+    // キャラクター選択・腕輪チェックボックスはこのパネル内だけで完結するUI専用の一時状態のため、
+    // GrowthConditionState側には保持しない（Windows版でもフォームコントロールにのみ保持されている）。
+    private readonly IReadOnlyList<ICharacter> m_Characters = new StubCharacterRepository().AllCharacters;
+    private int m_SelectedCharacterIndex;
+
+    private bool m_HasSwordBand;
+    private bool m_HasFighterBand;
+    private bool m_HasArcherBand;
+    private bool m_HasKnightBand;
+    private bool m_HasPaladinBand;
+    private bool m_HasPegasusBand;
+    private bool m_HasWyvernBand;
+    private bool m_HasMageBand;
+    private bool m_HasPriestBand;
+    private bool m_HasThiefBand;
+    private bool m_HasKnightWard;
+
+    private void RefreshGrowthRate()
+    {
+        if (m_Characters.Count == 0)
+        {
+            return;
+        }
+
+        var boosted = m_Characters[m_SelectedCharacterIndex].Boost(new ICharacterExtensions.BoostArgs
+        {
+            HasSwordBand = m_HasSwordBand,
+            HasFighterBand = m_HasFighterBand,
+            HasArcherBand = m_HasArcherBand,
+            HasKnightBand = m_HasKnightBand,
+            HasPaladinBand = m_HasPaladinBand,
+            HasPegasusBand = m_HasPegasusBand,
+            HasWyvernBand = m_HasWyvernBand,
+            HasMageBand = m_HasMageBand,
+            HasPriestBand = m_HasPriestBand,
+            HasThiefBand = m_HasThiefBand,
+            HasKnightWard = m_HasKnightWard,
+        });
+
+        State.HpGrowthRate = boosted.HpGrowthRate;
+        State.StrGrowthRate = boosted.StrGrowthRate;
+        State.MgcGrowthRate = boosted.MgcGrowthRate;
+        State.TecGrowthRate = boosted.TecGrowthRate;
+        State.SpdGrowthRate = boosted.SpdGrowthRate;
+        State.LucGrowthRate = boosted.LucGrowthRate;
+        State.DefGrowthRate = boosted.DefGrowthRate;
+        State.MdfGrowthRate = boosted.MdfGrowthRate;
+    }
+}
