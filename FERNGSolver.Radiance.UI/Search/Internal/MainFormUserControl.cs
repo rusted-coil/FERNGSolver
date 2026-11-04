@@ -20,7 +20,7 @@ namespace FERNGSolver.Radiance.UI.Search
     internal partial class MainFormUserControl : UserControl, IExtendedMainFormView
     {
         public IObservable<Unit> SearchButtonClicked => m_MainFormView.SearchButtonClicked;
-        public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels);
+        public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels, int? totalCount = null) => m_MainFormView.ShowSearchResults(columns, viewModelType, viewModels, totalCount);
         public IObservable<Unit> AddRngViewButtonClicked => m_MainFormView.AddRngViewButtonClicked;
         public IObservable<IEnumerable<object>> AddRngViewRequestedFromSearchResults => m_MainFormView.AddRngViewRequestedFromSearchResults;
 

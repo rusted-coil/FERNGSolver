@@ -19,6 +19,12 @@ namespace FERNGSolver.Radiance.Application.Search
         public static IReadOnlyList<ISearchResult> Search(int tableIndex, ICloneableRng initialRng, int positionMin, int positionMax, ISearchStrategy strategy)
         {
             var result = new List<ISearchResult>();
+            // 初期状態より前の位置は存在しないため、検索範囲を0以上に限定する。
+            positionMin = Math.Max(0, positionMin);
+            if (positionMax < positionMin)
+            {
+                return result;
+            }
 
             var currentRng = initialRng.Clone();
             currentRng.Advance(positionMin);

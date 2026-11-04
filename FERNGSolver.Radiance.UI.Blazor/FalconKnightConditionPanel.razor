@@ -1,9 +1,9 @@
 @using FERNGSolver.Radiance.UI.Blazor.Internal
 
-<MudTextField T="string" @bind-Value="State.CxString" Label="cx列" Variant="Variant.Outlined" Class="mb-4"
+<MudTextField T="string" @bind-Value="State.CxString" @bind-Value:after="NotifyChanged" Label="cx列" Variant="Variant.Outlined" Class="mb-4"
               HelperText="'c'と'x'のみで入力してください（例: cxcxcc）" />
 
-<MudCheckBox T="bool" @bind-Value="State.AddsCxOffset" Label="入力分を消費数に加算" Class="mb-4" />
+<MudCheckBox T="bool" @bind-Value="State.AddsCxOffset" @bind-Value:after="NotifyChanged" Label="入力分を消費数に加算" Class="mb-4" />
 
 <MudAlert Severity="Severity.Info">
     補助ツール（cx列作成ダイアログ）は今回のステップでは未移植です。cx列は直接入力してください。
@@ -16,4 +16,9 @@
     /// </summary>
     [Parameter, EditorRequired]
     public FalconKnightConditionState State { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback ConditionChanged { get; set; }
+
+    private Task NotifyChanged() => ConditionChanged.InvokeAsync();
 }

@@ -37,7 +37,7 @@
         <MudAlert Severity="Severity.Error" Class="mb-4">@m_ErrorMessage</MudAlert>
     }
 
-    <ResultsTable Columns="m_Columns" Rows="m_ViewModels" />
+    <ResultsTable Columns="m_Columns" Rows="m_ViewModels" TotalCount="m_TotalResultCount" />
 </MudContainer>
 
 @code {
@@ -47,11 +47,13 @@
 
     private IReadOnlyList<ITableColumn>? m_Columns;
     private IReadOnlyList<object>? m_ViewModels;
+    private int? m_TotalResultCount;
 
-    public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
+    public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels, int? totalCount = null)
     {
         m_Columns = columns;
         m_ViewModels = viewModels;
+        m_TotalResultCount = totalCount ?? viewModels.Count;
         InvokeAsync(StateHasChanged);
     }
 

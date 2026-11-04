@@ -11,9 +11,9 @@ namespace FERNGSolver.Common.Presentation.ViewContracts
         IObservable<Unit> SearchButtonClicked { get; }
 
         /// <summary>
-        /// 結果を表示します。
+        /// 結果を表示します。totalCountは表示上限を適用する前の検索結果件数です。
         /// </summary>
-        void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels);
+        void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels, int? totalCount = null);
 
         /// <summary>
         /// 乱数ビューの追加ボタンがクリックされたことを通知するストリームを取得します。

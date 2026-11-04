@@ -14,7 +14,7 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
         public CombatAndGrowthSearchResultItemViewModel(int position, int offset)
         {
             Position = position.ToString();
-            Offset = $"+{offset}";
+            Offset = offset >= 0 ? $"+{offset}" : offset.ToString();
         }
 
         public void SetCombatResult(CombatSimulator.Result result)

@@ -1,5 +1,6 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Application.Search.Strategy;
+using FERNGSolver.Common.Presentation.Search;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Gba.Presentation.Search.Internal;
 using FERNGSolver.Thracia.Application.Search;
@@ -45,6 +46,11 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
 
             for (int i = 0; i < Domain.RNG.Const.TableCount; ++i)
             {
+                if (mainFormView.SearchTableIndex != null && mainFormView.SearchTableIndex.Value != i)
+                {
+                    continue;
+                }
+
                 var rng = RngFactory.Create(i);
                 results.AddRange(Searcher.Search(i, rng, mainFormView.OffsetMin, mainFormView.OffsetMax, strategy));
             }
@@ -53,8 +59,8 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
 
         private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)
         {
-            var viewModels = new ResultViewModel[results.Count];
-            for (int i = 0; i < viewModels.Length && i < 100; ++i)
+            var viewModels = new ResultViewModel[Math.Min(results.Count, SearchResultDisplay.MaxRows)];
+            for (int i = 0; i < viewModels.Length; ++i)
             {
                 var rng = RngFactory.Create(results[i].TableIndex);
                 for (int a = 0; a < results[i].Position; ++a)
@@ -78,7 +84,7 @@ namespace FERNGSolver.Thracia.Presentation.Search.Executor.Internal
                 new SearchResultTableColumn("消費数", "Position") { Width = 50 },
                 new SearchResultTableColumn("続き", "Foresight") { Width = 400 },
             ],
-            typeof(ResultViewModel), viewModels);
+            typeof(ResultViewModel), viewModels, results.Count);
         }
     }
 }

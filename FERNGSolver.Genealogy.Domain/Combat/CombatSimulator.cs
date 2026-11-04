@@ -4,6 +4,10 @@ namespace FERNGSolver.Genealogy.Domain.Combat
 {
     public static class CombatSimulator
     {
+        // 終了しない闘技場戦闘や突撃の連鎖でUIを停止させないための計算上限。
+        // 上限に到達した場合、途中のHPを確定した戦闘結果として返さない。
+        public const int MaximumRoundCount = 10000;
+
         public sealed class Result
         {
             public int AttackerHp { get; }
@@ -39,6 +43,11 @@ namespace FERNGSolver.Genealogy.Domain.Combat
             int roundIndex = 0;
             for(roundIndex = 0; ; ++roundIndex) // 1ラウンドごとのループ
             {
+                if (roundIndex >= MaximumRoundCount)
+                {
+                    throw new CombatSimulationLimitException(MaximumRoundCount);
+                }
+
                 // システム上の先攻後攻を仮決め
                 var prior = isOpponentFirst ? defenderUnit : attackerUnit;
                 var follower = isOpponentFirst ? attackerUnit : defenderUnit;
@@ -210,7 +219,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
 
                 // 命中判定
                 // 月光剣か太陽剣が発動していたら命中判定は成功扱い
-                if (!isLunaActive && !isSolActive && !rngService.CheckHit(attackerSide.CombatUnit.HitRate, attackerSide.UnitSide, roundIndex))
+                if (!isLunaActive && !isSolActive && !rngService.CheckHit(hitRate, attackerSide.UnitSide, roundIndex))
                 {
                     isHit = false;
                 }
@@ -237,6 +246,9 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                         damage += attackerSide.CombatUnit.Attack; // 必殺は攻撃力を2倍にする
                     }
 
+                    // 命中時の最小ダメージは1。必殺の攻撃力補正を適用してから下限を設定する。
+                    damage = Math.Max(1, damage);
+
                     if (isSolActive || attackerSide.CombatUnit.StatusDetail.WeaponType == Const.WeaponType.Absorb)
                     {
                         attackerSide.CurrentHp = Math.Min(
@@ -255,6 +267,7 @@ namespace FERNGSolver.Genealogy.Domain.Combat
                         }
                         if (rngService.CheckSleep(sleepRate, attackerSide.UnitSide, roundIndex))
                         {
+                            defenderSide.CurrentHp = Math.Max(0, defenderSide.CurrentHp);
                             return false; // 状態異常にかかったら戦闘終了
                         }
                     }

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FERNGSolver.Genealogy.Domain\FERNGSolver.Genealogy.Domain.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Common.Application\FERNGSolver.Common.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

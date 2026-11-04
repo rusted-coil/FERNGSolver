@@ -8,7 +8,7 @@ namespace FERNGSolver.Gba.Domain.Tests.RNG
         [TestMethod]
         public void Next_ShouldReturnExpectedSequence()
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(isBindingBlade: false);
             var expected = new List<int>
             {
                 47, 66, 60, 46, 77,
@@ -23,9 +23,11 @@ namespace FERNGSolver.Gba.Domain.Tests.RNG
         }
 
         [TestMethod]
-        public void ClonedRng_ShouldProduceSameResults()
+        [DataRow(false)]
+        [DataRow(true)]
+        public void ClonedRng_ShouldProduceSameResults(bool isBindingBlade)
         {
-            var original = RngFactory.CreateDefault();
+            var original = RngFactory.CreateDefault(isBindingBlade);
 
             // 適当に進める
             for (int i = 0; i < 5; i++) original.Next();
@@ -39,6 +41,19 @@ namespace FERNGSolver.Gba.Domain.Tests.RNG
                 int actual = clone.Next();
                 Assert.AreEqual(expected, actual, $"Mismatch after clone at step {i}");
             }
+        }
+
+        [TestMethod]
+        [DataRow(false, 99)]
+        [DataRow(true, 100)]
+        public void ClonedRng_ShouldPreserveTitleSpecificConversion(bool isBindingBlade, int expected)
+        {
+            // 次の内部乱数が65535になる状態。封印と烈火・聖魔で変換結果が異なる。
+            var original = RngFactory.CreateFromSeeds(65504, 31, 0, isBindingBlade);
+            var clone = original.Clone();
+
+            Assert.AreEqual(expected, (int)original.Next());
+            Assert.AreEqual(expected, (int)clone.Next());
         }
     }
 }

@@ -1,5 +1,6 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Application.Search.Strategy;
+using FERNGSolver.Common.Presentation.Search;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Radiance.Application.Search;
 using FERNGSolver.Radiance.Domain.RNG;
@@ -59,8 +60,8 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
 
         private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)
         {
-            var viewModels = new ResultViewModel[results.Count];
-            for (int i = 0; i < viewModels.Length && i < 100; ++i)
+            var viewModels = new ResultViewModel[Math.Min(results.Count, SearchResultDisplay.MaxRows)];
+            for (int i = 0; i < viewModels.Length; ++i)
             {
                 int offset = mainFormView.AddsCxOffset ? results[i].Position + mainFormView.CxString.Length : results[i].Position;
                 viewModels[i] = new ResultViewModel { TableIndex = $"#{results[i].TableIndex}", Position = offset.ToString() };
@@ -69,7 +70,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
                 new SearchResultTableColumn("テーブル", "TableIndex") { Width = 50 },
                 new SearchResultTableColumn("消費数", "Position") { Width = 50 }
             ],
-            typeof(ResultViewModel), viewModels);
+            typeof(ResultViewModel), viewModels, results.Count);
         }
     }
 }

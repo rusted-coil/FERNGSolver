@@ -16,6 +16,7 @@ namespace FERNGSolver.Genealogy.UI.RngView.Internal
 
         private BehaviorSubject<int> m_PositionChanged;
         public IObservable<int> PositionChanged => m_PositionChanged;
+        private string? m_SimulationError;
 
         public RngViewUserControl(int initialPosition) : base()
         {
@@ -45,6 +46,23 @@ namespace FERNGSolver.Genealogy.UI.RngView.Internal
         }
 
         protected override string GetUsageDisplayString(IRandomNumberViewModel viewModel) => viewModel.Usage.ToDisplayString();
+
+        public void SetSimulationError(string? message)
+        {
+            m_SimulationError = message;
+            Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (m_SimulationError != null)
+            {
+                TextRenderer.DrawText(e.Graphics, m_SimulationError, Font,
+                    new Rectangle(5, 32, Math.Max(0, ClientSize.Width - 10), Math.Max(0, ClientSize.Height - 32)),
+                    Color.DarkRed, TextFormatFlags.WordBreak);
+            }
+        }
 
         private void PositionNumericUpDown_ValueChanged(object? sender, EventArgs e) => m_PositionChanged.OnNext((int)PositionNumericUpDown.Value);
     }

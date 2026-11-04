@@ -5,19 +5,19 @@
 <MudText Typo="Typo.subtitle2" Class="mb-2">攻撃側</MudText>
 <MudGrid Class="mb-2">
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.AttackerHp" Label="HP" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.AttackerHp" @bind-Value:after="NotifyChanged" Label="HP" Variant="Variant.Outlined" />
     </MudItem>
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.AttackerPower" Label="威力" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.AttackerPower" @bind-Value:after="NotifyChanged" Label="威力" Variant="Variant.Outlined" />
     </MudItem>
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.AttackerHitRate" Label="命中" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.AttackerHitRate" @bind-Value:after="NotifyChanged" Label="命中" Variant="Variant.Outlined" />
     </MudItem>
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.AttackerCriticalRate" Label="必殺" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.AttackerCriticalRate" @bind-Value:after="NotifyChanged" Label="必殺" Variant="Variant.Outlined" />
     </MudItem>
 </MudGrid>
-<MudCheckBox T="bool" @bind-Value="State.AttackerFollowsUpAttack" Label="追撃" Class="mb-2" />
+<MudCheckBox T="bool" @bind-Value="State.AttackerFollowsUpAttack" @bind-Value:after="NotifyChanged" Label="追撃" Class="mb-2" />
 <div class="d-flex align-center gap-4 mb-4">
     <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="() => OpenStatusDetailDialogAsync(isAttacker: true)">
         詳細設定
@@ -29,21 +29,21 @@
 <MudText Typo="Typo.subtitle2" Class="mb-2">防御側</MudText>
 <MudGrid Class="mb-2">
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.DefenderHp" Label="HP" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.DefenderHp" @bind-Value:after="NotifyChanged" Label="HP" Variant="Variant.Outlined" />
     </MudItem>
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.DefenderPower" Label="威力" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.DefenderPower" @bind-Value:after="NotifyChanged" Label="威力" Variant="Variant.Outlined" />
     </MudItem>
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.DefenderHitRate" Label="命中" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.DefenderHitRate" @bind-Value:after="NotifyChanged" Label="命中" Variant="Variant.Outlined" />
     </MudItem>
     <MudItem xs="6" sm="3">
-        <MudNumericField T="int" @bind-Value="State.DefenderCriticalRate" Label="必殺" Variant="Variant.Outlined" />
+        <MudNumericField T="int" @bind-Value="State.DefenderCriticalRate" @bind-Value:after="NotifyChanged" Label="必殺" Variant="Variant.Outlined" />
     </MudItem>
 </MudGrid>
 <div class="d-flex gap-4 mb-2">
-    <MudCheckBox T="bool" @bind-Value="State.DefenderCountersAttack" Label="反撃" />
-    <MudCheckBox T="bool" @bind-Value="State.DefenderFollowsUpAttack" Label="追撃" Disabled="@(!State.DefenderCountersAttack)" />
+    <MudCheckBox T="bool" @bind-Value="State.DefenderCountersAttack" @bind-Value:after="NotifyChanged" Label="反撃" />
+    <MudCheckBox T="bool" @bind-Value="State.DefenderFollowsUpAttack" @bind-Value:after="NotifyChanged" Label="追撃" Disabled="@(!State.DefenderCountersAttack)" />
 </div>
 <div class="d-flex align-center gap-4 mb-4">
     <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="() => OpenStatusDetailDialogAsync(isAttacker: false)">
@@ -55,28 +55,28 @@
 <MudDivider Class="mb-4" />
 
 @* 戦闘終了後のHPによる絞り込み *@
-<MudCheckBox T="bool" @bind-Value="State.FiltersByAttackerHpPostcondition" Label="攻撃側の戦闘終了後HPで絞り込み" />
+<MudCheckBox T="bool" @bind-Value="State.FiltersByAttackerHpPostcondition" @bind-Value:after="NotifyChanged" Label="攻撃側の戦闘終了後HPで絞り込み" />
 @if (State.FiltersByAttackerHpPostcondition)
 {
     <MudGrid Class="mb-2 ml-6">
         <MudItem xs="6" sm="3">
-            <MudNumericField T="int" @bind-Value="State.AttackerHpPostconditionMin" Label="最小" Variant="Variant.Outlined" />
+            <MudNumericField T="int" @bind-Value="State.AttackerHpPostconditionMin" @bind-Value:after="NotifyChanged" Label="最小" Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudNumericField T="int" @bind-Value="State.AttackerHpPostconditionMax" Label="最大" Variant="Variant.Outlined" />
+            <MudNumericField T="int" @bind-Value="State.AttackerHpPostconditionMax" @bind-Value:after="NotifyChanged" Label="最大" Variant="Variant.Outlined" />
         </MudItem>
     </MudGrid>
 }
 
-<MudCheckBox T="bool" @bind-Value="State.FiltersByDefenderHpPostcondition" Label="防御側の戦闘終了後HPで絞り込み" />
+<MudCheckBox T="bool" @bind-Value="State.FiltersByDefenderHpPostcondition" @bind-Value:after="NotifyChanged" Label="防御側の戦闘終了後HPで絞り込み" />
 @if (State.FiltersByDefenderHpPostcondition)
 {
     <MudGrid Class="mb-2 ml-6">
         <MudItem xs="6" sm="3">
-            <MudNumericField T="int" @bind-Value="State.DefenderHpPostconditionMin" Label="最小" Variant="Variant.Outlined" />
+            <MudNumericField T="int" @bind-Value="State.DefenderHpPostconditionMin" @bind-Value:after="NotifyChanged" Label="最小" Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudNumericField T="int" @bind-Value="State.DefenderHpPostconditionMax" Label="最大" Variant="Variant.Outlined" />
+            <MudNumericField T="int" @bind-Value="State.DefenderHpPostconditionMax" @bind-Value:after="NotifyChanged" Label="最大" Variant="Variant.Outlined" />
         </MudItem>
     </MudGrid>
 }
@@ -88,6 +88,11 @@
     /// </summary>
     [Parameter, EditorRequired]
     public CombatConditionState State { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback ConditionChanged { get; set; }
+
+    private Task NotifyChanged() => ConditionChanged.InvokeAsync();
 
     private async Task OpenStatusDetailDialogAsync(bool isAttacker)
     {
@@ -108,7 +113,7 @@
             {
                 State.DefenderStatusDetail = newState;
             }
-            StateHasChanged();
+            await NotifyChanged();
         }
     }
 }

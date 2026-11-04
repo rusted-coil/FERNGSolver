@@ -33,6 +33,20 @@ namespace FERNGSolver.Genealogy.Presentation.RngView.Internal
 
         private void PositionChanged(int position)
         {
+            m_View.SetSimulationError(null);
+            try
+            {
+                UpdateRandomNumbers(position);
+            }
+            catch (CombatSimulationLimitException exception)
+            {
+                m_View.SetRandomNumbers(Array.Empty<IRandomNumberViewModel>(), Array.Empty<int>());
+                m_View.SetSimulationError(exception.Message);
+            }
+        }
+
+        private void UpdateRandomNumbers(int position)
+        {
             var rng = RngFactory.Create();
             rng.Advance(position);
             var previewRng = rng.Clone();

@@ -19,6 +19,12 @@ namespace FERNGSolver.Thracia.Application.Search
         public static IReadOnlyList<ISearchResult> Search(int tableIndex, ICloneableRng initialRng, int positionMin, int positionMax, ISearchStrategy strategy)
         {
             var result = new List<ISearchResult>();
+            // 初期状態より前の位置は存在しないため、検索範囲を0以上に限定する。
+            positionMin = Math.Max(0, positionMin);
+            if (positionMax < positionMin)
+            {
+                return result;
+            }
 
             var currentRng = initialRng.Clone();
             for (int i = 0; i < positionMin; ++i)
@@ -31,7 +37,7 @@ namespace FERNGSolver.Thracia.Application.Search
                 var tempRng = currentRng.Clone();
                 if (strategy.CheckAndAdvance(tempRng))
                 {
-                    result.Add(new Internal.SearchResult(tableIndex, i));
+                    result.Add(new Internal.SearchResult(tableIndex, positionMin + i));
                 }
 
                 currentRng.Next();

@@ -18,5 +18,10 @@ namespace FERNGSolver.Genealogy.Presentation.RngView.ViewContracts
         /// <param name="viewModels">表示したい乱数1つあたりviewModel1つを持つリスト</param>
         /// <param name="partitionPositions">区切り線を出したい位置（[n]番目のViewModelの前に出したい場合はnを指定）</param>
         void SetRandomNumbers(IReadOnlyList<IRandomNumberViewModel> viewModels, IEnumerable<int> partitionPositions);
+
+        /// <summary>
+        /// 戦闘を最後まで計算できなかった理由を表示します。nullで表示を解除します。
+        /// </summary>
+        void SetSimulationError(string? message);
     }
 }

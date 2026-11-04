@@ -13,7 +13,8 @@ namespace FERNGSolver.Common.Application.Search.Pattern
             // 末尾に,を含んでもよく、その場合は自動的に読み飛ばす
             // 「(数値)+」は目標値の判定に失敗したことを示すため(数値, false)に変換
             // 「(数値)-」は目標値の判定に成功したことを示すため(数値, true)に変換
-            //「x」はチェックを行わない(あらゆる判定に成功する)ことを示すため(99, true)に変換
+            //「x」はチェックを行わないことを示すため(0, false)に変換。
+            // 判定はrngValue >= 0となり、IRngが返すすべてのushort値に一致する。
 
             var elements = pattern.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var result = new (ushort, bool)[elements.Length];
@@ -22,7 +23,7 @@ namespace FERNGSolver.Common.Application.Search.Pattern
                 var element = elements[i].Trim();
                 if (element == "x" || element == "X")
                 {
-                    result[i] = (99, true);
+                    result[i] = (0, false);
                 }
                 else if (element.EndsWith('+'))
                 {

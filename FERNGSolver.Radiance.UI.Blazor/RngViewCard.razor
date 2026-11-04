@@ -11,12 +11,17 @@
 <MudPaper Class="pa-3 mb-3" Elevation="1">
     <div class="d-flex align-center flex-wrap gap-4 mb-2">
         <MudNumericField T="int" Value="m_TableIndex" ValueChanged="OnTableIndexChanged" Label="テーブル番号"
-                          Variant="Variant.Outlined" Style="max-width:140px" Margin="Margin.Dense" />
+                          Min="0" Max="@(Domain.RNG.Const.TableCount - 1)" Variant="Variant.Outlined" Style="max-width:140px" Margin="Margin.Dense" />
         <MudNumericField T="int" Value="m_Position" ValueChanged="OnPositionChanged" Label="消費数"
-                          Variant="Variant.Outlined" Style="max-width:140px" Margin="Margin.Dense" />
+                          Min="0" Variant="Variant.Outlined" Style="max-width:140px" Margin="Margin.Dense" />
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="() => OnRemove.InvokeAsync()" />
     </div>
+
+    @if (m_InputError != null)
+    {
+        <MudAlert Severity="Severity.Error" Class="mb-2">@m_InputError</MudAlert>
+    }
 
     <div class="rng-value-grid">
         @foreach (var viewModel in m_ViewModels)
@@ -64,6 +69,7 @@
 
     private int m_TableIndex;
     private int m_Position;
+    private string? m_InputError;
     private IReadOnlyList<IRandomNumberViewModel> m_ViewModels = Array.Empty<IRandomNumberViewModel>();
     private BehaviorSubject<(int, int)>? m_PositionChanged;
     private IRngViewPresenter? m_Presenter;
@@ -81,8 +87,12 @@
 
     protected override void OnInitialized()
     {
-        m_TableIndex = InitialTableIndex;
-        m_Position = InitialPosition;
+        m_TableIndex = Math.Clamp(InitialTableIndex, 0, Domain.RNG.Const.TableCount - 1);
+        m_Position = Math.Max(0, InitialPosition);
+        if (m_TableIndex != InitialTableIndex || m_Position != InitialPosition)
+        {
+            m_InputError = $"テーブル番号は0〜{Domain.RNG.Const.TableCount - 1}、消費数は0以上で指定してください。表示位置を範囲内に補正しました。";
+        }
         m_PositionChanged = new BehaviorSubject<(int, int)>((m_TableIndex, m_Position));
 
         m_Presenter = Radiance.Presentation.RngView.PresenterFactory.CreateViewPresenter(MainFormView, this);
@@ -90,12 +100,24 @@
 
     private void OnTableIndexChanged(int value)
     {
+        if (value < 0 || value >= Domain.RNG.Const.TableCount)
+        {
+            m_InputError = $"テーブル番号は0〜{Domain.RNG.Const.TableCount - 1}で指定してください。";
+            return;
+        }
+        m_InputError = null;
         m_TableIndex = value;
         m_PositionChanged?.OnNext((m_TableIndex, m_Position));
     }
 
     private void OnPositionChanged(int value)
     {
+        if (value < 0)
+        {
+            m_InputError = "消費数は0以上で指定してください。";
+            return;
+        }
+        m_InputError = null;
         m_Position = value;
         m_PositionChanged?.OnNext((m_TableIndex, m_Position));
     }
@@ -121,5 +143,6 @@
     public void Dispose()
     {
         m_Presenter?.Dispose();
+        m_PositionChanged?.Dispose();
     }
 }

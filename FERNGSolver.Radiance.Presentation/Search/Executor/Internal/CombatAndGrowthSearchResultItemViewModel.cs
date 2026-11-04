@@ -19,7 +19,7 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
         {
             TableIndex = $"#{tableIndex}";
             Position = position.ToString();
-            Offset = $"+{offset}";
+            Offset = offset >= 0 ? $"+{offset}" : offset.ToString();
 
             {
                 var sb = new StringBuilder();

@@ -1,5 +1,6 @@
 using FERNGSolver.Application.Config;
 using FERNGSolver.Common.Presentation.Interfaces;
+using FERNGSolver.Common.Presentation.Search;
 using FERNGSolver.Common.UI.Interfaces;
 using FormRx.Button;
 using System.Collections;
@@ -34,10 +35,23 @@ namespace FERNGSolver.UI.Internal
 
         private readonly IButton m_SearchButton;
         private readonly IButton m_AddRngViewButton;
+        private readonly Label m_SearchResultSummaryLabel;
 
         public MainForm()
         {
             InitializeComponent();
+
+            m_SearchResultSummaryLabel = new Label
+            {
+                Location = SearchResultDataGridView.Location,
+                Size = new Size(SearchResultDataGridView.Width, 22),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                AutoEllipsis = true,
+            };
+            SearchResultsTabPage.Controls.Add(m_SearchResultSummaryLabel);
+            SearchResultDataGridView.Top += 24;
+            SearchResultDataGridView.Height -= 24;
+            SearchResultDataGridView.AllowUserToAddRows = false;
 
             m_SearchButton = ButtonFactory.CreateButton(SearchButton);
             m_AddRngViewButton = ButtonFactory.CreateButton(AddRngViewButton);
@@ -82,6 +96,7 @@ namespace FERNGSolver.UI.Internal
                 m_CurrentSearchConditionUserControl = null;
             }
             SearchResultDataGridView.Columns.Clear();
+            m_SearchResultSummaryLabel.Text = string.Empty;
 
             SwitchTitleTreeMenuItem.Text = title;
             foreach (var menuItem in m_SwitchTitleMenuItems)
@@ -125,8 +140,9 @@ namespace FERNGSolver.UI.Internal
             }
         }
 
-        public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
+        public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels, int? totalCount = null)
         {
+            m_SearchResultSummaryLabel.Text = SearchResultDisplay.GetSummary(viewModels.Count, totalCount ?? viewModels.Count);
             SearchResultDataGridView.AutoGenerateColumns = false;
             SearchResultDataGridView.Columns.Clear();
             foreach (var column in columns)

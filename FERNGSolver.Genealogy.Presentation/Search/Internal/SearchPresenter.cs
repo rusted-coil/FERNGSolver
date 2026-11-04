@@ -1,5 +1,7 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Presentation.Extensions;
+using FERNGSolver.Common.Presentation.Interfaces;
+using FERNGSolver.Genealogy.Domain.Combat;
 using FERNGSolver.Genealogy.Presentation.ViewContracts;
 using System.Reactive.Disposables;
 
@@ -32,13 +34,21 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Internal
                 return;
             }
 
-            if (m_MainFormView.UsesArenaCheck)
+            try
             {
-                Executor.Internal.ArenaCheckSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                if (m_MainFormView.UsesArenaCheck)
+                {
+                    Executor.Internal.ArenaCheckSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                }
+                else
+                {
+                    Executor.Internal.CombatAndGrowthSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                }
             }
-            else
+            catch (CombatSimulationLimitException exception)
             {
-                Executor.Internal.CombatAndGrowthSearchExecutor.ExecuteSearch(m_MainFormView, m_ErrorNotifier);
+                m_MainFormView.ShowSearchResults(Array.Empty<ITableColumn>(), typeof(object), Array.Empty<object>());
+                m_ErrorNotifier.NotifyError(exception.Message);
             }
         }
 

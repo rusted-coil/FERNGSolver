@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Application.Search.Strategy;
 using FERNGSolver.Common.Presentation.Interfaces;
+using FERNGSolver.Common.Presentation.Search;
 using FERNGSolver.Genealogy.Application.Search;
 using FERNGSolver.Genealogy.Application.Search.Strategy;
 using FERNGSolver.Genealogy.Domain.Combat;
@@ -111,12 +112,12 @@ namespace FERNGSolver.Genealogy.Presentation.Search.Executor.Internal
 
         private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)
         {
-            var viewModels = new CombatAndGrowthSearchResultItemViewModel[results.Count];
-            for (int i = 0; i < viewModels.Length && i < 100; ++i)
+            var viewModels = new CombatAndGrowthSearchResultItemViewModel[Math.Min(results.Count, SearchResultDisplay.MaxRows)];
+            for (int i = 0; i < viewModels.Length; ++i)
             {
                 viewModels[i] = CreateResultItemViewModel(mainFormView, results[i]);
             }
-            mainFormView.ShowSearchResults(CreateResultColumns(mainFormView), typeof(CombatAndGrowthSearchResultItemViewModel), viewModels);
+            mainFormView.ShowSearchResults(CreateResultColumns(mainFormView), typeof(CombatAndGrowthSearchResultItemViewModel), viewModels, results.Count);
         }
 
         private static IReadOnlyList<ITableColumn> CreateResultColumns(IExtendedMainFormView mainFormView)

@@ -21,10 +21,17 @@ namespace FERNGSolver.Internal
                 return new T();
             }
 
-            var nullable = JsonSerializer.Deserialize<T>(content);
-            if (nullable != null)
+            try
             {
-                return nullable;
+                var nullable = JsonSerializer.Deserialize<T>(content);
+                if (nullable != null)
+                {
+                    return nullable;
+                }
+            }
+            catch (JsonException)
+            {
+                // 空のファイルや途中で切れた設定ファイルからは既定値で復帰する。
             }
             return new T();
         }

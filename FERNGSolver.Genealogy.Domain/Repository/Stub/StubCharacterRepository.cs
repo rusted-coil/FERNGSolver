@@ -17,7 +17,7 @@ namespace FERNGSolver.Genealogy.Domain.Repository.Stub
             new HolyBlood("ノヴァ", 20, 10,  0, 10,  0, 10,  0,  0),
             new HolyBlood("ネール", 20,  0,  0, 30,  0,  0,  0,  0),
             new HolyBlood("ナーガ", 10,  0, 20,  0,  0,  0,  0, 20),
-            new HolyBlood("フォルセティ", 20, 0, 0, 0, 0, 30, 0, 0),
+            new HolyBlood("セティ", 20, 0, 0, 0, 0, 30, 0, 0),
             new HolyBlood("ロプトウス", 10, 0, 20, 0, 0, 0, 0, 20),
         ];
 

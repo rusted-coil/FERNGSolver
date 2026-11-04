@@ -17,7 +17,7 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
             int falconVerticalCount, int falconVerticalRemain)
         {
             Position = position.ToString();
-            Offset = $"+{offset}";
+            Offset = offset >= 0 ? $"+{offset}" : offset.ToString();
 
             {
                 var sb = new StringBuilder();

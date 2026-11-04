@@ -11,7 +11,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
         [TestMethod]
         public void Search_ShouldFindMatchingOffset()
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(isBindingBlade: false);
 
             // パターンに一致するのは offset = 5 から始まる [xxcccx]
             var pattern = new List<bool> { false, false, true, true, true, false };
@@ -27,7 +27,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
         [TestMethod]
         public void Search_ShouldReturnEmpty_WhenNoMatch()
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(isBindingBlade: false);
 
             // 不可能なパターン（例えばT,T,T,T,T,T,T,T）
             var pattern = new List<bool> { true, true, true, true, true, true, true, true };
@@ -43,7 +43,7 @@ namespace FERNGSolver.Gba.Application.Tests.Search
         [TestMethod]
         public void Search_ShouldNotAdvanceOriginalRng()
         {
-            var rng = RngFactory.CreateDefault();
+            var rng = RngFactory.CreateDefault(isBindingBlade: false);
             var before = rng.Clone();
 
             var pattern = new List<bool> { true };

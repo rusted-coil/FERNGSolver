@@ -1,5 +1,6 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Application.Search.Strategy;
+using FERNGSolver.Common.Presentation.Search;
 using FERNGSolver.FalconKnightTool.Application.Path;
 using FERNGSolver.Gba.Application.Search;
 using FERNGSolver.Gba.Domain.RNG;
@@ -45,15 +46,15 @@ namespace FERNGSolver.Gba.Presentation.Search.Executor.Internal
 
         private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)
         {
-            var viewModels = new ResultViewModel[results.Count];
-            for (int i = 0; i < viewModels.Length && i < 100; ++i)
+            var viewModels = new ResultViewModel[Math.Min(results.Count, SearchResultDisplay.MaxRows)];
+            for (int i = 0; i < viewModels.Length; ++i)
             {
                 int offset = mainFormView.AddsCxOffset ? results[i].Position + mainFormView.CxString.Length : results[i].Position;
                 viewModels[i] = new ResultViewModel { Position = offset.ToString() };
             }
             mainFormView.ShowSearchResults(
                 [ new SearchResultTableColumn("消費数", "Position") { Width = 50 } ],
-                typeof(ResultViewModel), viewModels);
+                typeof(ResultViewModel), viewModels, results.Count);
         }
     }
 }

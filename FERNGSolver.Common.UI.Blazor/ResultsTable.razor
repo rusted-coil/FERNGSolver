@@ -1,4 +1,5 @@
 @using FERNGSolver.Common.Presentation.Interfaces
+@using FERNGSolver.Common.Presentation.Search
 
 @if (Columns == null || Rows == null || ValidRows.Count == 0)
 {
@@ -6,6 +7,7 @@
 }
 else
 {
+    <MudText Typo="Typo.body2" Class="mt-4">@SearchResultDisplay.GetSummary(ValidRows.Count, TotalCount ?? ValidRows.Count)</MudText>
     <MudTable T="object" Items="@ValidRows" Hover="true" Dense="true" Bordered="true" Striped="true"
               Breakpoint="Breakpoint.Sm" Class="mt-4" OnRowClick="HandleRowClick">
         <HeaderContent>
@@ -32,10 +34,13 @@ else
 
     /// <summary>
     /// 表示する行（ViewModel）のリストを取得または設定します。
-    /// <para> * 検索結果の生成元仕様により、100件目以降はnullが含まれる場合があるため、描画時に読み飛ばします。</para>
     /// </summary>
     [Parameter]
     public IReadOnlyList<object>? Rows { get; set; }
+
+    /// <summary>表示上限を適用する前の検索結果件数。</summary>
+    [Parameter]
+    public int? TotalCount { get; set; }
 
     /// <summary>
     /// 行がクリックされた時に呼び出されるコールバックを取得または設定します。

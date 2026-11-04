@@ -22,7 +22,7 @@ FERNGSolver.Radiance.UI.Blazor/      ← 画面部品（Razor Class Library）�
   UnitStatusDetailDialog.razor         - スキル詳細設定のMudDialog（攻撃側/防御側共通）
   RngViewCard.razor                    - 乱数ビューアの1枚のカード
   RngViewCard.razor.css                - 乱数ビューアの見た目（○×表示、色分け等）
-  Internal/*ConditionState.cs          - 各パネルの入力値を保持するだけの状態クラス（UIローカル）
+  Internal/*ConditionState.cs          - 各パネルの入力値・選択状態（GrowthConditionStateは成長率自動入力も担当）
   Internal/UnitStatusDetailState.cs    - スキル詳細設定の状態クラス＋要約文字列(ToString)
   Internal/SearchMode.cs               - 検索方法の切り替え用enum
   Internal/RandomNumberUsageDisplayExtensions.cs - 乱数の用途表示文字列の変換
@@ -51,7 +51,7 @@ UI.Blazorではなく Presentation/Application/Domain 側を触ってくださ�
 | 攻撃側/防御側の「詳細設定」ダイアログの中身（スキル・武器種） | `UnitStatusDetailDialog.razor` + `Internal/UnitStatusDetailState.cs` |
 | 「詳細設定」ボタン横の要約文字列（`[天空(10%)]`等の表示） | `Internal/UnitStatusDetailState.cs` の `ToString()` |
 | 「レベルアップ条件」の入力項目、成長率の直接入力欄 | `GrowthConditionPanel.razor` + `Internal/GrowthConditionState.cs` |
-| キャラクター選択・腕輪チェックによる成長率自動入力 | `GrowthConditionPanel.razor` の `RefreshGrowthRate()`（キャラ一覧は`FERNGSolver.Radiance.Domain.Repository.Stub.StubCharacterRepository`） |
+| キャラクター選択・腕輪チェックによる成長率自動入力 | `GrowthConditionPanel.razor` の `RefreshGrowthRate()` → `Internal/GrowthConditionState.cs` の `RefreshGrowthRates()`（キャラ一覧は`FERNGSolver.Radiance.Domain.Repository.Stub.StubCharacterRepository`） |
 | 検索結果テーブルの列・見た目（Radiance以外にも影響） | `FERNGSolver.Common.UI.Blazor/ResultsTable.razor` |
 | 検索結果テーブルの列定義そのもの（何を表示するか） | `FERNGSolver.Radiance.Presentation` 側の ViewModel/Column定義（UI.Blazorではない） |
 | 乱数ビューアの1カードの見た目・レイアウト | `RngViewCard.razor` + `RngViewCard.razor.css` |
@@ -70,7 +70,9 @@ UI.Blazorではなく Presentation/Application/Domain 側を触ってくださ�
   各アコーディオンパネルは「表示用の`.razor`」と「値を保持するだけの`State`クラス」の
   ペアになっています。`State`はRadianceSearchForm側のフィールドとして生成され、
   `[Parameter, EditorRequired]`で参照渡しされるため、パネル側で`State.Xxx`を書き換えれば
-  そのままRadianceSearchForm側にも反映されます（双方向バインディングのための特別な仕組みは不要）。
+  そのままRadianceSearchForm側にも反映されます。入力変更後には`ConditionChanged`で親へ通知し、
+  親の`SearchConditionChanged`を通じて既存の乱数ビューアも再計算します。入力項目を追加する際は
+  `@bind-Value:after`などの変更通知も接続してください。
 
 - **`UnitStatusDetailDialog.razor`**
   MudBlazorの`MudDialog`。`CombatConditionPanel.razor`から
@@ -81,15 +83,17 @@ UI.Blazorではなく Presentation/Application/Domain 側を触ってくださ�
   （`FERNGSolver.Radiance.Domain/Combat/IUnitStatusDetail.cs`）の両方に手を入れる必要があります。
 
 - **`GrowthConditionPanel.razor`**
-  キャラクター選択・腕輪チェックボックスはこのファイル内だけで完結するUI専用の一時状態
-  （`Internal/GrowthConditionState.cs`には保持しない）。選択・チェック変更のたびに
-  `RefreshGrowthRate()`が`ICharacter.Boost(...)`を呼び出し、結果をStateへ直接上書きします。
+  キャラクター・腕輪の選択は、親が所有する`Internal/GrowthConditionState.cs`に保持します。
+  初期化時と選択変更時に`RefreshGrowthRates()`が`ICharacter.Boost(...)`を使って自動入力します。
+  検索モード変更によるパネルの再生成では再計算せず、選択状態と手入力した成長率を維持します。
 
 - **`ResultsTable.razor`（`FERNGSolver.Common.UI.Blazor`）**
   Radiance以外（Gba/Genealogy等）でも共有されるテーブル部品です。ここを変更すると
   他タイトルのWeb版にも影響するため、Radiance固有の見た目を変えたい場合は基本的に
   `RadianceSearchForm.razor`側の`Columns`/`Rows`の渡し方や、Presentation側の
   ViewModel定義を調整してください。
+  表示は先頭100件までで、Presenterが渡す`TotalCount`には上限適用前の総件数が入ります。
+  総件数が表示件数を超える場合は、上限と検索範囲の絞り込み案内を表示します。
 
 ## 4. 編集時の注意点（過去にハマった点）
 

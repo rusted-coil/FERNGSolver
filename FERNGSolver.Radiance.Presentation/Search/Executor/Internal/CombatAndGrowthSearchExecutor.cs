@@ -1,6 +1,7 @@
 using FERNGSolver.Common.Application.Interfaces;
 using FERNGSolver.Common.Application.Search.Strategy;
 using FERNGSolver.Common.Presentation.Interfaces;
+using FERNGSolver.Common.Presentation.Search;
 using FERNGSolver.Radiance.Application.Search;
 using FERNGSolver.Radiance.Application.Search.Strategy;
 using FERNGSolver.Radiance.Domain.Combat;
@@ -118,12 +119,12 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
 
         private static void ShowResults(IExtendedMainFormView mainFormView, IReadOnlyList<ISearchResult> results)
         {
-            var viewModels = new CombatAndGrowthSearchResultItemViewModel[results.Count];
-            for (int i = 0; i < viewModels.Length && i < 100; ++i)
+            var viewModels = new CombatAndGrowthSearchResultItemViewModel[Math.Min(results.Count, SearchResultDisplay.MaxRows)];
+            for (int i = 0; i < viewModels.Length; ++i)
             {
                 viewModels[i] = CreateResultItemViewModel(mainFormView, results[i]);
             }
-            mainFormView.ShowSearchResults(CreateResultColumns(mainFormView), typeof(CombatAndGrowthSearchResultItemViewModel), viewModels);
+            mainFormView.ShowSearchResults(CreateResultColumns(mainFormView), typeof(CombatAndGrowthSearchResultItemViewModel), viewModels, results.Count);
         }
 
         private static IReadOnlyList<ITableColumn> CreateResultColumns(IExtendedMainFormView mainFormView)
@@ -156,7 +157,8 @@ namespace FERNGSolver.Radiance.Presentation.Search.Executor.Internal
 
             // 結果表示用RNG処理 重かったら何か考える
             var rng = RngFactory.Create(result.TableIndex);
-            rng.Advance(currentPosition);
+            // 負のオフセットでは現在位置より前の検索結果をその位置から再現する。
+            rng.Advance(Math.Min(currentPosition, result.Position));
 
             // F法横は✕で止まる、F法縦は◯で止まる
             // 1回のF法消費は最大でも falconMove - 1 まで

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FERNGSolver.Common.Application\FERNGSolver.Common.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Application\FERNGSolver.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.FalconKnightTool.Application\FERNGSolver.FalconKnightTool.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Gba.Application\FERNGSolver.Gba.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Genealogy.Application\FERNGSolver.Genealogy.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Radiance.Application\FERNGSolver.Radiance.Application.csproj" />
+    <ProjectReference Include="..\FERNGSolver.Thracia.Application\FERNGSolver.Thracia.Application.csproj" />
+    <!-- Test the production serializer without loading the Windows Forms executable. -->
+    <Compile Include="..\FERNGSolver\Internal\Serializer.cs" Link="Internal\Serializer.cs" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+</Project>

@@ -26,17 +26,17 @@
             <MudPaper Class="pa-4 mb-4" Elevation="2">
                 <MudGrid>
                     <MudItem xs="12" sm="4">
-                        <MudNumericField T="int" @bind-Value="m_CurrentPosition" Label="現在の消費数" Variant="Variant.Outlined" />
+                        <MudNumericField T="int" @bind-Value="m_CurrentPosition" @bind-Value:after="NotifySearchConditionChanged" Label="現在の消費数" Variant="Variant.Outlined" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <MudNumericField T="int" @bind-Value="m_OffsetMin" Label="最小消費数（オフセット）" Variant="Variant.Outlined" />
+                        <MudNumericField T="int" @bind-Value="m_OffsetMin" @bind-Value:after="NotifySearchConditionChanged" Label="最小消費数（オフセット）" Variant="Variant.Outlined" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <MudNumericField T="int" @bind-Value="m_OffsetMax" Label="最大消費数（オフセット）" Variant="Variant.Outlined" />
+                        <MudNumericField T="int" @bind-Value="m_OffsetMax" @bind-Value:after="NotifySearchConditionChanged" Label="最大消費数（オフセット）" Variant="Variant.Outlined" />
                     </MudItem>
                 </MudGrid>
 
-                <MudSelect T="SearchMode" @bind-Value="m_SearchMode" Label="検索方法" Variant="Variant.Outlined" Class="mt-4">
+                <MudSelect T="SearchMode" @bind-Value="m_SearchMode" @bind-Value:after="NotifySearchConditionChanged" Label="検索方法" Variant="Variant.Outlined" Class="mt-4">
                     @foreach (var mode in s_SearchModeLabels.Keys)
                     {
                         <MudSelectItem T="SearchMode" Value="@mode">@s_SearchModeLabels[mode]</MudSelectItem>
@@ -48,19 +48,19 @@
                     @if (m_SearchMode == SearchMode.FalconKnightMethod)
                     {
                         <MudExpansionPanel Text="ファルコンナイト法" Expanded="true">
-                            <FalconKnightConditionPanel State="m_FalconKnightCondition" />
+                            <FalconKnightConditionPanel State="m_FalconKnightCondition" ConditionChanged="NotifySearchConditionChanged" />
                         </MudExpansionPanel>
                     }
                     @if (m_SearchMode is SearchMode.Combat or SearchMode.CombatAndGrowth)
                     {
                         <MudExpansionPanel Text="戦闘条件" Expanded="true">
-                            <CombatConditionPanel State="m_CombatCondition" />
+                            <CombatConditionPanel State="m_CombatCondition" ConditionChanged="NotifySearchConditionChanged" />
                         </MudExpansionPanel>
                     }
                     @if (m_SearchMode is SearchMode.Growth or SearchMode.CombatAndGrowth)
                     {
                         <MudExpansionPanel Text="レベルアップ条件" Expanded="true">
-                            <GrowthConditionPanel State="m_GrowthCondition" />
+                            <GrowthConditionPanel State="m_GrowthCondition" ConditionChanged="NotifySearchConditionChanged" />
                         </MudExpansionPanel>
                     }
                 </MudExpansionPanels>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="workspace-area workspace-area--results">
-            <ResultsTable Columns="m_Columns" Rows="m_ViewModels" OnRowClick="OnResultRowClicked" />
+            <ResultsTable Columns="m_Columns" Rows="m_ViewModels" TotalCount="m_TotalResultCount" OnRowClick="OnResultRowClicked" />
         </div>
 
         <div class="workspace-area workspace-area--rng">
@@ -109,11 +109,13 @@
 
     private IReadOnlyList<ITableColumn>? m_Columns;
     private IReadOnlyList<object>? m_ViewModels;
+    private int? m_TotalResultCount;
 
-    public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels)
+    public void ShowSearchResults(IReadOnlyList<ITableColumn> columns, Type viewModelType, IReadOnlyList<object> viewModels, int? totalCount = null)
     {
         m_Columns = columns;
         m_ViewModels = viewModels;
+        m_TotalResultCount = totalCount ?? viewModels.Count;
         InvokeAsync(StateHasChanged);
     }
 
@@ -163,7 +165,10 @@
     public int OffsetMax => m_OffsetMax;
     public int? SearchTableIndex => null;
     public int FalconKnightMethodMove => 0;
-    public IObservable<Unit> SearchConditionChanged => Observable.Never<Unit>();
+    public IObservable<Unit> SearchConditionChanged => m_SearchConditionChanged;
+    private readonly Subject<Unit> m_SearchConditionChanged = new();
+
+    private void NotifySearchConditionChanged() => m_SearchConditionChanged.OnNext(Unit.Default);
 
     // --- ファルコンナイト法 ---
     // * 補助ツール（cx列作成ダイアログ）は今回未移植のため、開くボタン自体を用意していない。
@@ -197,8 +202,7 @@
 
     // --- レベルアップ ---
     // * 各成長率/必要フラグはGrowthConditionPanelで編集するm_GrowthConditionから取得する。
-    // * Windows版にあるキャラクター選択による成長率自動入力（腕輪等の補正含む）は今回未移植のため、
-    //   各成長率は手入力のみとなる。
+    // * キャラクター・腕輪の選択と手入力した成長率は親の状態に保持する。
     public bool ContainsGrowth => m_SearchMode is SearchMode.Growth or SearchMode.CombatAndGrowth;
     public int HpGrowthRate => m_GrowthCondition.HpGrowthRate;
     public int StrGrowthRate => m_GrowthCondition.StrGrowthRate;
@@ -277,5 +281,10 @@
     public void Dispose()
     {
         m_Disposables.Dispose();
+        m_SearchConditionChanged.OnCompleted();
+        m_SearchConditionChanged.Dispose();
+        m_SearchButtonClicked.Dispose();
+        m_AddRngViewButtonClicked.Dispose();
+        m_AddRngViewRequestedFromSearchResults.Dispose();
     }
 }
